@@ -8,5 +8,6 @@ namespace Connect.QU.BAL
 {
     public class Class1
     {
+        //
     }
 }
