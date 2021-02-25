@@ -1,0 +1,28 @@
+﻿using Connect.QU.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace Connect.QU.UII.User
+{
+    public partial class User : System.Web.UI.MasterPage
+    {
+        public string UserName = "";
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                UserName = ((_User)(Session["objUser"])).obj_txn_Login.UserName;
+            }
+            catch (Exception ex)
+            {
+                Response.Redirect("Login.aspx", false);
+                throw;
+            }
+           
+        }
+    }
+}
