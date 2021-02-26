@@ -54,6 +54,19 @@ namespace Connect.QU.UII.Store
             return new QU.BAL.CommonBAL().SaveUpdateCompanyDetailsNew(cnt);
         }
 
+        [WebMethod]
+        public static List<QU.Entities.Quotation> GetQuotationDetails(int QID)
+        {
+            return new QU.BAL.CommonBAL().GetQuotationDetails(QID);
+
+            // string x=DateTime.Now.Year +"-"+ (DateTime.Now.Year +1 );
+
+        }
+        [WebMethod]
+        public static List<QU.Entities.TOC> GetTOCDetails(int QID)
+        {
+            return new QU.BAL.CommonBAL().GetTOCDetails(QID);
+        }
 
 
     }

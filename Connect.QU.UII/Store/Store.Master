@@ -41,7 +41,7 @@
             <header class="main-header">
                 <!-- Logo -->
                 <%--<a href="index.html" class="logo">--%>
-                 <a href="CompanyDetails.aspx" class="logo">
+                 <a href="Requisition.aspx" class="logo">
 
 
                     
@@ -56,7 +56,7 @@
                 <nav class="navbar navbar-static-top" role="navigation">
                     <div class="col-md-12 col-md-header">
                         <%--<a href="../Redirect.aspx" class="logo">--%>
-                         <a href="CompanyDetails.aspx" class="logo">
+                         <a href="Requisition.aspx" class="logo">
                             <img src="../images/Connectlogo.JPG" width="115" alt="Logo" />
                             <!-- mini logo for sidebar mini 50x50 pixels -->
                             <span class="logo-mini"><b>Connect</b></span>
@@ -106,11 +106,7 @@
                     <ul class="sidebar-menu">
                         <li class="header">MAIN NAVIGATION</li>
                      <%--   <li><a href="CompanyDetails.aspx"><i class="fa fa-edit"></i><span>Company Details</span></a> </li>--%>
-                        <li><a href="Company.aspx"><i class="fa fa-edit"></i><span>Company</span></a> </li>
-                        <li><a href="Register.aspx"><i class="fa fa-edit"></i><span>User Registration</span></a> </li>
-                        <li><a href="Currency.aspx"><i class="fa fa-user"></i><span>Currency</span> </a></li>
-                          <li><a href="Category.aspx"><i class="fa fa-user"></i><span>Category</span> </a></li>
-                          <li><a href="Item.aspx"><i class="fa fa-user"></i><span>Item</span> </a></li>
+                        <li><a href="Requisition.aspx"><i class="fa fa-edit"></i><span>Requisition</span></a> </li>
                       <%--  <li><a href="../User/SUQuotation.aspx"><i class="fa fa-user"></i><span>Quotation</span> </a></li>
                                                 <li><a href="Attendance.aspx"><i class="fa fa-user"></i><span>Attendance</span> </a></li>--%>
                        
