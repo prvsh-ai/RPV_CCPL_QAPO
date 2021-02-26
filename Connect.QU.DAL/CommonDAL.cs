@@ -40,8 +40,18 @@ namespace Connect.QU.DAL
                     CL = new Entities.Quotation();
                     CL.QID = Convert.ToInt32(sdr["QID"]);
                     CL.QNo = sdr["QNo"].ToString();
-
-                    CL.QType = sdr["QType"].ToString();
+                    if (sdr["QType"].ToString() == "1")
+                    {
+                        CL.QType = "SU";
+                    }
+                   else if (sdr["QType"].ToString() == "2")
+                    {
+                        CL.QType = "SER";
+                    }
+                    else
+                    {
+                        CL.QType = "TEN";
+                    }
                     CL.QDate = Convert.ToDateTime(sdr["QDate"]);
                     CL.QFromCompanyName = sdr["QFromCompanyName"].ToString();
                     CL.QFromAddress = sdr["QFromAddress"].ToString();
