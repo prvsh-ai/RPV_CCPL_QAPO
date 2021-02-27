@@ -1466,82 +1466,65 @@
             }
 
 
-            function numberToWords(number1) {
+            //var a = ['','one ','two ','three ','four ', 'five ','six ','seven ','eight ','nine ','ten ','eleven ','twelve ','thirteen ','fourteen ','fifteen ','sixteen ','seventeen ','eighteen ','nineteen '];
+            //var b = ['', '', 'twenty','thirty','forty','fifty', 'sixty','seventy','eighty','ninety'];
 
-                //alert(number1);
+            //function numberToWords(num) {
+            //    if ((num = num.toString()).length > 9) return 'Number is too big';
+            //    n = ('000000000' + num).substr(-9).match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
+            //    if (!n) return; var str = '';
+            //    str += (n[1] != 0) ? (a[Number(n[1])] || b[n[1][0]] + ' ' + a[n[1][1]]) + 'crore ' : '';
+            //    str += (n[2] != 0) ? (a[Number(n[2])] || b[n[2][0]] + ' ' + a[n[2][1]]) + 'lakh ' : '';
+            //    str += (n[3] != 0) ? (a[Number(n[3])] || b[n[3][0]] + ' ' + a[n[3][1]]) + 'thousand ' : '';
+            //    str += (n[4] != 0) ? (a[Number(n[4])] || b[n[4][0]] + ' ' + a[n[4][1]]) + 'hundred ' : '';
+            //    str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) + 'only ' : '';
+            //    return str;
+            //}
 
-                var number = parseInt(number1);
 
-                //var digit = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
-                //var elevenSeries = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
-                //var countingByTens = ['twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
-                //var shortScale = ['', 'thousand', 'million', 'billion', 'trillion'];
-                var digit = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine'];
-                var elevenSeries = ['Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen'];
-                var countingByTens = ['Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety'];
-                var shortScale = ['', 'Thousand', 'Million', 'Billion', 'Trillion'];
+           
+           var ones= ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
+           var tens= ['', '', 'twenty', 'thirty', 'fourty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+           var sep= ['', ' thousand ', ' million ', ' billion ', ' trillion ', ' quadrillion ', ' quintillion ', ' sextillion '];
+           
 
+            function numberToWords(val) {
 
-                number = number.toString();
-                number = number.replace(/[\, ]/g, '');
-                if (number != parseFloat(number)) {
-                    //alert("not a number");
-                    return 'not a number';
+                arr = [],
+                str = '',
+                i = 0;
+        
+                if ( val.length === 0 ) {
+                    return 'Please type a number into the text-box.';
+                     
                 }
-                var x = number.indexOf('.');
-                if (x == -1)
-                    x = number.length;
-                if (x > 15) {
-                    //alert("too big");
-                    return 'too big';
+        
+                val = parseInt( val, 10 );
+                if ( isNaN( val ) ) {
+                    return 'Invalid input.';
+            
                 }
-                var n = number.split('');
-                var str = '';
-                var sk = 0;
-                for (var i = 0; i < x; i++) {
-                    if ((x - i) % 3 == 2) {
-                        if (n[i] == '1') {
-                            str += elevenSeries[Number(n[i + 1])] + ' ';
-                            i++;
-                            sk = 1;
-                        }
-                        else if (n[i] != 0) {
-                            str += countingByTens[n[i] - 2] + ' ';
-                            sk = 1;
-                        }
-                    }
-                    else if (n[i] != 0) {
-                        str += digit[n[i]] + ' ';
-                        //if ((x - i) % 3 == 0) str += 'hundred ';
-
-                        if ((x - i) % 3 == 0) {
-                            str += 'hundred ';
-                            sk = 1;
-                        }
-                    }
-                    if ((x - i) % 3 == 1) {
-                        // if (sk) str += shortScale[(x - i - 1) / 3] + ' ';
-
-                        if (sk) {
-                            str += shortScale[(x - i - 1) / 3] + ' ';
-
-                            sk = 0;
-                        }
-                    }
+        
+                while ( val ) {
+                    arr.push( val % 1000 );
+                    val = parseInt( val / 1000, 10 );   
                 }
-                if (x != number.length) {
-                    var y = number.length;
-                    str += 'point ';
-                    for (var i = x + 1; i < y; i++)
-                        str += digit[n[i]] + ' ';
+        
+                while ( arr.length ) {
+                    str = (function( a ) {
+                        var x = Math.floor( a / 100 ),
+                            y = Math.floor( a / 10 ) % 10,
+                            z = a % 10;
+                
+                        return ( x > 0 ? ones[x] + ' hundred ' : '' ) +                 
+                               ( y >= 2 ? tens[y] + ' ' + ones[z] : ones[10*y + z] ); 
+                    })( arr.shift() ) + sep[i++] + str;                     
                 }
-                str = str.replace(/\number+/g, ' ');
-                return str.trim() + ".";
-
-            }
-
-
-
+        
+                return str;        
+    
+    
+            }( ones, tens, sep );
 
             function GetCompanyDetails(CompanyID, CompanyName) {
                 var element = "";
