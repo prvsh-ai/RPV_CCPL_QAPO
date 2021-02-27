@@ -57,6 +57,9 @@
         .select2 {
             width: 159px !important;
         }
+        .paginate_button {
+            margin-left: 1%;
+        }
     </style>
 
 </asp:Content>
@@ -132,9 +135,14 @@
                 </div>
             </div>
 
-            <div class="container">
+           <%-- <div class="container">
                 <table id="CategoryTableId" class="table table-striped cf">
                 </table>
+            </div>--%>
+            <div class="container" style="margin-top: 3%; margin-bottom: 1%; width: 100%;">
+
+                <table id="CategoryTableId" class="table table-striped cf table-bordered table-striped table-responsive dataTable" style="table-layout: fixed"></table>
+
             </div>
             <!-- /.row -->
 
@@ -220,6 +228,10 @@
         <input id="txtCategoryIdUpdate" type="hidden" />
 
     </div>
+
+    <link href="../css/DataTable/dataTablesbootstrap.css" rel="stylesheet" />
+    <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 
     <script type="text/javascript">
 
@@ -425,7 +437,7 @@
                     element = element + '<th>Code</th>';
                     element = element + '<th>Default SKU</th>';
                     element = element + '<th>Default PU</th>';
-                    element = element + '<th>Action</th>';
+                    element = element + '<th style="width:190px">Action</th>';
 
                     element = element + '</tr></thead><tbody>';
 
@@ -445,7 +457,16 @@
                     }
                     element = element + '</tbody>';
                     $("#CategoryTableId").append(element);
+                    $('#CategoryTableId').dataTable({
+                        "paging": true,
+                        //"scrollY": 400,
+                        "destroy": true,
+                        "pagingType": "simple_numbers"[{
+                            style: 'Margin-left:1%'
+                        }]
 
+                    });
+                    $('.dataTables_length').addClass('bs-select');
                 },
                 error: function (err) {
                     // alert(err.statusText)

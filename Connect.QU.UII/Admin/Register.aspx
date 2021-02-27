@@ -84,9 +84,15 @@
 
             </div>
 
-            <div class="container">
+           <%-- <div class="container">
                 <table id="LoginTableId" class="table table-striped cf">
-                </table>
+                </table>--%>
+
+            <div class="container" style="margin-top: 3%; margin-bottom: 1%; width: 100%;">
+
+                <table id="LoginTableId" class="table table-striped cf table-bordered table-striped table-responsive dataTable" style="table-layout: fixed"></table>
+
+            </div>
 
             </div>
 
@@ -163,7 +169,15 @@
             padding-left: .5em;
             vertical-align: top;
         }
+        .paginate_button {
+            margin-left: 1%;
+        }
     </style>
+
+    <link href="../css/DataTable/dataTablesbootstrap.css" rel="stylesheet" />
+    <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
     <script type="text/javascript">
 
         $(document).ready(function () {
@@ -291,6 +305,16 @@
                     }
                     element = element + '</tbody>';
                     $("#LoginTableId").append(element);
+                    $('#LoginTableId').dataTable({
+                        "paging": true,
+                        //"scrollY": 400,
+                        "destroy": true,
+                        "pagingType": "simple_numbers"[{
+                            style: 'Margin-left:1%'
+                        }]
+
+                    });
+                    $('.dataTables_length').addClass('bs-select');
                 },
 
                 error: function (err) {
@@ -360,7 +384,7 @@
                     element = element + '<thead class="cf"><tr class="bgblue-Over">';
                     element = element + '<th>Login Name</th>';
                     element = element + '<th>Mobile No</th>';
-                    element = element + '<th>Email Id</th>';
+                    element = element + '<th style="width:145px;">Email Id</th>';
                     element = element + '<th>Address</th>';
                     element = element + '<th>Designation</th>';
                     element = element + '<th>RoleName</th>';
@@ -389,6 +413,16 @@
                     }
                     element = element + '</tbody>';
                     $("#LoginTableId").append(element);
+                    $('#LoginTableId').dataTable({
+                        "paging": true,
+                        //"scrollY": 400,
+                        "destroy": true,
+                        "pagingType": "simple_numbers"[{
+                            style: 'Margin-left:1%'
+                        }]
+
+                    });
+                    $('.dataTables_length').addClass('bs-select');
                 },
 
                 error: function (err) {

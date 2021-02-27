@@ -57,6 +57,9 @@
         .select2 {
             width: 159px !important;
         }
+        .paginate_button {
+            margin-left: 1%;
+        }
     </style>
 
 </asp:Content>
@@ -169,9 +172,17 @@
                 </div>
             </div>
 
-            <div class="container">
+           <%-- <div class="container">
                 <table id="CityTableId" class="table table-striped cf">
                 </table>
+            </div>--%>
+
+            <%--Datatable Changes--%>
+
+             <div class="container" style="margin-top: 5%; margin-bottom: 1%; width: 100%;">
+                             
+                <table id="CityTableId" class="table table-striped cf table-bordered table-striped table-responsive dataTable" style="table-layout: fixed"></table>
+
             </div>
             <!-- /.row -->
 
@@ -298,6 +309,12 @@
         <input id="hidHotelId" type="hidden" />
 
     </div>
+
+    <%--Datatable Changes--%>
+
+    <link href="../css/DataTable/dataTablesbootstrap.css" rel="stylesheet" />
+    <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 
     <script type="text/javascript">
 
@@ -583,7 +600,18 @@
                         element = element + '</tr>';
                     }
                     element = element + '</tbody>';
+                    //Datatable Changes
                     $("#CityTableId").append(element);
+                    $('#CityTableId').dataTable({
+                        "paging": true,
+                        //"scrollY": 400,
+                        "destroy": true,
+                        "pagingType": "simple_numbers"[{
+                            style: 'Margin-left:1%'
+                        }]
+
+                    });
+                    $('.dataTables_length').addClass('bs-select');
 
                 },
                 error: function (err) {

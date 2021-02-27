@@ -88,68 +88,71 @@
                 color: #1b2cef;
                 width: auto;
             }
+        }
 
-            @media (min-width: 768px) {
-                #ApplicationForm .AppFormBody .APPTest input[type='text'], .PasswordControl {
-                    border: none;
-                    height: 30px;
-                    border-bottom: 1px solid #999;
-                    color: #1b2cef;
-                }
-
-
-
-
-
-                #ApplicationForm .list-inline > li {
-                    display: inline-block;
-                }
-
-                #ApplicationForm .AppFormdatetimepicker .form-control {
-                    border: none;
-                    box-shadow: 0 0 0 0;
-                    border-radius: 0;
-                    border-bottom: 1px solid #555;
-                    height: 30px;
-                }
-
-                #ApplicationForm .AppFormdatetimepicker .input-group-addon {
-                    background: transparent;
-                    border: 0;
-                    border-bottom: 1px solid #999 !important;
-                    border-radius: 0;
-                }
+        @media (min-width: 768px) {
+            #ApplicationForm .AppFormBody .APPTest input[type='text'], .PasswordControl {
+                border: none;
+                height: 30px;
+                border-bottom: 1px solid #999;
+                color: #1b2cef;
             }
-
-            .text-bold {
-                font-weight: bold;
-            }
-
-            .QS-Block {
-                border: 1px solid #999;
-                margin: 5px 0;
-                padding: 5px;
-                box-shadow: 3px 5px 6px #ddd;
-            }
-
-                .QS-Block .QSoption-List input[type='radio'] {
-                    margin: 0 3px;
-                }
+        }
 
 
 
-            table, td, th {
-                border: 1px solid black;
-            }
 
-            table {
-                width: 100%;
-                border-collapse: collapse;
+
+        #ApplicationForm .list-inline > li {
+            display: inline-block;
+        }
+
+        #ApplicationForm .AppFormdatetimepicker .form-control {
+            border: none;
+            box-shadow: 0 0 0 0;
+            border-radius: 0;
+            border-bottom: 1px solid #555;
+            height: 30px;
+        }
+
+        #ApplicationForm .AppFormdatetimepicker .input-group-addon {
+            background: transparent;
+            border: 0;
+            border-bottom: 1px solid #999 !important;
+            border-radius: 0;
+        }
+
+        }
+
+        .text-bold {
+            font-weight: bold;
+        }
+
+        .QS-Block {
+            border: 1px solid #999;
+            margin: 5px 0;
+            padding: 5px;
+            box-shadow: 3px 5px 6px #ddd;
+        }
+
+            .QS-Block .QSoption-List input[type='radio'] {
+                margin: 0 3px;
             }
 
 
-            /*feb 2021*/
-            /*@media (min-width: 768px) #ApplicationForm .AppFormBody input[type='text'], .PasswordControl {
+
+        table, td, th {
+            border: 1px solid black;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+
+        /*feb 2021*/
+        /*@media (min-width: 768px) #ApplicationForm .AppFormBody input[type='text'], .PasswordControl {
             border: none;
             height: ; 
             border-bottom: 1px solid #999; color: #1b2cef;
@@ -157,35 +160,39 @@
         }*/
 
 
-            /*body {
+        /*body {
             counter-reset: Count-Value;
         }*/
 
-            /*table {
+        /*table {
             border-collapse: separate;
              width: 100%;
         }*/
 
-            /*tr td:first-child:before {
+        /*tr td:first-child:before {
             counter-increment: Count-Value;
             /*content: "Row:" counter(Count-Value);*/
-            /*content: counter(Count-Value) ".";
+        /*content: counter(Count-Value) ".";
         }
         */
 
 
-            #watermark {
-                color: beige;
-                font-size: 131pt;
-                -webkit-transform: rotate(-45deg);
-                -moz-transform: rotate(-45deg);
-                position: absolute;
-                width: 100%;
-                margin: 0;
-                z-index: -1;
-                left: -100px;
-                top: -200px;
-            }
+        #watermark {
+            color: beige;
+            font-size: 131pt;
+            -webkit-transform: rotate(-45deg);
+            -moz-transform: rotate(-45deg);
+            position: absolute;
+            width: 100%;
+            margin: 0;
+            z-index: -1;
+            left: -100px;
+            top: -200px;
+        }
+
+        .paginate_button {
+            margin-left: 1%;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="EAWarpper" runat="Server">
@@ -607,8 +614,13 @@
             </table>--%>
         </div>
 
-        <div class="row" style="width: 93%; margin-left: 3%;">
+        <%--<div class="row" style="width: 93%; margin-left: 3%;">
             <table id="CityTableId" class="display" cellspacing="0" width="100%"></table>
+        </div>--%>
+        <div class="container" style="margin-top: 5%; margin-bottom: 1%; width: 100%;">
+
+            <table id="CityTableId" class="table table-striped cf table-bordered table-striped table-responsive dataTable" style="table-layout: fixed"></table>
+
         </div>
 
         <%--    update panel--%>
@@ -660,7 +672,9 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" rel="stylesheet" />
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
-
+        <link href="../css/DataTable/dataTablesbootstrap.css" rel="stylesheet" />
+        <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 
 
         <script type="text/javascript">
@@ -1005,7 +1019,7 @@
                 $('#ddlQuotationType').change(function () {
                     if ($('#ddlQuotationType').val() == 1) {
                         //  SetQNo(1);
-                      //  $('#txtQuotationNo').val("CCPL/2019-2020/SU000" + Math.floor((Math.random() * 100) + 1));
+                        //  $('#txtQuotationNo').val("CCPL/2019-2020/SU000" + Math.floor((Math.random() * 100) + 1));
                         GetQuotationDetailsOnQuotationType(1);
                         // aleart("SU");
                     }
@@ -1228,8 +1242,8 @@
                         $('#CityTableId').empty();
 
                         element = element + '<thead class="cf"><tr class="bgblue-Over">';
-                        element = element + '<th>S NO</th>';
-                        element = element + '<th>Q NO</th>';
+                        element = element + '<th style="width:59px">S NO</th>';
+                        element = element + '<th style="width:160px">Q NO</th>';
                         element = element + '<th>Q Type</th>';
                         element = element + '<th>Q From</th>';
                         element = element + '<th>Q To</th>';
@@ -1259,9 +1273,16 @@
                         }
                         element = element + '</tbody>';
                         $("#CityTableId").append(element);
+                        $('#CityTableId').dataTable({
+                            "paging": true,
+                            //"scrollY": 400,
+                            "destroy": true,
+                            "pagingType": "simple_numbers"[{
+                                style: 'Margin-left:1%'
+                            }]
 
-
-
+                        });
+                        $('.dataTables_length').addClass('bs-select');
 
 
                     },
