@@ -37,5 +37,11 @@ namespace Connect.QU.UII.Admin
 
             return new QU.BAL.CommonBAL().InsertApprovalData(chkVal, QID, HttpContext.Current.User.Identity.Name.ToString());
         }
+
+        [WebMethod]
+        public static List<QU.Entities.TOC> GetTOCDetails(int QID)
+        {
+            return new QU.BAL.CommonBAL().GetTOCDetails(QID);
+        }
     }
 }
