@@ -1180,7 +1180,7 @@
             }
 
 
-            function SaveUpdateQuotationDetails(data,) {
+            function SaveUpdateQuotationDetails(data) {
                 var tocArr = new Array();
                 $("#tblCustomers TBODY TR").each(function () {
                     var row = $(this);
