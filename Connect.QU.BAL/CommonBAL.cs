@@ -93,7 +93,7 @@ namespace Connect.QU.BAL
         {
             return new CommonDAL().SaveUpdateQuotationDetails(cnt);
         }
-
+       
         //public string SaveUpdateQuotationDetails(
         //  int Mode,
         //  int QID,
