@@ -163,8 +163,9 @@
             left: -100px;
             top: -200px;
         }
+
         .hello {
-        width:100% !important;
+            width: 100% !important;
         }
     </style>
 
@@ -199,24 +200,31 @@
                                                     </td>
                                                     <td>
 
-                                                        <select id="ddlQuotation" name="ddlQuotationName" class="selectBox form-control"></select></td>
+                                                        <select id="ddlQuotationId" name="ddlQuotationName" class="selectBox form-control"></select></td>
                                                     <td>
                                                         <label class="control-label">REQUIRED BY</label>
                                                     </td>
                                                     <td>
-                                                        <input type="text" id="txtTaxableAmount" class="form-control hello" /></td>
+                                                        <input type="text" id="txtRequiredBy" class="form-control hello" /></td>
                                                 </tr>
                                                 <tr>
                                                     <td>
                                                         <label class="control-label">REQUISITION DATE</label>
                                                     </td>
                                                     <td>
-                                                        <input type="text" id="txtTaxableAmount" class="form-control hello" /></td>
+
+                                                        <div class='input-group date AppFormdatetimepicker' id='datetimepicker3'>
+                                                            <input type='text' class="form-control" id="txtRequisitionDate" />
+                                                            <span class="input-group-addon">
+                                                                <span class="glyphicon glyphicon-calendar"></span>
+                                                            </span>
+                                                        </div>
+                                                    </td>
                                                     <td>
                                                         <label class="control-label">APPROVED BY</label>
                                                     </td>
                                                     <td>
-                                                        <input type="text" id="txtTaxableAmount" class="form-control hello" /></td>
+                                                        <input type="text" id="txtApprovedBy" class="form-control hello" /></td>
                                                 </tr>
                                             </table>
 
@@ -224,7 +232,8 @@
                                     </div>
                                 </div>
 
-
+                                <br />
+                                <br />
 
                                 <div class="row APPTest">
                                     <div class="col-lg-12">
@@ -233,14 +242,15 @@
                                                 <thead>
                                                     <tr>
                                                         <th style="width: 150px">Description Of Goods</th>
-                                                        <th style="width: 150px">Qty</th>
-                                                        <th style="width: 150px">HSN/SAC</th>
-                                                        <th style="width: 150px">Rate/Unit</th>
-                                                        <th style="width: 150px">Value Without Tax</th>
-                                                        <th style="width: 150px">IGST %</th>
+                                                        <th style="width: 150px">Required Quantity</th>
+                                                        <th style="width: 150px">In Stock Qty</th>
+                                                        <th style="width: 150px">Purchase Quantity</th>
+                                                        <th style="width: 150px">Rate</th>
                                                         <th style="width: 150px">Amount</th>
-                                                        <th style="width: 150px">Total Amount</th>
-                                                        <th></th>
+                                                        <th style="width: 150px">Bill Y/N</th>
+                                                        <th style="width: 150px">Po Item No</th>
+                                                        <th style="width: 150px"></th>
+
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -270,23 +280,28 @@
                                                         </td>
 
                                                         <td>
-                                                            <input type="text" id="txtQty" class="hello" /></td>
+                                                            <input type="text" id="txtRequiredQty" class="hello" /></td>
                                                         <td>
-                                                            <input type="text" id="txtHsn" class="hello" /></td>
+                                                            <input type="text" id="txtInStockQty" class="hello" /></td>
+                                                        <td>
+                                                            <input type="text" id="txtPurchaseQty" class="hello" /></td>
                                                         <td>
                                                             <input type="text" id="txtRate" class="hello" /></td>
                                                         <td>
-                                                            <input type="text" id="txtValue" class="hello" /></td>
-                                                        <td>
-                                                            <input type="text" id="txtIgst" class="hello" /></td>
-                                                        <td>
                                                             <input type="text" id="txtAmount" class="hello" /></td>
                                                         <td>
-                                                            <input type="text" id="txtTotalAmount1" class="hello" /></td>
+                                                            <%--   <input type="checkbox" name="chkApprove" value="YES" id="chkBillAvailable" /></td>--%>
+                                                            <select id="ddlBillAvailable" class="form-control" name="GstinNoType">
+                                                                <option value="1">YES</option>
+                                                                <option value="0">NO</option>
+
+                                                            </select></td>
+                                                        <%--    <input type="text" id="txtAmount" class="hello" /></td>--%>
+                                                        <td>
+                                                            <input type="text" id="txtPOItemNumber" class="hello" /></td>
 
                                                         <td>
                                                             <input type="button" id="btnAdd" value="Add" /></td>
-
                                                     </tr>
                                                 </tfoot>
                                             </table>
@@ -294,113 +309,61 @@
                                     </div>
                                 </div>
 
-
-
-
                             </div>
 
-                            <%--    <div class="row APPTest">
-                                <div class="col-lg-12">
-                                    <div style="overflow-x: auto">
-                                        <table id="tblCustomers" class="table" cellpadding="0" cellspacing="0">
-                                            <thead>
-                                                <tr>
-                                                    <th style="width: 150px">Description Of Goods</th>
-                                                    <th style="width: 150px">Qty</th>
-                                                    <th style="width: 150px">HSN/SAC</th>
-                                                    <th style="width: 150px">Rate/Unit</th>
-                                                    <th style="width: 150px">Value Without Tax</th>
-                                                    <th style="width: 150px">IGST %</th>
-                                                    <th style="width: 150px">Amount</th>
-                                                    <th style="width: 150px">Total Amount</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td>
-                                                        <input type="button" value="Remove" onclick="Remove(this)" /></td>
-                                                </tr>
-
-                                            </tbody>
-                                            <tfoot>
-                                                <tr>
-
-                                                    <td>
-
-
-
-                                                        <select id="ddlItem" name="ddlItemName" class="selectBox form-control"></select>
-                                                    </td>
-
-                                                    <td>
-                                                        <input type="text" id="txtQty" /></td>
-                                                    <td>
-                                                        <input type="text" id="txtHsn" disabled /></td>
-                                                    <td>
-                                                        <input type="text" id="txtRate" /></td>
-                                                    <td>
-                                                        <input type="text" id="txtValue" /></td>
-                                                    <td>
-                                                        <input type="text" id="txtIgst" disabled /></td>
-                                                    <td>
-                                                        <input type="text" id="txtAmount" /></td>
-                                                    <td>
-                                                        <input type="text" id="txtTotalAmount1" /></td>
-
-                                                    <td>
-                                                        <input type="button" id="btnAdd" value="Add" /></td>
-
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>--%>
 
                             <div class="form-group" style="margin-top: 1%; width: 100%;">
-
-
                                 <input id="btnSave" type="button" value="Save" class="btn btn-success" />
+                                <input id="btnUpdate" type="button" value="Update" class="btn btn-success" />
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
-
             <div class="container">
                 <table id="CityTableId" class="table table-striped cf">
                 </table>
             </div>
             <!-- /.row -->
-
-
-
         </section>
         <!-- /.content -->
 
         <div id="pageloaddiv" class="pageloaddiv" style="display: none;">
         </div>
-
         <input id="hidHotelId" type="hidden" />
 
     </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" rel="stylesheet" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../css/DataTable/dataTablesbootstrap.css" rel="stylesheet" />
+    <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 
     <script type="text/javascript">
 
         $(document).ready(function () {
 
+            GetRequisitionDetails(0);
+
             GetQuotationDetails(0);
+
+            //$(function () {
+            //    $('#txtRequisitionDate').datetimepicker({ defaultDate: new Date() });
+
+            //});
+
+            $(function () {
+                //$('#datetimepicker1,#datetimepicker3').datetimepicker();
+                $('#datetimepicker3').datetimepicker({ defaultDate: new Date() });
+
+            });
+
 
 
             var data = {};
@@ -419,79 +382,129 @@
                     // allowClear: true
                 });
             });
-            $('#ddlQuotation').change(function () {
+            $('#ddlQuotationId').change(function () {
 
-                GetTOCDetails($('#ddlQuotation').val());
+                // GetTOCDetails($('#ddlQuotation').val());
 
+                GetItemsDetails($('#ddlQuotationId').val());
             });
 
+            $('#ddlItem').change(function () {
+
+                // GetTOCDetails($('#ddlQuotation').val());
+
+                GetItemsDescriptionDetails($('#ddlQuotationId').val(), $('#ddlItem').val());
+            });
 
             $("#btnSave").click(function () {
 
-                data.Mode = "1";
-                data.CompanyId = 0;
-                data.CompanyName = $('#txtCompanyName').val();
-                data.GstinNo = $('#txtGSTIN').val();
-                data.PanNo = $('#txtPanNo').val();//
-                data.ServiceTaxNo = $('#txtServiceTaxNo').val();
-                data.EmailId = $('#txtEmailId').val();
-                data.Address = $('#txtAddress').val();
-                data.CountryId = parseInt($('#ddlCountry').val());
-                data.StateId = parseInt($('#ddlState').val());
-                data.CityId = parseInt($('#ddlCity').val());
-                data.LocationsId = $('#ddlCompanyLocation').val().toString();
-                data.MobileNo = parseInt($('#txtContactNo').val());
-                data.ZipCode = parseInt($('#txtZipCode').val());
-                data.BankName = $('#txtBankName').val();
-                data.BankBranch = $('#txtBankBranch').val();
-                data.BankAccountNo = parseInt($('#txtAccountNo').val());
-                data.BankIfsc = $('#txtBankIFSC').val();
-                data.POC = $('#txtPOC').val();
-                data.POCNo = parseInt($('#txtPOCNo').val());
-                data.Customer = $('#chkCustomer').is(':checked');
-                data.Vendor = $('#chkVendor').is(':checked');
 
-                SaveUpdateCompanyDetails(data);
+
+                data.Mode = 1;
+                data.RequisitionId = 0;
+                data.QuotationId = parseInt($('#ddlQuotationId').val());
+                data.RequisitionDate = $('#txtRequisitionDate').val(); //$("#RequisitionDate option:selected").text();//
+                data.RequiredBy = $('#txtRequiredBy').val();
+                data.ApprovedBy = $('#txtApprovedBy').val();
+
+                SaveUpdateRequisitionDetails(data);
+
+                // GetQuotationDetails(0);
+
             });
 
             $("#btnUpdate").click(function () {
+                data.Mode = 2;
+                data.RequisitionId = $('#hidHotelId').val();
+                data.QuotationId = $('#ddlQuotationId').val();
+                data.RequisitionDate = $('#txtRequisitionDate').val(); //$("#RequisitionDate option:selected").text();//
+                data.RequiredBy = $('#txtRequiredBy').val();
+                data.ApprovedBy = $('#txtApprovedBy').val();
 
-                data.Mode = "2";
-                data.CompanyId = $('#hidHotelId').val();
-                data.CompanyName = $('#txtCompanyNameUpdate').val();
-                data.GstinNo = $('#txtGSTINUpdate').val();
-                data.PanNo = $('#txtPanNoUpdate').val();//
-                data.ServiceTaxNo = $('#txtServiceTaxNoUpdate').val();
-                data.EmailId = $('#txtEmailIdUpdate').val();
-                data.Address = $('#txtAddressUpdate').val();
-                data.CountryId = parseInt($('#ddlCountryUpdate').val());
-                data.StateId = parseInt($('#ddlStateUpdate').val());
-                data.CityId = parseInt($('#ddlCityUpdate').val());
-                data.LocationsId = $('#ddlCompanyLocationUpdate').toString();
-                data.MobileNo = parseInt($('#txtContactNoUpdate').val());
-                data.ZipCode = parseInt($('#txtZipCodeUpdate').val());
-                data.BankName = $('#txtBankNameUpdate').val();
-                data.BankBranch = $('#txtBankBranchUpdate').val();
-                data.BankAccountNo = $('#txtAccountNoUpdate').val();
-                data.BankIfsc = $('#txtBankIFSCUpdate').val();
-                data.POC = $('#txtPOCUpdate').val();
-                data.POCNo = parseInt($('#txtPOCNoUpdate').val());
-                data.Customer = $('#chkCustomerUpdate').is(':checked');
-                data.Vendor = $('#chkVendorUpdate').is(':checked');
-
-                SaveUpdateCompanyDetails(data);
+                SaveUpdateRequisitionDetails(data);
             });
 
             var ArrData = [];
 
 
+            //new code 
 
+            $("body").on("click", "#btnAdd", function () {
 
+                $("#ddlQuotationId").prop('disabled', true);
+                //Reference the Name and Country TextBoxes.
+                var txtDescriptionOfGoods = $("#ddlItem option:selected").text();
+                // alert(txtDescriptionOfGoods);
+                var txtRequiredQty = $("#txtRequiredQty");
+                var txtInStockQty = $("#txtInStockQty");
+                var txtPurchaseQty = $("#txtPurchaseQty");
+                var txtRate = $("#txtRate");
+                var txtAmount = $("#txtAmount");
+                var chkBillAvailable = $("#ddlBillAvailable option:selected").text();
+                var txtPOItemNumber = $("#txtPOItemNumber");
 
+                //Get the reference of the Table's TBODY element.
+                var tBody = $("#tblCustomers > TBODY")[0];
+
+                //Add Row.
+                var row = tBody.insertRow(-1);
+
+                //Add Name cell.
+                var cell = $(row.insertCell(-1));
+                //cell.html(txtDescriptionOfGoods.val());
+                cell.html(txtDescriptionOfGoods);
+
+                //Add Country cell.
+                cell = $(row.insertCell(-1));
+                cell.html(txtRequiredQty.val());
+
+                cell = $(row.insertCell(-1));
+                cell.html(txtInStockQty.val());
+
+                cell = $(row.insertCell(-1));
+                cell.html(txtPurchaseQty.val());
+
+                cell = $(row.insertCell(-1));
+                cell.html(txtRate.val());
+
+                cell = $(row.insertCell(-1));
+                cell.html(txtAmount.val());
+                cell = $(row.insertCell(-1));
+                cell.html(chkBillAvailable);
+
+                cell = $(row.insertCell(-1));
+                cell.html(txtPOItemNumber.val());
+
+                // funTotalAmount(txtTotalAmount1.val(), txtAmount.val());
+
+                // funRecalculateAfterAdding(txtTotalAmount1.val(), txtAmount.val());
+                //Add Button cell.
+                cell = $(row.insertCell(-1));
+                var btnRemove = $("<input />");
+                btnRemove.attr("type", "button");
+                btnRemove.attr("onclick", "Remove(this);");
+                btnRemove.val("Remove");
+                cell.append(btnRemove);
+
+                //Clear the TextBoxes.
+                //txtDescriptionOfGoods.val("");
+
+                $("#ddlItem option").prop("selected", false);
+
+                txtRequiredQty.val("");
+                txtInStockQty.val("");
+                txtPurchaseQty.val("");
+                txtRate.val("");
+                txtAmount.val("");
+                $("#ddlBillAvailable option").prop('selected', false);
+                txtPOItemNumber.val("");
+
+            });
+
+            var index = $('#ddlItem').get(0).selectedIndex;
+            $('#ddlItem option:eq(' + index + ')').remove();
 
         });
-
-
         function GetQuotationDetails(QID) {
             var element = "";
 
@@ -504,9 +517,9 @@
                 success: function (result) {
                     var getResult = result.d;
                     var len = getResult.length;
-                    $("#ddlQuotation").append('<option value="0">Select</option>');
+                    $("#ddlQuotationId").append('<option value="0">Select</option>');
                     for (var i = 0; i < len; i++) {
-                        $("#ddlQuotation").append('<option value=' + getResult[i].QID + '>' + getResult[i].QNo + '</option>');
+                        $("#ddlQuotationId").append('<option value=' + getResult[i].QID + '>' + getResult[i].QNo + '</option>');
                     }
                 },
                 error: function (err) {
@@ -514,7 +527,107 @@
                 }
             });
         }
+        function funRecalculateAfterAdding(amount, tax) {
 
+
+            //$('#txtTaxableAmount').val(taxVal);
+            //$('#txtGrandTotal').val(val);
+            //$('#txtTotalWords').val(numberToWords(val));
+
+
+
+
+            var TotalAmount = 0;
+
+            if (!isNaN(amount)) {
+                //  alert('nan')
+                TotalAmount = amount;
+            }
+
+
+            //if ($('#txtGrandTotal').val() != "") {
+            //    TotalAmount = parseInt($('#txtGrandTotal').val());
+            //}
+            //var AddedAmount = parseInt(amount);
+            //var NewAmount = TotalAmount + AddedAmount;
+            //$('#txtGrandTotal').val(NewAmount);
+            //$('#txtTotalWords').val(numberToWords(NewAmount));
+
+            //var TotalTax = 0;
+            //if ($('#txtTaxableAmount').val() != "") {
+            //    TotalTax = parseInt($('#txtTaxableAmount').val());
+            //}
+            //var AddedTax = parseInt(tax);
+            //var NewTax = AddedTax + TotalTax;
+            //$('#txtTaxableAmount').val(NewTax);
+            // $('#txtTotalWords').val(numberToWords(NewAmount));
+
+
+        }
+        function GetRequisitionDetails(RequisitionId) {
+            var element = "";
+            var Counter = 1;
+            $.ajax({
+                contentType: "application/json; charset=utf-8",
+                url: "Requisition.aspx/GetRequisitionDetails",
+                type: "POST",
+                data: "{RequisitionId:" + RequisitionId + "}",
+                dataType: "json",
+                success: function (result) {
+                    var getResult = result.d;
+                    var len = getResult.length;
+                    $('#CityTableId').empty();
+
+                    element = element + '<thead class="cf"><tr class="bgblue-Over">';
+                    element = element + '<th style="width:59px">S NO</th>';
+                    element = element + '<th style="width:160px">Req Id</th>';
+                    element = element + '<th>Quo Id</th>';
+                    element = element + '<th>Date</th>';
+                    element = element + '<th>Required By</th>';
+                    element = element + '<th>Approved By</th>';
+                    element = element + '<th>Action</th>';
+
+                    element = element + '</tr></thead><tbody>';
+
+                    if (len == 0) {
+                        element = element + '<tr><td colspan="3"><p class="text-center">No Requisition Data Available</p></td></tr>'
+                    }
+
+                    for (var i = 0; i < len; i++) {
+                        //alert(i);
+
+                        //alert(getResult[i].BankAccountNo);
+
+                        element = element + '<tr>';
+                        element = element + '<td>' + Counter++ + '</td>';
+                        element = element + '<td>' + getResult[i].RequisitionId + '</td>';
+                        element = element + '<td>' + getResult[i].QuotationId + '</td>';
+                        element = element + '<td>' + GetProperDate(getResult[i].QDate) + '</td>';
+                        element = element + '<td>' + getResult[i].RequiredBy + '</td>';
+                        element = element + '<td>' + getResult[i].ApprovedBy + '</td>';
+                        element = element + '<td><a href="#"><span class="label label-warning" onclick="GetRequisitionDetailsForUpdate(' + getResult[i].RequisitionId + ',' + getResult[i].QuotationId + ',' + GetProperDate(getResult[i].QDate) + ',\'' + getResult[i].RequisitionNumber + '\',\'' + getResult[i].RequiredBy + '\',\'' + getResult[i].ApprovedBy + '\'); return false;" ><i class="fa fa-file-text"  aria-hidden="true"></i> Edit </span></a><a href="#" ><span class="label label-success"   onclick="EmailQuotationDetails(' + getResult[i].QID + '); return false;" style="margin-left: 23px;"><i class="fa fa-print"  aria-hidden="true"></i>   Send</span></a></td>';
+                        element = element + '</tr>';
+                    }
+                    element = element + '</tbody>';
+                    $("#CityTableId").append(element);
+                    $('#CityTableId').dataTable({
+                        "paging": true,
+                        //"scrollY": 400,
+                        "destroy": true,
+                        "pagingType": "simple_numbers"[{
+                            style: 'Margin-left:1%'
+                        }]
+
+                    });
+                    $('.dataTables_length').addClass('bs-select');
+
+
+                },
+                error: function (err) {
+                    // alert(err.statusText)
+                }
+            });
+        }
         function ClearInputBoxValues(Mode) {
             if (Mode == 1) {
                 $('input[type=text]').each(function () {
@@ -526,13 +639,181 @@
                 });
             }
         }
-
-
-
-        function SaveUpdateCompanyDetails(data) {
+        //toc details
+        function GetTOCDetails(RequisitionId) {
+            var element = "";
+            $("#tblCustomers > TBODY").empty();
             $.ajax({
                 contentType: "application/json; charset=utf-8",
-                url: "Company.aspx/SaveUpdateCompanyDetailsNew",
+                url: "Requisition.aspx/GetTOCRequisitionDetails",
+                type: "POST",
+                data: "{RequisitionId:" + RequisitionId + "}",
+                dataType: "json",
+                success: function (result) {
+                    var getResult = result.d;
+                    var len = getResult.length;
+
+                    for (var i = 0; i < len; i++) {
+
+                        var a = getResult[i].DescriptionOfGoods;
+                        var b = getResult[i].RequiredQty;
+                        var c = getResult[i].InStockQty;
+                        var d = getResult[i].PurchaseQty;
+                        var e = getResult[i].Rate;
+                        var f = getResult[i].Amount;
+                        var g = getResult[i].BillAvailable;
+                        var h = getResult[i].POItemNo;
+
+                        btnAddCall(a, b, c, d, e, f, g, h);
+
+                    }
+                },
+                error: function (err) {
+                    //alert(err.statusText)
+                }
+            });
+        }
+        function GetItemsDetails(QID) {
+            var element = "";
+
+            $.ajax({
+                contentType: "application/json; charset=utf-8",
+                url: "Requisition.aspx/GetQuotationItemDetails",
+                type: "POST",
+                data: "{QID:" + QID + "}",
+                dataType: "json",
+                success: function (result) {
+                    var getResult = result.d;
+                    var len = getResult.length;
+                    $("#ddlItem").empty();
+                    $("#ddlItem").append('<option value="0">Select</option>');
+                    for (var i = 0; i < len; i++) {
+                        $("#ddlItem").append('<option value=' + getResult[i].ItemId + '>' + getResult[i].ItemName + '</option>');
+                    }
+                },
+                error: function (err) {
+                    // alert(err.statusText)
+                }
+            });
+        }
+        function GetItemsDescriptionDetails(QID, ItemId) {
+            var element = "";
+
+            $.ajax({
+                contentType: "application/json; charset=utf-8",
+                url: "Requisition.aspx/GetQuotationItemDescriptionDetails",
+                type: "POST",
+                data: "{QID:" + QID + ",ItemId:" + ItemId + "}",
+                dataType: "json",
+                success: function (result) {
+                    var getResult = result.d;
+                    var len = getResult.length;
+
+                    for (var i = 0; i < len; i++) {
+                        $("#txtRequiredQty").val(getResult[i].Qty);
+                        $("#txtRate").val(getResult[i].Rate);
+                    }
+                },
+                error: function (err) {
+                    // alert(err.statusText)
+                }
+            });
+        }
+        function btnAddCall(DescriptionOfGoods, RequiredQty, InStockQty, PurchaseQty, Rate, Amount, BillAvailable, POItemNo) {
+
+            //Reference the Name and Country TextBoxes.
+            var txtDescriptionOfGoods = DescriptionOfGoods;
+            var txtRequiredQty = RequiredQty;
+            var txtInStockQty = InStockQty;
+            var txtPurchasedQty = PurchaseQty;
+            var txtRate = Rate;
+            var txtBillAvailable = "Yes";
+            if (BillAvailable != true) {
+                txtBillAvailable = "No";
+            }
+
+            var txtAmount = Amount;
+            var txtPOItemNo = POItemNo;
+
+
+            //Get the reference of the Table's TBODY element.
+            var tBody = $("#tblCustomers > TBODY")[0];
+
+            //Add Row.
+            var row = tBody.insertRow(-1);
+
+            //Add Name cell.
+            var cell = $(row.insertCell(-1));
+            cell.html(DescriptionOfGoods);
+
+            cell = $(row.insertCell(-1));
+            cell.html(txtRequiredQty);
+
+            cell = $(row.insertCell(-1));
+            cell.html(txtInStockQty);
+
+            cell = $(row.insertCell(-1));
+            cell.html(txtPurchasedQty);
+
+            cell = $(row.insertCell(-1));
+            cell.html(txtRate);
+
+
+            cell = $(row.insertCell(-1));
+            cell.html(txtAmount);
+            cell = $(row.insertCell(-1));
+            cell.html(txtBillAvailable);
+            cell = $(row.insertCell(-1));
+            cell.html(txtPOItemNo);
+
+            //Add Button cell.
+            cell = $(row.insertCell(-1));
+            var btnRemove = $("<input />");
+            btnRemove.attr("type", "button");
+            btnRemove.attr("onclick", "Remove(this);");
+            btnRemove.val("Remove");
+            cell.append(btnRemove);
+
+        }
+        //fun used
+        function SaveUpdateRequisitionDetails(data) {
+
+            alert(data);
+
+            var tocArr = new Array();
+            $("#tblCustomers TBODY TR").each(function () {
+
+                var row = $(this);
+                var TOCRequisition = {};
+
+                if ((row.find("TD").eq(0).html()) != "") {
+                    TOCRequisition.DescriptionOfGoods = row.find("TD").eq(0).html();
+                    TOCRequisition.RequiredQty = parseInt(row.find("TD").eq(1).html());
+                    TOCRequisition.InStockQty = parseInt(row.find("TD").eq(2).html());
+                    TOCRequisition.PurchaseQty = parseInt(row.find("TD").eq(3).html());
+                    TOCRequisition.Rate = parseInt(row.find("TD").eq(4).html());
+                    TOCRequisition.Amount = parseInt(row.find("TD").eq(5).html());
+
+                    if (row.find("TD").eq(6).html() == "YES") {
+                        TOCRequisition.BillAvailable = true;
+                    }
+                    else {
+                        TOCRequisition.BillAvailable = false;
+                    }
+                    TOCRequisition.POItemNo = row.find("TD").eq(7).html();
+                    tocArr.push(TOCRequisition);
+
+                }
+
+
+
+            });
+
+            data.TableOfContent = tocArr;
+
+            $.ajax({
+                contentType: "application/json; charset=utf-8",
+                url: "Requisition.aspx/SaveUpdateRequisitionDetails",
                 type: "POST",
                 data: JSON.stringify({ 'cnt': data }),
                 dataType: "json",
@@ -541,7 +822,7 @@
                     if (getResult != "0") {
                         alert(getResult);
                         //GetCityDetails(0, "", 0);
-                        GetCompanyDetails(0, "");
+                        // GetCompanyDetails(0, "");
                         ClearInputBoxValues(Mode);
                     }
                     else {
@@ -555,111 +836,31 @@
         }
 
 
-        //toc details
-        function GetTOCDetails(QID) {
-            var element = "";
-            $("#tblCustomers > TBODY").empty();
-            $.ajax({
-                contentType: "application/json; charset=utf-8",
-                url: "Requisition.aspx/GetTOCDetails",
-                type: "POST",
-                data: "{QID:" + QID + "}",
-                dataType: "json",
-                success: function (result) {
-                    var getResult = result.d;
-                    var len = getResult.length;
-
-                    for (var i = 0; i < len; i++) {
-
-                        var a = getResult[i].DescriptionOfGoods;
-                        var b = getResult[i].Qty;
-                        var c = getResult[i].Hsn;
-                        var d = getResult[i].Rate;
-                        var e = getResult[i].Value;
-                        var f = getResult[i].Igst;
-                        var g = getResult[i].Amount;
-                        var h = getResult[i].TotalAmount1;
-
-                        btnAddCall(a, b, c, d, e, f, g, h);
-
-                    }
-                },
-                error: function (err) {
-                    //alert(err.statusText)
-                }
-            });
+        function GetProperDate(DateStr) {
+            if (DateStr != null && DateStr != undefined && DateStr != "") {
+                var dateString = DateStr.substr(6);
+                var currentTime = new Date(parseInt(dateString));
+                var month = currentTime.getMonth() + 1;
+                var day = currentTime.getDate();
+                var year = currentTime.getFullYear();
+                var date = ('0' + month).slice(-2) + "/" + day + "/" + year;
+                return date;
+            }
         }
+        function GetRequisitionDetailsForUpdate(RequisitionId, QuotationId, RequisitionDate, RequisitionNumber, RequiredBy, ApprovedBy) {
 
 
-        function btnAddCall(DescriptionOfGoods, Qty, Hsn, Rate, Value, Igst, Amount, TotalAmount1) {
+            GetTOCDetails(RequisitionId);
 
-            //alert(DescriptionOfGoods, Qty, Hsn, Rate, Value, Igst, Amount, TotalAmount1);
-            //  $('#tblCustomers').empty();
-            //17 feb
-
-
-            //Reference the Name and Country TextBoxes.
-            var txtDescriptionOfGoods = DescriptionOfGoods;//$("#txtDescriptionOfGoods");
-            var txtQty = Qty;//$("#txtQty");
-            var txtHsn = Hsn;//$("#txtHsn");
-            var txtRate = Rate;//$("#txtRate");
-            var txtValue = Value;//$("#txtValue");
-            var txtIgst = Igst;//$("#txtIgst");
-            var txtAmount = Amount;//$("#txtAmount");
-            var txtTotalAmount1 = TotalAmount1;//$("#txtTotalAmount1");
+            $('#hidHotelId').val(RequisitionId);
+            $('#ddlQuotationId').val(QuotationId),
+            $('#txtRequisitionDate').val(RequisitionDate),
+            $('#txtRequiredBy').val(RequiredBy),
+            $('#txtApprovedBy').val(ApprovedBy)
 
 
-            //Get the reference of the Table's TBODY element.
-            var tBody = $("#tblCustomers > TBODY")[0];
-
-            //Add Row.
-            var row = tBody.insertRow(-1);
-
-            //Add Name cell.
-            var cell = $(row.insertCell(-1));
-            cell.html(DescriptionOfGoods);
-
-            //Add Country cell.
-            cell = $(row.insertCell(-1));
-            cell.html(Qty);
-
-            cell = $(row.insertCell(-1));
-            cell.html(Hsn);
-
-            cell = $(row.insertCell(-1));
-            cell.html(Rate);
-
-            cell = $(row.insertCell(-1));
-            cell.html(Value);
-
-            cell = $(row.insertCell(-1));
-            cell.html(Igst);
-            cell = $(row.insertCell(-1));
-            cell.html(Amount);
-
-            cell = $(row.insertCell(-1));
-            cell.html(TotalAmount1);
-
-            //Add Button cell.
-            cell = $(row.insertCell(-1));
-            var btnRemove = $("<input />");
-            btnRemove.attr("type", "button");
-            btnRemove.attr("onclick", "Remove(this);");
-            btnRemove.val("Remove");
-            cell.append(btnRemove);
-
-            //Clear the TextBoxes.
-            //txtDescriptionOfGoods.val("");
-            //txtQty.val("");
-            //txtHsn.val("");
-            //txtRate.val("");
-            //txtValue.val("");
-            //txtIgst.val("");
-            //txtAmount.val("");
-            //txtTotalAmount1.val("");
+            GetItemsDetails(QuotationId);
         }
-
-
 
     </script>
 

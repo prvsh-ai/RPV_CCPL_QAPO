@@ -44,9 +44,30 @@ namespace Connect.QU.BAL
         {
             return new CommonDAL().GetTOCDetails(QID);
         }
+
+        public List<QU.Entities.TOCRequisition> GetTOCRequisitionDetails(int RequisitionId)
+        {
+            return new CommonDAL().GetTOCRequisitionDetails(RequisitionId);
+        }
+        public List<QU.Entities.TOC> GetQuotationItemDetails(int QID)
+        {
+            return new CommonDAL().GetQuotationItemDetails(QID);
+        }
+        public List<QU.Entities.TOC> GetQuotationItemDescriptionDetails(int QID,int ItemId)
+        {
+            return new CommonDAL().GetQuotationItemDescriptionDetails(QID,ItemId);
+        }        
+        
+
         public List<QU.Entities.Quotation> GetQuotationDetails(int QID)
         {
             return new CommonDAL().GetQuotationDetails(QID);
+        }
+
+
+        public List<QU.Entities.Requisition> GetRequisitionDetails(int RequisitionId)
+        {
+            return new CommonDAL().GetRequisitionDetails(RequisitionId);
         }
         public List<QU.Entities.Location> GetCityDetails(int CityId, string CityName, int StateId)
         {
@@ -93,7 +114,11 @@ namespace Connect.QU.BAL
         {
             return new CommonDAL().SaveUpdateQuotationDetails(cnt);
         }
-
+        public string SaveUpdateRequisitionDetails(Requisition cnt)
+        {
+            return new CommonDAL().SaveUpdateRequisitionDetails(cnt);
+        }
+        
         //public string SaveUpdateQuotationDetails(
         //  int Mode,
         //  int QID,

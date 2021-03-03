@@ -19,6 +19,49 @@ namespace Connect.QU.DAL
         private SqlTransaction myTran = null;
         private DBConnectionDAL myDBConectionDAL = new DBConnectionDAL();
         #endregion
+
+
+        public List<QU.Entities.Requisition> GetRequisitionDetails(int RequisitionId)
+        {
+            List<Entities.Requisition> Entities = new List<Entities.Requisition>();
+            Entities.Requisition CL = null;
+            try
+            {
+                myCon = myDBConectionDAL.AssignConnection();
+                myCmd = new SqlCommand("spRetRequisitionDetails", myCon);
+                myCmd.CommandType = CommandType.StoredProcedure;
+                if (RequisitionId != 0)
+                {
+                    myCmd.Parameters.AddWithValue("@RequisitionId", RequisitionId);
+                }
+
+                myDBConectionDAL.OpenConnection();
+                SqlDataReader sdr = myCmd.ExecuteReader();
+                while (sdr.Read())
+                {
+                    CL = new Entities.Requisition();
+                    CL.RequisitionId = Convert.ToInt32(sdr["RequisitionId"]);
+                    CL.RequisitionNumber = sdr["RequisitionNumber"].ToString();
+
+                    CL.RequisitionDate = Convert.ToDateTime(sdr["RequisitionDate"]);
+                    CL.QuotationId = Convert.ToInt32(sdr["QuotationId"]);
+                    CL.RequiredBy = sdr["RequiredBy"].ToString();
+                    CL.ApprovedBy = sdr["ApprovedBy"].ToString();
+
+                    Entities.Add(CL);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                myDBConectionDAL.CloseConnection();
+            }
+
+            return Entities;
+        }
         public List<QU.Entities.Quotation> GetQuotationDetails(int QId)
         {
             List<Entities.Quotation> Entities = new List<Entities.Quotation>();
@@ -44,7 +87,7 @@ namespace Connect.QU.DAL
                     {
                         CL.QType = "SU";
                     }
-                   else if (sdr["QType"].ToString() == "2")
+                    else if (sdr["QType"].ToString() == "2")
                     {
                         CL.QType = "SER";
                     }
@@ -87,7 +130,7 @@ namespace Connect.QU.DAL
                     Entities.Add(CL);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -314,6 +357,50 @@ namespace Connect.QU.DAL
 
             return Entities;
         }
+
+
+        public List<QU.Entities.TOCRequisition> GetTOCRequisitionDetails(int Requisitionid)
+        {
+            List<Entities.TOCRequisition> Entities = new List<Entities.TOCRequisition>();
+            Entities.TOCRequisition CL = null;
+            try
+            {
+                myCon = myDBConectionDAL.AssignConnection();
+                myCmd = new SqlCommand("spRetTOCRequisition", myCon);
+                myCmd.CommandType = CommandType.StoredProcedure;
+                if (Requisitionid != 0)
+                {
+                    myCmd.Parameters.AddWithValue("@Requisitionid", Requisitionid);
+                }
+
+                myDBConectionDAL.OpenConnection();
+                SqlDataReader sdr = myCmd.ExecuteReader();
+                while (sdr.Read())
+                {
+                    CL = new Entities.TOCRequisition();
+                    CL.DescriptionOfGoods = sdr["DescriptionOfGoods"].ToString();
+                    CL.RequiredQty = Convert.ToInt32(sdr["RequiredQty"]);
+                    CL.InStockQty = Convert.ToInt32(sdr["InStockQty"]);
+                    CL.PurchaseQty = Convert.ToInt32(sdr["PurchaseQty"]);
+                    CL.Rate = Convert.ToInt32(sdr["Rate"]);
+                    CL.BillAvailable = Convert.ToBoolean(sdr["BillAvailable"]);
+                    CL.Amount = Convert.ToInt32(sdr["Amount"]);
+                    CL.POItemNo = sdr["POItemNo"].ToString();
+                    Entities.Add(CL);
+                }
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                myDBConectionDAL.CloseConnection();
+            }
+
+            return Entities;
+        }
+
         public List<QU.Entities.CategoryDetails> GetCategoryDetails(int CategoryID, string CategoryName)
         {
             List<Entities.CategoryDetails> Entities = new List<Entities.CategoryDetails>();
@@ -515,6 +602,175 @@ namespace Connect.QU.DAL
                     CL.Color = sdr["Color"].ToString();
                     CL.Size = sdr["Size"].ToString();
                     CL.CategoryName = sdr["categoryName"].ToString();
+                    Entities.Add(CL);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                myDBConectionDAL.CloseConnection();
+            }
+
+            return Entities;
+        }
+
+
+        public List<QU.Entities.TOC> GetQuotationItemDetails(int QID)
+        {
+            List<Entities.TOC> Entities = new List<Entities.TOC>();
+            Entities.TOC CL = null;
+            try
+            {
+                myCon = myDBConectionDAL.AssignConnection();
+                myCmd = new SqlCommand("spRetQuotationItemDetails", myCon);
+                myCmd.CommandType = CommandType.StoredProcedure;
+                if (QID != 0)
+                {
+                    myCmd.Parameters.AddWithValue("@QID", QID);
+                }
+
+
+
+                myDBConectionDAL.OpenConnection();
+                SqlDataReader sdr = myCmd.ExecuteReader();
+                while (sdr.Read())
+                {
+                    CL = new Entities.TOC();
+                    if (!string.IsNullOrEmpty(sdr["DescriptionOfGoods"].ToString()))
+                    {
+                        CL.DescriptionOfGoods = sdr["DescriptionOfGoods"].ToString();
+
+                    }
+
+                    if (!string.IsNullOrEmpty(sdr["Quantity"].ToString()))
+                    {
+                        CL.Qty = sdr["Quantity"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["HsnCode"].ToString()))
+                    {
+                        CL.Hsn = sdr["HsnCode"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["Rate"].ToString()))
+                    {
+                        CL.Rate = sdr["Rate"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["Value"].ToString()))
+                    {
+                        CL.Value = sdr["Value"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["Igst"].ToString()))
+                    {
+                        CL.Igst = sdr["Igst"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["Amount"].ToString()))
+                    {
+                        CL.Amount = sdr["Amount"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["TotalAmount1"].ToString()))
+                    {
+                        CL.TotalAmount1 = sdr["TotalAmount1"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["ItemID"].ToString()))
+                    {
+                        CL.ItemId = Convert.ToInt32(sdr["ItemID"]);
+                    }
+                    if (!string.IsNullOrEmpty(sdr["ItemName"].ToString()))
+                    {
+                        CL.ItemName = sdr["ItemName"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["LastPrice"].ToString()))
+                    {
+                        CL.LastRate = Convert.ToInt32(sdr["LastPrice"]);
+                    }
+                    Entities.Add(CL);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                myDBConectionDAL.CloseConnection();
+            }
+
+            return Entities;
+        }
+
+        public List<QU.Entities.TOC> GetQuotationItemDescriptionDetails(int QID, int ItemId)
+        {
+            List<Entities.TOC> Entities = new List<Entities.TOC>();
+            Entities.TOC CL = null;
+            try
+            {
+                myCon = myDBConectionDAL.AssignConnection();
+                myCmd = new SqlCommand("spRetQuotationItemDescriptionDetails", myCon);
+                myCmd.CommandType = CommandType.StoredProcedure;
+                if (QID != 0)
+                {
+                    myCmd.Parameters.AddWithValue("@QID", QID);
+                }
+
+                if (ItemId != 0)
+                {
+                    myCmd.Parameters.AddWithValue("@ItemId", ItemId);
+                }
+
+
+                myDBConectionDAL.OpenConnection();
+                SqlDataReader sdr = myCmd.ExecuteReader();
+                while (sdr.Read())
+                {
+                    CL = new Entities.TOC();
+                    if (!string.IsNullOrEmpty(sdr["DescriptionOfGoods"].ToString()))
+                    {
+                        CL.DescriptionOfGoods = sdr["DescriptionOfGoods"].ToString();
+
+                    }
+
+                    if (!string.IsNullOrEmpty(sdr["Quantity"].ToString()))
+                    {
+                        CL.Qty = sdr["Quantity"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["HsnCode"].ToString()))
+                    {
+                        CL.Hsn = sdr["HsnCode"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["Rate"].ToString()))
+                    {
+                        CL.Rate = sdr["Rate"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["Value"].ToString()))
+                    {
+                        CL.Value = sdr["Value"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["Igst"].ToString()))
+                    {
+                        CL.Igst = sdr["Igst"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["Amount"].ToString()))
+                    {
+                        CL.Amount = sdr["Amount"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["TotalAmount1"].ToString()))
+                    {
+                        CL.TotalAmount1 = sdr["TotalAmount1"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["ItemID"].ToString()))
+                    {
+                        CL.ItemId = Convert.ToInt32(sdr["ItemID"]);
+                    }
+                    if (!string.IsNullOrEmpty(sdr["ItemName"].ToString()))
+                    {
+                        CL.ItemName = sdr["ItemName"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["LastPrice"].ToString()))
+                    {
+                        CL.LastRate = Convert.ToInt32(sdr["LastPrice"]);
+                    }
                     Entities.Add(CL);
                 }
             }
@@ -1026,6 +1282,104 @@ namespace Connect.QU.DAL
             }
             return Result;
         }
+
+
+
+        public string SaveUpdateRequisitionDetails(Requisition cnt)
+        {
+
+            string Result = null;
+            myCon = myDBConectionDAL.AssignConnection();
+
+            //adding TOC
+            DataTable dt = new DataTable();
+       
+            dt.Columns.Add("TOCRequisitionId"); 
+            dt.Columns.Add("RequisitionId");
+            dt.Columns.Add("QuotationId");
+            dt.Columns.Add("ItemId");
+            dt.Columns.Add("ItemName");
+            dt.Columns.Add("DescriptionOfGoods");
+            dt.Columns.Add("RequiredQty");
+            dt.Columns.Add("InStockQty");
+            dt.Columns.Add("PurchaseQty");
+            dt.Columns.Add("Rate");
+            dt.Columns.Add("Amount");
+            dt.Columns.Add("BillAvailable");
+            dt.Columns.Add("POItemNo");
+            dt.Columns.Add("CreatedBy");
+            dt.Columns.Add("CreatedDate");
+            dt.Columns.Add("UpdatedBy");
+            dt.Columns.Add("UpdatedDate");
+            foreach (var arr in cnt.TableOfContent)
+            {
+
+                DataRow dr = dt.NewRow();
+             
+                dr["TOCRequisitionId"] = cnt.TOCRequisitionId;
+                dr["RequisitionId"] = cnt.RequisitionId;
+                dr["QuotationId"] = cnt.QuotationId;
+                dr["ItemId"] = arr.ItemId;
+                dr["ItemName"] = arr.ItemName;
+                dr["DescriptionOfGoods"] = arr.DescriptionOfGoods;
+                dr["RequiredQty"] = arr.RequiredQty;
+                dr["InStockQty"] = arr.InStockQty;
+                dr["PurchaseQty"] = arr.PurchaseQty;
+                dr["Rate"] = arr.Rate;
+                dr["Amount"] = arr.Amount;
+                dr["BillAvailable"] = arr.BillAvailable;
+                dr["POItemNo"] = arr.POItemNo;
+                dr["CreatedBy"] = cnt.UserId;
+                dr["CreatedDate"] = DateTime.Now;
+                dr["UpdatedBy"] = cnt.UserId;
+                dr["UpdatedDate"] = DateTime.Now;
+                dt.Rows.Add(dr);
+            }
+
+            //adding Toc ends here
+
+            try
+            {
+                myCmd = new SqlCommand("spRequisitionDetailsInsertUpdate", myCon);
+                myCmd.CommandType = CommandType.StoredProcedure;
+                if (cnt.RequisitionId != 0)
+                {
+                    myCmd.Parameters.AddWithValue("@RequisitionId", cnt.RequisitionId);
+                }
+                if (cnt.QuotationId != 0)
+                {
+                    myCmd.Parameters.AddWithValue("@QuotationId", cnt.QuotationId);
+                }
+                myCmd.Parameters.AddWithValue("@Mode", cnt.Mode);
+                myCmd.Parameters.AddWithValue("@RequisitionNumber", cnt.RequisitionNumber);
+                myCmd.Parameters.AddWithValue("@RequisitionDate", DateTime.Now);// cnt.RequisitionDate);
+                myCmd.Parameters.AddWithValue("@RequiredBy", cnt.RequiredBy);
+                myCmd.Parameters.AddWithValue("@ApprovedBy", cnt.ApprovedBy);
+                myCmd.Parameters.AddWithValue("@TOCRequisitionId", cnt.TOCRequisitionId);
+                myCmd.Parameters.AddWithValue("@CreatedBy", cnt.UserId);
+                myCmd.Parameters.AddWithValue("@CreatedDate", DateTime.Now);
+                myCmd.Parameters.AddWithValue("@UpdatedBy", cnt.UserId);
+                myCmd.Parameters.AddWithValue("@UpdatedDate", DateTime.Now);
+                myCmd.Parameters.AddWithValue("@tblTOCRequisition", dt);
+
+                myCmd.Parameters.Add("@Message", SqlDbType.VarChar, 100);
+                myCmd.Parameters["@Message"].Direction = ParameterDirection.Output;
+
+                myDBConectionDAL.OpenConnection();
+                myCmd.ExecuteNonQuery();
+                Result = myCmd.Parameters["@Message"].Value.ToString();
+            }
+            catch (Exception ex)
+            {
+                Result = myCmd.Parameters["@Message"].Value.ToString();
+            }
+            finally
+            {
+                myDBConectionDAL.CloseConnection();
+            }
+            return Result;
+        }
+
         public string InsertApprovalData(bool chkVal, int QID, string UserId)
         {
             string Result = null;

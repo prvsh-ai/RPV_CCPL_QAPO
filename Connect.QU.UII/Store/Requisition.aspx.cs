@@ -46,14 +46,26 @@ namespace Connect.QU.UII.Store
         {
             return new QU.BAL.CommonBAL().GetCountryDetails(CountryId, CountryName);
         }
-       
+
         [WebMethod]
-        public static string SaveUpdateCompanyDetailsNew(CompanyDetails cnt)
+        public static string SaveUpdateRequisitionDetails(Connect.QU.Entities.Requisition cnt)
         {
+            Random RN = new Random();
+         
+            cnt.TOCRequisitionId= RN.Next(10, 1000000);
+            cnt.RequisitionNumber = Convert.ToString(cnt.QuotationId + "RQ" + DateTime.Now);
             cnt.UserId = HttpContext.Current.User.Identity.Name.ToString();
-            return new QU.BAL.CommonBAL().SaveUpdateCompanyDetailsNew(cnt);
+           
+            return new QU.BAL.CommonBAL().SaveUpdateRequisitionDetails(cnt);
         }
 
+        [WebMethod]
+        public static List<QU.Entities.Requisition> GetRequisitionDetails(int RequisitionId)
+        {
+            return new QU.BAL.CommonBAL().GetRequisitionDetails(RequisitionId);
+
+
+        }
         [WebMethod]
         public static List<QU.Entities.Quotation> GetQuotationDetails(int QID)
         {
@@ -63,11 +75,21 @@ namespace Connect.QU.UII.Store
 
         }
         [WebMethod]
-        public static List<QU.Entities.TOC> GetTOCDetails(int QID)
+        public static List<QU.Entities.TOCRequisition> GetTOCRequisitionDetails(int RequisitionId)
         {
-            return new QU.BAL.CommonBAL().GetTOCDetails(QID);
+            return new QU.BAL.CommonBAL().GetTOCRequisitionDetails(RequisitionId);
         }
 
-
+        [WebMethod]
+        public static List<QU.Entities.TOC> GetQuotationItemDetails(int QID)
+        {
+            return new QU.BAL.CommonBAL().GetQuotationItemDetails(QID);
+        }
+          [WebMethod]
+        public static List<QU.Entities.TOC> GetQuotationItemDescriptionDetails(int QID,int ItemId)
+        {
+            return new QU.BAL.CommonBAL().GetQuotationItemDescriptionDetails(QID,ItemId);
+        }
+        
     }
 }
