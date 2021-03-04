@@ -120,7 +120,7 @@
             <%--Quotation Details Start--%>
 
             <div class="AppFormBody" id="ApplicationForm">
-                <h4 class="text-center" id="QuotationApplicationText">QUOTATION APPLICATION</h4>
+                <h4 class="text-center" id="QuotationApplicationText"><b>QUOTATION APPLICATION</b></h4>
 
                 <p>
                     </br>

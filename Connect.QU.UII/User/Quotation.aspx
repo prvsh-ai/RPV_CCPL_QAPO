@@ -262,18 +262,18 @@
                         </p>
 
                         <p>
+
                             <div class="form-inline">
-                                <div class="form-group">
+                                <%-- <div class="form-group">
                                     <label>Help</label>
-                                    <select id="ddlHelp" class="form-control" name="HelpType">
-                                        <%--<option value="0">--select--</option>--%>
+                                    <select id="ddlHelp" class="form-control" name="HelpType">                                        
                                         <option value="1"><a href="xyz" target="_blank">PDF</a></option>
                                         <option value="2"><a href="xyz" target="_blank">PDF</a></option>
                                         <option value="3"><a href="xyz" target="_blank">PDF</a></option>
                                     </select>
-                                </div>
+                                </div>--%>
                                 <div class="form-group">
-                                    <input type="buttton" id="btnExportToPdf" value="Export" class="btn btn-sm btn-success" />
+                                    <input type="buttton" id="btnExportToPdf" style="margin-top: 4%" value="Export" class="btn btn-sm btn-success" />
                                 </div>
                             </div>
 
@@ -682,7 +682,7 @@
 
             // debugger;
             $(document).ready(function () {
-
+                $('#btnExportToPdf').prop('disabled', true);
 
                 var data = {};
 
@@ -776,6 +776,60 @@
                         $('#txtFinancialYear').val(lastValue);
                     }
                 });
+
+                // Export to PDF
+                $('#btnExportToPdf').on('click', function () {
+                    QID = $('#hidHotelId').val();
+                    $.ajax({
+                        contentType: "application/json; charset=utf-8",
+                        url: "Quotation.aspx/ExportToPDF",
+                        type: "POST",
+                        data: "{QID:" + QID + "}",
+                        dataType: "json",
+                        success: function (result) {
+                            //Convert Base64 string to Byte Array.
+                            var bytes = Base64ToBytes(result.d);
+
+                            //Convert Byte Array to BLOB.
+                            var blob = new Blob([bytes], { type: "application/octetstream" });
+
+                            //Check the Browser type and download the File.
+                            var isIE = false || !!document.documentMode;
+                            if (isIE) {
+                                window.navigator.msSaveBlob(blob, 'QuotationData' + new Date(Date.now()) + '.pdf');
+                            } else {
+                                var url = window.URL || window.webkitURL;
+                                link = url.createObjectURL(blob);
+                                var a = $("<a />");
+                                a.attr("download", 'QuotationData' + new Date(Date.now()) + '.pdf');
+                                a.attr("href", link);
+                                $("body").append(a);
+                                a[0].click();
+                                $("body").remove(a);
+                            }
+                        },
+
+                        //    var getResult = result.d;
+                        //    var len = getResult.length;
+                        //    if (len > 0) {
+                        //        alert('Quotation Export Successfully')
+                        //    }
+                        //}
+                        //,
+                        error: function (err) {
+                            return;
+                        }
+                    });
+                });
+
+                function Base64ToBytes(base64) {
+                    var s = window.atob(base64);
+                    var bytes = new Uint8Array(s.length);
+                    for (var i = 0; i < s.length; i++) {
+                        bytes[i] = s.charCodeAt(i);
+                    }
+                    return bytes;
+                };
 
                 //new code 
 
@@ -910,46 +964,46 @@
 
 
 
-                    data.Mode=  1;
-                    data.QuotationId  =0;
-                    data.FormType=$('#ddlPageType').val();
-                    
-                    data.QFromGSTINNo=$("#ddlQGstinNoType option:selected" ).text();//
+                    data.Mode = 1;
+                    data.QuotationId = 0;
+                    data.FormType = $('#ddlPageType').val();
+
+                    data.QFromGSTINNo = $("#ddlQGstinNoType option:selected").text();//
 
 
-                    data.QuotationType  =$('#ddlQuotationType').val();
-                    data.QNo  =$('#txtQuotationNo').val();
-                    data.QType=$('#ddlQuotationType').val();
-                    data.QDate  =$('#txtQuotationDate').val();
+                    data.QuotationType = $('#ddlQuotationType').val();
+                    data.QNo = $('#txtQuotationNo').val();
+                    data.QType = $('#ddlQuotationType').val();
+                    data.QDate = $('#txtQuotationDate').val();
                     //  data.QFromGSTINNo  = $('#txtGstinNo').val();
 
-                    data.ProjectName  =$('#txtProjectName').val();
-                    data.FinantialYear  =$('#txtFinantialYear').val();
-              
-                    data.QToCompanyID  =$('#ddlCompanyId option:selected').val(), // 
-                    data.QToCompanyName  =$('#txtCompanyName').val();
-                    data.QToGSTINNo  =$('#txtGstinParty').val();
-                    data.QToContactPerson  =$('#txtContactPerson').val();
-                    data.QToAddress  =$('#txtAddress').val();
-                 
-                    data.PaymentTerms  =$('#txtaymentTerms').val();
-                    data.ValidityOfQuote  =$('#txtValidityOfQuote').val();
-                    data.PlaceOfSupply  =$('#txtPlaceOfSupply').val();
-                 
-                    data.TotalAmountDigit  =$('#txtGrandTotal').val();
-                    data.TotalAmountWords  =$('#txtTotalWords').val();
-                    data.TaxableAmount  =$('#txtTaxableAmount').val();
-                    data.Freight  =$('#txtFreight').val();
-                 
-                    data.BankName  =$('#txtBankName').val();
-                    data.BranchName  =$('#txtBranchName').val();
-                    data.BankAccountNo  =$('#txtBankAccountNo').val();
-                    data.BankBranchIFSC  =$('#txtBranchIfsc').val();
-                    
-                    data.TermsAndCondition  =$('#txtTermsAndConditions').val();
-                    data.Note1  =$('#txtNotes1').val();
-                    data.Note2  =$('#txtNotes2').val();
-                    data.SignatureDate  =$('#txtSignatureDate').val();
+                    data.ProjectName = $('#txtProjectName').val();
+                    data.FinantialYear = $('#txtFinantialYear').val();
+
+                    data.QToCompanyID = $('#ddlCompanyId option:selected').val(), // 
+                    data.QToCompanyName = $('#txtCompanyName').val();
+                    data.QToGSTINNo = $('#txtGstinParty').val();
+                    data.QToContactPerson = $('#txtContactPerson').val();
+                    data.QToAddress = $('#txtAddress').val();
+
+                    data.PaymentTerms = $('#txtaymentTerms').val();
+                    data.ValidityOfQuote = $('#txtValidityOfQuote').val();
+                    data.PlaceOfSupply = $('#txtPlaceOfSupply').val();
+
+                    data.TotalAmountDigit = $('#txtGrandTotal').val();
+                    data.TotalAmountWords = $('#txtTotalWords').val();
+                    data.TaxableAmount = $('#txtTaxableAmount').val();
+                    data.Freight = $('#txtFreight').val();
+
+                    data.BankName = $('#txtBankName').val();
+                    data.BranchName = $('#txtBranchName').val();
+                    data.BankAccountNo = $('#txtBankAccountNo').val();
+                    data.BankBranchIFSC = $('#txtBranchIfsc').val();
+
+                    data.TermsAndCondition = $('#txtTermsAndConditions').val();
+                    data.Note1 = $('#txtNotes1').val();
+                    data.Note2 = $('#txtNotes2').val();
+                    data.SignatureDate = $('#txtSignatureDate').val();
 
 
                     SaveUpdateQuotationDetails(data);
@@ -963,48 +1017,48 @@
 
                 $("#btnUpdate").click(function () {
 
-                    data.Mode=  2;
-                    data.QuotationId  =$('#hidHotelId').val();
-                    data.FormType=$('#ddlPageType').val();
-                    
-                    data.QFromGSTINNo=$("#ddlQGstinNoType option:selected" ).text();//
+                    data.Mode = 2;
+                    data.QuotationId = $('#hidHotelId').val();
+                    data.FormType = $('#ddlPageType').val();
+
+                    data.QFromGSTINNo = $("#ddlQGstinNoType option:selected").text();//
 
 
-                    data.QuotationType  =$('#ddlQuotationType').val();
-                    data.QNo  =$('#txtQuotationNo').val();
-                    data.QType=$('#ddlQuotationType').val();
-                    data.QDate  =$('#txtQuotationDate').val();
+                    data.QuotationType = $('#ddlQuotationType').val();
+                    data.QNo = $('#txtQuotationNo').val();
+                    data.QType = $('#ddlQuotationType').val();
+                    data.QDate = $('#txtQuotationDate').val();
                     //  data.QFromGSTINNo  = $('#txtGstinNo').val();
 
-                    data.ProjectName  =$('#txtProjectName').val();
-                    data.FinantialYear  =$('#txtFinantialYear').val();
-              
-                    data.QToCompanyID  =$('#ddlCompanyId option:selected').val(), // 
-                    data.QToCompanyName  =$('#txtCompanyName').val();
-                    data.QToGSTINNo  =$('#txtGstinParty').val();
-                    data.QToContactPerson  =$('#txtContactPerson').val();
-                    data.QToAddress  =$('#txtAddress').val();
-                 
-                    data.PaymentTerms  =$('#txtaymentTerms').val();
-                    data.ValidityOfQuote  =$('#txtValidityOfQuote').val();
-                    data.PlaceOfSupply  =$('#txtPlaceOfSupply').val();
-                 
-                    data.TotalAmountDigit  =$('#txtGrandTotal').val();
-                    data.TotalAmountWords  =$('#txtTotalWords').val();
-                    data.TaxableAmount  =$('#txtTaxableAmount').val();
-                    data.Freight  =$('#txtFreight').val();
-                 
-                    data.BankName  =$('#txtBankName').val();
-                    data.BranchName  =$('#txtBranchName').val();
-                    data.BankAccountNo  =$('#txtBankAccountNo').val();
-                    data.BankBranchIFSC  =$('#txtBranchIfsc').val();
-                    
-                    data.TermsAndCondition  =$('#txtTermsAndConditions').val();
-                    data.Note1  =$('#txtNotes1').val();
-                    data.Note2  =$('#txtNotes2').val();
-                    data.SignatureDate  =$('#txtSignatureDate').val();
+                    data.ProjectName = $('#txtProjectName').val();
+                    data.FinantialYear = $('#txtFinantialYear').val();
 
-                  
+                    data.QToCompanyID = $('#ddlCompanyId option:selected').val(), // 
+                    data.QToCompanyName = $('#txtCompanyName').val();
+                    data.QToGSTINNo = $('#txtGstinParty').val();
+                    data.QToContactPerson = $('#txtContactPerson').val();
+                    data.QToAddress = $('#txtAddress').val();
+
+                    data.PaymentTerms = $('#txtaymentTerms').val();
+                    data.ValidityOfQuote = $('#txtValidityOfQuote').val();
+                    data.PlaceOfSupply = $('#txtPlaceOfSupply').val();
+
+                    data.TotalAmountDigit = $('#txtGrandTotal').val();
+                    data.TotalAmountWords = $('#txtTotalWords').val();
+                    data.TaxableAmount = $('#txtTaxableAmount').val();
+                    data.Freight = $('#txtFreight').val();
+
+                    data.BankName = $('#txtBankName').val();
+                    data.BranchName = $('#txtBranchName').val();
+                    data.BankAccountNo = $('#txtBankAccountNo').val();
+                    data.BankBranchIFSC = $('#txtBranchIfsc').val();
+
+                    data.TermsAndCondition = $('#txtTermsAndConditions').val();
+                    data.Note1 = $('#txtNotes1').val();
+                    data.Note2 = $('#txtNotes2').val();
+                    data.SignatureDate = $('#txtSignatureDate').val();
+
+
 
                     SaveUpdateQuotationDetails(data);
 
@@ -1248,7 +1302,8 @@
                         element = element + '<th>Q From</th>';
                         element = element + '<th>Q To</th>';
                         element = element + '<th>Date</th>';
-                        element = element + '<th>Action</th>';
+                        element = element + '<th style="width:85px">Approval</th>';
+                        element = element + '<th style="width:80px">Action</th>';
 
                         element = element + '</tr></thead><tbody>';
 
@@ -1268,7 +1323,14 @@
                             element = element + '<td>CCPL</td>';
                             element = element + '<td>' + getResult[i].QToCompanyName + '</td>';
                             element = element + '<td>' + GetProperDate(getResult[i].QDate) + '</td>';
-                            element = element + '<td><a href="#"><span class="label label-warning" onclick="GetQuotationDetailsForUpdate(' + getResult[i].QID + ',\'' + getResult[i].QType + '\',\'' + getResult[i].QNo + '\',\'' + GetProperDate(getResult[i].QDate) + '\',\'' + getResult[i].ProjectName + '\',\'' + getResult[i].FinantialYear + '\',\'' + getResult[i].QToCompanyName + '\',\'' + getResult[i].QToGSTINNo + '\',\'' + getResult[i].QToContactPerson + '\',\'' + getResult[i].QToAddress + '\',\'' + getResult[i].PaymentTerms + '\',\'' + getResult[i].ValidityOfQuote + '\',\'' + getResult[i].PlaceOfSupply + '\',\'' + getResult[i].TotalAmountDigit + '\',\'' + getResult[i].TotalAmountWords + '\',\'' + getResult[i].TaxableAmount + '\',\'' + getResult[i].Freight + '\',\'' + getResult[i].BankName + '\',\'' + getResult[i].BranchName + '\',\'' + getResult[i].BankBranchIFSC + '\',\'' + getResult[i].BankAccountNo + '\',\'' + getResult[i].TermsAndCondition + '\',\'' + getResult[i].Note1 + '\',\'' + getResult[i].Note2 + '\' ,\'' + GetProperDate(getResult[i].SignatureDate) + '\'); return false;" ><i class="fa fa-file-text"  aria-hidden="true"></i> Edit </span></a><a href="#" ><span class="label label-success"   onclick="EmailQuotationDetails(' + getResult[i].QID + '); return false;" style="margin-left: 23px;"><i class="fa fa-print"  aria-hidden="true"></i>   Send</span></a></td>';
+                            if (!getResult[i].Approved) {
+                                element = element + '<td>' + '<input type="checkbox" disabled name="Approve"   id="chkApprove" />';
+                                element = element + '<td><a href="#"><span class="label label-warning" onclick="GetQuotationDetailsForUpdate(' + getResult[i].QID + ',\'' + getResult[i].QType + '\',\'' + getResult[i].QNo + '\',\'' + GetProperDate(getResult[i].QDate) + '\',\'' + getResult[i].ProjectName + '\',\'' + getResult[i].FinantialYear + '\',\'' + getResult[i].QToCompanyName + '\',\'' + getResult[i].QToGSTINNo + '\',\'' + getResult[i].QToContactPerson + '\',\'' + getResult[i].QToAddress + '\',\'' + getResult[i].PaymentTerms + '\',\'' + getResult[i].ValidityOfQuote + '\',\'' + getResult[i].PlaceOfSupply + '\',\'' + getResult[i].TotalAmountDigit + '\',\'' + getResult[i].TotalAmountWords + '\',\'' + getResult[i].TaxableAmount + '\',\'' + getResult[i].Freight + '\',\'' + getResult[i].BankName + '\',\'' + getResult[i].BranchName + '\',\'' + getResult[i].BankBranchIFSC + '\',\'' + getResult[i].BankAccountNo + '\',\'' + getResult[i].TermsAndCondition + '\',\'' + getResult[i].Note1 + '\',\'' + getResult[i].Note2 + '\' ,\'' + GetProperDate(getResult[i].SignatureDate) + '\'); return false;" ><i class="fa fa-file-text"  aria-hidden="true"></i> Edit </span></a></td>'
+                            }
+                            else {
+                                element = element + '<td>' + '<input type="checkbox" disabled checked name="Approve" id="chkApprove" />';
+                                element = element + '<td><a href="#" ><span class="label label-success"   onclick="EmailQuotationDetails(' + getResult[i].QID + '); return false;"><i class="fa fa-print"  aria-hidden="true"></i>   Send</span></a></td>'
+                            }
                             element = element + '</tr>';
                         }
                         element = element + '</tbody>';
@@ -1433,6 +1495,10 @@
                $('#txtNotes2').val(Note2),
                $('#txtSignatureDate').val(SignatureDate)
                 //  alert(SignatureDate);
+
+
+                $('#btnExportToPdf').prop('disabled', false);
+
             }
 
             function GetProperDate(DateStr) {
@@ -1482,49 +1548,49 @@
             //}
 
 
-           
-           var ones= ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
-           var tens= ['', '', 'twenty', 'thirty', 'fourty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
-           var sep= ['', ' thousand ', ' million ', ' billion ', ' trillion ', ' quadrillion ', ' quintillion ', ' sextillion '];
-           
+
+            var ones = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
+            var tens = ['', '', 'twenty', 'thirty', 'fourty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+            var sep = ['', ' thousand ', ' million ', ' billion ', ' trillion ', ' quadrillion ', ' quintillion ', ' sextillion '];
+
 
             function numberToWords(val) {
 
                 arr = [],
                 str = '',
                 i = 0;
-        
-                if ( val.length === 0 ) {
+
+                if (val.length === 0) {
                     return 'Please type a number into the text-box.';
-                     
+
                 }
-        
-                val = parseInt( val, 10 );
-                if ( isNaN( val ) ) {
+
+                val = parseInt(val, 10);
+                if (isNaN(val)) {
                     return 'Invalid input.';
-            
+
                 }
-        
-                while ( val ) {
-                    arr.push( val % 1000 );
-                    val = parseInt( val / 1000, 10 );   
+
+                while (val) {
+                    arr.push(val % 1000);
+                    val = parseInt(val / 1000, 10);
                 }
-        
-                while ( arr.length ) {
-                    str = (function( a ) {
-                        var x = Math.floor( a / 100 ),
-                            y = Math.floor( a / 10 ) % 10,
+
+                while (arr.length) {
+                    str = (function (a) {
+                        var x = Math.floor(a / 100),
+                            y = Math.floor(a / 10) % 10,
                             z = a % 10;
-                
-                        return ( x > 0 ? ones[x] + ' hundred ' : '' ) +                 
-                               ( y >= 2 ? tens[y] + ' ' + ones[z] : ones[10*y + z] ); 
-                    })( arr.shift() ) + sep[i++] + str;                     
+
+                        return (x > 0 ? ones[x] + ' hundred ' : '') +
+                               (y >= 2 ? tens[y] + ' ' + ones[z] : ones[10 * y + z]);
+                    })(arr.shift()) + sep[i++] + str;
                 }
-        
-                return str;        
-    
-    
-            }( ones, tens, sep );
+
+                return str;
+
+
+            } (ones, tens, sep);
 
             function GetCompanyDetails(CompanyID, CompanyName) {
                 var element = "";
