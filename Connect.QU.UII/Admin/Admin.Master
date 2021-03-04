@@ -41,10 +41,10 @@
             <header class="main-header">
                 <!-- Logo -->
                 <%--<a href="index.html" class="logo">--%>
-                 <a href="CompanyDetails.aspx" class="logo">
+                <a href="CompanyDetails.aspx" class="logo">
 
 
-                    
+
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span class="logo-mini"><b>QU</b></span>
                     <!-- logo for regular state and mobile devices -->
@@ -56,7 +56,7 @@
                 <nav class="navbar navbar-static-top" role="navigation">
                     <div class="col-md-12 col-md-header">
                         <%--<a href="../Redirect.aspx" class="logo">--%>
-                         <a href="CompanyDetails.aspx" class="logo">
+                        <a href="CompanyDetails.aspx" class="logo">
                             <img src="../images/Connectlogo.JPG" width="115" alt="Logo" />
                             <!-- mini logo for sidebar mini 50x50 pixels -->
                             <span class="logo-mini"><b>Connect</b></span>
@@ -70,14 +70,14 @@
                                 <li class="dropdown user user-menu">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="pull-left">Welcome&nbsp;&nbsp;</span>
                                         <img src="../images/user.png" class="user-image" alt="User Image" />
-                                          <span class="hidden-xs"><%=UserName %></span> 
+                                        <span class="hidden-xs"><%=UserName %></span>
 
                                     </a>
                                     <ul class="dropdown-menu">
                                         <!-- User image -->
                                         <li class="user-header">
                                             <img src="../images/user.png" class="img-circle" alt="User Image" />
-                                             <p> Name - <%=UserName %>  </p>
+                                            <p>Name - <%=UserName %>  </p>
                                         </li>
 
                                         <!-- Menu Footer-->
@@ -104,18 +104,14 @@
                 <section class="sidebar">
                     <!-- Sidebar user panel -->
                     <ul class="sidebar-menu">
-                        <li class="header">MAIN NAVIGATION</li>
-                     <%--   <li><a href="CompanyDetails.aspx"><i class="fa fa-edit"></i><span>Company Details</span></a> </li>--%>
+                        <li class="header">MAIN NAVIGATION</li>                        
                         <li><a href="Company.aspx"><i class="fa fa-edit"></i><span>Company</span></a> </li>
                         <li><a href="Register.aspx"><i class="fa fa-edit"></i><span>User Registration</span></a> </li>
                         <li><a href="Currency.aspx"><i class="fa fa-user"></i><span>Currency</span> </a></li>
-                          <li><a href="Category.aspx"><i class="fa fa-user"></i><span>Category</span> </a></li>
-                          <li><a href="Item.aspx"><i class="fa fa-user"></i><span>Item</span> </a></li>
-                             <li><a href="Approval.aspx"><i class="fa fa-user"></i><span>Approval</span> </a></li>
-                      <%--  <li><a href="../User/SUQuotation.aspx"><i class="fa fa-user"></i><span>Quotation</span> </a></li>
-                                                <li><a href="Attendance.aspx"><i class="fa fa-user"></i><span>Attendance</span> </a></li>--%>
-                       
-                       
+                        <li><a href="Category.aspx"><i class="fa fa-user"></i><span>Category</span> </a></li>
+                        <li><a href="Item.aspx"><i class="fa fa-user"></i><span>Item</span> </a></li>
+                        <li><a href="Approval.aspx"><i class="fa fa-user"></i><span>Approval</span> </a></li>
+                        <li><a href="Reports.aspx"><i class="fa fa-user"></i><span>Reports</span> </a></li>
                     </ul>
                 </section>
                 <!-- /.sidebar -->

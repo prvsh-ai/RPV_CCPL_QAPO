@@ -167,6 +167,32 @@
         .hello {
             width: 100% !important;
         }
+
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            /*background: rgba( 255, 255, 255, .8 ) url('../images/loadingimage.png') 50% 50% no-repeat;*/
+           background: url(http://localhost:13314/images/loadingimage.png) 50% 50% no-repeat rgb(249,249,249);
+          
+        }
+
+        /* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+        body.loading {
+            overflow: hidden;
+        }
+
+            /* Anytime the body has the loading class, our
+   modal element will be visible */
+            body.loading .modal {
+                display: block;
+            }
     </style>
 
 </asp:Content>
@@ -186,12 +212,60 @@
                     <div class="box-body">
                         <div class="form-inline">
 
+
+                            <div class="form-group" style="width: 100%; margin-top: 1%;">
+
+                                <div class="row">
+
+                                    <div class="col-lg-7">
+                                        <label class="control-label" for="ddlQuotationName">REQUISITION NUMBER</label>
+                                        <select id="ddlQuotationId" name="ddlQuotationName" class="selectBox form-control"></select>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <label class="control-label" for="txtCode">REQUIRED BY</label>
+                                        <input type="text" id="txtRequiredBy" class="form-control" />
+                                    </div>
+                                </div>
+
+
+
+
+
+
+                            </div>
+
+                            <div class="form-group" style="width: 100%; margin-top: 1%;">
+
+                                <div class="row">
+
+                                    <div class="col-lg-7">
+                                        <label class="control-label" for="txtRequisitionDate">REQUISITION DATE</label>
+                                        <div class='input-group date AppFormdatetimepicker' id='datetimepicker3'>
+                                            <input type='text' class="form-control" id="txtRequisitionDate" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <label class="control-label" for="txtCode">APPROVED BY</label>
+                                        <input type="text" id="txtApprovedBy" class="form-control" />
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
+
+
+
                             <div class="form-group" style="width: 100%; margin-top: 1%;">
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div style="overflow-x: auto">
 
-                                            <table border="1" style="width: -webkit-fill-available;">
+                                            <%--  <table border="1" style="width: -webkit-fill-available;">
 
 
                                                 <tr>
@@ -226,8 +300,7 @@
                                                     <td>
                                                         <input type="text" id="txtApprovedBy" class="form-control hello" /></td>
                                                 </tr>
-                                            </table>
-
+                                            </table>--%>
                                         </div>
                                     </div>
                                 </div>
@@ -331,6 +404,7 @@
         <div id="pageloaddiv" class="pageloaddiv" style="display: none;">
         </div>
         <input id="hidHotelId" type="hidden" />
+        <div class="modal"></div>
 
     </div>
 
@@ -347,24 +421,29 @@
 
     <script type="text/javascript">
 
+
+        $body = $("body");
+
+        $(document).on({
+            ajaxStart: function () { $body.addClass("loading"); },
+            ajaxStop: function () { $body.removeClass("loading"); }
+        });
+
+
         $(document).ready(function () {
 
+
+            $("#btnUpdate").hide();
+            $("#btnSave").show();
+
+
             GetRequisitionDetails(0);
-
             GetQuotationDetails(0);
-
-            //$(function () {
-            //    $('#txtRequisitionDate').datetimepicker({ defaultDate: new Date() });
-
-            //});
-
             $(function () {
                 //$('#datetimepicker1,#datetimepicker3').datetimepicker();
                 $('#datetimepicker3').datetimepicker({ defaultDate: new Date() });
 
             });
-
-
 
             var data = {};
 
@@ -409,7 +488,7 @@
 
                 SaveUpdateRequisitionDetails(data);
 
-                // GetQuotationDetails(0);
+                GetRequisitionDetails(0);
 
             });
 
@@ -422,6 +501,7 @@
                 data.ApprovedBy = $('#txtApprovedBy').val();
 
                 SaveUpdateRequisitionDetails(data);
+                GetRequisitionDetails(0);
             });
 
             var ArrData = [];
@@ -596,16 +676,16 @@
                     for (var i = 0; i < len; i++) {
                         //alert(i);
 
-                        //alert(getResult[i].BankAccountNo);
+                        //   alert(getResult[i].RequisitionDate);
 
                         element = element + '<tr>';
                         element = element + '<td>' + Counter++ + '</td>';
                         element = element + '<td>' + getResult[i].RequisitionId + '</td>';
                         element = element + '<td>' + getResult[i].QuotationId + '</td>';
-                        element = element + '<td>' + GetProperDate(getResult[i].QDate) + '</td>';
+                        element = element + '<td>' + GetProperDate(getResult[i].RequisitionDate) + '</td>';
                         element = element + '<td>' + getResult[i].RequiredBy + '</td>';
                         element = element + '<td>' + getResult[i].ApprovedBy + '</td>';
-                        element = element + '<td><a href="#"><span class="label label-warning" onclick="GetRequisitionDetailsForUpdate(' + getResult[i].RequisitionId + ',' + getResult[i].QuotationId + ',' + GetProperDate(getResult[i].QDate) + ',\'' + getResult[i].RequisitionNumber + '\',\'' + getResult[i].RequiredBy + '\',\'' + getResult[i].ApprovedBy + '\'); return false;" ><i class="fa fa-file-text"  aria-hidden="true"></i> Edit </span></a><a href="#" ><span class="label label-success"   onclick="EmailQuotationDetails(' + getResult[i].QID + '); return false;" style="margin-left: 23px;"><i class="fa fa-print"  aria-hidden="true"></i>   Send</span></a></td>';
+                        element = element + '<td><a href="#"><span class="label label-warning" onclick="GetRequisitionDetailsForUpdate(' + getResult[i].RequisitionId + ',' + getResult[i].QuotationId + ',\'' + GetProperDate(getResult[i].RequisitionDate) + '\',\'' + getResult[i].RequisitionNumber + '\',\'' + getResult[i].RequiredBy + '\',\'' + getResult[i].ApprovedBy + '\'); return false;" ><i class="fa fa-file-text"  aria-hidden="true"></i> Edit </span></a></td>';
                         element = element + '</tr>';
                     }
                     element = element + '</tbody>';
@@ -629,15 +709,16 @@
             });
         }
         function ClearInputBoxValues(Mode) {
-            if (Mode == 1) {
-                $('input[type=text]').each(function () {
-                    $(this).val('');
-                });
+            //alert(Mode);
+            //if (Mode == 1) {
+            $('input[type=text]').each(function () {
+                $(this).val('');
+            });
 
-                $('select').each(function () {
-                    $(this).val('0');
-                });
-            }
+            $('select').each(function () {
+                $(this).val('0');
+            });
+            //}
         }
         //toc details
         function GetTOCDetails(RequisitionId) {
@@ -778,7 +859,7 @@
         //fun used
         function SaveUpdateRequisitionDetails(data) {
 
-            alert(data);
+            // alert(data);
 
             var tocArr = new Array();
             $("#tblCustomers TBODY TR").each(function () {
@@ -850,6 +931,8 @@
         function GetRequisitionDetailsForUpdate(RequisitionId, QuotationId, RequisitionDate, RequisitionNumber, RequiredBy, ApprovedBy) {
 
 
+            // alert(RequisitionDate)
+
             GetTOCDetails(RequisitionId);
 
             $('#hidHotelId').val(RequisitionId);
@@ -858,9 +941,33 @@
             $('#txtRequiredBy').val(RequiredBy),
             $('#txtApprovedBy').val(ApprovedBy)
 
-
             GetItemsDetails(QuotationId);
+
+            $("#btnUpdate").show();
+            $("#btnSave").hide();
         }
+
+        function Remove(button) {
+
+
+
+            //Determine the reference of the Row using the Button.
+            var row = $(button).closest("TR");
+
+            // alert("recalculate fun called" + row[0].cells[7].innerText);
+            //  funRecalculateAfterRemoving(row[0].cells[7].innerText, row[0].cells[6].innerText);
+
+
+            var name = $("TD", row).eq(0).html();
+            if (confirm("Do you want to delete: " + name)) {
+                //Get the reference of the Table.
+                var table = $("#tblCustomers")[0];
+
+                //Delete the Table row using it's Index.
+                table.deleteRow(row[0].rowIndex);
+            }
+        };
+
 
     </script>
 

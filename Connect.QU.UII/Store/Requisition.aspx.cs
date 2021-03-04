@@ -51,9 +51,9 @@ namespace Connect.QU.UII.Store
         public static string SaveUpdateRequisitionDetails(Connect.QU.Entities.Requisition cnt)
         {
             Random RN = new Random();
-         
+            int x = RN.Next(10, 10000);
             cnt.TOCRequisitionId= RN.Next(10, 1000000);
-            cnt.RequisitionNumber = Convert.ToString(cnt.QuotationId + "RQ" + DateTime.Now);
+            cnt.RequisitionNumber = Convert.ToString("RQ" + cnt.QuotationId + "_" + x+"_"+DateTime.Now.Day);
             cnt.UserId = HttpContext.Current.User.Identity.Name.ToString();
            
             return new QU.BAL.CommonBAL().SaveUpdateRequisitionDetails(cnt);
