@@ -129,6 +129,10 @@
                 <input id="btnGenerate" type="button" value="Generate Report" class="btn btn-success" />
             </div>
 
+             <div class="form-group" id="dvdrequisition" style="margin-top: 2.5%; margin-left: 89%; width: 100%;">
+
+                <input id="btnGenerateRequisition" type="button" value="Generate Report" class="btn btn-success" />
+            </div>
              <div class="form-group" id="dvdItems" style="margin-top: 2.5%; margin-left: 89%; width: 100%;">
 
                 <input id="btnGenerateItems" type="button" value="Generate Report" class="btn btn-success" />
@@ -144,6 +148,12 @@
             <div class="container" id="itemTable" style="margin-top: 3%; margin-bottom: 1%; width: 100%;">
 
                 <table id="CityTableId" class="table table-striped cf table-bordered table-striped table-responsive dataTable" style="table-layout: fixed"></table>
+
+            </div>
+
+            <div class="container" id="RequisitionTable" style="margin-top: 3%; margin-bottom: 1%; width: 100%;">
+
+                <table id="RequisitionTableId" class="table table-striped cf table-bordered table-striped table-responsive dataTable" style="table-layout: fixed"></table>
 
             </div>
 
@@ -447,7 +457,7 @@
                         GetItemDetails(0, "");
                         break;
                     case 'Requisition':
-                        GetQuotationDetails(0);
+                        GetRequisitionDetails(0);
                         break;
                     case 'Execution':
                         GetItemDetails(0, "");
@@ -499,6 +509,25 @@
 
         });
 
+        $('#btnGenerateRequisition').on('click', function () {
+            $.ajax({
+                contentType: "application/json; charset=utf-8",
+                url: "Reports.aspx/GenerateExcelForRequisition",
+                type: "POST",
+                dataType: "json",
+                success: function (result) {
+                    var getResult = result.d;
+                    var len = getResult.length;
+                    if (len > 0) {
+                        alert('Generate Report Successfully')
+                    }
+                },
+                error: function (err) {
+                    return;
+                }
+            });
+
+        });
 
         function GetQuotationDetails(QID) {
             var element = "";
@@ -516,9 +545,11 @@
 
                     $('#CityTableId').empty();
                     $('#itemTable').hide();
+                    $('#RequisitionTable').hide();
                     $('#QuotationTable').show();
                     $('#dvdQuotation').show();
                     $('#dvdItems').hide();
+                    $('#dvdrequisition').hide();
 
                     $('#tblApprove').empty();
 
@@ -569,6 +600,75 @@
 
                     });
                     $('.dataTables_length').addClass('bs-select');
+                },
+                error: function (err) {
+                    // alert(err.statusText)
+                }
+            });
+        }
+
+        function GetRequisitionDetails(RequisitionId) {
+            var element = "";
+            var Counter = 1;
+            $.ajax({
+                contentType: "application/json; charset=utf-8",
+                url: "Reports.aspx/GetRequisitionDetails",
+                type: "POST",
+                data: "{RequisitionId:" + RequisitionId + "}",
+                dataType: "json",
+                success: function (result) {
+                    var getResult = result.d;
+                    var len = getResult.length;
+                    $('#RequisitionTableId').empty();
+                    $('#itemTable').hide();
+                    $('#QuotationTable').hide();
+                    $('#RequisitionTable').show();
+                    $('#dvdQuotation').hide();                    
+                    $('#dvdItems').hide();
+                    $('#dvdrequisition').show();
+
+                    element = element + '<thead class="cf"><tr class="bgblue-Over">';
+                    element = element + '<th style="width:59px">S NO</th>';
+                    element = element + '<th style="width:160px">Req Id</th>';
+                    element = element + '<th>Quo Id</th>';
+                    element = element + '<th>Date</th>';
+                    element = element + '<th>Required By</th>';
+                    element = element + '<th>Approved By</th>';                    
+
+                    element = element + '</tr></thead><tbody>';
+
+                    if (len == 0) {
+                        element = element + '<tr><td colspan="3"><p class="text-center">No Requisition Data Available</p></td></tr>'
+                    }
+
+                    for (var i = 0; i < len; i++) {
+                        //alert(i);
+
+                        //   alert(getResult[i].RequisitionDate);
+
+                        element = element + '<tr>';
+                        element = element + '<td>' + Counter++ + '</td>';
+                        element = element + '<td>' + getResult[i].RequisitionId + '</td>';
+                        element = element + '<td>' + getResult[i].QuotationId + '</td>';
+                        element = element + '<td>' + GetProperDate(getResult[i].RequisitionDate) + '</td>';
+                        element = element + '<td>' + getResult[i].RequiredBy + '</td>';
+                        element = element + '<td>' + getResult[i].ApprovedBy + '</td>';                        
+                        element = element + '</tr>';
+                    }
+                    element = element + '</tbody>';
+                    $("#RequisitionTableId").append(element);
+                    $('#RequisitionTableId').dataTable({
+                        "paging": true,
+                        //"scrollY": 400,
+                        "destroy": true,
+                        "pagingType": "simple_numbers"[{
+                            style: 'Margin-left:1%'
+                        }]
+
+                    });
+                    $('.dataTables_length').addClass('bs-select');
+
+
                 },
                 error: function (err) {
                     // alert(err.statusText)
@@ -748,7 +848,9 @@
                     $('#CityTableId').empty();
                     $('#itemTable').show();
                     $('#QuotationTable').hide();
+                    $('#RequisitionTable').hide();
                     $('#dvdQuotation').hide();
+                    $('#dvdrequisition').hide();
                     $('#dvdItems').show();
 
                     $('#tblApprove').empty();
