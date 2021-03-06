@@ -57,6 +57,7 @@
         .select2 {
             width: 159px !important;
         }
+
         .paginate_button {
             margin-left: 1%;
         }
@@ -172,15 +173,15 @@
                 </div>
             </div>
 
-           <%-- <div class="container">
+            <%-- <div class="container">
                 <table id="CityTableId" class="table table-striped cf">
                 </table>
             </div>--%>
 
             <%--Datatable Changes--%>
 
-             <div class="container" style="margin-top: 5%; margin-bottom: 1%; width: 100%;">
-                             
+            <div class="container" style="margin-top: 5%; margin-bottom: 1%; width: 100%;">
+
                 <table id="CityTableId" class="table table-striped cf table-bordered table-striped table-responsive dataTable" style="table-layout: fixed"></table>
 
             </div>
@@ -322,9 +323,7 @@
             GetCountryDetails(0, "");
             GetLocationDetails(0, "");
             GetCompanyDetails(0, "");
-
             var data = {};
-
             $(function () {
                 $('#ddlCompanyLocation').select2({
                     placeholder: "Select Nationality",
@@ -374,7 +373,6 @@
             });
 
             $("#btnSave").click(function () {
-
                 data.Mode = "1";
                 data.CompanyId = 0;
                 data.CompanyName = $('#txtCompanyName').val();
@@ -397,12 +395,10 @@
                 data.POCNo = parseInt($('#txtPOCNo').val());
                 data.Customer = $('#chkCustomer').is(':checked');
                 data.Vendor = $('#chkVendor').is(':checked');
-
                 SaveUpdateCompanyDetails(data);
             });
 
             $("#btnUpdate").click(function () {
-
                 data.Mode = "2";
                 data.CompanyId = $('#hidHotelId').val();
                 data.CompanyName = $('#txtCompanyNameUpdate').val();
@@ -425,31 +421,27 @@
                 data.POCNo = parseInt($('#txtPOCNoUpdate').val());
                 data.Customer = $('#chkCustomerUpdate').is(':checked');
                 data.Vendor = $('#chkVendorUpdate').is(':checked');
-
                 SaveUpdateCompanyDetails(data);
             });
-
             var ArrData = [];
         });
 
         function GetCityDetailsNew(CityId, CityName, StateId) {
             var element = "";
-
             $.ajax({
                 contentType: "application/json; charset=utf-8",
                 url: "Company.aspx/GetCityDetails",
                 type: "POST",
                 data: "{CityId:" + CityId + ",CityName:'" + CityName + "',StateId:" + StateId + "}",
                 dataType: "json",
+                async: false,
                 success: function (result) {
                     var getResult = result.d;
                     var len = getResult.length;
-
                     $("#ddlCity").empty();
                     $("#ddlCityUpdate").empty();
                     $("#ddlCity").append('<option value="0">Select</option>');
                     $("#ddlCityUpdate").append('<option value="0">Select</option>');
-
                     for (var i = 0; i < len; i++) {
                         $("#ddlCity").append('<option value=' + getResult[i].CityId + '>' + getResult[i].CityName + '</option>');
                         $("#ddlCityUpdate").append('<option value=' + getResult[i].CityId + '>' + getResult[i].CityName + '</option>');
@@ -463,22 +455,20 @@
 
         function GetCountryDetails(CountryId, CountryName) {
             var element = "";
-
             $.ajax({
                 contentType: "application/json; charset=utf-8",
                 url: "Company.aspx/GetCountryDetails",
                 type: "POST",
                 data: "{CountryId:" + CountryId + ",CountryName:'" + CountryName + "'}",
                 dataType: "json",
+                async: false,
                 success: function (result) {
                     var getResult = result.d;
                     var len = getResult.length;
-
                     $("#ddlCountry").empty();
                     $("#ddlCountryUpdate").empty();
                     $("#ddlCountry").append('<option value="0">Select</option>');
                     $("#ddlCountryUpdate").append('<option value="0">Select</option>');
-
                     for (var i = 0; i < len; i++) {
                         $("#ddlCountry").append('<option value=' + getResult[i].CountryId + '>' + getResult[i].CountryName + '</option>');
                         $("#ddlCountryUpdate").append('<option value=' + getResult[i].CountryId + '>' + getResult[i].CountryName + '</option>');
@@ -492,22 +482,20 @@
 
         function GetStateDetails(StateId, StateName, CountryId) {
             var element = "";
-
             $.ajax({
                 contentType: "application/json; charset=utf-8",
                 url: "Company.aspx/GetStateDetails",
                 type: "POST",
                 data: "{StateId:" + StateId + ",StateName:'" + StateName + "',CountryId:" + CountryId + "}",
                 dataType: "json",
+                async: false,
                 success: function (result) {
                     var getResult = result.d;
                     var len = getResult.length;
-
                     $("#ddlState").empty();
                     $("#ddlStateUpdate").empty();
                     $("#ddlState").append('<option value="0">Select</option>');
                     $("#ddlStateUpdate").append('<option value="0">Select</option>');
-
                     for (var i = 0; i < len; i++) {
                         $("#ddlState").append('<option value=' + getResult[i].StateId + '>' + getResult[i].StateName + '</option>');
                         $("#ddlStateUpdate").append('<option value=' + getResult[i].StateId + '>' + getResult[i].StateName + '</option>');
@@ -521,25 +509,22 @@
 
         function GetLocationDetails(StateId, StateName) {
             var element = "";
-
             $.ajax({
                 contentType: "application/json; charset=utf-8",
                 url: "Company.aspx/GetLocationDetails",
                 type: "POST",
                 data: "{StateId:" + StateId + ",StateName:'" + StateName + "'}",
                 dataType: "json",
+                async: false,
                 success: function (result) {
                     var getResult = result.d;
                     var len = getResult.length;
-
                     $("#ddlCompanyLocation").empty();
                     $("#ddlCompanyLocationUpdate").empty();
                     $("#ddlCompanyLocationUpdate").append('<option value="0">Select</option>');
-
                     for (var i = 0; i < len; i++) {
                         $("#ddlCompanyLocation").append('<option value=' + getResult[i].StateId + '>' + getResult[i].StateName + '</option>');
                         $("#ddlCompanyLocationUpdate").append('<option value=' + getResult[i].StateId + '>' + getResult[i].StateName + '</option>');
-
                     }
                 },
                 error: function (err) {
@@ -553,7 +538,6 @@
                 $('input[type=text]').each(function () {
                     $(this).val('');
                 });
-
                 $('select').each(function () {
                     $(this).val('0');
                 });
@@ -562,18 +546,17 @@
 
         function GetCompanyDetails(CompanyID, CompanyName) {
             var element = "";
-
             $.ajax({
                 contentType: "application/json; charset=utf-8",
                 url: "Company.aspx/GetCompanyDetailsNew",
                 type: "POST",
                 data: "{CompanyID:" + CompanyID + ",CompanyName:'" + CompanyName + "'}",
                 dataType: "json",
+                async: false,
                 success: function (result) {
                     var getResult = result.d;
                     var len = getResult.length;
                     $('#CityTableId').empty();
-
                     element = element + '<thead class="cf"><tr class="bgblue-Over">';
                     element = element + '<th>CompanyName</th>';
                     element = element + '<th>Gstin No</th>';
@@ -581,15 +564,11 @@
                     element = element + '<th>Vendor</th>';
                     element = element + '<th>Customer</th>';
                     element = element + '<th>Action</th>';
-
                     element = element + '</tr></thead><tbody>';
-
                     if (len == 0) {
                         element = element + '<tr><td colspan="3"><p class="text-center">No Company Data Available</p></td></tr>'
                     }
-
                     for (var i = 0; i < len; i++) {
-
                         element = element + '<tr>';
                         element = element + '<td>' + getResult[i].CompanyName + '</td>';
                         element = element + '<td>' + getResult[i].GstinNo + '</td>';
@@ -609,10 +588,8 @@
                         "pagingType": "simple_numbers"[{
                             style: 'Margin-left:1%'
                         }]
-
                     });
                     $('.dataTables_length').addClass('bs-select');
-
                 },
                 error: function (err) {
                     // alert(err.statusText)
@@ -621,10 +598,8 @@
         }
 
         function GetCompanyDetailsForUpdate(CompanyID, CompanyName, GstinNo, PanNo, ServiceTaxNo, EmailId, MobiletNo, ZipCode, Address, CountryId, StateId, CityId, LocationsId, BankName, BankBranch, BankAccountNo, BankIfsc, Poc, PocNo, Customer, Vendor) {
-
             GetStateDetails(0, "", CountryId);
             GetCityDetailsNew(0, "", StateId);
-
             $('#hidHotelId').val(CompanyID);
             $('#txtCompanyNameUpdate').val(CompanyName);
             $('#txtGSTINNoUpdate').val(GstinNo);
@@ -634,35 +609,41 @@
             $('#txtContactNoUpdate').val(MobiletNo);
             $('#txtZipCodeUpdate').val(ZipCode);
             $('#txtAddressUpdate').val(Address);
-            $('#ddlCountryUpdate').val(CountryId);
+            $('#ddlCountryUpdate').val(CountryId); //pravesh
             $('#ddlStateUpdate').val(StateId);
             $('#ddlCityUpdate').val(CityId);
-            $('#ddlCompanyLocation').val(LocationsId); //
+            // $('#ddlCompanyLocationUpdate').val(LocationsId); //
             $('#txtBankNameUpdate').val(BankName);
             $('#txtBankBranchUpdate').val(BankBranch);
             $('#txtAccountNoUpdate').val(BankAccountNo);
             $('#txtBankIFSCUpdate').val(BankIfsc);
             $('#txtPOCUpdate').val(Poc);
             $('#txtPOCNoUpdate').val(PocNo);
-            $('#chkCustomerUpdate').attr('checked', Customer);
-            $('#chkVendorUpdate').attr('checked', Vendor);
 
+            var ArrayOfInts = LocationsId.split(',').map(Number);
+            $.each($("#ddlCompanyLocationUpdate"), function () {
+                $(this).select2('val', ArrayOfInts);
+            });
+            $('#chkCustomerUpdate').prop('checked', Customer);
+            $('#chkVendorUpdate').prop('checked', Vendor);
         }
 
         function SaveUpdateCompanyDetails(data) {
+            ///   alert(data);
             $.ajax({
                 contentType: "application/json; charset=utf-8",
                 url: "Company.aspx/SaveUpdateCompanyDetailsNew",
                 type: "POST",
                 data: JSON.stringify({ 'cnt': data }),
                 dataType: "json",
+                async: false,
                 success: function (result) {
                     var getResult = result.d;
                     if (getResult != "0") {
                         alert(getResult);
                         //GetCityDetails(0, "", 0);
                         GetCompanyDetails(0, "");
-                        ClearInputBoxValues(Mode);
+                        ClearInputBoxValues(data.Mode);
                     }
                     else {
                         alert("There is an Error");
