@@ -21,7 +21,6 @@ namespace Connect.QU.DAL
         private DBConnectionDAL myDBConectionDAL = new DBConnectionDAL();
         #endregion
 
-
         public List<QU.Entities.Requisition> GetRequisitionDetails(int RequisitionId)
         {
             List<Entities.Requisition> Entities = new List<Entities.Requisition>();
@@ -358,8 +357,6 @@ namespace Connect.QU.DAL
 
             return Entities;
         }
-
-
         public List<QU.Entities.TOCRequisition> GetTOCRequisitionDetails(int Requisitionid)
         {
             List<Entities.TOCRequisition> Entities = new List<Entities.TOCRequisition>();
@@ -401,7 +398,6 @@ namespace Connect.QU.DAL
 
             return Entities;
         }
-
         public List<QU.Entities.CategoryDetails> GetCategoryDetails(int CategoryID, string CategoryName)
         {
             List<Entities.CategoryDetails> Entities = new List<Entities.CategoryDetails>();
@@ -617,8 +613,6 @@ namespace Connect.QU.DAL
 
             return Entities;
         }
-
-
         public List<QU.Entities.TOC> GetQuotationItemDetails(int QID)
         {
             List<Entities.TOC> Entities = new List<Entities.TOC>();
@@ -700,7 +694,6 @@ namespace Connect.QU.DAL
 
             return Entities;
         }
-
         public List<QU.Entities.TOC> GetQuotationItemDescriptionDetails(int QID, int ItemId)
         {
             List<Entities.TOC> Entities = new List<Entities.TOC>();
@@ -874,8 +867,6 @@ namespace Connect.QU.DAL
 
             return Entities;
         }
-
-        //new
         public QU.Entities.QuotationTypeDetails GetQuotationDetailsOnQuotationType(int QuotationType)
         {
             QuotationTypeDetails Entities = new QuotationTypeDetails();
@@ -1283,9 +1274,6 @@ namespace Connect.QU.DAL
             }
             return Result;
         }
-
-
-
         public string SaveUpdateRequisitionDetails(Requisition cnt)
         {
 
@@ -1294,8 +1282,8 @@ namespace Connect.QU.DAL
 
             //adding TOC
             DataTable dt = new DataTable();
-       
-            dt.Columns.Add("TOCRequisitionId"); 
+
+            dt.Columns.Add("TOCRequisitionId");
             dt.Columns.Add("RequisitionId");
             dt.Columns.Add("QuotationId");
             dt.Columns.Add("ItemId");
@@ -1316,7 +1304,7 @@ namespace Connect.QU.DAL
             {
 
                 DataRow dr = dt.NewRow();
-             
+
                 dr["TOCRequisitionId"] = cnt.TOCRequisitionId;
                 dr["RequisitionId"] = cnt.RequisitionId;
                 dr["QuotationId"] = cnt.QuotationId;
@@ -1380,7 +1368,6 @@ namespace Connect.QU.DAL
             }
             return Result;
         }
-
         public string InsertApprovalData(bool chkVal, int QID, string UserId)
         {
             string Result = null;
@@ -1412,8 +1399,5 @@ namespace Connect.QU.DAL
             }
             return Result;
         }
-
-
-       
     }
 }

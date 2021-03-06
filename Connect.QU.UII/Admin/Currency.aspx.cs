@@ -14,20 +14,18 @@ namespace Connect.QU.UII.Admin
         {
 
         }
-        //[WebMethod]
-        //public static string SaveUpdateCurrencyDetails(int Mode, int CurrencyId, string CurrencyName)
-        //{
-        //    return new QU.BAL.CommonBAL().SaveUpdateCurrencyDetails(Mode, CurrencyId, CurrencyName);
-        //}
-        [WebMethod]
-        public static string SaveUpdateCurrencyDetails(Connect.QU.Entities.Currency cnt)
-        {
-            return new QU.BAL.CommonBAL().SaveUpdateCurrencyDetails(cnt);
-        }
+
         [WebMethod]
         public static List<QU.Entities.Currency> GetCurrencyDetails(int CurrencyId, string CurrencyName)
         {
             return new QU.BAL.CommonBAL().GetCurrencyDetails(CurrencyId, CurrencyName);
         }
+
+        [WebMethod]
+        public static string SaveUpdateCurrencyDetails(Connect.QU.Entities.Currency cnt)
+        {
+            return new QU.BAL.CommonBAL().SaveUpdateCurrencyDetails(cnt);
+        }
+
     }
 }

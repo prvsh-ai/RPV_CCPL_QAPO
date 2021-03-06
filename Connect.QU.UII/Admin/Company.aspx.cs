@@ -28,7 +28,6 @@ namespace Connect.QU.UII.Admin
             return new QU.BAL.CommonBAL().GetStateDetails(StateId, StateName);
         }
 
-
         [WebMethod]
         public static List<QU.Entities.Location> GetCityDetails(int CityId, string CityName, int StateId)
         {
@@ -53,8 +52,6 @@ namespace Connect.QU.UII.Admin
             cnt.UserId = HttpContext.Current.User.Identity.Name.ToString();
             return new QU.BAL.CommonBAL().SaveUpdateCompanyDetailsNew(cnt);
         }
-
-
 
     }
 }

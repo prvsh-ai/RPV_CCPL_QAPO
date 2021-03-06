@@ -82,8 +82,6 @@
             }
         }
 
-
-
         #ApplicationForm .list-inline > li {
             display: inline-block;
         }
@@ -108,7 +106,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="EAWarpper" runat="server">
     <div class="content-wrapper">
         <section class="content">
-
             <ul class="nav nav-tabs" role="tablist" style="margin-top: 2%; background-color: white; border-color: lightskyblue; font-weight: bold; width: 100%; margin-left: 0%;">
                 <li class="active">
                     <a href="#Quotation" data-toggle="tab">Quotation</a>
@@ -123,48 +120,29 @@
                     <a href="#Execution" data-toggle="tab">Execution</a>
                 </li>
             </ul>
-
             <div class="form-group" id="dvdQuotation" style="margin-top: 2.5%; margin-left: 89%; width: 100%;">
-
                 <input id="btnGenerate" type="button" value="Generate Report" class="btn btn-success" />
             </div>
-
-             <div class="form-group" id="dvdrequisition" style="margin-top: 2.5%; margin-left: 89%; width: 100%;">
-
+            <div class="form-group" id="dvdrequisition" style="margin-top: 2.5%; margin-left: 89%; width: 100%;">
                 <input id="btnGenerateRequisition" type="button" value="Generate Report" class="btn btn-success" />
             </div>
-             <div class="form-group" id="dvdItems" style="margin-top: 2.5%; margin-left: 89%; width: 100%;">
-
+            <div class="form-group" id="dvdItems" style="margin-top: 2.5%; margin-left: 89%; width: 100%;">
                 <input id="btnGenerateItems" type="button" value="Generate Report" class="btn btn-success" />
             </div>
-
             <div class="container" id="QuotationTable" style="margin-top: 3%; margin-bottom: 1%; width: 100%;">
-
                 <table id="tblApprove" class="table table-striped cf table-bordered table-striped table-responsive dataTable" style="table-layout: fixed"></table>
-
             </div>
-
-
             <div class="container" id="itemTable" style="margin-top: 3%; margin-bottom: 1%; width: 100%;">
-
                 <table id="CityTableId" class="table table-striped cf table-bordered table-striped table-responsive dataTable" style="table-layout: fixed"></table>
-
             </div>
-
             <div class="container" id="RequisitionTable" style="margin-top: 3%; margin-bottom: 1%; width: 100%;">
-
                 <table id="RequisitionTableId" class="table table-striped cf table-bordered table-striped table-responsive dataTable" style="table-layout: fixed"></table>
-
             </div>
-
             <%--Quotation Details Start--%>
-
             <div class="AppFormBody" id="ApplicationForm">
                 <h4 class="text-center" id="QuotationApplicationText"><b>QUOTATION APPLICATION</b></h4>
-
                 <p>
                     </br>
-
                             <div class="form-inline AppX">
                                 <div class="form-row">
                                     <div class="col-lg-4">
@@ -172,42 +150,26 @@
                                         <b />
                                         <input type="text" id="txtProjectName" class="form-control" disabled />
                                     </div>
-
                                     <div class="col-lg-4">
                                         <label class="control-label" style="margin-right: 5%">Financial Year</label><b />
 
                                         <input type='text' class="form-control" id="txtFinancialYear" disabled />
-
                                     </div>
-
-
-
-
                                     <div class="col-lg-4">
                                         <label for="txtQuotationDate" class="control-label" style="margin-right: 9%">Date</label><b />
-
                                         <input type='text' class="form-control" id="txtQuotationDate" disabled />
-
-
                                     </div>
                                 </div>
                             </div>
-
                 </p>
                 <br />
-
-
                 <br />
-
-
-
                 <p>
                     <div class="form-inline AppX">
                         <div class="form-row">
                             <div class="col-lg-4">
                                 <label class="control-label" style="margin-right: 2%">Company Name </label>
                                 <input type="text" id="txtCompanyName" class="form-control" disabled />
-
                             </div>
                             <div class="col-lg-4">
                                 <label class="control-label" style="margin-right: 2%">Contact Person   </label>
@@ -217,18 +179,13 @@
                                 <label class="control-label" style="margin-right: 2%">Address </label>
                                 <input type="text" id="txtAddress" class="form-control" disabled />
                             </div>
-
                         </div>
                     </div>
                 </p>
-
                 <br />
                 <br />
-
-
                 <p>
                     <div class="form-inline AppX">
-
                         <div class="form-row">
                             <div class="col-lg-4">
                                 <label class="control-label" style="margin-right: 20.8%">GSTIN</label>
@@ -243,31 +200,23 @@
                                 &nbsp;&nbsp;
                                         <input type="text" id="txtValidityOfQuote" class="form-control" disabled />
                             </div>
-
                         </div>
                 </p>
                 <br />
                 <br />
                 <p>
                     <div class="form-inline AppX">
-
                         <div class="form-row">
                             <div class="col-lg-4">
                                 <label class="control-label" style="margin-right: 2%">Place Of Supply </label>
                                 <input type="text" id="txtPlaceOfSupply" class="form-control" disabled />
                             </div>
                         </div>
-
                     </div>
-
                 </p>
-
-
-
                 <br />
                 <br />
                 <br />
-
                 <div class="row APPTest">
                     <div class="col-lg-12">
                         <div style="overflow-x: auto">
@@ -287,7 +236,6 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-
                                         <td></td>
                                         <td></td>
                                         <td></td>
@@ -299,18 +247,12 @@
                                         <td>
                                             <input type="button" value="Remove" onclick="Remove(this)" /></td>
                                     </tr>
-
                                 </tbody>
                                 <tfoot>
                                     <tr>
-
                                         <td>
-                                            <%--    <input type="text" id="txtDescriptionOfGoods" />--%>
-
-
                                             <select id="ddlItem" name="ddlItemName" class="selectBox form-control hidden"></select>
                                         </td>
-
                                         <td>
                                             <input type="text" id="txtQty" hidden /></td>
                                         <td>
@@ -325,33 +267,24 @@
                                             <input type="text" id="txtAmount" hidden /></td>
                                         <td>
                                             <input type="text" id="txtTotalAmount1" hidden /></td>
-
-
-
                                     </tr>
                                 </tfoot>
                             </table>
                         </div>
                     </div>
                 </div>
-
-
                 <br />
-
                 <p>
                     <div class="form-inline AppX">
                         <div class="form-row">
-
                             <div class="col-lg-4">
                                 <label class="control-label" style="margin-right: 3%">Taxable Amount  </label>
                                 <input type="text" id="txtTaxableAmount" class="form-control" disabled />
-
                             </div>
                             <div class="col-lg-8">
                                 <label class="control-label" style="margin-right: 3%">Total Words </label>
                                 <input type="text" id="txtTotalWords" class="form-control" disabled />
                             </div>
-
                         </div>
                     </div>
                 </p>
@@ -365,20 +298,16 @@
                                 <input type="text" id="txtFreight" class="form-control" disabled />
                             </div>
                             <div class="col-lg-8">
-
                                 <label class="control-label" style="margin-right: 3%">Grand Total</label>
                                 <input type="text" id="txtGrandTotal" class="form-control" disabled />
                             </div>
                         </div>
                     </div>
                 </p>
-
-
                 <br />
                 <br />
                 <br />
                 <p>Bank Details</p>
-
                 <p>
                     <div class="form-inline AppX">
                         <div class="form-row">
@@ -394,7 +323,6 @@
                                 <label class="control-label" style="margin-right: 3%">Account No.</label>
                                 <input type="text" id="txtBankAccountNo" class="form-control" disabled />
                             </div>
-
                         </div>
                     </div>
                 </p>
@@ -411,7 +339,6 @@
                         </div>
                     </div>
                 </p>
-
                 <br />
                 <br />
                 <p>
@@ -424,30 +351,23 @@
                         </div>
                     </div>
                 </p>
-
             </div>
             <%--Quotation Details End --%>
-
-            <%--Table Started--%>
-
-
-
-            <%--Table End--%>
         </section>
     </div>
+
     <link href="../css/DataTable/dataTablesbootstrap.css" rel="stylesheet" />
     <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-
-
 
     <script type="text/javascript">
         $(document).ready(function () {
 
             $('#ApplicationForm').hide();
-            GetQuotationDetails(0);
-            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 
+            GetQuotationDetails(0);
+
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
                 var currentTab = $(e.target).text(); // get current tab               
                 switch (currentTab) {
                     case 'Quotation':
@@ -463,11 +383,9 @@
                         GetItemDetails(0, "");
                         break;
                     default:
-
                 };
             });
         });
-
 
         $('#btnGenerate').on('click', function () {
             $.ajax({
@@ -541,8 +459,6 @@
                 success: function (result) {
                     var getResult = result.d;
                     var len = getResult.length;
-
-
                     $('#CityTableId').empty();
                     $('#itemTable').hide();
                     $('#RequisitionTable').hide();
@@ -550,9 +466,7 @@
                     $('#dvdQuotation').show();
                     $('#dvdItems').hide();
                     $('#dvdrequisition').hide();
-
                     $('#tblApprove').empty();
-
                     element += '<thead class="cf"><tr class="bgblue-Over">';
                     element += '<th>S NO</th>';
                     element += '<th>Q NO</th>';
@@ -563,14 +477,10 @@
                     element += '<th>Approve</th>';
                     element += '<th>Details</th>';
                     element += '</tr></thead><tbody>';
-
-
                     if (len == 0) {
                         element = element + '<tr><td colspan="3"><p class="text-center">No Approval Data Available</p></td></tr>'
                     }
-
                     for (var i = 0; i < len; i++) {
-
                         element = element + '<tr>';
                         element = element + '<td>' + getResult[i].QID + '</td>';
                         element = element + '<td>' + getResult[i].QNo + '</td>';
@@ -597,7 +507,6 @@
                         "pagingType": "simple_numbers"[{
                             style: 'Margin-left:1%'
                         }]
-
                     });
                     $('.dataTables_length').addClass('bs-select');
                 },
@@ -623,36 +532,28 @@
                     $('#itemTable').hide();
                     $('#QuotationTable').hide();
                     $('#RequisitionTable').show();
-                    $('#dvdQuotation').hide();                    
+                    $('#dvdQuotation').hide();
                     $('#dvdItems').hide();
                     $('#dvdrequisition').show();
-
                     element = element + '<thead class="cf"><tr class="bgblue-Over">';
                     element = element + '<th style="width:59px">S NO</th>';
                     element = element + '<th style="width:160px">Req Id</th>';
                     element = element + '<th>Quo Id</th>';
                     element = element + '<th>Date</th>';
                     element = element + '<th>Required By</th>';
-                    element = element + '<th>Approved By</th>';                    
-
+                    element = element + '<th>Approved By</th>';
                     element = element + '</tr></thead><tbody>';
-
                     if (len == 0) {
                         element = element + '<tr><td colspan="3"><p class="text-center">No Requisition Data Available</p></td></tr>'
                     }
-
                     for (var i = 0; i < len; i++) {
-                        //alert(i);
-
-                        //   alert(getResult[i].RequisitionDate);
-
                         element = element + '<tr>';
                         element = element + '<td>' + Counter++ + '</td>';
                         element = element + '<td>' + getResult[i].RequisitionId + '</td>';
                         element = element + '<td>' + getResult[i].QuotationId + '</td>';
                         element = element + '<td>' + GetProperDate(getResult[i].RequisitionDate) + '</td>';
                         element = element + '<td>' + getResult[i].RequiredBy + '</td>';
-                        element = element + '<td>' + getResult[i].ApprovedBy + '</td>';                        
+                        element = element + '<td>' + getResult[i].ApprovedBy + '</td>';
                         element = element + '</tr>';
                     }
                     element = element + '</tbody>';
@@ -664,11 +565,8 @@
                         "pagingType": "simple_numbers"[{
                             style: 'Margin-left:1%'
                         }]
-
                     });
                     $('.dataTables_length').addClass('bs-select');
-
-
                 },
                 error: function (err) {
                     // alert(err.statusText)
@@ -677,13 +575,6 @@
         }
 
         function btnAddCall(DescriptionOfGoods, Qty, Hsn, Rate, Value, Igst, Amount, TotalAmount1) {
-
-            //alert(DescriptionOfGoods, Qty, Hsn, Rate, Value, Igst, Amount, TotalAmount1);
-            //  $('#tblCustomers').empty();
-            //17 feb
-
-
-            //Reference the Name and Country TextBoxes.
             var txtDescriptionOfGoods = DescriptionOfGoods;//$("#txtDescriptionOfGoods");
             var txtQty = Qty;//$("#txtQty");
             var txtHsn = Hsn;//$("#txtHsn");
@@ -692,39 +583,24 @@
             var txtIgst = Igst;//$("#txtIgst");
             var txtAmount = Amount;//$("#txtAmount");
             var txtTotalAmount1 = TotalAmount1;//$("#txtTotalAmount1");
-
-
-            //Get the reference of the Table's TBODY element.
             var tBody = $("#tblCustomers > TBODY")[0];
-
-            //Add Row.
             var row = tBody.insertRow(-1);
-
-            //Add Name cell.
             var cell = $(row.insertCell(-1));
             cell.html(DescriptionOfGoods);
-
-            //Add Country cell.
             cell = $(row.insertCell(-1));
             cell.html(Qty);
-
             cell = $(row.insertCell(-1));
             cell.html(Hsn);
-
             cell = $(row.insertCell(-1));
             cell.html(Rate);
-
             cell = $(row.insertCell(-1));
             cell.html(Value);
-
             cell = $(row.insertCell(-1));
             cell.html(Igst);
             cell = $(row.insertCell(-1));
             cell.html(Amount);
-
             cell = $(row.insertCell(-1));
             cell.html(TotalAmount1);
-
         }
 
         function GetTOCDetails(QID) {
@@ -739,9 +615,7 @@
                 success: function (result) {
                     var getResult = result.d;
                     var len = getResult.length;
-
                     for (var i = 0; i < len; i++) {
-
                         var a = getResult[i].DescriptionOfGoods;
                         var b = getResult[i].Qty;
                         var c = getResult[i].Hsn;
@@ -750,9 +624,7 @@
                         var f = getResult[i].Igst;
                         var g = getResult[i].Amount;
                         var h = getResult[i].TotalAmount1;
-
                         btnAddCall(a, b, c, d, e, f, g, h);
-
                     }
                 },
                 error: function (err) {
@@ -761,11 +633,9 @@
             });
         }
 
-
         function ViewDetails(QID) {
             $('#ApplicationForm').show();
             GetTOCDetails(QID);
-
             $.ajax({
                 contentType: "application/json; charset=utf-8",
                 url: "Approval.aspx/GetQuotationDetails",
@@ -776,25 +646,20 @@
                     var getResult = result.d;
                     var len = getResult.length;
                     if (len > 0) {
-
                         $('#txtProjectName').val(getResult[0].ProjectName),
                         $('#txtFinantialYear').val(getResult[0].FinantialYear),
                        $('#txtQuotationDate').val(GetProperDate(getResult[0].QDate)),
                         $('#txtCompanyName').val(getResult[0].QToCompanyName),
                         $('#txtGstinParty').val(getResult[0].QToGSTINNo),
-
                         $('#txtContactPerson').val(getResult[0].QToContactPerson),
                         $('#txtAddress').val(getResult[0].QToAddress),
                         $('#txtaymentTerms').val(getResult[0].PaymentTerms),
                         $('#txtValidityOfQuote').val(getResult[0].ValidityOfQuote),
                         $('#txtPlaceOfSupply').val(getResult[0].PlaceOfSupply),
-
                         $('#txtGrandTotal').val(getResult[0].TotalAmountDigit),
                         $('#txtTotalWords').val(getResult[0].TotalAmountWords),
                         $('#txtTaxableAmount').val(getResult[0].TaxableAmount),
                         $('#txtFreight').val(getResult[0].Freight),
-
-
                        $('#txtBankName').val(getResult[0].BankName),
                        $('#txtBranchName').val(getResult[0].BranchName),
                         $('#txtBankAccountNo').val(getResult[0].BankAccNo),
@@ -808,7 +673,6 @@
                         $('#txtIgst').val(getResult[0].Igst),
                         $('#txtAmount').val(getResult[0].Amount),
                         $('#txtTotalAmount1').val(getResult[0].TotalAmount1)
-
                     }
                 },
                 error: function (err) {
@@ -835,7 +699,6 @@
 
         function GetItemDetails(ItemID, ItemName) {
             var element = "";
-
             $.ajax({
                 contentType: "application/json; charset=utf-8",
                 url: "Reports.aspx/GetItemDetails",
@@ -852,7 +715,6 @@
                     $('#dvdQuotation').hide();
                     $('#dvdrequisition').hide();
                     $('#dvdItems').show();
-
                     $('#tblApprove').empty();
                     element = element + '<thead class="cf"><tr class="bgblue-Over">';
                     element = element + '<th>Item Name</th>';
@@ -862,13 +724,10 @@
                     element = element + '<th>SKU</th>';
                     element = element + '<th>PU</th>';
                     element = element + '</tr></thead><tbody>';
-
                     if (len == 0) {
                         element = element + '<tr><td colspan="3"><p class="text-center">No Company Data Available</p></td></tr>'
                     }
-
                     for (var i = 0; i < len; i++) {
-
                         element = element + '<tr>';
                         element = element + '<td>' + getResult[i].ItemName + '</td>';
                         element = element + '<td>' + getResult[i].CategoryName + '</td>';
@@ -887,17 +746,14 @@
                         "pagingType": "simple_numbers"[{
                             style: 'Margin-left:1%'
                         }]
-
                     });
                     $('.dataTables_length').addClass('bs-select');
-
                 },
                 error: function (err) {
                     // alert(err.statusText)
                 }
             });
         }
-
 
     </script>
 </asp:Content>

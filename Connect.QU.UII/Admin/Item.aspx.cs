@@ -16,29 +16,23 @@ namespace Connect.QU.UII.Admin
             string str = HttpContext.Current.User.Identity.Name.ToString();
         }
 
-        
         [WebMethod]
         public static List<QU.Entities.ItemDetails> GetItemDetails(int ItemID, string ItemName)
         {
             return new QU.BAL.CommonBAL().GetItemDetails(ItemID, ItemName);
         }
 
-           
-      
         [WebMethod]
         public static List<QU.Entities.CategoryDetails> GetCategoryDetails(int CategoryID, string CategoryName)
         {
             return new QU.BAL.CommonBAL().GetCategoryDetails(CategoryID, CategoryName);
         }
 
-
         [WebMethod]
         public static string SaveUpdateItemDetails(ItemDetails cnt)
         {
-            cnt.UserId=HttpContext.Current.User.Identity.Name.ToString();
+            cnt.UserId = HttpContext.Current.User.Identity.Name.ToString();
             return new QU.BAL.CommonBAL().SaveUpdateItemDetails(cnt);
         }
-
-       
     }
 }

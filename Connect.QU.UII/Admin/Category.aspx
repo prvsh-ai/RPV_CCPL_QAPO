@@ -57,6 +57,7 @@
         .select2 {
             width: 159px !important;
         }
+
         .paginate_button {
             margin-left: 1%;
         }
@@ -68,36 +69,25 @@
 
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-
         <!-- Main content -->
         <section class="content">
             <!-- START CUSTOM TABS -->
             <div class="container">
-
                 <div class="box box-solid">
-
                     <div class="box-body">
                         <div class="form-inline">
-
                             <div class="form-group" style="width: 100%; margin-top: 1%;">
                                 <label class="label1" for="txtCategoryName">Category Name</label>
                                 <input id="txtCategoryName" class="form-control" type="text" />
-
                                 <label class="label1" for="txtCode">Code</label>
                                 <input id="txtCode" class="form-control" type="text" />
                                 <label class="label1" for="txtDefaultSKU">Default SKU</label>
                                 <input id="txtDefaultSKU" class="form-control" type="text" />
                             </div>
-
                             <div class="form-group" style="width: 100%; margin-top: 1%;">
-
                                 <label class="label1" for="txtDefaultPU">Default PU</label>
                                 <input id="txtDefaultPU" class="form-control" type="text" />
                             </div>
-
-
-
-
                             <div class="form-group" style="width: 100%; margin-top: 1%;">
                                 <label class="label1">Specification    </label>
                                 <div class="form-group" style="margin-top: 1%; width: 100%;">
@@ -113,75 +103,42 @@
                                     <input type="checkbox" name="Color" value="Color" id="chkColor" />
                                     <label class="label1" for="chkSize">Size</label>
                                     <input type="checkbox" name="Size" value="Size" id="chkSize" />
-                                    <%--               <label class="label1" for="chkSun">Sunday</label>
-                                <input type="checkbox" name="Sunday" value="Sun" id="chkSun" />
-                                    --%>
                                 </div>
                             </div>
-
-
-
-
-
-
                             <div class="form-group" style="margin-top: 1%; width: 100%;">
-
-
                                 <input id="btnSave" type="button" value="Save" class="btn btn-success" />
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
-
-           <%-- <div class="container">
-                <table id="CategoryTableId" class="table table-striped cf">
-                </table>
-            </div>--%>
             <div class="container" style="margin-top: 3%; margin-bottom: 1%; width: 100%;">
-
                 <table id="CategoryTableId" class="table table-striped cf table-bordered table-striped table-responsive dataTable" style="table-layout: fixed"></table>
-
             </div>
-            <!-- /.row -->
-
             <div id="CategoryModal" class="modal fade" role="dialog">
                 <div class="modal-dialog">
-
                     <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                             <h4 class="modal-title">Category Details Update</h4>
                         </div>
-
-
                         <div class="modal-body" style="padding: 1px;">
                             <div class="box box-solid">
                                 <div class="box-body">
-
                                     <div class="form-inline">
-
                                         <div class="form-group" style="width: 100%; margin-top: 1%;">
                                             <label class="label1" for="txtCategoryNameUpdate">Category</label>
                                             <input id="txtCategoryNameUpdate" class="form-control" type="text" />
-
                                             <label class="label1" for="txtCodeUpdate">Code</label>
                                             <input id="txtCodeUpdate" class="form-control" type="text" />
                                             <label class="label1" for="txtDefaultSKUUpdate">Default SKU</label>
                                             <input id="txtDefaultSKUUpdate" class="form-control" type="text" />
                                         </div>
-
                                         <div class="form-group" style="width: 100%; margin-top: 1%;">
-
                                             <label class="label1" for="txtDefaultPUUpdate">Default PU</label>
                                             <input id="txtDefaultPUUpdate" class="form-control" type="text" />
                                         </div>
-
-
-
-
                                         <div class="form-group" style="width: 100%; margin-top: 1%;">
                                             <label class="label1">Specification    </label>
                                             <div class="form-group" style="margin-top: 1%; width: 100%;">
@@ -197,14 +154,9 @@
                                                 <input type="checkbox" name="Color" value="Color" id="chkColorUpdate" />
                                                 <label class="label1" for="chkSizeUpdate">Size</label>
                                                 <input type="checkbox" name="Size" value="Size" id="chkSizeUpdate" />
-
                                             </div>
                                         </div>
-
-
-
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -212,21 +164,14 @@
                             <input id="btnUpdate" type="button" value="Update" class="btn btn-success" style="float: left;" />
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         </div>
-
-
                     </div>
                 </div>
-
             </div>
-
         </section>
         <!-- /.content -->
-
         <div id="pageloaddiv" class="pageloaddiv" style="display: none;">
         </div>
-
         <input id="txtCategoryIdUpdate" type="hidden" />
-
     </div>
 
     <link href="../css/DataTable/dataTablesbootstrap.css" rel="stylesheet" />
@@ -257,10 +202,7 @@
                 });
             });
 
-
             $("#btnSave").click(function () {
-
-               
                 data.Mode = 1;
                 data.CategoryID = 0;
                 data.CategoryName = $('#txtCategoryName').val();
@@ -273,30 +215,10 @@
                 data.Number = $('#chkNumber').prop("checked");
                 data.Color = $('#chkColor').prop("checked");
                 data.Size = $('#chkSize').prop("checked");
-               
-
                 SaveUpdateCategoryDetails(data);
-
-
-                //SaveUpdateCategoryDetails(
-                //    1,
-                //    0,
-                //    $('#txtCategoryName').val(),
-                //    $('#txtCode').val(),
-                //    $('#txtDefaultSKU').val(),
-                //    $('#txtDefaultPU').val(),
-                //    $('#chkBrand').prop("checked"),
-                //    $('#chkType').prop("checked"),
-                //    $('#chkName').prop("checked"),
-                //    $('#chkNumber').prop("checked"),
-                //    $('#chkColor').prop("checked"),
-                //    $('#chkSize').prop("checked")
-                //    )
             });
 
             $("#btnUpdate").click(function () {
-
-
                 data.Mode = 2;
                 data.CategoryID = $('#txtCategoryIdUpdate').val();
                 data.CategoryName = $('#txtCategoryNameUpdate').val();
@@ -309,118 +231,13 @@
                 data.Number = $('#chkNumberUpdate').prop("checked");
                 data.Color = $('#chkColorUpdate').prop("checked");
                 data.Size = $('#chkSizeUpdate').prop("checked");
-
-
-
-                //SaveUpdateCategoryDetails(
-                //    2,
-                //    $('#txtCategoryIdUpdate').val(),
-                //    $('#txtCategoryNameUpdate').val(),
-                //    $('#txtCodeUpdate').val(),
-                //    $('#txtDefaultSKUUpdate').val(),
-                //    $('#txtDefaultPUUpdate').val(),
-                //    $('#chkBrandUpdate').prop("checked"),
-                //    $('#chkTypeUpdate').prop("checked"),
-                //    $('#chkNameUpdate').prop("checked"),
-                //    $('#chkNumberUpdate').prop("checked"),
-                //    $('#chkColorUpdate').prop("checked"),
-                //    $('#chkSizeUpdate').prop("checked")
-                //    )
-
                 SaveUpdateCategoryDetails(data);
-
             });
-
             var ArrData = [];
         });
 
-
-
-
-        function SaveUpdateCategoryDetails(data) {
-            
-            $.ajax({
-                contentType: "application/json; charset=utf-8",
-                url: "Category.aspx/SaveUpdateCategoryDetails",
-                type: "POST",
-                data: JSON.stringify({ 'cnt': data }),
-                dataType: "json",
-                success: function (result) {
-                    var getResult = result.d;
-                    if (getResult != "0") {
-                        alert(getResult);
-                        //GetCityDetails(0, "", 0);
-                        GetCategoryDetails(0, "");
-                        ClearInputBoxValues(Mode);
-                    }
-                    else {
-                        alert("There is an Error");
-                    }
-                },
-                error: function (err) {
-                    // alert(err.statusText)
-                }
-            });
-        }
-
-
-
-        //function SaveUpdateCategoryDetails(
-        //    Mode,
-        //    CategoryID,
-        //    CategoryName,
-        //    Code,
-        //    DefaultSKU,
-        //    DefaultPU,
-        //    Brand,
-        //    Type,
-        //    Name,
-        //    Number,
-        //    Color,
-        //    Size
-        //    ) {
-        //    // var arrval = [];
-        //    // arrval = HotelRoomCategoryTable;
-
-        //    $.ajax({
-        //        contentType: "application/json; charset=utf-8",
-        //        url: "Category.aspx/SaveUpdateCategoryDetails",
-        //        type: "POST",
-        //        data: "{Mode:" + Mode + ",CategoryID:" + CategoryID + ",CategoryName:'" + CategoryName + "',Code:'" + Code + "',DefaultSKU:'" + DefaultSKU + "',DefaultPU:'" + DefaultPU + "',Brand:'" + Brand + "',Type:'" + Type + "',Name:'" + Name + "',Number:'" + Number + "',Color:'" + Color + "',Size:'" + Size + "'}",
-        //        dataType: "json",
-        //        success: function (result) {
-        //            var getResult = result.d;
-        //            if (getResult != "0") {
-        //                alert(getResult);
-        //                //GetCityDetails(0, "", 0);
-        //                GetCategoryDetails(0, "");
-        //                ClearInputBoxValues(Mode);
-        //            }
-        //            else {
-        //                alert("There is an Error");
-        //            }
-        //        },
-        //        error: function (err) {
-        //            // alert(err.statusText)
-        //        }
-        //    });
-        //}
-
-        function ClearInputBoxValues(Mode) {
-            if (Mode == 1) {
-                $('input[type=text]').each(function () {
-                    $(this).val('');
-                });
-
-                $('select').each(function () {
-                    $(this).val('0');
-                });
-            }
-        }
-
         function GetCategoryDetails(CategoryID, CategoryName) {
             var element = "";
-
             $.ajax({
                 contentType: "application/json; charset=utf-8",
                 url: "Category.aspx/GetCategoryDetails",
@@ -431,22 +248,17 @@
                     var getResult = result.d;
                     var len = getResult.length;
                     $('#CategoryTableId').empty();
-
                     element = element + '<thead class="cf"><tr class="bgblue-Over">';
                     element = element + '<th>CategoryName</th>';
                     element = element + '<th>Code</th>';
                     element = element + '<th>Default SKU</th>';
                     element = element + '<th>Default PU</th>';
                     element = element + '<th style="width:190px">Action</th>';
-
                     element = element + '</tr></thead><tbody>';
-
                     if (len == 0) {
                         element = element + '<tr><td colspan="3"><p class="text-center">No Category Data Available</p></td></tr>'
                     }
-
                     for (var i = 0; i < len; i++) {
-
                         element = element + '<tr>';
                         element = element + '<td>' + getResult[i].CategoryName + '</td>';
                         element = element + '<td>' + getResult[i].Code + '</td>';
@@ -464,7 +276,6 @@
                         "pagingType": "simple_numbers"[{
                             style: 'Margin-left:1%'
                         }]
-
                     });
                     $('.dataTables_length').addClass('bs-select');
                 },
@@ -475,8 +286,6 @@
         }
 
         function GetCategoryDetailsForUpdate(CategoryID, CategoryName, Code, DefaultSKU, DefaultPU, Brand, Type, Name, Number, Color, Size) {
-
-
             $('#txtCategoryIdUpdate').val(CategoryID);
             $('#txtCategoryNameUpdate').val(CategoryName);
             $('#txtCodeUpdate').val(Code);
@@ -488,23 +297,42 @@
             $('#chkNumberUpdate').prop('checked', Number);
             $('#chkColorUpdate').prop('checked', Color);
             $('#chkSizeUpdate').prop('checked', Size);
-
         }
 
+        function SaveUpdateCategoryDetails(data) {
+            $.ajax({
+                contentType: "application/json; charset=utf-8",
+                url: "Category.aspx/SaveUpdateCategoryDetails",
+                type: "POST",
+                data: JSON.stringify({ 'cnt': data }),
+                dataType: "json",
+                success: function (result) {
+                    var getResult = result.d;
+                    if (getResult != "0") {
+                        alert(getResult);
+                        GetCategoryDetails(0, "");
+                        ClearInputBoxValues(Mode);
+                    }
+                    else {
+                        alert("There is an Error");
+                    }
+                },
+                error: function (err) {
+                    // alert(err.statusText)
+                }
+            });
+        }
 
-
-
-
-        //testing
-
-
-
-
-
-
-
-
-
+        function ClearInputBoxValues(Mode) {
+            if (Mode == 1) {
+                $('input[type=text]').each(function () {
+                    $(this).val('');
+                });
+                $('select').each(function () {
+                    $(this).val('0');
+                });
+            }
+        }
     </script>
 
 </asp:Content>

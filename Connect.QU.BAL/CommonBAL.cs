@@ -11,7 +11,6 @@ namespace Connect.QU.BAL
 {
     public class CommonBAL
     {
-        //get
         public List<QU.Entities.CategoryDetails> GetCategoryDetails(int CategoryID, string CategoryName)
         {
             return new CommonDAL().GetCategoryDetails(CategoryID, CategoryName);
@@ -44,7 +43,6 @@ namespace Connect.QU.BAL
         {
             return new CommonDAL().GetTOCDetails(QID);
         }
-
         public List<QU.Entities.TOCRequisition> GetTOCRequisitionDetails(int RequisitionId)
         {
             return new CommonDAL().GetTOCRequisitionDetails(RequisitionId);
@@ -53,18 +51,14 @@ namespace Connect.QU.BAL
         {
             return new CommonDAL().GetQuotationItemDetails(QID);
         }
-        public List<QU.Entities.TOC> GetQuotationItemDescriptionDetails(int QID,int ItemId)
+        public List<QU.Entities.TOC> GetQuotationItemDescriptionDetails(int QID, int ItemId)
         {
-            return new CommonDAL().GetQuotationItemDescriptionDetails(QID,ItemId);
-        }        
-        
-
+            return new CommonDAL().GetQuotationItemDescriptionDetails(QID, ItemId);
+        }
         public List<QU.Entities.Quotation> GetQuotationDetails(int QID)
         {
             return new CommonDAL().GetQuotationDetails(QID);
         }
-
-
         public List<QU.Entities.Requisition> GetRequisitionDetails(int RequisitionId)
         {
             return new CommonDAL().GetRequisitionDetails(RequisitionId);
@@ -85,7 +79,6 @@ namespace Connect.QU.BAL
         {
             return new CommonDAL().GetQuotationDetailsOnQuotationType(QuotationType);
         }
-        //save
         public string InsertApprovalData(bool chkVal, int QID, string UserId)
         {
             return new CommonDAL().InsertApprovalData(chkVal, QID, UserId);
@@ -118,169 +111,5 @@ namespace Connect.QU.BAL
         {
             return new CommonDAL().SaveUpdateRequisitionDetails(cnt);
         }
-        
-        //public string SaveUpdateQuotationDetails(
-        //  int Mode,
-        //  int QID,
-        //  string QType,
-        //  string QNo,
-        //  DateTime QDate,
-        //  string QFromCompanyName,
-        //  string QFromAddress,
-        //  string QFromContactNo,
-        //  string QFromContactPerson,
-        //  string QFromEmailID,
-        //  string QFromGSTINNo,
-        //  string ProjectName,
-        //  string FinantialYear,
-        //  string QToCompanyID,
-        //  string QToCompanyName,
-        //  string QToGSTINNo,
-        //  string QToContactPerson,
-        //  string QToAddress,
-        //  string PaymentTerms,
-        //  string ValidityOfQuote,
-        //  string PlaceOfSupply,
-        //  string TOCID,
-        //  string TotalAmountDigit,
-        //  string TotalAmountWords,
-        //  string TaxableAmount,
-        //  string Freight,
-        //  string BankName,
-        //  string BranchName,
-        //  string BankAccountNo,
-        //  string BankBranchIFSC,
-        //  string TermsAndCondition,
-        //  string Note1,
-        //  string Note2,
-        //  DateTime SignatureDate,
-        //  string SignatureData,
-        //    List<TOC> TocData,
-        //  string UserID)
-        //{
-        //    return new CommonDAL().SaveUpdateQuotationDetails(
-        //   Mode,
-        //   QID,
-        //   QType,
-        //   QNo,
-        //   QDate,
-        //   QFromCompanyName,
-        //   QFromAddress,
-        //   QFromContactNo,
-        //   QFromContactPerson,
-        //   QFromEmailID,
-        //   QFromGSTINNo,
-        //   ProjectName,
-        //   FinantialYear,
-        //   QToCompanyID,
-        //   QToCompanyName,
-        //   QToGSTINNo,
-        //   QToContactPerson,
-        //   QToAddress,
-        //   PaymentTerms,
-        //   ValidityOfQuote,
-        //   PlaceOfSupply,
-        //   TOCID,
-        //   TotalAmountDigit,
-        //   TotalAmountWords,
-        //   TaxableAmount,
-        //   Freight,
-        //   BankName,
-        //   BranchName,
-        //   BankAccountNo,
-        //   BankBranchIFSC,
-        //   TermsAndCondition,
-        //   Note1,
-        //   Note2,
-        //   SignatureDate,
-        //   SignatureData, TocData,
-        //   UserID);
-        //}
-
-        //UserLogin
-        //public string SaveUpdateUserLoginDetails(int Mode, int LoginId, string UserId, string Password, string Name, string MobileNo, string EmailID, string Designation, int RoleId, string Address)
-        //{
-        //    return new CommonDAL().SaveUpdateUserLoginDetails(Mode, LoginId, UserId, Password, Name, MobileNo, EmailID, Designation, RoleId, Address);
-        //}
-
-        //public string SaveUpdateCategoryDetails(
-        //   int Mode,
-        //    int CategoryID,
-        //    string CategoryName,
-        //    string Code,
-        //    string DefaultSKU,
-        //    string DefaultPU,
-        //    bool Brand,
-        //    bool Type,
-        //    bool Name,
-        //    bool Number,
-        //    bool Color,
-        //    bool Size,
-        //    string UserId)
-        //{
-        //    return new CommonDAL().SaveUpdateCategoryDetails(
-        //    Mode,
-        //    CategoryID,
-        //    CategoryName,
-        //    Code,
-        //    DefaultSKU,
-        //    DefaultPU,
-        //    Brand,
-        //    Type,
-        //    Name,
-        //    Number,
-        //    Color,
-        //    Size,
-        //    UserId);
-        //}
-
-        //public string SaveUpdateCompanyDetails(
-        //    int Mode,
-        //    int CompanyID,
-        //    string CompanyName,
-        //    string GSTINNo,
-        //    string TINNo,
-        //    string ServiceTaxNo,
-        //    string EmailID,
-        //    string CompanyLogo,
-        //    string Address,
-        //    string City,
-        //    string State,
-        //    string Country,
-        //    string ContactNo,
-        //    string ZipCode,
-        //    string UserID)
-        //{
-        //    return new CommonDAL().SaveUpdateCompanyDetails(
-        //    Mode,
-        //    CompanyID,
-        //    CompanyName,
-        //    GSTINNo,
-        //    TINNo,
-        //    ServiceTaxNo,
-        //    EmailID,
-        //    CompanyLogo,
-        //    Address,
-        //    City,
-        //    State,
-        //    Country,
-        //    ContactNo,
-        //    ZipCode,
-        //    UserID);
-        //}
-
-        //public List<QU.Entities.Txn_Company> GetCompanyDetails(int CompanyID, string CompanyName)
-        //{
-        //    return new CommonDAL().GetCompanyDetails(CompanyID, CompanyName);
-        //}
-
-        //public string SaveUpdateCurrencyDetails(int Mode, int CurrencyId, string CurrencyName)
-        //{
-        //    return new CommonDAL().SaveUpdateCurrencyDetails(Mode, CurrencyId, CurrencyName);
-        //}
-
-
-
     }
-
 }

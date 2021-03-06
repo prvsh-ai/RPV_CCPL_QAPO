@@ -15,27 +15,11 @@ namespace Connect.QU.UII.Admin
 
         }
 
-        //[WebMethod]
-        //public static string SaveUpdateUserLoginDetails(int Mode, int LoginId, string UserId, string Password, string Name, string MobileNo, string EmailID, string Designation, int RoleId, string Address)
-        //{
-        //    return new QU.BAL.CommonBAL().SaveUpdateUserLoginDetails(Mode, LoginId, UserId, Password, Name, MobileNo, EmailID, Designation, RoleId, Address);
-        //}
-
-
-        [WebMethod]
-        public static string SaveUpdateUserLoginDetails(Connect.QU.Entities.Login cnt)
-        {
-            return new QU.BAL.CommonBAL().SaveUpdateUserLoginDetails(cnt);
-        }
-
-
-
         [WebMethod]
         public static List<QU.Entities.Login> GetUserLoginDetails(int LoginId, string Name)
         {
             return new QU.BAL.CommonBAL().GetUserLoginDetails(LoginId, Name);
         }
-
 
         [WebMethod]
         public static List<QU.Entities.Role> GetRoleDetails(int RoleID, string RoleName)
@@ -43,5 +27,10 @@ namespace Connect.QU.UII.Admin
             return new QU.BAL.CommonBAL().GetRoleDetails(RoleID, RoleName);
         }
 
+        [WebMethod]
+        public static string SaveUpdateUserLoginDetails(Connect.QU.Entities.Login cnt)
+        {
+            return new QU.BAL.CommonBAL().SaveUpdateUserLoginDetails(cnt);
+        }
     }
 }
