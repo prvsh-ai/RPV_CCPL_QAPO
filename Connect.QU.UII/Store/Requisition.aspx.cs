@@ -21,13 +21,12 @@ namespace Connect.QU.UII.Store
         {
             return new QU.BAL.CommonBAL().GetCompanyDetailsNew(CompanyID, CompanyName);
         }
-        
+
         [WebMethod]
         public static List<QU.Entities.Location> GetLocationDetails(int StateId, string StateName)
         {
             return new QU.BAL.CommonBAL().GetStateDetails(StateId, StateName);
         }
-
 
         [WebMethod]
         public static List<QU.Entities.Location> GetCityDetails(int CityId, string CityName, int StateId)
@@ -52,10 +51,9 @@ namespace Connect.QU.UII.Store
         {
             Random RN = new Random();
             int x = RN.Next(10, 10000);
-            cnt.TOCRequisitionId= RN.Next(10, 1000000);
-            cnt.RequisitionNumber = Convert.ToString("RQ" + cnt.QuotationId + "_" + x+"_"+DateTime.Now.Day);
+            cnt.TOCRequisitionId = RN.Next(10, 1000000);
+            cnt.RequisitionNumber = Convert.ToString("RQ" + cnt.QuotationId + "_" + x + "_" + DateTime.Now.Day);
             cnt.UserId = HttpContext.Current.User.Identity.Name.ToString();
-           
             return new QU.BAL.CommonBAL().SaveUpdateRequisitionDetails(cnt);
         }
 
@@ -63,17 +61,14 @@ namespace Connect.QU.UII.Store
         public static List<QU.Entities.Requisition> GetRequisitionDetails(int RequisitionId)
         {
             return new QU.BAL.CommonBAL().GetRequisitionDetails(RequisitionId);
-
-
         }
+        
         [WebMethod]
         public static List<QU.Entities.Quotation> GetQuotationDetails(int QID)
         {
             return new QU.BAL.CommonBAL().GetQuotationDetails(QID);
-
-            // string x=DateTime.Now.Year +"-"+ (DateTime.Now.Year +1 );
-
         }
+        
         [WebMethod]
         public static List<QU.Entities.TOCRequisition> GetTOCRequisitionDetails(int RequisitionId)
         {
@@ -85,11 +80,12 @@ namespace Connect.QU.UII.Store
         {
             return new QU.BAL.CommonBAL().GetQuotationItemDetails(QID);
         }
-          [WebMethod]
-        public static List<QU.Entities.TOC> GetQuotationItemDescriptionDetails(int QID,int ItemId)
-        {
-            return new QU.BAL.CommonBAL().GetQuotationItemDescriptionDetails(QID,ItemId);
-        }
         
+        [WebMethod]
+        public static List<QU.Entities.TOC> GetQuotationItemDescriptionDetails(int QID, int ItemId)
+        {
+            return new QU.BAL.CommonBAL().GetQuotationItemDescriptionDetails(QID, ItemId);
+        }
+
     }
 }
