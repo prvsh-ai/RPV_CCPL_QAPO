@@ -406,12 +406,38 @@
             $('#txtPurchaseQty,#txtRate,#txtAmount').change(function () {
                 var a = 1;
                 if ($('#txtPurchaseQty').val() != "") {
+
+                    if (parseFloat($("#txtPurchaseQty").val()) > $("#txtInStockQty").val()) {
+                        //do something
+                        alert('Purchase quantity can not be greater then In Stock Quantity');
+                        $("#txtPurchaseQty").val(0);
+                        $('#txtAmount').val(0);
+                        return false;
+                    }
+
+
+
                     a = parseInt($('#txtPurchaseQty').val());
                 }
                 var b = parseInt($('#txtRate').val());
                 var c = a * b;
                 $('#txtAmount').val(c);
             });
+
+
+            //Purchased qty should not be greater then instockqty
+            //$('#txtPurchaseQty').change(function () {
+            //    if (parseFloat($("#txtPurchaseQty").val()) > $("#txtInStockQty").val()) {
+            //        //do something
+            //        alert('Purchase quantity can not be greater then In Stock Quantity');
+            //        $("#txtPurchaseQty").val(0);
+            //    }
+            //});
+
+
+
+          
+
 
 
 
@@ -753,7 +779,7 @@
                         $("#txtRequiredQty").val(getResult[i].Qty);
                         $("#txtRate").val(getResult[i].Rate);
                         $("#txtInStockQty").val(getResult[i].InStockQuantity);
-
+                        $("#txtPOItemNumber").val(getResult[i].ItemLineNumber);
                     }
                 },
                 error: function (err) {

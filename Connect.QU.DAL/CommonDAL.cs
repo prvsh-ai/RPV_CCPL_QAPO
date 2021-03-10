@@ -837,6 +837,11 @@ namespace Connect.QU.DAL
                     {
                         CL.InStockQuantity = sdr["InStockQuantity"].ToString();
                     }
+                    if (!string.IsNullOrEmpty(sdr["ItemLineNumber"].ToString()))
+                    {
+                        CL.ItemLineNumber = sdr["ItemLineNumber"].ToString();
+                    }
+
                     Entities.Add(CL);
                 }
             }
