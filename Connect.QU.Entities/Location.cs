@@ -15,6 +15,8 @@ namespace Connect.QU.Entities
         public int StateId { get; set; }
         public string StateName { get; set; }
 
+        public string Item { get; set; }
+
     }
 
 }

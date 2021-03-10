@@ -21,6 +21,46 @@ namespace Connect.QU.DAL
         private DBConnectionDAL myDBConectionDAL = new DBConnectionDAL();
         #endregion
 
+        public List<QU.Entities.Location> GetLocationDetails(int CompanyId)
+        {
+            List<Entities.Location> Entities = new List<Entities.Location>();
+            Entities.Location CL = null;
+            try
+            {
+                myCon = myDBConectionDAL.AssignConnection();
+                myCmd = new SqlCommand("spRetLocations", myCon);
+                myCmd.CommandType = CommandType.StoredProcedure;
+
+                if (CompanyId != 0)
+                {
+                    myCmd.Parameters.AddWithValue("@CompanyId", CompanyId);
+                }
+
+                myDBConectionDAL.OpenConnection();
+                SqlDataReader sdr = myCmd.ExecuteReader();
+                while (sdr.Read())
+                {
+                    CL = new Entities.Location();
+
+                    //CL.Item = sdr["item"].ToString();
+                    CL.StateId = Convert.ToInt32(sdr["StateId"]);
+                    CL.StateName = sdr["StateName"].ToString();
+
+                    Entities.Add(CL);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                myDBConectionDAL.CloseConnection();
+            }
+
+            return Entities;
+        }
+
         public List<QU.Entities.Requisition> GetRequisitionDetails(int RequisitionId)
         {
             List<Entities.Requisition> Entities = new List<Entities.Requisition>();
@@ -42,11 +82,12 @@ namespace Connect.QU.DAL
                     CL = new Entities.Requisition();
                     CL.RequisitionId = Convert.ToInt32(sdr["RequisitionId"]);
                     CL.RequisitionNumber = sdr["RequisitionNumber"].ToString();
-
                     CL.RequisitionDate = Convert.ToDateTime(sdr["RequisitionDate"]);
                     CL.QuotationId = Convert.ToInt32(sdr["QuotationId"]);
                     CL.RequiredBy = sdr["RequiredBy"].ToString();
                     CL.ApprovedBy = sdr["ApprovedBy"].ToString();
+                    CL.PreparedBy = sdr["PreparedBy"].ToString();
+                    CL.QuotationNumber = sdr["QNO"].ToString();
 
                     Entities.Add(CL);
                 }
@@ -83,18 +124,21 @@ namespace Connect.QU.DAL
                     CL = new Entities.Quotation();
                     CL.QID = Convert.ToInt32(sdr["QID"]);
                     CL.QNo = sdr["QNo"].ToString();
-                    if (sdr["QType"].ToString() == "1")
-                    {
-                        CL.QType = "SU";
-                    }
-                    else if (sdr["QType"].ToString() == "2")
-                    {
-                        CL.QType = "SER";
-                    }
-                    else
-                    {
-                        CL.QType = "TEN";
-                    }
+                    CL.QType = sdr["QType"].ToString();
+                    
+                    //if (sdr["QType"].ToString() == "1")
+                    //{
+                    //    CL.QType = "SU";
+                    //}
+                    //else if (sdr["QType"].ToString() == "2")
+                    //{
+                    //    CL.QType = "SER";
+                    //}
+                    //else
+                    //{
+                    //    CL.QType = "TEN";
+                    //}
+
                     CL.QDate = Convert.ToDateTime(sdr["QDate"]);
                     CL.QFromCompanyName = sdr["QFromCompanyName"].ToString();
                     CL.QFromAddress = sdr["QFromAddress"].ToString();
@@ -127,6 +171,17 @@ namespace Connect.QU.DAL
                     CL.SignatureDate = Convert.ToDateTime(sdr["SignatureDate"]);
                     CL.SignatureData = sdr["SignatureData"].ToString();
                     CL.Approved = Convert.ToBoolean(sdr["Approved"]);
+                    CL.IsRequisition = Convert.ToBoolean(sdr["IsRequisition"]);
+                    if (!string.IsNullOrEmpty(sdr["CurrencyId"].ToString()))
+                    {
+                        CL.CurrencyId = Convert.ToInt32(sdr["CurrencyId"]);
+
+                    }
+                    if (!string.IsNullOrEmpty(sdr["LocationId"].ToString()))
+                    {
+                        CL.LocationId = Convert.ToInt32(sdr["LocationId"]);
+                    }
+
                     Entities.Add(CL);
                 }
             }
@@ -334,6 +389,7 @@ namespace Connect.QU.DAL
                 while (sdr.Read())
                 {
                     CL = new Entities.TOC();
+                    CL.ItemLineNumber = sdr["ItemLineNumber"].ToString();
                     CL.DescriptionOfGoods = sdr["DescriptionOfGoods"].ToString();
                     CL.Qty = sdr["Qty"].ToString();
                     CL.Hsn = sdr["Hsn"].ToString();
@@ -479,12 +535,12 @@ namespace Connect.QU.DAL
                     CL.PanNo = sdr["PanNo"].ToString();
                     CL.ServiceTaxNo = sdr["ServiceTaxNo"].ToString();
                     CL.EmailId = sdr["EmailId"].ToString();
-                    CL.MobileNo = Convert.ToInt32(sdr["MobileNo"]);
+                    CL.MobileNo = sdr["MobileNo"].ToString();
                     CL.Address = sdr["Address"].ToString();
                     CL.LocationsId = sdr["LocationsId"].ToString();
                     CL.CountryId = Convert.ToInt32(sdr["CountryId"]);
                     CL.StateId = Convert.ToInt32(sdr["StateId"]);
-                    CL.ZipCode = Convert.ToInt32(sdr["Zipcode"]);
+                    CL.ZipCode = sdr["Zipcode"].ToString();
                     CL.CityId = Convert.ToInt32(sdr["CityId"]);
 
                     CL.BankName = sdr["BankName"].ToString();
@@ -492,7 +548,7 @@ namespace Connect.QU.DAL
                     CL.BankAccountNo = sdr["BankAccountNo"].ToString();
                     CL.BankIfsc = sdr["BankIfsc"].ToString();
                     CL.POC = sdr["POC"].ToString();
-                    CL.POCNo = Convert.ToInt32(sdr["POCNo"]);
+                    CL.POCNo = sdr["POCNo"].ToString();
 
                     CL.Customer = Convert.ToBoolean(sdr["Customer"]);
                     CL.Vendor = Convert.ToBoolean(sdr["Vendor"]);
@@ -599,6 +655,8 @@ namespace Connect.QU.DAL
                     CL.Color = sdr["Color"].ToString();
                     CL.Size = sdr["Size"].ToString();
                     CL.CategoryName = sdr["categoryName"].ToString();
+                    CL.InStockQuantity = sdr["InStockQuantity"].ToString();
+                    CL.Approved = Convert.ToBoolean(sdr["Approved"]);
                     Entities.Add(CL);
                 }
             }
@@ -634,6 +692,11 @@ namespace Connect.QU.DAL
                 while (sdr.Read())
                 {
                     CL = new Entities.TOC();
+                    if (!string.IsNullOrEmpty(sdr["ItemLineNumber"].ToString()))
+                    {
+                        CL.ItemLineNumber = sdr["ItemLineNumber"].ToString();
+
+                    }
                     if (!string.IsNullOrEmpty(sdr["DescriptionOfGoods"].ToString()))
                     {
                         CL.DescriptionOfGoods = sdr["DescriptionOfGoods"].ToString();
@@ -719,6 +782,11 @@ namespace Connect.QU.DAL
                 while (sdr.Read())
                 {
                     CL = new Entities.TOC();
+                    if (!string.IsNullOrEmpty(sdr["ItemLineNumber"].ToString()))
+                    {
+                        CL.ItemLineNumber = sdr["ItemLineNumber"].ToString();
+
+                    }
                     if (!string.IsNullOrEmpty(sdr["DescriptionOfGoods"].ToString()))
                     {
                         CL.DescriptionOfGoods = sdr["DescriptionOfGoods"].ToString();
@@ -764,6 +832,10 @@ namespace Connect.QU.DAL
                     if (!string.IsNullOrEmpty(sdr["LastPrice"].ToString()))
                     {
                         CL.LastRate = Convert.ToInt32(sdr["LastPrice"]);
+                    }
+                    if (!string.IsNullOrEmpty(sdr["InStockQuantity"].ToString()))
+                    {
+                        CL.InStockQuantity = sdr["InStockQuantity"].ToString();
                     }
                     Entities.Add(CL);
                 }
@@ -1013,6 +1085,15 @@ namespace Connect.QU.DAL
                 myCmd.Parameters.AddWithValue("@CreatedDate", DateTime.Now);
                 myCmd.Parameters.AddWithValue("@UpdatedBy", cnt.UserId);
                 myCmd.Parameters.AddWithValue("@UpdatedDate", DateTime.Now);
+                myCmd.Parameters.AddWithValue("@Approved", cnt.Approved);
+                if (cnt.InStockQuantity != "")
+                {
+                    myCmd.Parameters.AddWithValue("@InStockQuantity", Convert.ToInt32(cnt.InStockQuantity));
+                }
+                else
+                {
+                    myCmd.Parameters.AddWithValue("@InStockQuantity", 0);
+                }
 
                 myCmd.Parameters.Add("@Message", SqlDbType.VarChar, 100);
                 myCmd.Parameters["@Message"].Direction = ParameterDirection.Output;
@@ -1174,6 +1255,7 @@ namespace Connect.QU.DAL
             DataTable dt = new DataTable();
             dt.Columns.Add("TransID");
             dt.Columns.Add("QID");
+            dt.Columns.Add("ItemLineNumber");
             dt.Columns.Add("DescriptionOfGoods");
             dt.Columns.Add("Quantity");
             dt.Columns.Add("HSNCode");
@@ -1192,6 +1274,7 @@ namespace Connect.QU.DAL
                 DataRow dr = dt.NewRow();
                 dr["TransID"] = 0;
                 dr["QID"] = cnt.QID;
+                dr["ItemLineNumber"] = arr.ItemLineNumber;
                 dr["DescriptionOfGoods"] = arr.DescriptionOfGoods;
                 dr["Quantity"] = arr.Qty;
                 dr["HsnCode"] = arr.Hsn;
@@ -1211,7 +1294,7 @@ namespace Connect.QU.DAL
 
             try
             {
-                myCmd = new SqlCommand("spQuotationDetailsInsertUpdate_Test", myCon);
+                myCmd = new SqlCommand("spQuotationDetailsInsertUpdate", myCon);
                 myCmd.CommandType = CommandType.StoredProcedure;
                 if (cnt.QID != 0)
                 {
@@ -1256,7 +1339,8 @@ namespace Connect.QU.DAL
                 myCmd.Parameters.AddWithValue("@UpdatedBy", cnt.User_ID);
                 myCmd.Parameters.AddWithValue("@UpdatedDate", DateTime.Now);
                 myCmd.Parameters.AddWithValue("@tblTOC", dt);
-
+                myCmd.Parameters.AddWithValue("@CurrencyID", cnt.CurrencyId);
+                myCmd.Parameters.AddWithValue("@LocationID", cnt.LocationId);
                 myCmd.Parameters.Add("@Message", SqlDbType.VarChar, 100);
                 myCmd.Parameters["@Message"].Direction = ParameterDirection.Output;
 
@@ -1344,6 +1428,7 @@ namespace Connect.QU.DAL
                 myCmd.Parameters.AddWithValue("@RequisitionDate", DateTime.Now);// cnt.RequisitionDate);
                 myCmd.Parameters.AddWithValue("@RequiredBy", cnt.RequiredBy);
                 myCmd.Parameters.AddWithValue("@ApprovedBy", cnt.ApprovedBy);
+                myCmd.Parameters.AddWithValue("@PreparedBy", cnt.PreparedBy);
                 myCmd.Parameters.AddWithValue("@TOCRequisitionId", cnt.TOCRequisitionId);
                 myCmd.Parameters.AddWithValue("@CreatedBy", cnt.UserId);
                 myCmd.Parameters.AddWithValue("@CreatedDate", DateTime.Now);

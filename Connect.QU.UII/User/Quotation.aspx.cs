@@ -443,6 +443,12 @@ namespace Connect.QU.UII.User
                 }
             }
         }
+        [WebMethod]
+        public static List<QU.Entities.Location> GetLocationDetails(int CompanyID)
+        {
+            return new QU.BAL.CommonBAL().GetLocationDetails(CompanyID);
+        }
+
 
         //private static void DrawLine(PdfWriter writer, float x1, float y1, float x2, float y2, Color color)
         //{

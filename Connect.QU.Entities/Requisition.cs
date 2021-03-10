@@ -14,6 +14,7 @@ namespace Connect.QU.Entities
         public DateTime RequisitionDate { get; set; }
         public string RequiredBy { get; set; }
         public string ApprovedBy { get; set; }
+        public string PreparedBy { get; set; }
         public int TOCRequisitionId { get; set; }
 
         public string RequisitionNumber { get; set; }
@@ -23,6 +24,7 @@ namespace Connect.QU.Entities
         public DateTime? ModifiedDate { get; set; }
         public string Mode { get; set; }
         public string UserId { get; set; }
+        public string QuotationNumber { get; set; }
 
     }
     public class TOCRequisition

@@ -23,6 +23,8 @@ namespace Connect.QU.Entities
         public DateTime EffectiveEndDate { get; set; }
         public string SKU { get; set; }
         public string PU { get; set; }
+        public string InStockQuantity { get; set; }
+        public bool Approved { get; set; }
         public string HsnCode { get; set; }
         public string Brand { get; set; }
         public string Type { get; set; }
@@ -32,8 +34,8 @@ namespace Connect.QU.Entities
         public string Size { get; set; }
         public string UserId { get; set; }
         public string CategoryName { get; set; }
-    
-    
+
+
     }
 
 

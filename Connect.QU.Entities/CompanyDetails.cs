@@ -21,14 +21,14 @@ namespace Connect.QU.Entities
         public int StateId { get; set; }
         public int CityId { get; set; }
         public string LocationsId { get; set; }
-        public int MobileNo { get; set; }
-        public int ZipCode { get; set; }
+        public string MobileNo { get; set; }
+        public string ZipCode { get; set; }
         public string BankName { get; set; }
         public string BankBranch { get; set; }
         public string BankAccountNo { get; set; }
         public string BankIfsc { get; set; }
         public string POC { get; set; }
-        public int POCNo { get; set; }
+        public string POCNo { get; set; }
         public bool Customer { get; set; }
         public bool Vendor { get; set; }
         public string UserId { get; set; }

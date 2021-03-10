@@ -71,11 +71,14 @@ namespace Connect.QU.Entities
         public string User_ID { get; set; }
         public string Mode { get; set; }
         public bool Approved { get; set; }
+
         public int CreatedBy { get; set; }
         public DateTime? CreatedDate { get; set; }
         public int ModifiedBy { get; set; }
         public DateTime? ModifiedDate { get; set; }
-      
+        public bool? IsRequisition { get; set; }
+        public int? CurrencyId { get; set; }
+        public int? LocationId { get; set; }
 
     }
 

@@ -47,7 +47,7 @@
                     <div class="box-body">
                         <div class="form-inline">
                             <div class="form-group" style="width: 100%;">
-                                <label class="label1" for="txtUserId">UserId  </label>
+                                <label class="label1" for="txtUserId">User Name</label>
                                 <input id="txtUserId" name="Designation" class="form-control" type="text" />
                                 <label class="label1" for="txtPassword">Password  </label>
                                 <input id="txtPassword" name="RoleId" class="form-control" type="text" />
@@ -56,7 +56,7 @@
                             </div>
                             <div class="form-group" style="width: 100%; margin-top: 1%;">
                                 <label class="label1" for="txtMobileNo">MobileNo </label>
-                                <input id="txtMobileNo" name="MobileNo" class="form-control" type="text" />
+                                <input id="txtMobileNo" name="MobileNo" class="form-control integer" type="text" />
                                 <label class="label1" for="txtDesignation">Designation </label>
                                 <input id="txtDesignation" name="Designation" class="form-control" type="text" />
                                 <label class="label1" for="txtEmailId">Email Id  </label>
@@ -92,7 +92,7 @@
                         <div class="box-body">
                             <div class="form-inline">
                                 <div class="form-group" style="width: 100%;">
-                                    <label class="label1" for="txtUserIdUpdate">UserId</label>
+                                    <label class="label1" for="txtUserIdUpdate">User Name</label>
                                     <input id="txtUserIdUpdate" class="form-control" type="text" />
                                     <label class="label1" for="txtPasswordUpdate">Password</label>
                                     <input id="txtPasswordUpdate" class="form-control" type="text" />
@@ -101,7 +101,7 @@
                                 </div>
                                 <div class="form-group" style="width: 100%; margin-top: 1%;">
                                     <label class="label1" for="txtMobileNoUpdate">MobileNo</label>
-                                    <input id="txtMobileNoUpdate" class="form-control" type="text" />
+                                    <input id="txtMobileNoUpdate" class="form-control integer" type="text" />
                                     <label class="label1" for="txtDesignationUpdate">Designation</label>
                                     <input id="txtDesignationUpdate" class="form-control" type="text" />
                                     <label class="label1" for="txtEmailIdUpdate">Email Id</label>
@@ -145,43 +145,67 @@
     <link href="../css/DataTable/dataTablesbootstrap.css" rel="stylesheet" />
     <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-
+    <script src="../js/validations.js"></script>
     <script type="text/javascript">
 
         $(document).ready(function () {
+
+            $('.integer').keyup(function (e) {
+                if (/\D/g.test(this.value)) {
+                    this.value = this.value.replace(/\D/g, '');
+                }
+            });
+
+            //validation starts
+            checkNameEmpty("#txtUserId");
+            checkNameEmpty("#txtPassword");
+            checkNameEmpty("#txtName");
+            checkvalidPhoneNumber("#txtMobileNo");
+            checkNameEmpty("#txtDesignation");
+            checkValidEmail("#txtEmailId");
+            checkComment("#txtAddress");
+            //validation ends
             var data = {};
             GetUserLoginDetails(0, "");
             GetRoleDetails(0, "");
             $("#btnSave").click(function () {
-                if ($('#txtUserId').val().trim() != '' && $('#txtPassword').val().trim() != '' && $('#txtName').val().trim() != '' && $('#txtMobileNo').val().trim() != '' && $('#txtEmailId').val().trim() != '' && $('#txtDesignation').val().trim() != '' && $('#ddlRoleId').val().trim() != '') {
-                    data.Mode = 1;
-                    data.LoginId = 0;
-                    data.UserId = $('#txtUserId').val();
-                    data.Password = $('#txtPassword').val();
-                    data.Name = $('#txtName').val();
-                    data.MobileNo = $('#txtMobileNo').val();
-                    data.Designation = $('#txtEmailId').val();
-                    data.EmailId = $('#txtDesignation').val();
-                    data.RoleId = $('#ddlRoleId').val();
-                    data.Address = $('#txtAddress').val();
-                    InsertUpdateUserLoginDetails(data);
+                var validations = Validation_Register("#txtUserId", "#txtPassword", "#txtName", "#txtMobileNo", "#txtDesignation", "#txtEmailId", "#txtAddress", "#ddlRoleId");
+                if (validations) {
                 }
+                else {
+                    return false;
+                }
+                data.Mode = 1;
+                data.LoginId = 0;
+                data.UserId = $('#txtUserId').val();
+                data.Password = $('#txtPassword').val();
+                data.Name = $('#txtName').val();
+                data.MobileNo = $('#txtMobileNo').val();
+                data.Designation = $('#txtEmailId').val();
+                data.EmailId = $('#txtDesignation').val();
+                data.RoleId = $('#ddlRoleId').val();
+                data.Address = $('#txtAddress').val();
+                InsertUpdateUserLoginDetails(data);
             });
 
             $("#btnUpdate").click(function () {
-                if ($('#txtUserIdUpdate').val().trim() != '' && $('#txtPasswordUpdate').val().trim() != '' && $('#txtNameUpdate').val().trim() != '' && $('#txtMobileNoUpdate').val().trim() != '' && $('#txtEmailIdUpdate').val().trim() != '' && $('#txtDesignationUpdate').val().trim() != '' && $('#ddlRoleIdUpdate').val().trim() != '') {
-                    data.Mode = 2;
-                    data.LoginId = $('#hidLoginId').val();
-                    data.UserId = $('#txtUserIdUpdate').val();
-                    data.Password = $('#txtPasswordUpdate').val();
-                    data.Name = $('#txtNameUpdate').val();
-                    data.MobileNo = $('#txtMobileNoUpdate').val();
-                    data.Designation = $('#txtEmailIdUpdate').val();
-                    data.EmailId = $('#txtDesignationUpdate').val();
-                    data.RoleId = $('#ddlRoleIdUpdate').val();
-                    data.Address = $('#txtAddressUpdate').val();
-                    InsertUpdateUserLoginDetails(data);
+                var validations = Validation_Register("#txtUserIdUpdate", "#txtPasswordUpdate", "#txtNameUpdate", "#txtMobileNoUpdate", "#txtDesignationUpdate", "#txtEmailIdUpdate", "#txtAddressUpdate", "#ddlRoleIdUpdate");
+                if (validations) {
                 }
+                else {
+                    return false;
+                }
+                data.Mode = 2;
+                data.LoginId = $('#hidLoginId').val();
+                data.UserId = $('#txtUserIdUpdate').val();
+                data.Password = $('#txtPasswordUpdate').val();
+                data.Name = $('#txtNameUpdate').val();
+                data.MobileNo = $('#txtMobileNoUpdate').val();
+                data.Designation = $('#txtEmailIdUpdate').val();
+                data.EmailId = $('#txtDesignationUpdate').val();
+                data.RoleId = $('#ddlRoleIdUpdate').val();
+                data.Address = $('#txtAddressUpdate').val();
+                InsertUpdateUserLoginDetails(data);
             });
         });
 
@@ -359,6 +383,9 @@
                 }
             });
         }
+
+
+
     </script>
 
 </asp:Content>

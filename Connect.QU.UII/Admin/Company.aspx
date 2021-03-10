@@ -111,9 +111,9 @@
                                 <label class="label1" for="ddlCompanyLocation">Location </label>
                                 <select id="ddlCompanyLocation" name="ddlCompanyLocationName" class="selectBox" multiple="multiple"></select>
                                 <label class="label1" for="txtContactNo">Mobile</label>
-                                <input id="txtContactNo" class="form-control" type="text" />
+                                <input id="txtContactNo" class="form-control integer" type="text" />
                                 <label class="label1" for="txtZipCode">Zipcode</label>
-                                <input id="txtZipCode" class="form-control" type="text" />
+                                <input id="txtZipCode" class="form-control integer" type="text" />
                             </div>
 
                             <div class="form-group" style="width: 100%; margin-top: 1%;">
@@ -122,7 +122,7 @@
                                 <label class="label1" for="txtBankBranch">Bank Branch</label>
                                 <input id="txtBankBranch" class="form-control" type="text" />
                                 <label class="label1" for="txtAccountNo">Account No</label>
-                                <input id="txtAccountNo" class="form-control" type="text" />
+                                <input id="txtAccountNo" class="form-control integer" type="text" />
                             </div>
 
                             <div class="form-group" style="width: 100%; margin-top: 1%;">
@@ -131,7 +131,7 @@
                                 <label class="label1" for="txtPOC">POC</label>
                                 <input id="txtPOC" class="form-control" type="text" />
                                 <label class="label1" for="txtPOCNo">POC No</label>
-                                <input id="txtPOCNo" class="form-control" type="text" />
+                                <input id="txtPOCNo" class="form-control integer" type="text" />
                             </div>
 
                             <div class="form-group" style="width: 100%; margin-top: 1%;">
@@ -198,9 +198,9 @@
                                             <label class="label1" for="ddlCompanyLocationUpdate">Location </label>
                                             <select id="ddlCompanyLocationUpdate" name="ddlCompanyLocationUpdateName" class="selectBox" multiple="multiple"></select>
                                             <label class="label1" for="txtContactNoUpdate">Mobile</label>
-                                            <input id="txtContactNoUpdate" class="form-control" type="text" />
+                                            <input id="txtContactNoUpdate" class="form-control integer" type="text" />
                                             <label class="label1" for="txtZipCodeUpdate">Zipcode</label>
-                                            <input id="txtZipCodeUpdate" class="form-control" type="text" />
+                                            <input id="txtZipCodeUpdate" class="form-control integer" type="text" />
                                         </div>
 
                                         <div class="form-group" style="width: 100%; margin-top: 1%;">
@@ -209,7 +209,7 @@
                                             <label class="label1" for="txtBankBranchUpdate">Bank Branch</label>
                                             <input id="txtBankBranchUpdate" class="form-control" type="text" />
                                             <label class="label1" for="txtAccountNoUpdate">Account No</label>
-                                            <input id="txtAccountNoUpdate" class="form-control" type="text" />
+                                            <input id="txtAccountNoUpdate" class="form-control integer" type="text" />
                                         </div>
 
                                         <div class="form-group" style="width: 100%; margin-top: 1%;">
@@ -218,7 +218,7 @@
                                             <label class="label1" for="txtPOCUpdate">POC</label>
                                             <input id="txtPOCUpdate" class="form-control" type="text" />
                                             <label class="label1" for="txtPOCNoUpdate">POC No</label>
-                                            <input id="txtPOCNoUpdate" class="form-control" type="text" />
+                                            <input id="txtPOCNoUpdate" class="form-control integer" type="text" />
                                         </div>
 
                                         <div class="form-group" style="width: 100%; margin-top: 1%;">
@@ -253,10 +253,39 @@
     <link href="../css/DataTable/dataTablesbootstrap.css" rel="stylesheet" />
     <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-
+    <script src="../js/validations.js"></script>
     <script type="text/javascript">
 
         $(document).ready(function () {
+
+
+            $('.integer').keyup(function (e) {
+                if (/\D/g.test(this.value)) {
+                    this.value = this.value.replace(/\D/g, '');
+                }
+            });
+
+            //validation starts
+            checkNameEmpty("#txtCompanyName");
+            checkNameEmpty("#txtGSTIN");
+            checkNameEmpty("#txtPanNo"); 
+            checkNameEmpty("#txtServiceTaxNo");
+            checkValidEmail("#txtEmailId");
+            checkNameEmpty("#txtAddress");
+            //checkNameEmpty("#ddlCountry"); //ddl
+            //checkNameEmpty("#ddlState");
+            //checkNameEmpty("#ddlCity");
+            //checkNameEmpty("#ddlCompanyLocation");
+            checkvalidPhoneNumber("#txtContactNo"); 
+            checkNameEmpty("#txtZipCode"); ///integer
+            checkNameEmpty("#txtBankName");
+            checkNameEmpty("#txtBankBranch");
+            checkNameEmpty("#txtAccountNo"); //integer
+            checkNameEmpty("#txtBankIFSC");
+            checkNameEmpty("#txtPOC");
+            checkNameEmpty("#txtPOCNo"); //integer
+            //validation ends
+
             GetCountryDetails(0, "");
             GetLocationDetails(0, "");
             GetCompanyDetails(0, "");
@@ -308,6 +337,31 @@
                 }
             });
             $("#btnSave").click(function () {
+                var validations = Validation_Company(
+                "#txtCompanyName",
+                "#txtGSTIN",
+                "#txtPanNo",
+                "#txtServiceTaxNo",
+                "#txtEmailId",
+                "#txtAddress",
+                "#ddlCountry",
+                "#ddlState",
+                "#ddlCity",
+                "#ddlCompanyLocation",
+                "#txtContactNo",
+                "#txtZipCode",
+                "#txtBankName",
+                "#txtBankBranch",
+                "#txtAccountNo",
+                "#txtBankIFSC",
+                "#txtPOC",
+                "#txtPOCNo"
+                );
+                if (validations) {
+                }
+                else {
+                    return false;
+                }
                 data.Mode = "1";
                 data.CompanyId = 0;
                 data.CompanyName = $('#txtCompanyName').val();
@@ -333,6 +387,33 @@
                 SaveUpdateCompanyDetails(data);
             });
             $("#btnUpdate").click(function () {
+                var validations = Validation_Register(
+               "#txtCompanyNameUpdate",
+               "#txtGSTINNoUpdate",
+               "#txtPanNoUpdate",
+               "#txtServiceTaxNoUpdate",
+               "#txtEmailIDUpdate",
+               "#txtAddressUpdate",
+               "#ddlCountryUpdate",
+               "#ddlStateUpdate",
+               "#ddlCityUpdate",
+               "#ddlCompanyLocationUpdate",
+               "#txtContactNoUpdate",
+               "#txtZipCodeUpdate",
+               "#txtBankNameUpdate",
+               "#txtBankBranchUpdate",
+               "#txtAccountNoUpdate",
+               "#txtBankIFSCUpdate",
+               "#txtPOCUpdate",
+               "#txtPOCNoUpdate"
+               );
+                if (validations) {
+                }
+                else {
+                    return false;
+                }
+
+
                 data.Mode = "2";
                 data.CompanyId = $('#hidHotelId').val();
                 data.CompanyName = $('#txtCompanyNameUpdate').val();

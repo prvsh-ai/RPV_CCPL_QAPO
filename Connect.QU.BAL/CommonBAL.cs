@@ -11,6 +11,10 @@ namespace Connect.QU.BAL
 {
     public class CommonBAL
     {
+        public List<QU.Entities.Location> GetLocationDetails(int CompanyId)
+        {
+            return new CommonDAL().GetLocationDetails(CompanyId);
+        }
         public List<QU.Entities.CategoryDetails> GetCategoryDetails(int CategoryID, string CategoryName)
         {
             return new CommonDAL().GetCategoryDetails(CategoryID, CategoryName);

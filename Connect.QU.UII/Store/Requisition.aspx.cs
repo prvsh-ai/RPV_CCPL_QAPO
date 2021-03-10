@@ -52,7 +52,7 @@ namespace Connect.QU.UII.Store
             Random RN = new Random();
             int x = RN.Next(10, 10000);
             cnt.TOCRequisitionId = RN.Next(10, 1000000);
-            cnt.RequisitionNumber = Convert.ToString("RQ" + cnt.QuotationId + "_" + x + "_" + DateTime.Now.Day);
+           // cnt.RequisitionNumber = Convert.ToString("RQ" + cnt.QuotationId + "_" + x + "_" + DateTime.Now.Day);
             cnt.UserId = HttpContext.Current.User.Identity.Name.ToString();
             return new QU.BAL.CommonBAL().SaveUpdateRequisitionDetails(cnt);
         }

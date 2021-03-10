@@ -86,7 +86,7 @@
                                 <label class="label1" for="ddlCategoryId">Category No</label>
                                 <select id="ddlCategoryId" name="ddlCategoryName" class="selectBox form-control"></select>
                                 <label class="label1" for="txtLastPrice">Last Price</label>
-                                <input id="txtLastPrice" class="form-control" type="text" />
+                                <input id="txtLastPrice" class="form-control integer" type="text" />
                             </div>
                             <div class="form-group" style="width: 100%; margin-top: 1%;">
                                 <label class="label1" for="ddlGstApplicable">Gst Applicable</label>
@@ -131,6 +131,11 @@
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
                                 </div>
+
+                                <label class="label1" for="txtInStockQuantity">Stock Quantity</label>
+                                <input id="txtInStockQuantity" class="form-control" type="text" />
+
+
                                 <label class="label1" for="chkApprove">Approve</label>
                                 <input type="checkbox" name="chkApprove" value="YES" id="chkApprove" />
                             </div>
@@ -144,7 +149,7 @@
                                     <label class="label1" for="txtName">Name</label>
                                     <input type="text" name="Monday" class="form-control" id="txtName" />
                                     <label class="label1" for="txtNumber">Number</label>
-                                    <input type="text" class="form-control" name="Monday" id="txtNumber" />
+                                    <input type="text" class="form-control integer" name="Monday" id="txtNumber" />
                                     <label class="label1" for="txtColor">Color</label>
                                     <input type="text" class="form-control" name="Monday" id="txtColor" />
                                     <label class="label1" for="txtSize">Size</label>
@@ -180,7 +185,7 @@
                                             <label class="label1" for="ddlCategoryIdUpdate">Category No</label>
                                             <select id="ddlCategoryIdUpdate" name="ddlCategoryName" class="selectBox form-control"></select>
                                             <label class="label1" for="txtLastPriceUpdate">Last Price</label>
-                                            <input id="txtLastPriceUpdate" class="form-control" type="text" />
+                                            <input id="txtLastPriceUpdate" class="form-control integer" type="text" />
                                         </div>
                                         <div class="form-group" style="width: 100%; margin-top: 1%;">
                                             <label class="label1" for="ddlGstApplicableUpdate">Gst Applicable</label>
@@ -225,6 +230,9 @@
                                                     <span class="glyphicon glyphicon-calendar"></span>
                                                 </span>
                                             </div>
+                                            <label class="label1" for="txtInStockQuantityUpdate">Stock Quantity</label>
+                                            <input id="txtInStockQuantityUpdate" class="form-control" type="text" />
+
                                             <label class="label1" for="chkApproveUpdate">Approve</label>
                                             <input type="checkbox" name="chkApprove" value="YES" id="chkApproveUpdate" />
                                         </div>
@@ -238,7 +246,7 @@
                                                 <label class="label1" for="txtNameUpdate">Name</label>
                                                 <input type="text" name="Monday" class="form-control" id="txtNameUpdate" />
                                                 <label class="label1" for="txtNumberUpdate">Number</label>
-                                                <input type="text" class="form-control" name="Monday" id="txtNumberUpdate" />
+                                                <input type="text" class="form-control integer" name="Monday" id="txtNumberUpdate" />
                                                 <label class="label1" for="txtColorUpdate">Color</label>
                                                 <input type="text" class="form-control" name="Monday" id="txtColorUpdate" />
                                                 <label class="label1" for="txtSizeUpdate">Size</label>
@@ -267,10 +275,30 @@
     <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 
+    <script src="../js/validations.js"></script>
 
     <script type="text/javascript">
 
         $(document).ready(function () {
+
+
+            //validation starts
+            $('.integer').keyup(function (e) {
+                if (/\D/g.test(this.value)) {
+                    this.value = this.value.replace(/\D/g, '');
+                }
+            });
+            checkNameEmpty("#txtItemName");
+            //checkNameEmpty("#ddlCategoryId"); //ddl
+            checkNameEmpty("#txtLastPrice"); //integer
+            //checkNameEmpty("#ddlGstApplicable"); //ddl
+            //checkValidEmail("#ddlGstRate"); //ddl
+            checkNameEmpty("#txtHsnCode");
+            checkNameEmpty("#txtEffectiveFrom");
+            checkNameEmpty("#txtEffectiveTo");
+            checkNameEmpty("#txtInStockQuantity");
+            //validation ends
+
 
             GetItemDetails(0, "");
 
@@ -333,6 +361,22 @@
             });
 
             $("#btnSave").click(function () {
+
+                var validations = Validation_Item(
+               "#txtItemName",
+               "#ddlCategoryId",
+               "#txtLastPrice",
+               "#ddlGstApplicable",
+               "#ddlGstRate",
+               "#txtEffectiveFrom",
+               "#txtEffectiveTo"
+               );
+                if (validations) {
+                }
+                else {
+                    return false;
+                }
+
                 data.Mode = 1;
                 data.ItemId = 0;
                 data.ItemName = $('#txtItemName').val();
@@ -353,11 +397,29 @@
                 data.Number = $('#txtNumber').val();
                 data.Color = $('#txtColor').val();
                 data.Size = $('#txtSize').val();
+                data.InStockQuantity = $('#txtInStockQuantity').val();
+                data.Approved = $('#chkApprove').prop("checked");
                 SaveUpdateItemDetails(
                   data);
             });
 
             $("#btnUpdate").click(function () {
+
+                var validations = Validation_Item(
+              "#txtItemNameUpdate",
+              "#ddlCategoryIdUpdate",
+              "#txtLastPriceUpdate",
+              "#ddlGstApplicableUpdate",
+              "#ddlGstRateUpdate",
+              "#txtEffectiveFromUpdate",
+              "#txtEffectiveToUpdate"
+              );
+                if (validations) {
+                }
+                else {
+                    return false;
+                }
+
                 data.Mode = 2;
                 data.ItemId = $('#hidHotelId').val();
                 data.ItemName = $('#txtItemNameUpdate').val();
@@ -378,6 +440,8 @@
                 data.Number = $('#txtNumberUpdate').val();
                 data.Color = $('#txtColorUpdate').val();
                 data.Size = $('#txtSizeUpdate').val();
+                data.InStockQuantity = $('#txtInStockQuantityUpdate').val();
+                data.Approved = $('#chkApproveUpdate').prop("checked");
                 SaveUpdateItemDetails(
                   data);
             });
@@ -570,7 +634,7 @@
                         element = element + '<td>' + getResult[i].HsnCode + '</td>';
                         element = element + '<td>' + getResult[i].SKU + '</td>';
                         element = element + '<td>' + getResult[i].PU + '</td>';
-                        element = element + '<td><a href="#"><span class="label label-warning" onclick="GetItemDetailsForUpdate(' + getResult[i].ItemId + ',\'' + getResult[i].ItemName + '\',' + getResult[i].CategoryId + ',\'' + getResult[i].CategoryName + '\',' + getResult[i].LastPrice + ',' + getResult[i].GstApplicable + ',' + getResult[i].GstRate + ',' + getResult[i].RadStock + ',' + getResult[i].RadService + ',\'' + getResult[i].SKU + '\',\'' + getResult[i].PU + '\',\'' + getResult[i].HsnCode + '\',\'' + getResult[i].EffectiveStartDate + '\',\'' + getResult[i].EffectiveEndDate + '\',\'' + getResult[i].Brand + '\',\'' + getResult[i].Type + '\',\'' + getResult[i].Name + '\',\'' + getResult[i].Number + '\',\'' + getResult[i].Color + '\',\'' + getResult[i].Size + '\'); return false;" data-toggle="modal" data-target="#CityModal"><i class="fa fa-file-text"  aria-hidden="true"></i> Edit </span></a></td>';
+                        element = element + '<td><a href="#"><span class="label label-warning" onclick="GetItemDetailsForUpdate(' + getResult[i].ItemId + ',\'' + getResult[i].ItemName + '\',' + getResult[i].CategoryId + ',\'' + getResult[i].CategoryName + '\',' + getResult[i].LastPrice + ',' + getResult[i].GstApplicable + ',' + getResult[i].GstRate + ',' + getResult[i].RadStock + ',' + getResult[i].RadService + ',\'' + getResult[i].SKU + '\',\'' + getResult[i].PU + '\',\'' + getResult[i].HsnCode + '\',\'' + getResult[i].EffectiveStartDate + '\',\'' + getResult[i].EffectiveEndDate + '\',\'' + getResult[i].Brand + '\',\'' + getResult[i].Type + '\',\'' + getResult[i].Name + '\',\'' + getResult[i].Number + '\',\'' + getResult[i].Color + '\',\'' + getResult[i].Size + '\',' + getResult[i].InStockQuantity + ',' + getResult[i].Approved + '); return false;" data-toggle="modal" data-target="#CityModal"><i class="fa fa-file-text"  aria-hidden="true"></i> Edit </span></a></td>';
                         element = element + '</tr>';
                     }
                     element = element + '</tbody>';
@@ -591,15 +655,21 @@
             });
         }
 
-        function GetItemDetailsForUpdate(ItemID, ItemName, CategoryId, CategoryName, LastPrice, GstApplicable, GstRate, RadStock, RadService, SKU, PU, HsnCode, EffectiveStartDate, EffectiveEndDate, Brand, Type, Name, Number, Color, Size) {
+        function GetItemDetailsForUpdate(ItemID, ItemName, CategoryId, CategoryName, LastPrice, GstApplicable, GstRate, RadStock, RadService, SKU, PU, HsnCode, EffectiveStartDate, EffectiveEndDate, Brand, Type, Name, Number, Color, Size, InStockQuantity, Approved) {
+
+
+            alert(RadStock);
+            alert(RadService);
+
+
             $('#hidHotelId').val(ItemID);
             $('#txtItemNameUpdate').val(ItemName);
             $('#ddlCategoryIdUpdate').val(CategoryId);
             $('#txtLastPriceUpdate').val(LastPrice);
             $('#ddlGstApplicableUpdate').val(GstApplicable);
             $('#ddlGstRateUpdate').val(GstRate);
-            $('#radStockUpdate').attr('checked', RadStock)
-            $('#radServiceUpdate').attr('checked', RadService)
+            $('#radStockUpdate').prop('checked', RadStock);
+            $('#radServiceUpdate').prop('checked', RadService);
             $('#txtEffectiveFromUpdate').val(GetProperDate(EffectiveStartDate));
             $('#txtEffectiveToUpdate').val(GetProperDate(EffectiveEndDate));
             $('#txtSKUUpdate').val(SKU);
@@ -611,6 +681,11 @@
             $('#txtNumberUpdate').val(Number);
             $('#txtColorUpdate').val(Color);
             $('#txtSizeUpdate').val(Size);
+            $('#txtInStockQuantityUpdate').val(InStockQuantity);
+            $('#chkApproveUpdate').prop('checked', Approved);
+
+
+
         }
 
         function SaveUpdateItemDetails(data) {

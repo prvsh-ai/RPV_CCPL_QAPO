@@ -170,6 +170,7 @@
             background: url(http://localhost:13314/images/loadingimage.png) 50% 50% no-repeat rgb(249,249,249);
         }
 
+
         /* When the body has the loading class, we turn
    the scrollbar off with overflow:hidden */
         body.loading {
@@ -181,6 +182,19 @@
             body.loading .modal {
                 display: block;
             }
+
+
+
+        .label1 {
+            display: inline-block;
+            max-width: 24%;
+            margin-bottom: 5px;
+            margin-top: 1%;
+            font-weight: 700;
+            width: 9%;
+            text-align: right;
+            margin-right: 1%;
+        }
     </style>
 
 </asp:Content>
@@ -197,32 +211,48 @@
                         <div class="form-inline">
                             <div class="form-group" style="width: 100%; margin-top: 1%;">
                                 <div class="row">
-                                    <div class="col-lg-7">
-                                        <label class="control-label" for="ddlQuotationName">REQUISITION NUMBER</label>
-                                        <select id="ddlQuotationId" name="ddlQuotationName" class="selectBox form-control"></select>
+                                    <div class="col-lg-4">
+                                        <label class="control-label" for="ddlQuotationName">QUOTATION NUMBER</label>
+                                        <select id="ddlQuotationId" style="width: 56%;" name="ddlQuotationName" class="selectBox form-control"></select>
                                     </div>
-                                    <div class="col-lg-5">
+                                    <div class="col-lg-4">
+                                        <label class="control-label" for="txtRequisitionNumber">REQUISITION NUMBER</label>
+                                        <input type="text" id="txtRequisitionNumber" class="form-control" />
+                                    </div>
+                                    <div class="col-lg-4">
                                         <label class="control-label" for="txtCode">REQUIRED BY</label>
                                         <input type="text" id="txtRequiredBy" class="form-control" />
                                     </div>
                                 </div>
+
+
+
+
+
                             </div>
                             <div class="form-group" style="width: 100%; margin-top: 1%;">
                                 <div class="row">
-                                    <div class="col-lg-7">
+                                    <div class="col-lg-4">
                                         <label class="control-label" for="txtRequisitionDate">REQUISITION DATE</label>
-                                        <div class='input-group date AppFormdatetimepicker' id='datetimepicker3'>
+                                        <div class='input-group date AppFormdatetimepicker' id='datetimepicker3' style="margin-left: 4%; width: 56%;">
                                             <input type='text' class="form-control" id="txtRequisitionDate" />
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-calendar"></span>
                                             </span>
                                         </div>
                                     </div>
-                                    <div class="col-lg-5">
+                                    <div class="col-lg-4">
+
                                         <label class="control-label" for="txtCode">APPROVED BY</label>
-                                        <input type="text" id="txtApprovedBy" class="form-control" />
+                                        <input type="text" id="txtApprovedBy" style="margin-left: 16%;" class="form-control" />
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <%--<label class="control-label" for="txtCode">APPROVED BY</label>
+                                        <input type="text" id="txtApprovedBy" class="form-control" />--%>
                                     </div>
                                 </div>
+
+
                             </div>
                             <div class="form-group" style="width: 100%; margin-top: 1%;">
                                 <div class="row">
@@ -270,15 +300,15 @@
                                                             <select id="ddlItem" name="ddlItemName" class="selectBox form-control hello"></select>
                                                         </td>
                                                         <td>
-                                                            <input type="text" id="txtRequiredQty" class="hello" /></td>
+                                                            <input type="text" id="txtRequiredQty" class="hello integer" /></td>
                                                         <td>
-                                                            <input type="text" id="txtInStockQty" class="hello" /></td>
+                                                            <input type="text" id="txtInStockQty" class="hello integer" /></td>
                                                         <td>
-                                                            <input type="text" id="txtPurchaseQty" class="hello" /></td>
+                                                            <input type="text" id="txtPurchaseQty" class="hello integer" /></td>
                                                         <td>
-                                                            <input type="text" id="txtRate" class="hello" /></td>
+                                                            <input type="text" id="txtRate" class="hello integer" /></td>
                                                         <td>
-                                                            <input type="text" id="txtAmount" class="hello" /></td>
+                                                            <input type="text" id="txtAmount" class="hello integer" /></td>
                                                         <td>
                                                             <select id="ddlBillAvailable" class="form-control" name="GstinNoType">
                                                                 <option value="1">YES</option>
@@ -293,6 +323,23 @@
                                             </table>
                                         </div>
                                     </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                            <label class="control-label" style="margin-left: 3%;" for="txtCode">GRAND TOTAL</label>
+                                            <input type="text" id="txtGrandTotal" style="margin-left: 5%;" class="form-control integer" />
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label class="control-label" for="txtCode">PREPARED BY</label>
+                                            <input type="text" id="txtPreparedBy" class="form-control" />
+                                        </div>
+
+                                    </div>
+
+
+
+
+
                                 </div>
                             </div>
                             <div class="form-group" style="margin-top: 1%; width: 100%;">
@@ -328,16 +375,46 @@
     <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 
+    <script src="../js/validations.js"></script>
+
     <script type="text/javascript">
 
-        $body = $("body");
+        //$body = $("body");
 
-        $(document).on({
-            ajaxStart: function () { $body.addClass("loading"); },
-            ajaxStop: function () { $body.removeClass("loading"); }
-        });
+        //$(document).on({
+        //    ajaxStart: function () { $body.addClass("loading"); },
+        //    ajaxStop: function () { $body.removeClass("loading"); }
+        //});
 
         $(document).ready(function () {
+
+            //validation starts
+            $('.integer').keyup(function (e) {
+                if (/\D/g.test(this.value)) {
+                    this.value = this.value.replace(/\D/g, '');
+                }
+            });
+            checkNameEmpty("#txtRequiredBy"); //integer
+            checkNameEmpty("#txtRequisitionDate");
+            checkNameEmpty("#txtApprovedBy");
+            checkNameEmpty("#txtRequisitionNumber");
+            checkNameEmpty("#txtPreparedBy");
+            //validation ends
+
+
+            //qty to rate = value without tax
+            $('#txtPurchaseQty,#txtRate,#txtAmount').change(function () {
+                var a = 1;
+                if ($('#txtPurchaseQty').val() != "") {
+                    a = parseInt($('#txtPurchaseQty').val());
+                }
+                var b = parseInt($('#txtRate').val());
+                var c = a * b;
+                $('#txtAmount').val(c);
+            });
+
+
+
 
             $("#btnUpdate").hide();
             $("#btnSave").show();
@@ -373,23 +450,53 @@
             });
 
             $("#btnSave").click(function () {
+                var validations = Validation_Requisition(
+                "#ddlQuotationId",
+                "#txtRequisitionDate",
+                "#txtRequiredBy",
+                "#txtApprovedBy",
+                "#txtRequisitionNumber",
+                "#txtPreparedBy");
+                if (validations) {
+                }
+                else {
+                    return false;
+                }
+
                 data.Mode = 1;
                 data.RequisitionId = 0;
                 data.QuotationId = parseInt($('#ddlQuotationId').val());
                 data.RequisitionDate = $('#txtRequisitionDate').val(); //$("#RequisitionDate option:selected").text();//
                 data.RequiredBy = $('#txtRequiredBy').val();
                 data.ApprovedBy = $('#txtApprovedBy').val();
+                data.RequisitionNumber = $('#txtRequisitionNumber').val();
+                data.PreparedBy = $('#txtPreparedBy').val();
                 SaveUpdateRequisitionDetails(data);
                 GetRequisitionDetails(0);
             });
 
             $("#btnUpdate").click(function () {
+                var validations = Validation_Requisition(
+                "#ddlQuotationId",
+                "#txtRequisitionDate",
+                "#txtRequiredBy",
+                "#txtApprovedBy",
+                 "#txtRequisitionNumber",
+                "#txtPreparedBy");
+                if (validations) {
+                }
+                else {
+                    return false;
+                }
+
                 data.Mode = 2;
                 data.RequisitionId = $('#hidHotelId').val();
                 data.QuotationId = $('#ddlQuotationId').val();
                 data.RequisitionDate = $('#txtRequisitionDate').val(); //$("#RequisitionDate option:selected").text();//
                 data.RequiredBy = $('#txtRequiredBy').val();
                 data.ApprovedBy = $('#txtApprovedBy').val();
+                data.RequisitionNumber = $('#txtRequisitionNumber').val();
+                data.PreparedBy = $('#txtPreparedBy').val();
                 SaveUpdateRequisitionDetails(data);
                 GetRequisitionDetails(0);
             });
@@ -397,6 +504,23 @@
             var ArrData = [];
 
             $("body").on("click", "#btnAdd", function () {
+
+                var validations = Validation_TOCRequisition(
+               "#ddlItem",
+               "#txtRequiredQty",
+               "#txtInStockQty",
+               "#txtPurchaseQty",
+               "#txtRate",
+               "#txtAmount",
+               "#txtPOItemNumber");
+                if (validations) {
+                }
+                else {
+                    return false;
+                }
+
+
+
                 $("#ddlQuotationId").prop('disabled', true);
                 var txtDescriptionOfGoods = $("#ddlItem option:selected").text();
                 var txtRequiredQty = $("#txtRequiredQty");
@@ -425,7 +549,7 @@
                 cell = $(row.insertCell(-1));
                 cell.html(txtPOItemNumber.val());
                 // funTotalAmount(txtTotalAmount1.val(), txtAmount.val());
-                // funRecalculateAfterAdding(txtTotalAmount1.val(), txtAmount.val());
+                funRecalculateAfterAdding(txtAmount.val());
                 cell = $(row.insertCell(-1));
                 var btnRemove = $("<input />");
                 btnRemove.attr("type", "button");
@@ -459,7 +583,9 @@
                     var len = getResult.length;
                     $("#ddlQuotationId").append('<option value="0">Select</option>');
                     for (var i = 0; i < len; i++) {
-                        $("#ddlQuotationId").append('<option value=' + getResult[i].QID + '>' + getResult[i].QNo + '</option>');
+                        if (getResult[i].Approved) {
+                            $("#ddlQuotationId").append('<option value=' + getResult[i].QID + '>' + getResult[i].QNo + '</option>');
+                        }
                     }
                 },
                 error: function (err) {
@@ -468,13 +594,32 @@
             });
         }
 
-        function funRecalculateAfterAdding(amount, tax) {
+        function funRecalculateAfterAdding(amount2) {
             var TotalAmount = 0;
-            if (!isNaN(amount)) {
-                TotalAmount = amount;
-            }
-        }
 
+            var amount = parseInt(amount2);
+
+            //if (!isNaN(amount)) {
+            //    TotalAmount = amount;
+            //}
+            if ($('#txtGrandTotal').val() != "") {
+                TotalAmount = parseInt($('#txtGrandTotal').val());
+            }
+            var AddedAmount = parseInt(amount);
+            var NewAmount = TotalAmount + AddedAmount;
+            $('#txtGrandTotal').val(NewAmount);
+
+        }
+        function funRecalculateAfterRemoving(amount) {
+
+            var TotalAmount = 0;
+            if ($('#txtGrandTotal').val() != "") {
+                TotalAmount = parseInt($('#txtGrandTotal').val());
+            }
+            var RemovedAmount = parseInt(amount);
+            var NewAmount = TotalAmount - RemovedAmount;
+            $('#txtGrandTotal').val(NewAmount);
+        }
         function GetRequisitionDetails(RequisitionId) {
             var element = "";
             var Counter = 1;
@@ -503,12 +648,12 @@
                     for (var i = 0; i < len; i++) {
                         element = element + '<tr>';
                         element = element + '<td>' + Counter++ + '</td>';
-                        element = element + '<td>' + getResult[i].RequisitionId + '</td>';
-                        element = element + '<td>' + getResult[i].QuotationId + '</td>';
+                        element = element + '<td>' + getResult[i].RequisitionNumber + '</td>';
+                        element = element + '<td>' + getResult[i].QuotationNumber + '</td>';
                         element = element + '<td>' + GetProperDate(getResult[i].RequisitionDate) + '</td>';
                         element = element + '<td>' + getResult[i].RequiredBy + '</td>';
                         element = element + '<td>' + getResult[i].ApprovedBy + '</td>';
-                        element = element + '<td><a href="#"><span class="label label-warning" onclick="GetRequisitionDetailsForUpdate(' + getResult[i].RequisitionId + ',' + getResult[i].QuotationId + ',\'' + GetProperDate(getResult[i].RequisitionDate) + '\',\'' + getResult[i].RequisitionNumber + '\',\'' + getResult[i].RequiredBy + '\',\'' + getResult[i].ApprovedBy + '\'); return false;" ><i class="fa fa-file-text"  aria-hidden="true"></i> Edit </span></a></td>';
+                        element = element + '<td><a href="#"><span class="label label-warning" onclick="GetRequisitionDetailsForUpdate(' + getResult[i].RequisitionId + ',' + getResult[i].QuotationId + ',\'' + GetProperDate(getResult[i].RequisitionDate) + '\',\'' + getResult[i].RequisitionNumber + '\',\'' + getResult[i].RequiredBy + '\',\'' + getResult[i].ApprovedBy + '\',\'' + getResult[i].PreparedBy + '\'); return false;" ><i class="fa fa-file-text"  aria-hidden="true"></i> Edit </span></a></td>';
                         element = element + '</tr>';
                     }
                     element = element + '</tbody>';
@@ -529,7 +674,7 @@
             });
         }
 
-        function ClearInputBoxValues(Mode) {
+        function ClearInputBoxValues() {
             $('input[type=text]').each(function () {
                 $(this).val('');
             });
@@ -582,7 +727,9 @@
                     $("#ddlItem").empty();
                     $("#ddlItem").append('<option value="0">Select</option>');
                     for (var i = 0; i < len; i++) {
-                        $("#ddlItem").append('<option value=' + getResult[i].ItemId + '>' + getResult[i].ItemName + '</option>');
+                        if (getResult[i].ItemName != undefined) {
+                            $("#ddlItem").append('<option value=' + getResult[i].ItemId + '>' + getResult[i].ItemName + '</option>');
+                        }
                     }
                 },
                 error: function (err) {
@@ -605,6 +752,8 @@
                     for (var i = 0; i < len; i++) {
                         $("#txtRequiredQty").val(getResult[i].Qty);
                         $("#txtRate").val(getResult[i].Rate);
+                        $("#txtInStockQty").val(getResult[i].InStockQuantity);
+
                     }
                 },
                 error: function (err) {
@@ -649,6 +798,8 @@
             btnRemove.attr("onclick", "Remove(this);");
             btnRemove.val("Remove");
             cell.append(btnRemove);
+
+            funRecalculateAfterAdding(Amount);
         }
 
         function SaveUpdateRequisitionDetails(data) {
@@ -686,7 +837,7 @@
                     var getResult = result.d;
                     if (getResult != "0") {
                         alert(getResult);
-                        ClearInputBoxValues(Mode);
+                        ClearInputBoxValues();
                     }
                     else {
                         alert("There is an Error");
@@ -709,21 +860,30 @@
                 return date;
             }
         }
-        function GetRequisitionDetailsForUpdate(RequisitionId, QuotationId, RequisitionDate, RequisitionNumber, RequiredBy, ApprovedBy) {
+
+        function GetRequisitionDetailsForUpdate(RequisitionId, QuotationId, RequisitionDate, RequisitionNumber, RequiredBy, ApprovedBy, PreparedBy) {
             GetTOCDetails(RequisitionId);
             $('#hidHotelId').val(RequisitionId);
             $('#ddlQuotationId').val(QuotationId),
             $('#txtRequisitionDate').val(RequisitionDate),
+            $('#txtRequisitionNumber').val(RequisitionNumber),
             $('#txtRequiredBy').val(RequiredBy),
-            $('#txtApprovedBy').val(ApprovedBy)
+            $('#txtApprovedBy').val(ApprovedBy),
+            $('#txtPreparedBy').val(PreparedBy)
+
             GetItemsDetails(QuotationId);
             $("#btnUpdate").show();
             $("#btnSave").hide();
+            $('#txtGrandTotal').val('');
+            $('#ddlQuotationId').prop('disabled', true);
         }
 
         function Remove(button) {
             var row = $(button).closest("TR");
             var name = $("TD", row).eq(0).html();
+
+            funRecalculateAfterRemoving(row[0].cells[5].innerText);
+
             if (confirm("Do you want to delete: " + name)) {
                 var table = $("#tblCustomers")[0];
                 table.deleteRow(row[0].rowIndex);

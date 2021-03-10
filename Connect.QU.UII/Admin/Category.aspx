@@ -178,9 +178,18 @@
     <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 
+     <script src="../js/validations.js"></script>
+
     <script type="text/javascript">
 
         $(document).ready(function () {
+
+            //validation starts
+            checkNameEmpty("#txtCategoryName");
+            checkNameEmpty("#txtCode"); //integer
+            checkNameEmpty("#txtDefaultSKU");
+            checkNameEmpty("#txtDefaultPU");
+            //validation ends
 
             var data = {};
             GetCategoryDetails(0, "");
@@ -203,6 +212,18 @@
             });
 
             $("#btnSave").click(function () {
+
+                var validations = Validation_Category(
+              "#txtCategoryName",
+              "#txtCode",
+              "#txtDefaultSKU",
+              "#txtDefaultPU");
+                if (validations) {
+                }
+                else {
+                    return false;
+                }
+
                 data.Mode = 1;
                 data.CategoryID = 0;
                 data.CategoryName = $('#txtCategoryName').val();
@@ -219,6 +240,16 @@
             });
 
             $("#btnUpdate").click(function () {
+                var validations = Validation_Category(
+                "#txtCategoryNameUpdate",
+                "#txtCodeUpdate",
+                "#txtDefaultSKUUpdate",
+                "#txtDefaultPUUpdate");
+                if (validations) {
+                }
+                else {
+                    return false;
+                }
                 data.Mode = 2;
                 data.CategoryID = $('#txtCategoryIdUpdate').val();
                 data.CategoryName = $('#txtCategoryNameUpdate').val();
