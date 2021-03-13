@@ -112,6 +112,7 @@
     <Content Include="scripts\jquery-3.1.1.min.map" />
     <Content Include="scripts\jquery-3.1.1.slim.min.map" />
     <None Include="Properties\PublishProfiles\Attendance.pubxml" />
+    <Content Include="Store\Execution.aspx" />
     <Content Include="Store\Store.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -626,6 +627,13 @@
     </Compile>
     <Compile Include="Redirect.aspx.designer.cs">
       <DependentUpon>Redirect.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Store\Execution.aspx.cs">
+      <DependentUpon>Execution.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Store\Execution.aspx.designer.cs">
+      <DependentUpon>Execution.aspx</DependentUpon>
     </Compile>
     <Compile Include="Store\Store.Master.cs">
       <DependentUpon>Store.Master</DependentUpon>

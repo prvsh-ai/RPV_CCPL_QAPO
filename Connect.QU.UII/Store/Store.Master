@@ -107,6 +107,7 @@
                         <li class="header">MAIN NAVIGATION</li>
                      <%--   <li><a href="CompanyDetails.aspx"><i class="fa fa-edit"></i><span>Company Details</span></a> </li>--%>
                         <li><a href="Requisition.aspx"><i class="fa fa-edit"></i><span>Requisition</span></a> </li>
+                          <li><a href="Execution.aspx"><i class="fa fa-edit"></i><span>Execution</span></a> </li>
                       <%--  <li><a href="../User/SUQuotation.aspx"><i class="fa fa-user"></i><span>Quotation</span> </a></li>
                                                 <li><a href="Attendance.aspx"><i class="fa fa-user"></i><span>Attendance</span> </a></li>--%>
                        

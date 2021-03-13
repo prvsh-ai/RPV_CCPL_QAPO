@@ -121,6 +121,17 @@ namespace Connect.QU.BAL
         {
             return new CommonDAL().GetTOCRequisitionDetails(RequisitionId, mode);
         }
-
+        public List<QU.Entities.TOCExecution> GetTOCExecutionDetails(int ExecutionId)
+        {
+            return new CommonDAL().GetTOCExecutionDetails(ExecutionId);
+        }
+        public string SaveUpdateExecutionDetails(Execution cnt)
+        {
+            return new CommonDAL().SaveUpdateExecutionDetails(cnt);
+        }
+        public List<QU.Entities.Execution> GetExecutionDetails(int ExecutionId)
+        {
+            return new CommonDAL().GetExecutionDetails(ExecutionId);
+        }
     }
 }

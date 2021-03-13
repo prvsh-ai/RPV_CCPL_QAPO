@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="CategoryDetails.cs" />
     <Compile Include="CompanyDetails.cs" />
+    <Compile Include="Execution.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Currency.cs" />
     <Compile Include="Dropdown.cs" />
