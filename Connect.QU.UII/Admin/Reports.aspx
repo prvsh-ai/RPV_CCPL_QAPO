@@ -146,7 +146,7 @@
                             <div class="form-inline AppX">
                                 <div class="form-row">
                                     <div class="col-lg-4">
-                                        <label class="control-label" style="margin-right: 6%">Project Name </label>
+                                        <label class="control-label" style="margin-right: 2%">Project Name </label>
                                         <b />
                                         <input type="text" id="txtProjectName" class="form-control" disabled />
                                     </div>
