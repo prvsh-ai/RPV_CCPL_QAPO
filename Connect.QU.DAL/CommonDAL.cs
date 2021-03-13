@@ -398,6 +398,7 @@ namespace Connect.QU.DAL
                     CL.Igst = sdr["Igst"].ToString();
                     CL.Amount = sdr["Amount"].ToString();
                     CL.TotalAmount1 = sdr["TotalAmount1"].ToString();
+                    CL.ItemId = Convert.ToInt32(sdr["ItemId"]);
 
                     Entities.Add(CL);
                 }
@@ -1265,6 +1266,7 @@ namespace Connect.QU.DAL
             DataTable dt = new DataTable();
             dt.Columns.Add("TransID");
             dt.Columns.Add("QID");
+            dt.Columns.Add("ItemId");
             dt.Columns.Add("ItemLineNumber");
             dt.Columns.Add("DescriptionOfGoods");
             dt.Columns.Add("Quantity");
@@ -1284,6 +1286,7 @@ namespace Connect.QU.DAL
                 DataRow dr = dt.NewRow();
                 dr["TransID"] = 0;
                 dr["QID"] = cnt.QID;
+                dr["ItemId"] = arr.ItemId;
                 dr["ItemLineNumber"] = arr.ItemLineNumber;
                 dr["DescriptionOfGoods"] = arr.DescriptionOfGoods;
                 dr["Quantity"] = arr.Qty;
@@ -1403,7 +1406,7 @@ namespace Connect.QU.DAL
                 dr["RequisitionId"] = cnt.RequisitionId;
                 dr["QuotationId"] = cnt.QuotationId;
                 dr["ItemId"] = arr.ItemId;
-                dr["ItemName"] = arr.ItemName;
+                dr["ItemName"] = arr.DescriptionOfGoods;//arr.ItemName;
                 dr["DescriptionOfGoods"] = arr.DescriptionOfGoods;
                 dr["RequiredQty"] = arr.RequiredQty;
                 dr["InStockQty"] = arr.InStockQty;
@@ -1552,6 +1555,10 @@ namespace Connect.QU.DAL
                     if (!string.IsNullOrEmpty(sdr["PU"].ToString()))
                     {
                         CL.Quantity = sdr["PU"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(Convert.ToInt32(sdr["ItemId"]).ToString()))
+                    {
+                        CL.ItemId = Convert.ToInt32(sdr["ItemId"]);
                     }
                     Entities.Add(CL);
                 }

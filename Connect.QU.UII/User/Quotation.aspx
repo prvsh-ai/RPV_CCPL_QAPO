@@ -696,6 +696,8 @@
 
                 var cell = $(row.insertCell(-1));
                 cell.html(txtDescriptionOfGoods);
+                cell.attr('data-itemid', $("#ddlItem option:selected").attr('data-itemid'));
+
                 cell = $(row.insertCell(-1));
                 cell.html(txtQty.val());
                 cell = $(row.insertCell(-1));
@@ -1025,6 +1027,7 @@
                 var TOC = {};
                 TOC.ItemLineNumber = row.find("TD").eq(0).html();
                 TOC.DescriptionOfGoods = row.find("TD").eq(1).html();
+                TOC.ItemId = row.find("TD").eq(1).attr('data-itemid');
                 TOC.Qty = row.find("TD").eq(2).html();
                 TOC.Hsn = row.find("TD").eq(3).html();
                 TOC.Rate = row.find("TD").eq(4).html();
@@ -1133,7 +1136,7 @@
             });
         }
 
-        function btnAddCall(ItemLineNumber, DescriptionOfGoods, Qty, Hsn, Rate, Value, Igst, Amount, TotalAmount1) {
+        function btnAddCall(ItemLineNumber, DescriptionOfGoods, Qty, Hsn, Rate, Value, Igst, Amount, TotalAmount1,ItemId) {
             //Reference the Name and Country TextBoxes.
 
             var itellinenumber = ItemLineNumber;
@@ -1154,32 +1157,35 @@
             //add cells
 
             cell.html(ItemLineNumber);
-            cell = $(row.insertCell(-1));
 
+            cell = $(row.insertCell(-1));
             cell.html(DescriptionOfGoods);
-            cell = $(row.insertCell(-1));
+            cell.attr('data-itemid', ItemId);
 
+
+            cell = $(row.insertCell(-1));
             cell.html(Qty);
-            cell = $(row.insertCell(-1));
 
+
+            cell = $(row.insertCell(-1));
             cell.html(Hsn);
-            cell = $(row.insertCell(-1));
 
+            cell = $(row.insertCell(-1));
             cell.html(Rate);
-            cell = $(row.insertCell(-1));
 
+            cell = $(row.insertCell(-1));
             cell.html(Value);
-            cell = $(row.insertCell(-1));
 
+            cell = $(row.insertCell(-1));
             cell.html(Igst);
-            cell = $(row.insertCell(-1));
 
+            cell = $(row.insertCell(-1));
             cell.html(Amount);
-            cell = $(row.insertCell(-1));
 
+            cell = $(row.insertCell(-1));
             cell.html(TotalAmount1);
-            cell = $(row.insertCell(-1));
 
+            cell = $(row.insertCell(-1));
             var btnRemove = $("<input />");
             btnRemove.attr("type", "button");
             btnRemove.attr("onclick", "Remove(this);");
@@ -1210,8 +1216,9 @@
                         var g = getResult[i].Igst;
                         var h = getResult[i].Amount;
                         var j = getResult[i].TotalAmount1;
+                        var k = getResult[i].ItemId;
 
-                        btnAddCall(a, b, c, d, e, f, g, h, j);
+                        btnAddCall(a, b, c, d, e, f, g, h, j,k);
                     }
                 },
                 error: function (err) {
@@ -1273,17 +1280,17 @@
         }
 
         function ClearInputBoxValues() {
-           // if (Mode == 1) {
-                $('input[type=text]').each(function () {
-                    $(this).val('');
-                });
-                $('select').each(function () {
-                    $(this).val('0');
-                });
-                $('#txtTermsAndConditions,#txtNotes1,#txtNotes2').val('');
-                $('#txtGstinNo').val("07AAACC4708J1ZS");
-                $('#ddlQuotationType').val("1");
-           // }
+            // if (Mode == 1) {
+            $('input[type=text]').each(function () {
+                $(this).val('');
+            });
+            $('select').each(function () {
+                $(this).val('0');
+            });
+            $('#txtTermsAndConditions,#txtNotes1,#txtNotes2').val('');
+            $('#txtGstinNo').val("07AAACC4708J1ZS");
+            $('#ddlQuotationType').val("1");
+            // }
         }
 
         var ones = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
@@ -1413,7 +1420,7 @@
                     for (var i = 0; i < len; i++) {
 
                         if (getResult[i].Approved) {
-                            $("#ddlItem").append('<option value=' + getResult[i].ItemId + '>' + getResult[i].ItemName + '</option>');
+                            $("#ddlItem").append('<option data-itemName=' + getResult[i].ItemName + ' data-itemId=' + getResult[i].ItemId + ' value=' + getResult[i].ItemId + '>' + getResult[i].ItemName + '</option>');
                         }
                     }
                 },

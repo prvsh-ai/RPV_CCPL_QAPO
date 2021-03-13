@@ -196,7 +196,7 @@
             margin-right: 1%;
         }
 
-          .paginate_button {
+        .paginate_button {
             margin-left: 1%;
         }
     </style>
@@ -228,11 +228,6 @@
                                         <input type="text" id="txtRequiredBy" class="form-control" />
                                     </div>
                                 </div>
-
-
-
-
-
                             </div>
                             <div class="form-group" style="width: 100%; margin-top: 1%;">
                                 <div class="row">
@@ -251,12 +246,8 @@
                                         <input type="text" id="txtApprovedBy" style="margin-left: 16%;" class="form-control" />
                                     </div>
                                     <div class="col-lg-4">
-                                        <%--<label class="control-label" for="txtCode">APPROVED BY</label>
-                                        <input type="text" id="txtApprovedBy" class="form-control" />--%>
                                     </div>
                                 </div>
-
-
                             </div>
                             <div class="form-group" style="width: 100%; margin-top: 1%;">
                                 <div class="row">
@@ -301,7 +292,7 @@
                                                 <tfoot>
                                                     <tr>
                                                         <td>
-                                                            <select id="ddlItem" name="ddlItemName" class="selectBox form-control hello"></select>
+                                                            <select id="ddlItem"  name="ddlItemName" class="selectBox form-control hello"></select>
                                                         </td>
                                                         <td>
                                                             <input type="text" id="txtRequiredQty" class="hello integer" /></td>
@@ -327,7 +318,6 @@
                                             </table>
                                         </div>
                                     </div>
-
                                     <div class="row">
                                         <div class="col-lg-8">
                                             <label class="control-label" style="margin-left: 3%;" for="txtCode">GRAND TOTAL</label>
@@ -337,13 +327,7 @@
                                             <label class="control-label" for="txtCode">PREPARED BY</label>
                                             <input type="text" id="txtPreparedBy" class="form-control" />
                                         </div>
-
                                     </div>
-
-
-
-
-
                                 </div>
                             </div>
                             <div class="form-group" style="margin-top: 1%; width: 100%;">
@@ -419,32 +403,12 @@
                         return false;
                     }
 
-
-
                     a = parseInt($('#txtPurchaseQty').val());
                 }
                 var b = parseInt($('#txtRate').val());
                 var c = a * b;
                 $('#txtAmount').val(c);
             });
-
-
-            //Purchased qty should not be greater then instockqty
-            //$('#txtPurchaseQty').change(function () {
-            //    if (parseFloat($("#txtPurchaseQty").val()) > $("#txtInStockQty").val()) {
-            //        //do something
-            //        alert('Purchase quantity can not be greater then In Stock Quantity');
-            //        $("#txtPurchaseQty").val(0);
-            //    }
-            //});
-
-
-
-          
-
-
-
-
 
             $("#btnUpdate").hide();
             $("#btnSave").show();
@@ -548,11 +512,11 @@
                 else {
                     return false;
                 }
-
-
-
                 $("#ddlQuotationId").prop('disabled', true);
                 var txtDescriptionOfGoods = $("#ddlItem option:selected").text();
+
+
+
                 var txtRequiredQty = $("#txtRequiredQty");
                 var txtInStockQty = $("#txtInStockQty");
                 var txtPurchaseQty = $("#txtPurchaseQty");
@@ -564,6 +528,8 @@
                 var row = tBody.insertRow(-1);
                 var cell = $(row.insertCell(-1));
                 cell.html(txtDescriptionOfGoods);
+                cell.attr('data-itemid', $("#ddlItem option:selected").attr('data-itemid'));
+
                 cell = $(row.insertCell(-1));
                 cell.html(txtRequiredQty.val());
                 cell = $(row.insertCell(-1));
@@ -734,7 +700,9 @@
                         var f = getResult[i].Amount;
                         var g = getResult[i].BillAvailable;
                         var h = getResult[i].POItemNo;
-                        btnAddCall(a, b, c, d, e, f, g, h);
+                        var j = getResult[i].ItemId;
+
+                        btnAddCall(a, b, c, d, e, f, g, h,j);
                     }
                 },
                 error: function (err) {
@@ -758,7 +726,7 @@
                     $("#ddlItem").append('<option value="0">Select</option>');
                     for (var i = 0; i < len; i++) {
                         if (getResult[i].ItemName != undefined) {
-                            $("#ddlItem").append('<option value=' + getResult[i].ItemId + '>' + getResult[i].ItemName + '</option>');
+                            $("#ddlItem").append('<option data-itemName=' + getResult[i].ItemName + ' data-itemId=' + getResult[i].ItemId + ' value=' + getResult[i].ItemId + '>' + getResult[i].ItemName + '</option>');
                         }
                     }
                 },
@@ -792,7 +760,7 @@
             });
         }
 
-        function btnAddCall(DescriptionOfGoods, RequiredQty, InStockQty, PurchaseQty, Rate, Amount, BillAvailable, POItemNo) {
+        function btnAddCall(DescriptionOfGoods, RequiredQty, InStockQty, PurchaseQty, Rate, Amount, BillAvailable, POItemNo,ItemId) {
             var txtDescriptionOfGoods = DescriptionOfGoods;
             var txtRequiredQty = RequiredQty;
             var txtInStockQty = InStockQty;
@@ -808,20 +776,29 @@
             var row = tBody.insertRow(-1);
             var cell = $(row.insertCell(-1));
             cell.html(DescriptionOfGoods);
+            cell.attr('data-itemid', ItemId);
+
             cell = $(row.insertCell(-1));
             cell.html(txtRequiredQty);
+
             cell = $(row.insertCell(-1));
             cell.html(txtInStockQty);
+
             cell = $(row.insertCell(-1));
             cell.html(txtPurchasedQty);
+
             cell = $(row.insertCell(-1));
             cell.html(txtRate);
+
             cell = $(row.insertCell(-1));
             cell.html(txtAmount);
+
             cell = $(row.insertCell(-1));
             cell.html(txtBillAvailable);
+
             cell = $(row.insertCell(-1));
             cell.html(txtPOItemNo);
+
             cell = $(row.insertCell(-1));
             var btnRemove = $("<input />");
             btnRemove.attr("type", "button");
@@ -834,11 +811,13 @@
 
         function SaveUpdateRequisitionDetails(data) {
             var tocArr = new Array();
+            debugger;
             $("#tblCustomers TBODY TR").each(function () {
                 var row = $(this);
                 var TOCRequisition = {};
                 if ((row.find("TD").eq(0).html()) != "") {
                     TOCRequisition.DescriptionOfGoods = row.find("TD").eq(0).html();
+                    TOCRequisition.ItemId = row.find("TD").eq(0).attr('data-itemid');
                     TOCRequisition.RequiredQty = parseInt(row.find("TD").eq(1).html());
                     TOCRequisition.InStockQty = parseInt(row.find("TD").eq(2).html());
                     TOCRequisition.PurchaseQty = parseInt(row.find("TD").eq(3).html());
@@ -856,6 +835,9 @@
             });
 
             data.TableOfContent = tocArr;
+
+           
+            //pravesh
 
             $.ajax({
                 contentType: "application/json; charset=utf-8",

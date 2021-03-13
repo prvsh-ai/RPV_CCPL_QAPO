@@ -12,13 +12,11 @@
     });
 }
 
-
 //regex to validate email
 function validateEmail(email) {
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
 }
-
 
 // validation for email input using validateEmail Function
 function checkValidEmail(emailInputID) {
@@ -36,7 +34,6 @@ function checkValidEmail(emailInputID) {
 
 }
 
-
 // regex to validate phone
 function validatePhone(inputtxt) {
 
@@ -52,7 +49,6 @@ function validatePhone(inputtxt) {
         return false;
     }
 }
-
 
 // validation for phone input using validatePhone Function
 function checkvalidPhoneNumber(phoneInputID) {
@@ -70,7 +66,6 @@ function checkvalidPhoneNumber(phoneInputID) {
     });
 }
 
-
 function checkComment(commentID) {
     $(commentID).blur(function () {
 
@@ -85,7 +80,7 @@ function checkComment(commentID) {
     });
 }
 
-
+//User
 function Validation_Register(userid, password, name, mobileno, designation, emailid, address, roleid) {
 
     if ($(userid).val() == '') {
@@ -160,7 +155,7 @@ function Validation_Register(userid, password, name, mobileno, designation, emai
     return true;
 }
 
-//company
+//Company
 function Validation_Company(companyname, gstin, panno, servicetaxno, emailid, address, country, state, city, companylocation, contactno, zipcode, bankname, bankbranch, bankaccount, bankifsc, poc, pocno) {
 
     if ($(companyname).val() == '') {
@@ -502,7 +497,7 @@ function Validation_TOCRequisition(itemname, requiredqty, instockqty, purchaseqt
 }
 
 //Quotation
-function Validation_Quotation(projectname, financialyear, quotationdate, ddlcompanyid, placeofsupply, taxableamount, totalwords, grandtotal, termsandconditions, signaturedate,currencyid,locationid) {
+function Validation_Quotation(projectname, financialyear, quotationdate, ddlcompanyid, placeofsupply, taxableamount, totalwords, grandtotal, termsandconditions, signaturedate, currencyid, locationid) {
 
     if ($(projectname).val() == '') {
         $(projectname).css('border', '1px solid red');
