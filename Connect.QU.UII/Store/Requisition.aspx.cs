@@ -72,7 +72,8 @@ namespace Connect.QU.UII.Store
         [WebMethod]
         public static List<QU.Entities.TOCRequisition> GetTOCRequisitionDetails(int RequisitionId)
         {
-            return new QU.BAL.CommonBAL().GetTOCRequisitionDetails(RequisitionId);
+            return new QU.BAL.CommonBAL().GetTOCRequisitionDetails(RequisitionId,1);
+
         }
 
         [WebMethod]

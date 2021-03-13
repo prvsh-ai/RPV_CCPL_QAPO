@@ -195,6 +195,10 @@
             text-align: right;
             margin-right: 1%;
         }
+
+          .paginate_button {
+            margin-left: 1%;
+        }
     </style>
 
 </asp:Content>

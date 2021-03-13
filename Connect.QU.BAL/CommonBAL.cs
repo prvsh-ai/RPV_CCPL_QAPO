@@ -47,10 +47,10 @@ namespace Connect.QU.BAL
         {
             return new CommonDAL().GetTOCDetails(QID);
         }
-        public List<QU.Entities.TOCRequisition> GetTOCRequisitionDetails(int RequisitionId)
-        {
-            return new CommonDAL().GetTOCRequisitionDetails(RequisitionId);
-        }
+        //public List<QU.Entities.TOCRequisition> GetTOCRequisitionDetails(int RequisitionId)
+        //{
+        //    return new CommonDAL().GetTOCRequisitionDetails(RequisitionId);
+        //}
         public List<QU.Entities.TOC> GetQuotationItemDetails(int QID)
         {
             return new CommonDAL().GetQuotationItemDetails(QID);
@@ -115,5 +115,12 @@ namespace Connect.QU.BAL
         {
             return new CommonDAL().SaveUpdateRequisitionDetails(cnt);
         }
+
+        //abhishek's fun
+        public List<QU.Entities.TOCRequisition> GetTOCRequisitionDetails(int RequisitionId, int mode)
+        {
+            return new CommonDAL().GetTOCRequisitionDetails(RequisitionId, mode);
+        }
+
     }
 }

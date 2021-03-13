@@ -40,6 +40,9 @@ namespace Connect.QU.Entities
         public int ItemId { get; set; }
         public string ItemName { get; set; }
 
+        //add
+        public string Quantity { get; set; }
+
     }
 
 }
