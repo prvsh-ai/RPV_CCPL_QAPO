@@ -588,8 +588,9 @@
                     var len = getResult.length;
                     $("#ddlQuotationId").append('<option value="0">Select</option>');
                     for (var i = 0; i < len; i++) {
-                        if (getResult[i].Approved) {
-                            $("#ddlQuotationId").append('<option value=' + getResult[i].QID + '>' + getResult[i].QNo + '</option>');
+                       // if (getResult[i].Approved) {
+                        if (getResult[i].Approved && !(getResult[i].IsRequisition)) {
+                        $("#ddlQuotationId").append('<option value=' + getResult[i].QID + '>' + getResult[i].QNo + '</option>');
                         }
                     }
                 },
