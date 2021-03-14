@@ -276,7 +276,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
+                                                   <%-- <tr>
                                                         <td></td>
                                                         <td></td>
                                                         <td></td>
@@ -286,13 +286,15 @@
                                                         <td></td>
                                                         <td></td>
                                                         <td>
-                                                            <input type="button" value="Remove" onclick="Remove(this)" /></td>
-                                                    </tr>
+                                                            <input type="button" value="Remove" onclick="Remove(this)" />
+
+                                                        </td>
+                                                    </tr>--%>
                                                 </tbody>
                                                 <tfoot>
                                                     <tr>
                                                         <td>
-                                                            <select id="ddlItem"  name="ddlItemName" class="selectBox form-control hello"></select>
+                                                            <select id="ddlItem" name="ddlItemName" class="selectBox form-control hello"></select>
                                                         </td>
                                                         <td>
                                                             <input type="text" id="txtRequiredQty" class="hello integer" /></td>
@@ -373,7 +375,7 @@
         //    ajaxStart: function () { $body.addClass("loading"); },
         //    ajaxStop: function () { $body.removeClass("loading"); }
         //});
-
+        var dropArr = new Array();
         $(document).ready(function () {
 
             //validation starts
@@ -499,6 +501,8 @@
 
             $("body").on("click", "#btnAdd", function () {
 
+                dropArr.push($("#ddlItem option:selected").attr('data-itemid'));
+
                 var validations = Validation_TOCRequisition(
                "#ddlItem",
                "#txtRequiredQty",
@@ -552,6 +556,7 @@
                 btnRemove.attr("onclick", "Remove(this);");
                 btnRemove.val("Remove");
                 cell.append(btnRemove);
+
                 $("#ddlItem option").prop("selected", false);
                 txtRequiredQty.val("");
                 txtInStockQty.val("");
@@ -560,6 +565,10 @@
                 txtAmount.val("");
                 $("#ddlBillAvailable option").prop('selected', false);
                 txtPOItemNumber.val("");
+
+                //calling dropdown item
+                GetItemsDetails($('#ddlQuotationId').val());
+
             });
 
             var index = $('#ddlItem').get(0).selectedIndex;
@@ -702,7 +711,7 @@
                         var h = getResult[i].POItemNo;
                         var j = getResult[i].ItemId;
 
-                        btnAddCall(a, b, c, d, e, f, g, h,j);
+                        btnAddCall(a, b, c, d, e, f, g, h, j);
                     }
                 },
                 error: function (err) {
@@ -711,6 +720,7 @@
             });
         }
 
+        //need to call at btnadd , removebtn, and on edit btnAddCall
         function GetItemsDetails(QID) {
             var element = "";
             $.ajax({
@@ -725,8 +735,19 @@
                     $("#ddlItem").empty();
                     $("#ddlItem").append('<option value="0">Select</option>');
                     for (var i = 0; i < len; i++) {
+
+                        debugger;
                         if (getResult[i].ItemName != undefined) {
-                            $("#ddlItem").append('<option data-itemName=' + getResult[i].ItemName + ' data-itemId=' + getResult[i].ItemId + ' value=' + getResult[i].ItemId + '>' + getResult[i].ItemName + '</option>');
+
+
+                            var x = jQuery.inArray(getResult[i].ItemId.toString(), dropArr);
+
+
+                            if (x == (-1)) {
+                                $("#ddlItem").append('<option data-itemName=' + getResult[i].ItemName + ' data-itemId=' + getResult[i].ItemId + ' value=' + getResult[i].ItemId + '>' + getResult[i].ItemName + '</option>');
+                            }
+
+                           
                         }
                     }
                 },
@@ -760,7 +781,10 @@
             });
         }
 
-        function btnAddCall(DescriptionOfGoods, RequiredQty, InStockQty, PurchaseQty, Rate, Amount, BillAvailable, POItemNo,ItemId) {
+        function btnAddCall(DescriptionOfGoods, RequiredQty, InStockQty, PurchaseQty, Rate, Amount, BillAvailable, POItemNo, ItemId) {
+
+            dropArr.push(ItemId);
+
             var txtDescriptionOfGoods = DescriptionOfGoods;
             var txtRequiredQty = RequiredQty;
             var txtInStockQty = InStockQty;
@@ -836,7 +860,7 @@
 
             data.TableOfContent = tocArr;
 
-           
+
             //pravesh
 
             $.ajax({
@@ -891,14 +915,28 @@
         }
 
         function Remove(button) {
+
+           
+
             var row = $(button).closest("TR");
             var name = $("TD", row).eq(0).html();
 
             funRecalculateAfterRemoving(row[0].cells[5].innerText);
 
+            var x = row[0].cells[0].getAttribute('data-itemid');
+            // alert(x);
+
+
             if (confirm("Do you want to delete: " + name)) {
+
+                dropArr.splice($.inArray((x), dropArr), 1);
+                alert(dropArr);
                 var table = $("#tblCustomers")[0];
+
                 table.deleteRow(row[0].rowIndex);
+
+                //calling dropdown item
+                GetItemsDetails($('#ddlQuotationId').val());
             }
         };
 

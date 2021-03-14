@@ -16,7 +16,14 @@ namespace Connect.QU.UII.Store
            // UserName = ((_User)(Session["objUser"])).obj_txn_Login.UserName;
             try
             {
-                UserName = ((_User)(Session["objUser"])).obj_txn_Login.UserName;
+                if (((_User)(Session["objUser"])) != null)
+                {
+                    UserName = ((_User)(Session["objUser"])).obj_txn_Login.UserName;
+                }
+                else
+                {
+                    Response.Redirect("Login.aspx", false);
+                }
             }
             catch (Exception ex)
             {

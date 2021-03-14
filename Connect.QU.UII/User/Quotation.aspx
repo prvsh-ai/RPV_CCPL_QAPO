@@ -340,7 +340,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
+                                            <%--<tr>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
@@ -352,7 +352,7 @@
                                                 <td></td>
                                                 <td>
                                                     <input type="button" value="Remove" onclick="Remove(this)" /></td>
-                                            </tr>
+                                            </tr>--%>
                                         </tbody>
                                         <tfoot>
                                             <tr>
@@ -523,6 +523,7 @@
 
 
         // debugger;
+        var dropArr = new Array();
         $(document).ready(function () {
 
             $('.integer').keyup(function (e) {
@@ -662,8 +663,7 @@
             };
 
             $("body").on("click", "#btnAdd", function () {
-
-
+                dropArr.push($("#ddlItem option:selected").attr('data-itemid'));
                 CounterSno = CounterSno + 10;
                 var validations = Validation_TOCQuotation(
              "#ddlItem",
@@ -729,6 +729,9 @@
                 txtIgst.val("");
                 txtAmount.val("");
                 txtTotalAmount1.val("");
+
+                //calling dropdown item
+                GetItemDetails(0, "");
             });
 
             GetCurrencyDetails(0, "");
@@ -984,15 +987,21 @@
         }
 
         function Remove(button) {
+            debugger;
             //Determine the reference of the Row using the Button.
             var row = $(button).closest("TR");
             // alert("recalculate fun called" + row[0].cells[7].innerText);
             funRecalculateAfterRemoving(row[0].cells[7].innerText, row[0].cells[6].innerText);
+            var x = row[0].cells[1].getAttribute('data-itemid');
             var name = $("TD", row).eq(0).html();
             if (confirm("Do you want to delete: " + name)) {
+
+                dropArr.splice($.inArray((x), dropArr), 1);
                 var table = $("#tblCustomers")[0];
                 //Delete the Table row using it's Index.
                 table.deleteRow(row[0].rowIndex);
+                //calling dropdown item
+                GetItemDetails(0, "");
             }
         };
 
@@ -1136,8 +1145,9 @@
             });
         }
 
-        function btnAddCall(ItemLineNumber, DescriptionOfGoods, Qty, Hsn, Rate, Value, Igst, Amount, TotalAmount1,ItemId) {
+        function btnAddCall(ItemLineNumber, DescriptionOfGoods, Qty, Hsn, Rate, Value, Igst, Amount, TotalAmount1, ItemId) {
             //Reference the Name and Country TextBoxes.
+            dropArr.push(ItemId);
 
             var itellinenumber = ItemLineNumber;
             var txtDescriptionOfGoods = DescriptionOfGoods;//$("#txtDescriptionOfGoods");
@@ -1218,7 +1228,7 @@
                         var j = getResult[i].TotalAmount1;
                         var k = getResult[i].ItemId;
 
-                        btnAddCall(a, b, c, d, e, f, g, h, j,k);
+                        btnAddCall(a, b, c, d, e, f, g, h, j, k);
                     }
                 },
                 error: function (err) {
@@ -1420,7 +1430,12 @@
                     for (var i = 0; i < len; i++) {
 
                         if (getResult[i].Approved) {
-                            $("#ddlItem").append('<option data-itemName=' + getResult[i].ItemName + ' data-itemId=' + getResult[i].ItemId + ' value=' + getResult[i].ItemId + '>' + getResult[i].ItemName + '</option>');
+                            var x = jQuery.inArray(getResult[i].ItemId.toString(), dropArr);
+                            if (x == (-1)) {
+                                $("#ddlItem").append('<option data-itemName=' + getResult[i].ItemName + ' data-itemId=' + getResult[i].ItemId + ' value=' + getResult[i].ItemId + '>' + getResult[i].ItemName + '</option>');
+                            }
+
+                            //$("#ddlItem").append('<option data-itemName=' + getResult[i].ItemName + ' data-itemId=' + getResult[i].ItemId + ' value=' + getResult[i].ItemId + '>' + getResult[i].ItemName + '</option>');
                         }
                     }
                 },
