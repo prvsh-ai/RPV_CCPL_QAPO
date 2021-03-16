@@ -1238,6 +1238,7 @@
         }
 
         function GetQuotationDetailsForUpdate(QID, QType, QNo, QDate, ProjectName, FinantialYear, QToCompanyName, QToGSTINNo, QToContactPerson, QToAddress, PaymentTerms, ValidityOfQuote, PlaceOfSupply, TotalAmountDigit, TotalAmountWords, TaxableAmount, Freight, BankName, BranchName, BankBranchIFSC, BankAccNo, TermsAndCondition, Note1, Note2, SignatureDate, CurrencyId, LocationId, QToCompanyId) {
+            $("#tblCustomers").load("Quotation.aspx #tblCustomers");
             GetCurrencyDetails(0, "");
             GetCompanyDetails(0, "");
             GetCompanyLocations(QToCompanyId);
@@ -1291,6 +1292,7 @@
 
         function ClearInputBoxValues() {
             // if (Mode == 1) {
+            $("#tblCustomers").load("Quotation.aspx #tblCustomers");
             $('input[type=text]').each(function () {
                 $(this).val('');
             });

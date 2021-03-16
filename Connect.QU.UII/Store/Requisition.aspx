@@ -167,7 +167,7 @@
             height: 100%;
             width: 100%;
             /*background: rgba( 255, 255, 255, .8 ) url('../images/loadingimage.png') 50% 50% no-repeat;*/
-            background: url(http://localhost:13314/images/loadingimage.png) 50% 50% no-repeat rgb(249,249,249);
+            background: url('../images/loadingimage.png') 50% 50% no-repeat rgb(249,249,249);
         }
 
 
@@ -199,6 +199,45 @@
         .paginate_button {
             margin-left: 1%;
         }
+
+
+        /*spinner starts*/
+        #overlay {
+            position: fixed;
+            top: 0;
+            z-index: 100;
+            width: 100%;
+            height: 100%;
+            display: none;
+            background: rgba(0,0,0,0.6);
+        }
+
+        .cv-spinner {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px #ddd solid;
+            border-top: 4px #2e93e6 solid;
+            border-radius: 50%;
+            animation: sp-anime 0.8s infinite linear;
+        }
+
+        @keyframes sp-anime {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .is-hide {
+            display: none;
+        }
+        /*spinner ends*/
     </style>
 
 </asp:Content>
@@ -276,7 +315,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                   <%-- <tr>
+                                                    <%-- <tr>
                                                         <td></td>
                                                         <td></td>
                                                         <td></td>
@@ -352,8 +391,13 @@
         </div>
         <input id="hidHotelId" type="hidden" />
         <div class="modal"></div>
+      
     </div>
-
+      <div id="overlay">
+            <div class="cv-spinner">
+                <span class="spinner"></span>
+            </div>
+        </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
@@ -369,12 +413,17 @@
 
     <script type="text/javascript">
 
-        //$body = $("body");
+        $body = $("body");
 
-        //$(document).on({
-        //    ajaxStart: function () { $body.addClass("loading"); },
-        //    ajaxStop: function () { $body.removeClass("loading"); }
-        //});
+        $(document).on({
+            ajaxStart: function () { $("#overlay").fadeIn(300);; },
+            ajaxStop: function () {
+                setTimeout(function () {
+                    $("#overlay").fadeOut(300);
+                }, 200);
+            }
+        });
+
         var dropArr = new Array();
         $(document).ready(function () {
 
@@ -588,9 +637,9 @@
                     var len = getResult.length;
                     $("#ddlQuotationId").append('<option value="0">Select</option>');
                     for (var i = 0; i < len; i++) {
-                       // if (getResult[i].Approved) {
+                        // if (getResult[i].Approved) {
                         if (getResult[i].Approved && !(getResult[i].IsRequisition)) {
-                        $("#ddlQuotationId").append('<option value=' + getResult[i].QID + '>' + getResult[i].QNo + '</option>');
+                            $("#ddlQuotationId").append('<option value=' + getResult[i].QID + '>' + getResult[i].QNo + '</option>');
                         }
                     }
                 },
@@ -681,6 +730,7 @@
         }
 
         function ClearInputBoxValues() {
+            $("#tblCustomers").load("Requisition.aspx #tblCustomers");
             $('input[type=text]').each(function () {
                 $(this).val('');
             });
@@ -748,7 +798,7 @@
                                 $("#ddlItem").append('<option data-itemName=' + getResult[i].ItemName + ' data-itemId=' + getResult[i].ItemId + ' value=' + getResult[i].ItemId + '>' + getResult[i].ItemName + '</option>');
                             }
 
-                           
+
                         }
                     }
                 },
@@ -899,6 +949,7 @@
         }
 
         function GetRequisitionDetailsForUpdate(RequisitionId, QuotationId, RequisitionDate, RequisitionNumber, RequiredBy, ApprovedBy, PreparedBy) {
+            $("#tblCustomers").load("Quotation.aspx #tblCustomers");
             GetTOCDetails(RequisitionId);
             $('#hidHotelId').val(RequisitionId);
             $('#ddlQuotationId').val(QuotationId),
@@ -917,7 +968,7 @@
 
         function Remove(button) {
 
-           
+
 
             var row = $(button).closest("TR");
             var name = $("TD", row).eq(0).html();
