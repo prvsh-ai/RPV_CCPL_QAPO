@@ -60,7 +60,6 @@ namespace Connect.QU.DAL
 
             return Entities;
         }
-
         public List<QU.Entities.Requisition> GetRequisitionDetails(int RequisitionId)
         {
             List<Entities.Requisition> Entities = new List<Entities.Requisition>();
@@ -281,7 +280,7 @@ namespace Connect.QU.DAL
                     Entities.Add(CL);
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 throw;
             }
@@ -361,7 +360,7 @@ namespace Connect.QU.DAL
                     Entities.Add(CL);
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 throw;
             }
@@ -405,7 +404,7 @@ namespace Connect.QU.DAL
                     Entities.Add(CL);
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 throw;
             }
@@ -416,52 +415,6 @@ namespace Connect.QU.DAL
 
             return Entities;
         }
-
-
-        //public List<QU.Entities.TOCRequisition> GetTOCRequisitionDetails(int Requisitionid)
-        //{
-        //    List<Entities.TOCRequisition> Entities = new List<Entities.TOCRequisition>();
-        //    Entities.TOCRequisition CL = null;
-        //    try
-        //    {
-        //        myCon = myDBConectionDAL.AssignConnection();
-        //        myCmd = new SqlCommand("spRetTOCRequisition", myCon);
-        //        myCmd.CommandType = CommandType.StoredProcedure;
-        //        if (Requisitionid != 0)
-        //        {
-        //            myCmd.Parameters.AddWithValue("@Requisitionid", Requisitionid);
-        //        }
-
-        //        myDBConectionDAL.OpenConnection();
-        //        SqlDataReader sdr = myCmd.ExecuteReader();
-        //        while (sdr.Read())
-        //        {
-        //            CL = new Entities.TOCRequisition();
-        //            CL.DescriptionOfGoods = sdr["DescriptionOfGoods"].ToString();
-        //            CL.RequiredQty = Convert.ToInt32(sdr["RequiredQty"]);
-        //            CL.InStockQty = Convert.ToInt32(sdr["InStockQty"]);
-        //            CL.PurchaseQty = Convert.ToInt32(sdr["PurchaseQty"]);
-        //            CL.Rate = Convert.ToInt32(sdr["Rate"]);
-        //            CL.BillAvailable = Convert.ToBoolean(sdr["BillAvailable"]);
-        //            CL.Amount = Convert.ToInt32(sdr["Amount"]);
-        //            CL.POItemNo = sdr["POItemNo"].ToString();
-        //            Entities.Add(CL);
-        //        }
-        //    }
-        //    catch
-        //    {
-        //        throw;
-        //    }
-        //    finally
-        //    {
-        //        myDBConectionDAL.CloseConnection();
-        //    }
-
-        //    return Entities;
-        //}
-
-
-
         public List<QU.Entities.CategoryDetails> GetCategoryDetails(int CategoryID, string CategoryName)
         {
             List<Entities.CategoryDetails> Entities = new List<Entities.CategoryDetails>();
@@ -1013,6 +966,236 @@ namespace Connect.QU.DAL
 
             return Entities;
         }
+        public List<QU.Entities.TOCRequisition> GetTOCRequisitionDetails(int Requisitionid, int mode)
+        {
+            List<Entities.TOCRequisition> Entities = new List<Entities.TOCRequisition>();
+            Entities.TOCRequisition CL = null;
+            try
+            {
+                myCon = myDBConectionDAL.AssignConnection();
+                myCmd = new SqlCommand("spRetTOCRequisition", myCon);
+                myCmd.CommandType = CommandType.StoredProcedure;
+                if (Requisitionid != 0)
+                {
+                    myCmd.Parameters.AddWithValue("@Requisitionid", Requisitionid);
+                    myCmd.Parameters.AddWithValue("@Mode", mode);
+                }
+
+
+                myDBConectionDAL.OpenConnection();
+                SqlDataReader sdr = myCmd.ExecuteReader();
+                while (sdr.Read())
+                {
+                    CL = new Entities.TOCRequisition();
+                    if (!string.IsNullOrEmpty(sdr["DescriptionOfGoods"].ToString()))
+                    {
+                        CL.DescriptionOfGoods = sdr["DescriptionOfGoods"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(Convert.ToInt32(sdr["RequiredQty"]).ToString()))
+                    {
+                        CL.RequiredQty = Convert.ToInt32(sdr["RequiredQty"]);
+                    }
+                    if (!string.IsNullOrEmpty(Convert.ToInt32(sdr["InStockQty"]).ToString()))
+                    {
+                        CL.InStockQty = Convert.ToInt32(sdr["InStockQty"]);
+                    }
+                    if (!string.IsNullOrEmpty(Convert.ToInt32(sdr["PurchaseQty"]).ToString()))
+                    {
+                        CL.PurchaseQty = Convert.ToInt32(sdr["PurchaseQty"]);
+                    }
+                    if (!string.IsNullOrEmpty(Convert.ToInt32(sdr["Rate"]).ToString()))
+                    {
+                        CL.Rate = Convert.ToInt32(sdr["Rate"]);
+                    }
+                    if (!string.IsNullOrEmpty(Convert.ToBoolean(sdr["BillAvailable"]).ToString()))
+                    {
+                        CL.BillAvailable = Convert.ToBoolean(sdr["BillAvailable"]);
+                    }
+                    if (!string.IsNullOrEmpty(Convert.ToInt32(sdr["Amount"]).ToString()))
+                    {
+                        CL.Amount = Convert.ToInt32(sdr["Amount"]);
+                    }
+                    if (!string.IsNullOrEmpty(sdr["POItemNo"].ToString()))
+                    {
+                        CL.POItemNo = sdr["POItemNo"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["PU"].ToString()))
+                    {
+                        CL.Quantity = sdr["PU"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(Convert.ToInt32(sdr["ItemId"]).ToString()))
+                    {
+                        CL.ItemId = Convert.ToInt32(sdr["ItemId"]);
+                    }
+                    Entities.Add(CL);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                myDBConectionDAL.CloseConnection();
+            }
+
+            return Entities;
+        }
+        public List<QU.Entities.TOCExecution> GetTOCExecutionDetails(int ExecutionId)
+        {
+            List<Entities.TOCExecution> Entities = new List<Entities.TOCExecution>();
+            Entities.TOCExecution CL = null;
+            try
+            {
+                myCon = myDBConectionDAL.AssignConnection();
+                myCmd = new SqlCommand("spRetTOCExecution", myCon);
+                myCmd.CommandType = CommandType.StoredProcedure;
+                if (ExecutionId != 0)
+                {
+                    myCmd.Parameters.AddWithValue("@ExecutionId", ExecutionId);
+
+                }
+                myDBConectionDAL.OpenConnection();
+                SqlDataReader sdr = myCmd.ExecuteReader();
+                while (sdr.Read())
+                {
+                    CL = new Entities.TOCExecution();
+                    if (!string.IsNullOrEmpty(sdr["ItemDescription"].ToString()))
+                    {
+                        CL.ItemDescription = sdr["ItemDescription"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["Unit"].ToString()))
+                    {
+                        CL.Unit = sdr["Unit"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["UnitPrice"].ToString()))
+                    {
+                        CL.UnitPrice = sdr["UnitPrice"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["Value"].ToString()))
+                    {
+                        CL.Value = sdr["Value"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["TotalBilledQuantity"].ToString()))
+                    {
+                        CL.TotalBilledQuantity = sdr["TotalBilledQuantity"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["TotalBilledValue"].ToString()))
+                    {
+                        CL.TotalBilledValue = sdr["TotalBilledValue"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["BalanceQuantity"].ToString()))
+                    {
+                        CL.BalanceQuantity = sdr["BalanceQuantity"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["BalanceValue"].ToString()))
+                    {
+                        CL.BalanceValue = sdr["BalanceValue"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["BilledQuantity"].ToString()))
+                    {
+                        CL.BilledQuantity = sdr["BilledQuantity"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["BilledValue"].ToString()))
+                    {
+                        CL.BilledValue = sdr["BilledValue"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["Quantity"].ToString()))
+                    {
+                        CL.Quantity = sdr["Quantity"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["ItemId"].ToString()))
+                    {
+                        CL.ItemId = Convert.ToInt32(sdr["ItemId"]);
+                    }
+                    Entities.Add(CL);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                myDBConectionDAL.CloseConnection();
+            }
+
+            return Entities;
+        }
+        public List<QU.Entities.Execution> GetExecutionDetails(int ExecutionId)
+        {
+            List<Entities.Execution> Entities = new List<Entities.Execution>();
+            Entities.Execution CL = null;
+            try
+            {
+                myCon = myDBConectionDAL.AssignConnection();
+                myCmd = new SqlCommand("spRetExecutionnDetails", myCon);
+                myCmd.CommandType = CommandType.StoredProcedure;
+                if (ExecutionId != 0)
+                {
+                    myCmd.Parameters.AddWithValue("@ExecutionId", ExecutionId);
+                }
+
+                myDBConectionDAL.OpenConnection();
+                SqlDataReader sdr = myCmd.ExecuteReader();
+                while (sdr.Read())
+                {
+                    CL = new Entities.Execution();
+                    CL.ExecutionID = Convert.ToInt32(sdr["ExecutionId"]);
+                    CL.DocumentNumber = sdr["DocumentNumber"].ToString();
+
+                    CL.Division = sdr["Division"].ToString();
+                    CL.VersionNember = sdr["VersionNember"].ToString();
+                    CL.SupplierName = sdr["SupplierName"].ToString();
+                    CL.CreatedDate = Convert.ToDateTime(sdr["CreatedDate"]);
+                    CL.CreatedBy = sdr["CreatedBy"].ToString();
+                    CL.QuotationId = Convert.ToInt32(sdr["QuotationId"]);
+
+                    Entities.Add(CL);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                myDBConectionDAL.CloseConnection();
+            }
+
+            return Entities;
+        }
+        public string InsertApprovalData(bool chkVal, int QID, string UserId)
+        {
+            string Result = null;
+            try
+            {
+                myCon = myDBConectionDAL.AssignConnection();
+                myCmd = new SqlCommand("UpdateApprovalRecord", myCon);
+                myCmd.CommandType = CommandType.StoredProcedure;
+                myCmd.Parameters.AddWithValue("@chkVal", chkVal);
+                myCmd.Parameters.AddWithValue("@QIDVal", QID);
+                myCmd.Parameters.AddWithValue("@ApprovedDate", DateTime.Now);
+                myCmd.Parameters.AddWithValue("@ApprovedBy", UserId);
+                myCmd.Parameters.Add("@Message", SqlDbType.VarChar, 100);
+                myCmd.Parameters["@Message"].Direction = ParameterDirection.Output;
+
+                myDBConectionDAL.OpenConnection();
+                myCmd.ExecuteNonQuery();
+
+                Result = myCmd.Parameters["@Message"].Value.ToString();
+            }
+            catch (Exception ex)
+            {
+                Result = "0";
+                throw;
+            }
+            finally
+            {
+                myDBConectionDAL.CloseConnection();
+            }
+            return Result;
+        }
         public string SaveUpdateCategoryDetails(CategoryDetails cnt)
         {
             string Result = null;
@@ -1246,7 +1429,7 @@ namespace Connect.QU.DAL
 
                 Result = myCmd.Parameters["@Message"].Value.ToString();
             }
-            catch
+            catch (Exception ex)
             {
                 Result = "0";
                 throw;
@@ -1468,195 +1651,6 @@ namespace Connect.QU.DAL
             }
             return Result;
         }
-        public string InsertApprovalData(bool chkVal, int QID, string UserId)
-        {
-            string Result = null;
-            try
-            {
-                myCon = myDBConectionDAL.AssignConnection();
-                myCmd = new SqlCommand("UpdateApprovalRecord", myCon);
-                myCmd.CommandType = CommandType.StoredProcedure;
-                myCmd.Parameters.AddWithValue("@chkVal", chkVal);
-                myCmd.Parameters.AddWithValue("@QIDVal", QID);
-                myCmd.Parameters.AddWithValue("@ApprovedDate", DateTime.Now);
-                myCmd.Parameters.AddWithValue("@ApprovedBy", UserId);
-                myCmd.Parameters.Add("@Message", SqlDbType.VarChar, 100);
-                myCmd.Parameters["@Message"].Direction = ParameterDirection.Output;
-
-                myDBConectionDAL.OpenConnection();
-                myCmd.ExecuteNonQuery();
-
-                Result = myCmd.Parameters["@Message"].Value.ToString();
-            }
-            catch (Exception ex)
-            {
-                Result = "0";
-                throw;
-            }
-            finally
-            {
-                myDBConectionDAL.CloseConnection();
-            }
-            return Result;
-        }
-
-        //abhishek's fun
-        public List<QU.Entities.TOCRequisition> GetTOCRequisitionDetails(int Requisitionid, int mode)
-        {
-            List<Entities.TOCRequisition> Entities = new List<Entities.TOCRequisition>();
-            Entities.TOCRequisition CL = null;
-            try
-            {
-                myCon = myDBConectionDAL.AssignConnection();
-                myCmd = new SqlCommand("spRetTOCRequisition", myCon);
-                myCmd.CommandType = CommandType.StoredProcedure;
-                if (Requisitionid != 0)
-                {
-                    myCmd.Parameters.AddWithValue("@Requisitionid", Requisitionid);
-                    myCmd.Parameters.AddWithValue("@Mode", mode);
-                }
-
-
-                myDBConectionDAL.OpenConnection();
-                SqlDataReader sdr = myCmd.ExecuteReader();
-                while (sdr.Read())
-                {
-                    CL = new Entities.TOCRequisition();
-                    if (!string.IsNullOrEmpty(sdr["DescriptionOfGoods"].ToString()))
-                    {
-                        CL.DescriptionOfGoods = sdr["DescriptionOfGoods"].ToString();
-                    }
-                    if (!string.IsNullOrEmpty(Convert.ToInt32(sdr["RequiredQty"]).ToString()))
-                    {
-                        CL.RequiredQty = Convert.ToInt32(sdr["RequiredQty"]);
-                    }
-                    if (!string.IsNullOrEmpty(Convert.ToInt32(sdr["InStockQty"]).ToString()))
-                    {
-                        CL.InStockQty = Convert.ToInt32(sdr["InStockQty"]);
-                    }
-                    if (!string.IsNullOrEmpty(Convert.ToInt32(sdr["PurchaseQty"]).ToString()))
-                    {
-                        CL.PurchaseQty = Convert.ToInt32(sdr["PurchaseQty"]);
-                    }
-                    if (!string.IsNullOrEmpty(Convert.ToInt32(sdr["Rate"]).ToString()))
-                    {
-                        CL.Rate = Convert.ToInt32(sdr["Rate"]);
-                    }
-                    if (!string.IsNullOrEmpty(Convert.ToBoolean(sdr["BillAvailable"]).ToString()))
-                    {
-                        CL.BillAvailable = Convert.ToBoolean(sdr["BillAvailable"]);
-                    }
-                    if (!string.IsNullOrEmpty(Convert.ToInt32(sdr["Amount"]).ToString()))
-                    {
-                        CL.Amount = Convert.ToInt32(sdr["Amount"]);
-                    }
-                    if (!string.IsNullOrEmpty(sdr["POItemNo"].ToString()))
-                    {
-                        CL.POItemNo = sdr["POItemNo"].ToString();
-                    }
-                    if (!string.IsNullOrEmpty(sdr["PU"].ToString()))
-                    {
-                        CL.Quantity = sdr["PU"].ToString();
-                    }
-                    if (!string.IsNullOrEmpty(Convert.ToInt32(sdr["ItemId"]).ToString()))
-                    {
-                        CL.ItemId = Convert.ToInt32(sdr["ItemId"]);
-                    }
-                    Entities.Add(CL);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-            finally
-            {
-                myDBConectionDAL.CloseConnection();
-            }
-
-            return Entities;
-        }
-        public List<QU.Entities.TOCExecution> GetTOCExecutionDetails(int ExecutionId)
-        {
-            List<Entities.TOCExecution> Entities = new List<Entities.TOCExecution>();
-            Entities.TOCExecution CL = null;
-            try
-            {
-                myCon = myDBConectionDAL.AssignConnection();
-                myCmd = new SqlCommand("spRetTOCExecution", myCon);
-                myCmd.CommandType = CommandType.StoredProcedure;
-                if (ExecutionId != 0)
-                {
-                    myCmd.Parameters.AddWithValue("@ExecutionId", ExecutionId);
-
-                }
-                myDBConectionDAL.OpenConnection();
-                SqlDataReader sdr = myCmd.ExecuteReader();
-                while (sdr.Read())
-                {
-                    CL = new Entities.TOCExecution();
-                    if (!string.IsNullOrEmpty(sdr["ItemDescription"].ToString()))
-                    {
-                        CL.ItemDescription = sdr["ItemDescription"].ToString();
-                    }
-                    if (!string.IsNullOrEmpty(sdr["Unit"].ToString()))
-                    {
-                        CL.Unit = sdr["Unit"].ToString();
-                    }
-                    if (!string.IsNullOrEmpty(sdr["UnitPrice"].ToString()))
-                    {
-                        CL.UnitPrice = sdr["UnitPrice"].ToString();
-                    }
-                    if (!string.IsNullOrEmpty(sdr["Value"].ToString()))
-                    {
-                        CL.Value = sdr["Value"].ToString();
-                    }
-                    if (!string.IsNullOrEmpty(sdr["TotalBilledQuantity"].ToString()))
-                    {
-                        CL.TotalBilledQuantity = sdr["TotalBilledQuantity"].ToString();
-                    }
-                    if (!string.IsNullOrEmpty(sdr["TotalBilledValue"].ToString()))
-                    {
-                        CL.TotalBilledValue = sdr["TotalBilledValue"].ToString();
-                    }
-                    if (!string.IsNullOrEmpty(sdr["BalanceQuantity"].ToString()))
-                    {
-                        CL.BalanceQuantity = sdr["BalanceQuantity"].ToString();
-                    }
-                    if (!string.IsNullOrEmpty(sdr["BalanceValue"].ToString()))
-                    {
-                        CL.BalanceValue = sdr["BalanceValue"].ToString();
-                    }
-                    if (!string.IsNullOrEmpty(sdr["BilledQuantity"].ToString()))
-                    {
-                        CL.BilledQuantity = sdr["BilledQuantity"].ToString();
-                    }
-                    if (!string.IsNullOrEmpty(sdr["BilledValue"].ToString()))
-                    {
-                        CL.BilledValue = sdr["BilledValue"].ToString();
-                    }
-                    if (!string.IsNullOrEmpty(sdr["Quantity"].ToString()))
-                    {
-                        CL.Quantity = sdr["Quantity"].ToString();
-                    }
-                    if (!string.IsNullOrEmpty(sdr["ItemId"].ToString()))
-                    {
-                        CL.ItemId =Convert.ToInt32(sdr["ItemId"]);
-                    }
-                    Entities.Add(CL);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-            finally
-            {
-                myDBConectionDAL.CloseConnection();
-            }
-
-            return Entities;
-        }
         public string SaveUpdateExecutionDetails(Execution cnt)
         {
 
@@ -1776,49 +1770,6 @@ namespace Connect.QU.DAL
                 myDBConectionDAL.CloseConnection();
             }
             return Message;
-        }
-        public List<QU.Entities.Execution> GetExecutionDetails(int ExecutionId)
-        {
-            List<Entities.Execution> Entities = new List<Entities.Execution>();
-            Entities.Execution CL = null;
-            try
-            {
-                myCon = myDBConectionDAL.AssignConnection();
-                myCmd = new SqlCommand("spRetExecutionnDetails", myCon);
-                myCmd.CommandType = CommandType.StoredProcedure;
-                if (ExecutionId != 0)
-                {
-                    myCmd.Parameters.AddWithValue("@ExecutionId", ExecutionId);
-                }
-
-                myDBConectionDAL.OpenConnection();
-                SqlDataReader sdr = myCmd.ExecuteReader();
-                while (sdr.Read())
-                {
-                    CL = new Entities.Execution();
-                    CL.ExecutionID = Convert.ToInt32(sdr["ExecutionId"]);
-                    CL.DocumentNumber = sdr["DocumentNumber"].ToString();
-
-                    CL.Division = sdr["Division"].ToString();
-                    CL.VersionNember = sdr["VersionNember"].ToString();
-                    CL.SupplierName = sdr["SupplierName"].ToString();
-                    CL.CreatedDate = Convert.ToDateTime(sdr["CreatedDate"]);
-                    CL.CreatedBy = sdr["CreatedBy"].ToString();
-                    CL.QuotationId = Convert.ToInt32(sdr["QuotationId"]);
-
-                    Entities.Add(CL);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-            finally
-            {
-                myDBConectionDAL.CloseConnection();
-            }
-
-            return Entities;
         }
     }
 }

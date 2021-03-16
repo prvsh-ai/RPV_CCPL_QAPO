@@ -158,33 +158,6 @@
             width: 100% !important;
         }
 
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            /*background: rgba( 255, 255, 255, .8 ) url('../images/loadingimage.png') 50% 50% no-repeat;*/
-            background: url('../images/loadingimage.png') 50% 50% no-repeat rgb(249,249,249);
-        }
-
-
-        /* When the body has the loading class, we turn
-   the scrollbar off with overflow:hidden */
-        body.loading {
-            overflow: hidden;
-        }
-
-            /* Anytime the body has the loading class, our
-   modal element will be visible */
-            body.loading .modal {
-                display: block;
-            }
-
-
-
         .label1 {
             display: inline-block;
             max-width: 24%;
@@ -390,7 +363,6 @@
         <div id="pageloaddiv" class="pageloaddiv" style="display: none;">
         </div>
         <input id="hidHotelId" type="hidden" />
-        <div class="modal"></div>
       
     </div>
       <div id="overlay">
@@ -418,6 +390,11 @@
         $(document).on({
             ajaxStart: function () { $("#overlay").fadeIn(300);; },
             ajaxStop: function () {
+                setTimeout(function () {
+                    $("#overlay").fadeOut(300);
+                }, 200);
+            },
+            ajaxError: function () {
                 setTimeout(function () {
                     $("#overlay").fadeOut(300);
                 }, 200);
