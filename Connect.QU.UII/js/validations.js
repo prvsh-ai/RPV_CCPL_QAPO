@@ -632,6 +632,51 @@ function Validation_TOCQuotation(itemname, qty, rate, amount, totalamount) {
     return true;
 }
 
+//Category
+function Validation_Execution(documentnumber, division, creationdate, versionnumber,suppliername,modificationdate) {
 
+    var optiondocumentnumber = $("option:selected", documentnumber);
+    var xdocumentnumber = (optiondocumentnumber[0].value != 0 && optiondocumentnumber.length > 0 && optiondocumentnumber[0].value != '')
+    if (xdocumentnumber) {
+        $(documentnumber).css('border', '1px solid green');
+    }
+    else {
+        $(documentnumber).css('border', '1px solid red');
+        alert("Please Select Document Number");
+        $(documentnumber).focus();
+        return false;
+    }
+    if ($(division).val() == '') {
+        $(division).css('border', '1px solid red');
+        alert("Please Enter Division");
+        $(division).focus();
+        return false;
+    }
+    if ($(creationdate).val() == '') {
+        $(creationdate).css('border', '1px solid red');
+        alert("Please Enter Creation Date");
+        $(creationdate).focus();
+        return false;
+    }
+    if ($(versionnumber).val() == '') {
+        $(versionnumber).css('border', '1px solid red');
+        alert("Please Enter Version Number");
+        $(versionnumber).focus();
+        return false;
+    }
+    if ($(suppliername).val() == '') {
+        $(suppliername).css('border', '1px solid red');
+        alert("Please Enter Supplier Name");
+        $(suppliername).focus();
+        return false;
+    }
+    if ($(modificationdate).val() == '') {
+        $(modificationdate).css('border', '1px solid red');
+        alert("Please Enter Modification Date");
+        $(modificationdate).focus();
+        return false;
+    }
+    return true;
+}
 
 

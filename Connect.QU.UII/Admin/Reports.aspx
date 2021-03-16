@@ -129,6 +129,9 @@
             <div class="form-group" id="dvdItems" style="margin-top: 2.5%; margin-left: 89%; width: 100%;">
                 <input id="btnGenerateItems" type="button" value="Generate Report" class="btn btn-success" />
             </div>
+             <div class="form-group" id="dvdExecution" style="margin-top: 2.5%; margin-left: 89%; width: 100%;">
+                <input id="btnGenerateExecution" type="button" value="Generate Report" class="btn btn-success" />
+            </div>
             <div class="container" id="QuotationTable" style="margin-top: 3%; margin-bottom: 1%; width: 100%;">
                 <table id="tblApprove" class="table table-striped cf table-bordered table-striped table-responsive dataTable" style="table-layout: fixed"></table>
             </div>
@@ -138,6 +141,9 @@
             <div class="container" id="RequisitionTable" style="margin-top: 3%; margin-bottom: 1%; width: 100%;">
                 <table id="RequisitionTableId" class="table table-striped cf table-bordered table-striped table-responsive dataTable" style="table-layout: fixed"></table>
             </div>
+            <div class="container" id="ExecutionTable" style="margin-top: 3%; margin-bottom: 1%; width: 100%;">
+                <table id="ExecutionTableId" class="table table-striped cf table-bordered table-striped table-responsive dataTable" style="table-layout: fixed"></table>
+            </div>
             <%--Quotation Details Start--%>
             <div class="AppFormBody" id="ApplicationForm">
                 <h4 class="text-center" id="QuotationApplicationText"><b>QUOTATION APPLICATION</b></h4>
@@ -146,7 +152,7 @@
                             <div class="form-inline AppX">
                                 <div class="form-row">
                                     <div class="col-lg-4">
-                                        <label class="control-label" style="margin-right: 2%">Project Name </label>
+                                        <label class="control-label" style="margin-right: 6.5%">Project Name </label>
                                         <b />
                                         <input type="text" id="txtProjectName" class="form-control" disabled />
                                     </div>
@@ -372,15 +378,19 @@
                 switch (currentTab) {
                     case 'Quotation':
                         GetQuotationDetails(0);
+                        $('#ApplicationForm').hide();
                         break;
                     case 'Items':
                         GetItemDetails(0, "");
+                        $('#ApplicationForm').hide();
                         break;
                     case 'Requisition':
                         GetRequisitionDetails(0);
+                        $('#ApplicationForm').hide();
                         break;
                     case 'Execution':
-                        GetItemDetails(0, "");
+                        GetExecutionDetails(0);
+                        $('#ApplicationForm').hide();
                         break;
                     default:
                 };
@@ -466,6 +476,8 @@
                     $('#dvdQuotation').show();
                     $('#dvdItems').hide();
                     $('#dvdrequisition').hide();
+                    $('#dvdExecution').hide();
+                    $('#ExecutionTable').hide();
                     $('#tblApprove').empty();
                     element += '<thead class="cf"><tr class="bgblue-Over">';
                     element += '<th>S NO</th>';
@@ -534,6 +546,8 @@
                     $('#RequisitionTable').show();
                     $('#dvdQuotation').hide();
                     $('#dvdItems').hide();
+                    $('#dvdExecution').hide();
+                    $('#ExecutionTable').hide();
                     $('#dvdrequisition').show();
                     element = element + '<thead class="cf"><tr class="bgblue-Over">';
                     element = element + '<th style="width:59px">S NO</th>';
@@ -712,7 +726,9 @@
                     $('#itemTable').show();
                     $('#QuotationTable').hide();
                     $('#RequisitionTable').hide();
+                    $('#ExecutionTable').hide();
                     $('#dvdQuotation').hide();
+                    $('#dvdExecution').hide();
                     $('#dvdrequisition').hide();
                     $('#dvdItems').show();
                     $('#tblApprove').empty();
@@ -754,6 +770,79 @@
                 }
             });
         }
+
+        function GetExecutionDetails(ExecutionId) {
+            var element = "";
+            var Counter = 1;
+            $.ajax({
+                contentType: "application/json; charset=utf-8",
+                url: "Reports.aspx/GetExecutionDetails",
+                type: "POST",
+                data: "{ExecutionId:" + ExecutionId + "}",
+                dataType: "json",
+                success: function (result) {
+                    var getResult = result.d;
+                    var len = getResult.length;
+                    $('#ExecutionTableId').empty();
+                    $('#itemTable').hide();
+                    $('#QuotationTable').hide();
+                    $('#RequisitionTable').hide();
+                    $('#ExecutionTable').show();
+                    $('#dvdQuotation').hide();
+                    $('#dvdExecution').show();
+                    $('#dvdrequisition').hide();
+                    $('#dvdItems').hide();
+                    $('#tblApprove').empty();
+                    //style = "width:59px"
+                    element = element + '<thead class="cf"><tr class="bgblue-Over">';
+                    element = element + '<th>Document Number</th>';
+                    element = element + '<th>Division</th>';
+                    element = element + '<th>Version Nember</th>';
+                    element = element + '<th>Supplier Name</th>';
+                    element = element + '<th>Creation Date</th>';
+                    element = element + '<th>Created By</th>';
+                    element = element + '</tr></thead><tbody>';
+
+                    if (len == 0) {
+                        element = element + '<tr><td colspan="3"><p class="text-center">No Execution Data Available</p></td></tr>'
+                    }
+
+                    for (var i = 0; i < len; i++) {
+                        //alert(i);
+
+                        //   alert(getResult[i].RequisitionDate);
+
+                        element = element + '<tr>';
+                        //element = element + '<td>' + Counter++ + '</td>';
+                        element = element + '<td>' + getResult[i].DocumentNumber + '</td>';
+                        element = element + '<td>' + getResult[i].Division + '</td>';
+                        element = element + '<td>' + getResult[i].VersionNember + '</td>';
+                        element = element + '<td>' + getResult[i].SupplierName + '</td>';
+                        element = element + '<td>' + GetProperDate(getResult[i].CreatedDate) + '</td>';
+                        element = element + '<td>' + getResult[i].CreatedBy + '</td>';
+                        element = element + '</tr>';
+                    }
+                    element = element + '</tbody>';
+                    $("#ExecutionTableId").append(element);
+                    $('#ExecutionTableId').dataTable({
+                        "paging": true,
+                        //"scrollY": 400,
+                        "destroy": true,
+                        "pagingType": "simple_numbers"[{
+                            style: 'Margin-left:1%'
+                        }]
+
+                    });
+                    $('.dataTables_length').addClass('bs-select');
+
+
+                },
+                error: function (err) {
+                    // alert(err.statusText)
+                }
+            });
+        }
+
 
     </script>
 </asp:Content>

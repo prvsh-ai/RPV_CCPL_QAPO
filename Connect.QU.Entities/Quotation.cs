@@ -77,6 +77,8 @@ namespace Connect.QU.Entities
         public int ModifiedBy { get; set; }
         public DateTime? ModifiedDate { get; set; }
         public bool? IsRequisition { get; set; }
+
+        public bool? IsExecution { get; set; }
         public int? CurrencyId { get; set; }
         public int? LocationId { get; set; }
 

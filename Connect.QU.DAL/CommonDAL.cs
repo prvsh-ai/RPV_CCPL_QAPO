@@ -172,6 +172,8 @@ namespace Connect.QU.DAL
                     CL.SignatureData = sdr["SignatureData"].ToString();
                     CL.Approved = Convert.ToBoolean(sdr["Approved"]);
                     CL.IsRequisition = Convert.ToBoolean(sdr["IsRequisition"]);
+                    CL.IsExecution = Convert.ToBoolean(sdr["IsExecution"]);
+
                     if (!string.IsNullOrEmpty(sdr["CurrencyId"].ToString()))
                     {
                         CL.CurrencyId = Convert.ToInt32(sdr["CurrencyId"]);
@@ -1633,6 +1635,14 @@ namespace Connect.QU.DAL
                     {
                         CL.BilledValue = sdr["BilledValue"].ToString();
                     }
+                    if (!string.IsNullOrEmpty(sdr["Quantity"].ToString()))
+                    {
+                        CL.Quantity = sdr["Quantity"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["ItemId"].ToString()))
+                    {
+                        CL.ItemId =Convert.ToInt32(sdr["ItemId"]);
+                    }
                     Entities.Add(CL);
                 }
             }
@@ -1651,6 +1661,7 @@ namespace Connect.QU.DAL
         {
 
             string Result = null;
+            string Message = "";
             myCon = myDBConectionDAL.AssignConnection();
 
             //adding TOC
@@ -1659,6 +1670,7 @@ namespace Connect.QU.DAL
             dt.Columns.Add("ExecutionId");
             dt.Columns.Add("QuotationId");
             dt.Columns.Add("ItemDescription");
+            dt.Columns.Add("Quantity");
             dt.Columns.Add("Unit");
             dt.Columns.Add("UnitPrice");
             dt.Columns.Add("Value");
@@ -1672,6 +1684,7 @@ namespace Connect.QU.DAL
             dt.Columns.Add("CreatedDate");
             dt.Columns.Add("UpdatedBy");
             dt.Columns.Add("UpdatedDate");
+            dt.Columns.Add("ItemId");
             foreach (var arr in cnt.ExecutionItem)
             {
 
@@ -1679,6 +1692,7 @@ namespace Connect.QU.DAL
                 dr["ExecutionId"] = cnt.ExecutionID;
                 dr["QuotationId"] = cnt.QuotationId;
                 dr["ItemDescription"] = arr.ItemDescription;
+                dr["Quantity"] = arr.Quantity;
                 dr["Unit"] = arr.Unit;
                 dr["UnitPrice"] = arr.UnitPrice;
                 dr["Value"] = arr.Value;
@@ -1690,14 +1704,23 @@ namespace Connect.QU.DAL
                 {
                     dr["BilledQuantity"] = arr.BilledQuantity.Remove(0, 1);
                 }
+                else
+                {
+                    dr["BilledQuantity"] = 0;
+                }
                 if (!string.IsNullOrEmpty(arr.BilledValue))
                 {
                     dr["BilledValue"] = arr.BilledValue.Remove(0, 1);
+                }
+                else
+                {
+                    dr["BilledValue"] = 0;
                 }
                 dr["CreatedBy"] = cnt.UserId;
                 dr["CreatedDate"] = DateTime.Now;
                 dr["UpdatedBy"] = cnt.UserId;
                 dr["UpdatedDate"] = DateTime.Now;
+                dr["ItemId"] = arr.ItemId;
                 dt.Rows.Add(dr);
             }
 
@@ -1707,11 +1730,12 @@ namespace Connect.QU.DAL
             {
                 myCmd = new SqlCommand("spExecutionDetailsInsertUpdate", myCon);
                 myCmd.CommandType = CommandType.StoredProcedure;
-                if (cnt.QuotationId != 0)
+                if (cnt.ExecutionID != 0)
                 {
-                    myCmd.Parameters.AddWithValue("@QuotationId", cnt.QuotationId);
+                    myCmd.Parameters.AddWithValue("@ExecutionId", cnt.ExecutionID);
                 }
                 myCmd.Parameters.AddWithValue("@Mode", cnt.Mode);
+                myCmd.Parameters.AddWithValue("@QuotationId", cnt.QuotationId);
                 myCmd.Parameters.AddWithValue("@DocumentNumber", cnt.DocumentNumber);
                 myCmd.Parameters.AddWithValue("@Division", cnt.Division);
                 myCmd.Parameters.AddWithValue("@VersionNumber", cnt.VersionNember);
@@ -1728,16 +1752,30 @@ namespace Connect.QU.DAL
                 myDBConectionDAL.OpenConnection();
                 myCmd.ExecuteNonQuery();
                 Result = myCmd.Parameters["@Message"].Value.ToString();
+
+                //update itemmaster table
+                myCmd = new SqlCommand("spInStockInsertUpdate", myCon);
+                myCmd.CommandType = CommandType.StoredProcedure;
+                if (Convert.ToInt32(Result) != 0)
+                {
+                    myCmd.Parameters.AddWithValue("@ExecutionId", Convert.ToInt32(Result));
+                    myCmd.Parameters.Add("@Message", SqlDbType.VarChar, 100);
+                    myCmd.Parameters["@Message"].Direction = ParameterDirection.Output;
+                    myCmd.ExecuteNonQuery();
+                }
+
+                Message = myCmd.Parameters["@Message"].Value.ToString();
+                //ends here
             }
             catch (Exception ex)
             {
-                Result = myCmd.Parameters["@Message"].Value.ToString();
+                Message = myCmd.Parameters["@Message"].Value.ToString();
             }
             finally
             {
                 myDBConectionDAL.CloseConnection();
             }
-            return Result;
+            return Message;
         }
         public List<QU.Entities.Execution> GetExecutionDetails(int ExecutionId)
         {
@@ -1765,6 +1803,7 @@ namespace Connect.QU.DAL
                     CL.VersionNember = sdr["VersionNember"].ToString();
                     CL.SupplierName = sdr["SupplierName"].ToString();
                     CL.CreatedDate = Convert.ToDateTime(sdr["CreatedDate"]);
+                    CL.CreatedBy = sdr["CreatedBy"].ToString();
                     CL.QuotationId = Convert.ToInt32(sdr["QuotationId"]);
 
                     Entities.Add(CL);

@@ -658,10 +658,10 @@
         function GetItemDetailsForUpdate(ItemID, ItemName, CategoryId, CategoryName, LastPrice, GstApplicable, GstRate, RadStock, RadService, SKU, PU, HsnCode, EffectiveStartDate, EffectiveEndDate, Brand, Type, Name, Number, Color, Size, InStockQuantity, Approved) {
 
 
-            alert(RadStock);
-            alert(RadService);
+            //alert(RadStock);
+            //alert(RadService);
 
-
+            debugger;
             $('#hidHotelId').val(ItemID);
             $('#txtItemNameUpdate').val(ItemName);
             $('#ddlCategoryIdUpdate').val(CategoryId);

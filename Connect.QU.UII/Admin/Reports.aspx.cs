@@ -37,6 +37,12 @@ namespace Connect.QU.UII.Admin
         }
 
         [WebMethod]
+        public static List<QU.Entities.Execution> GetExecutionDetails(int ExecutionId)
+        {
+            return new QU.BAL.CommonBAL().GetExecutionDetails(ExecutionId);
+        }
+
+        [WebMethod]
         public static string GenerateExcelForQuotation()
         {
             DataTable dt = new DataTable();

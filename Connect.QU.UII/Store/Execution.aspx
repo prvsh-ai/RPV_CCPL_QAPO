@@ -196,6 +196,43 @@
         .paginate_button {
             margin-left: 1%;
         }
+        /*Spinner Style Start*/
+        #overlay {
+            position: fixed;
+            top: 0;
+            z-index: 100;
+            width: 100%;
+            height: 100%;
+            display: none;
+            background: rgba(0,0,0,0.6);
+        }
+
+        .cv-spinner {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px #ddd solid;
+            border-top: 4px #2e93e6 solid;
+            border-radius: 50%;
+            animation: sp-anime 0.8s infinite linear;
+        }
+
+        @keyframes sp-anime {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .is-hide {
+            display: none;
+        }
+        /*Spinner Style End*/
     </style>
 
 </asp:Content>
@@ -293,6 +330,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th style="width: 112px">Item Description</th>
+                                                        <th style="width: 90px">Quantity</th>
                                                         <th style="width: 90px">Unit</th>
                                                         <th style="width: 100px">Unit Price</th>
                                                         <th style="width: 90px">Value</th>
@@ -304,7 +342,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
+                                                    <%-- <tr>
 
                                                         <td></td>
                                                         <td></td>
@@ -314,28 +352,33 @@
                                                         <td></td>
                                                         <td></td>
                                                         <td></td>
-                                                    </tr>
-
+                                                        <td></td>
+                                                    </tr>--%>
                                                 </tbody>
                                                 <tfoot>
                                                     <tr>
 
                                                         <td>
-                                                            <input type="text" id="txtItemDescription" disabled /></td>
+                                                            <input type="text" id="txtItemDescription" disabled style="width: 100%;" /></td>
                                                         <td>
-                                                            <input type="text" id="txtQuantity" disabled /></td>
+                                                            <input type="text" id="txtQuantity" disabled style="width: 100%;" /></td>
                                                         <td>
-                                                            <input type="text" id="txtUnit" disabled /></td>
+                                                            <input type="text" id="txtUnit" disabled style="width: 100%;" /></td>
+
+
                                                         <td>
-                                                            <input type="text" id="txtValue" disabled /></td>
+                                                            <input type="text" id="txtUnitPrice" disabled style="width: 100%;" /></td>
+
                                                         <td>
-                                                            <input type="text" id="txtTotalBilledQuantity" disabled /></td>
+                                                            <input type="text" id="txtValue" disabled style="width: 100%;" /></td>
                                                         <td>
-                                                            <input type="text" id="txtTotalBilledValue" disabled /></td>
+                                                            <input type="text" id="txtTotalBilledQuantity" disabled style="width: 100%;" /></td>
                                                         <td>
-                                                            <input type="text" id="txtBalanceQuantity" disabled /></td>
+                                                            <input type="text" id="txtTotalBilledValue" disabled style="width: 100%;" /></td>
                                                         <td>
-                                                            <input type="text" id="txtBalanceValue" disabled /></td>
+                                                            <input type="text" id="txtBalanceQuantity" disabled style="width: 100%;" /></td>
+                                                        <td>
+                                                            <input type="text" id="txtBalanceValue" disabled style="width: 100%;" /></td>
 
                                                         <%--<td>
                                                             <input type="button" id="btnAdd" value="Add" /></td>--%>
@@ -350,9 +393,18 @@
 
 
                             <div class="form-group" style="margin-top: 1%; width: 100%;">
-                                <input id="btnSave" type="button" value="Save" class="btn btn-success" />
-                                <input type="button" id="btnAdd" value="Add" class="btn btn-warning" style="margin-left: 89%;" />
-                                <input id="btnUpdate" type="button" value="Update" class="btn btn-success" />
+                                <div class="row">
+                                    <div class="col-lg-11">
+                                        <input id="btnSave" type="button" value="Save" class="btn btn-success" />
+
+                                        <input id="btnUpdate" type="button" value="Update" class="btn btn-success" />
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <input type="button" id="btnAdd" value="Add" class="btn btn-warning" />
+                                    </div>
+                                </div>
+
+
                             </div>
                         </div>
                     </div>
@@ -372,7 +424,11 @@
         <div class="modal"></div>
 
     </div>
-
+    <div id="overlay">
+        <div class="cv-spinner">
+            <span class="spinner"></span>
+        </div>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
@@ -384,19 +440,32 @@
     <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 
+    <script src="../js/validations.js"></script>
+
     <script type="text/javascript">
 
+        $body = $("body");
 
-        //$body = $("body");
-
-        //$(document).on({
-        //    ajaxStart: function () { $body.addClass("loading"); },
-        //    ajaxStop: function () { $body.removeClass("loading"); }
-        //});
-
+        $(document).on({
+            ajaxStart: function () { $("#overlay").fadeIn(300);; },
+            ajaxStop: function () {
+                setTimeout(function () {
+                    $("#overlay").fadeOut(300);
+                }, 200);
+            }
+        });
 
         $(document).ready(function () {
-
+            //validation starts
+            $('.integer').keyup(function (e) {
+                if (/\D/g.test(this.value)) {
+                    this.value = this.value.replace(/\D/g, '');
+                }
+            });
+            checkNameEmpty("#txtDivision"); //integer
+            checkNameEmpty("#txtVersionNumber");
+            checkNameEmpty("#txtSupplierName");
+            //validation ends
 
             $("#btnUpdate").hide();
             $("#btnSave").show();
@@ -410,22 +479,10 @@
 
             });
 
+
+
             var data = {};
 
-            //$(function () {
-            //    $('#ddlCompanyLocation').select2({
-            //        placeholder: "Select Nationality",
-            //        // minimumInputLength: 1,
-            //        maximumInputLength: 1
-            //        // allowClear: true
-            //    });
-            //    $('#ddlCompanyLocationUpdate').select2({
-            //        placeholder: "Select Nationality",
-            //        // minimumInputLength: 1,
-            //        maximumInputLength: 1
-            //        // allowClear: true
-            //    });
-            //});
             $('#ddlQuotationId').change(function () {
 
                 GetTOCDetails($('#ddlQuotationId').val());
@@ -433,17 +490,25 @@
                 //DeleteRowCell();
             });
 
-            //$('#ddlItem').change(function () {
-
-            //   // GetTOCDetails($('#ddlQuotation').val());
-
-            //    GetItemsDescriptionDetails($('#ddlQuotationId').val(), $('#ddlItem').val());
-            //});
 
 
             $("#btnSave").click(function () {
 
+                var validations = Validation_Execution(
+              "#ddlQuotationId",
+              "#txtDivision",
+              "#txtCreationDate",
+              "#txtVersionNumber",
+              "#txtSupplierName",
+              "#txtModificationDate");
+                if (validations) {
+                }
+                else {
+                    return false;
+                }
+
                 data.Mode = 1;
+                data.ExecutionID = 0;
                 data.QuotationId = parseInt($('#ddlQuotationId').val());
                 data.DocumentNumber = $("#ddlQuotationId option:selected").text();
                 data.Division = $('#txtDivision').val();
@@ -459,12 +524,28 @@
             });
 
             $("#btnUpdate").click(function () {
+                var validations = Validation_Execution(
+                "#ddlQuotationId",
+                "#txtDivision",
+                "#txtCreationDate",
+                "#txtVersionNumber",
+                "#txtSupplierName",
+                "#txtModificationDate");
+                if (validations) {
+                }
+                else {
+                    return false;
+                }
+
                 data.Mode = 2;
-                data.RequisitionId = $('#hidHotelId').val();
-                data.QuotationId = $('#ddlQuotationId').val();
-                data.RequisitionDate = $('#txtRequisitionDate').val(); //$("#RequisitionDate option:selected").text();//
-                data.RequiredBy = $('#txtRequiredBy').val();
-                data.ApprovedBy = $('#txtApprovedBy').val();
+                data.ExecutionID = $('#hidHotelId').val();
+                data.QuotationId = parseInt($('#ddlQuotationId').val());
+                data.DocumentNumber = $("#ddlQuotationId option:selected").text();
+                data.Division = $('#txtDivision').val();
+                data.VersionNember = $('#txtVersionNumber').val();
+                data.SupplierName = $('#txtSupplierName').val();
+                data.CreatedDate = $('#txtCreationDate').val();
+                data.UpdatedDate = $('#txtModificationDate').val();
 
                 SaveUpdateRequisitionDetails(data);
                 GetExecutionDetails(0);
@@ -475,29 +556,45 @@
 
             //new code 
 
+            var count = 0;
             $("body").on("click", "#btnAdd", function () {
+
+
+                count = count + 1;
 
                 var tHead = $("#tblCustomers > THEAD > TR")[0];
                 var rowHead = tHead;
                 var cellBody = $(rowHead.insertCell(-1));
-                cellBody.html('<label class="lblqty"><b>Billed Quantity</b></label>');
+                cellBody.html('<label class="lblqty" style="width:10%;"><b>Billed Quantity</b></label>');
                 cellBody = $(rowHead.insertCell(-1));
-                cellBody.html('<label class="lblqty"><b>Billed Value</b></label>');
+                cellBody.html('<label class="lblqty" style="width:10%;"><b>Billed Value</b></label>');
+
 
                 for (i = 0; i < $('#tblCustomers > TFOOT > TR').length; i++) {
                     var tBody = $("#tblCustomers > TFOOT > TR")[i];
                     var row = tBody;
                     var cell = $(row.insertCell(-1));
 
+                    //    cell.html('<input type="text" value="0" class="txtBillQty" data-ID=' + i + ' id="BillQuantity' + i + '"/>');
+                    var ct = $("<input />");
+                    ct.attr("type", "text");
+                    ct.attr("data-ID", i);
+                    ct.attr("data-UqId", i + '-' + count);
+                    ct.attr("class", "BillQuantity" + i);
+                    ct.attr("class", "integer");
+                    ct.attr("style", "width:100%");
 
-                    cell.html('<input type="text" id="txtBillQty" data-ID=' + i + ' class="BillQuantity' + i + '"/>');
+                    ct.attr("id", "txtBillQty" + i + '-' + count);
+                    ct.attr("onchange", "Calculate(this);");
+                    ct.val("0");
+                    cell.append(ct);
 
                     var cell = $(row.insertCell(-1));
-
-                    cell.html('<input type="text" id="txtBillValue" data-ID=' + i + ' class="BillValue' + i + '"/>');
+                    cell.html('<input type="text" value="0" style="width:100%;" id="txtBillValue' + i + '-' + count + '" disabled   data-UqId=' + i + '-' + count + ' data-ID=' + i + ' class="BillValue' + i + '"/>');
 
                 }
             });
+
 
             function DeleteRowCell() {
                 for (i = 0; i < $('#tblCustomers > THEAD > TR').length; i++) {
@@ -525,7 +622,9 @@
                     var len = getResult.length;
                     $("#ddlQuotationId").append('<option value="0">Select</option>');
                     for (var i = 0; i < len; i++) {
-                        $("#ddlQuotationId").append('<option value=' + getResult[i].QID + '>' + getResult[i].QNo + '</option>');
+                        if (getResult[i].Approved && getResult[i].IsRequisition) {
+                            $("#ddlQuotationId").append('<option value=' + getResult[i].QID + '>' + getResult[i].QNo + '</option>');
+                        }
                     }
                 },
                 error: function (err) {
@@ -533,43 +632,7 @@
                 }
             });
         }
-        //function funRecalculateAfterAdding(amount, tax) {
 
-
-        //    //$('#txtTaxableAmount').val(taxVal);
-        //    //$('#txtGrandTotal').val(val);
-        //    //$('#txtTotalWords').val(numberToWords(val));
-
-
-
-
-        //    var TotalAmount = 0;
-
-        //    if (!isNaN(amount)) {
-        //        //  alert('nan')
-        //        TotalAmount = amount;
-        //    }
-
-
-        //    //if ($('#txtGrandTotal').val() != "") {
-        //    //    TotalAmount = parseInt($('#txtGrandTotal').val());
-        //    //}
-        //    //var AddedAmount = parseInt(amount);
-        //    //var NewAmount = TotalAmount + AddedAmount;
-        //    //$('#txtGrandTotal').val(NewAmount);
-        //    //$('#txtTotalWords').val(numberToWords(NewAmount));
-
-        //    //var TotalTax = 0;
-        //    //if ($('#txtTaxableAmount').val() != "") {
-        //    //    TotalTax = parseInt($('#txtTaxableAmount').val());
-        //    //}
-        //    //var AddedTax = parseInt(tax);
-        //    //var NewTax = AddedTax + TotalTax;
-        //    //$('#txtTaxableAmount').val(NewTax);
-        //    // $('#txtTotalWords').val(numberToWords(NewAmount));
-
-
-        //}
 
         function GetExecutionDetails(ExecutionId) {
             var element = "";
@@ -636,7 +699,8 @@
             });
         }
 
-        function ClearInputBoxValues(Mode) {
+        function ClearInputBoxValues() {
+            $("#tblCustomers").load("Execution.aspx #tblCustomers");
             //alert(Mode);
             //if (Mode == 1) {
             $('input[type=text]').each(function () {
@@ -668,9 +732,10 @@
                         var b = getResult[i].PurchaseQty;
                         var c = getResult[i].Rate;
                         var d = getResult[i].Amount;
+                        var e = getResult[i].Quantity;
+                        var f = getResult[i].ItemId;
 
-
-                        btnAddCall(a, b, c, d, i);
+                        btnAddCall(a, b, c, d, e, f, i);
 
                     }
                 },
@@ -679,52 +744,7 @@
                 }
             });
         }
-        //function GetItemsDetails(QID) {
-        //    var element = "";
 
-        //    $.ajax({
-        //        contentType: "application/json; charset=utf-8",
-        //        url: "Requisition.aspx/GetQuotationItemDetails",
-        //        type: "POST",
-        //        data: "{QID:" + QID + "}",
-        //        dataType: "json",
-        //        success: function (result) {
-        //            var getResult = result.d;
-        //            var len = getResult.length;
-        //            $("#ddlItem").empty();
-        //            $("#ddlItem").append('<option value="0">Select</option>');
-        //            for (var i = 0; i < len; i++) {
-        //                $("#ddlItem").append('<option value=' + getResult[i].ItemId + '>' + getResult[i].ItemName + '</option>');
-        //            }
-        //        },
-        //        error: function (err) {
-        //            // alert(err.statusText)
-        //        }
-        //    });
-        //}
-        //function GetItemsDescriptionDetails(QID, ItemId) {
-        //    var element = "";
-
-        //    $.ajax({
-        //        contentType: "application/json; charset=utf-8",
-        //        url: "Requisition.aspx/GetQuotationItemDescriptionDetails",
-        //        type: "POST",
-        //        data: "{QID:" + QID + ",ItemId:" + ItemId + "}",
-        //        dataType: "json",
-        //        success: function (result) {
-        //            var getResult = result.d;
-        //            var len = getResult.length;
-
-        //            for (var i = 0; i < len; i++) {
-        //                $("#txtRequiredQty").val(getResult[i].Qty);
-        //                $("#txtRate").val(getResult[i].Rate);
-        //            }
-        //        },
-        //        error: function (err) {
-        //            // alert(err.statusText)
-        //        }
-        //    });
-        //}
 
         function GetTOCExecutionDetails(ExecutionId) {
             var element = "";
@@ -750,16 +770,20 @@
                         var h = getResult[i].BalanceValue;
                         var j = getResult[i].BilledQuantity;
                         var k = getResult[i].BilledValue;
+                        var l = getResult[i].Quantity;
+                        var m = getResult[i].ItemId;
                         //pravesh
 
-                        btnAddCallExecution(a, b, c, d, e, f, g, h, j, k, i);
+                        btnAddCallExecution(a, b, c, d, e, f, g, h, j, k, l, m, i);
                     }
-                    //header calling for  
-                    //alert(getResult[0].BilledQuantity); //'10,20'
 
-
-                    var trainindIdArray2 = getResult[0].BilledQuantity.split(',');
-                    for (var i = 0; i < trainindIdArray2.length; i++) {
+                    if (getResult[0].BilledQuantity.length > 1) {
+                        var trainindIdArray2 = getResult[0].BilledQuantity.split(',');
+                        for (var i = 0; i < trainindIdArray2.length; i++) {
+                            coladd();
+                        }
+                    }
+                    else {
                         coladd();
                     }
 
@@ -780,7 +804,7 @@
             //head ends
         }
 
-        function btnAddCallExecution(ItemDescription, Unit, UnitPrice, Value, TotalBilledQuantity, TotalBilledValue, BalanceQuantity, BalanceValue, BilledQuantity, BilledValue, Counter) {
+        function btnAddCallExecution(ItemDescription, Unit, UnitPrice, Value, TotalBilledQuantity, TotalBilledValue, BalanceQuantity, BalanceValue, BilledQuantity, BilledValue, Quantity, ItemId, counter) {
             debugger;
 
             //Reference the Name and Country TextBoxes.
@@ -792,6 +816,7 @@
             var txtTotalBilledValue = TotalBilledValue;
             var txtBalanceQuantity = BalanceQuantity;
             var txtBalanceValue = BalanceValue;
+            var txtQuantity = Quantity;
             //var BilledQuantity = BilledQuantity;
             //var BilledValue = BilledValue;
 
@@ -802,66 +827,68 @@
             //Add Name cell.
             var cell = $(row.insertCell(-1));
             cell.html(txtItemDescription);
-            cell.attr('dataID', Counter);
+            cell.attr('dataID', counter);
+            cell.attr('data-itemid', ItemId);
+
+            cell = $(row.insertCell(-1));
+            cell.html(txtQuantity);
+            cell.attr('id', 'tdPurchasedQty' + counter);
 
             cell = $(row.insertCell(-1));
             cell.html(txtUnit);
 
             cell = $(row.insertCell(-1));
             cell.html(txtUnitPrice);
+            cell.attr('id', 'tdRate' + counter);
 
             cell = $(row.insertCell(-1));
             cell.html(txtValue);
+            cell.attr('id', 'tdValue' + counter);
 
             cell = $(row.insertCell(-1));
             cell.html(txtTotalBilledQuantity);
+            cell.attr('id', 'tdTotalBilledQty' + counter);
 
             cell = $(row.insertCell(-1));
             cell.html(txtTotalBilledValue);
+            cell.attr('id', 'tdTotalBilledVal' + counter);
 
             cell = $(row.insertCell(-1));
             cell.html(txtBalanceQuantity);
+            cell.attr('id', 'tdBalanceQty' + counter);
 
             cell = $(row.insertCell(-1));
             cell.html(txtBalanceValue);
+            cell.attr('id', 'tdBalanceVal' + counter);
 
-            var trainindIdArray = BilledQuantity.split(',');
-            $.each(trainindIdArray, function (index, value) {
-                // alert(index + ': ' + value);   // alerts 0:[1 ,  and  1:2]
+            if (BilledQuantity.length > 1) {
+                var trainindIdArray = BilledQuantity.split(',');
+                $.each(trainindIdArray, function (index, value) {
+                    // alert(index + ': ' + value);   // alerts 0:[1 ,  and  1:2]
+                    cell = $(row.insertCell(-1));
+                    cell.html(value);
+                    cell.attr("class", "BillQuantity" + counter);
+                    cell.attr("class", "integer");
+                    cell = $(row.insertCell(-1));
+                    cell.html(txtUnitPrice * value);
+                    cell.attr("class", "BillValue" + counter);
+
+                });
+            }
+            else {
                 cell = $(row.insertCell(-1));
-                cell.html(value);
+                cell.html(BilledQuantity);
+                cell.attr("class", "BillQuantity" + counter);
+
                 cell = $(row.insertCell(-1));
-                cell.html(txtUnitPrice * value);
-
-            });
-
-            //var trainindIdArray1 = BilledValue.split(',');
-            //$.each(trainindIdArray1, function (index, value) {
-            //    // alert(index + ': ' + value);   // alerts 0:[1 ,  and  1:2]
-            //    cell = $(row.insertCell(-1));
-            //    cell.html(value);
-
-            //});
-
-            //cell = $(row.insertCell(-1));
-            //cell.html(txtBalanceValue);
+                cell.html(txtUnitPrice * BilledQuantity);
+                cell.attr("class", "BillValue" + counter);
+            }
 
 
-
-
-
-
-            //Add Button cell.
-            //cell = $(row.insertCell(-1));
-            //var btnRemove = $("<input />");
-            //btnRemove.attr("type", "button");
-            //btnRemove.attr("onclick", "Add(this);");
-            //btnRemove.val("Add");
-            //cell.append(btnRemove);
-            //  xt=xt+1;
         }
 
-        function btnAddCall(DescriptionOfGoods, PurchaseQty, Rate, Amount, counter) {
+        function btnAddCall(DescriptionOfGoods, PurchaseQty, Rate, Amount, Unit, ItemId, counter) {
 
 
             //Reference the Name and Country TextBoxes.
@@ -872,6 +899,7 @@
 
 
             var txtAmount = Amount;
+            var txtUnit = Unit;
 
             //Get the reference of the Table's TBODY element.
             var tBody = $("#tblCustomers > TFOOT")[0];
@@ -883,64 +911,47 @@
             var cell = $(row.insertCell(-1));
             cell.html(DescriptionOfGoods);
             cell.attr('dataID', counter);
+            cell.attr('data-itemid', ItemId);
 
             cell = $(row.insertCell(-1));
             cell.html(txtPurchasedQty);
+            cell.attr('id', 'tdPurchasedQty' + counter);
+
+            cell = $(row.insertCell(-1));
+            cell.html(txtUnit);
 
             cell = $(row.insertCell(-1));
             cell.html(txtRate);
-
+            cell.attr('id', 'tdRate' + counter);
 
             cell = $(row.insertCell(-1));
             cell.html(txtAmount);
+            cell.attr('id', 'tdValue' + counter);
 
             cell = $(row.insertCell(-1));
             cell.html(0);
+            cell.attr('id', 'tdTotalBilledQty' + counter);
 
             cell = $(row.insertCell(-1));
             cell.html(0);
+            cell.attr('id', 'tdTotalBilledVal' + counter);
 
             cell = $(row.insertCell(-1));
-            cell.html(0);
+            cell.html(txtPurchasedQty);
+            cell.attr('id', 'tdBalanceQty' + counter);
 
             cell = $(row.insertCell(-1));
-            cell.html(0);
+            cell.html(txtPurchasedQty * txtRate);
+            cell.attr('id', 'tdBalanceVal' + counter);
 
-            //Add Button cell.
-            //cell = $(row.insertCell(-1));
-            //var btnRemove = $("<input />");
-            //btnRemove.attr("type", "button");
-            //btnRemove.attr("onclick", "Add(this);");
-            //btnRemove.val("Add");
-            //cell.append(btnRemove);
-            //  xt=xt+1;
         }
+
+
 
         function SaveUpdateRequisitionDetails(data) {
 
             var tocArr = new Array();
-            //var ExeQty = new Array();
-            //var Exeval = new Array();
 
-
-
-            //$("#tblCustomers TFOOT TR").each(function () {
-            //    var row = $(this);
-            //    var len = row.find("TD").eq(0).attr('dataID');
-            //    var quantity = new Array();
-            //    var value = new Array();
-            //    debugger;
-            //    var t = 0;
-            //    for (var o = 0; o < $('.BillQuantity' + len).length; o++) {
-            //        quantity.push($('.BillQuantity' + len)[o].value);
-
-            //    }
-            //    for (var o = 0; o < $('.BillValue' + len).length; o++) {
-            //        value.push($('.BillValue' + len)[o].value);
-            //    }
-            //    alert(quantity + '-' + value);
-
-            //});
 
 
             $("#tblCustomers TFOOT TR").each(function () {
@@ -952,23 +963,33 @@
 
                 if ((row.find("TD").eq(0).html()) != "") {
                     TOCExecution.ItemDescription = row.find("TD").eq(0).html();
-                    TOCExecution.Unit = row.find("TD").eq(1).html();
-                    TOCExecution.UnitPrice = row.find("TD").eq(2).html();
-                    TOCExecution.Value = row.find("TD").eq(3).html();
-                    TOCExecution.TotalBilledQuantity = row.find("TD").eq(4).html();
-                    TOCExecution.TotalBilledValue = row.find("TD").eq(5).html();
-                    TOCExecution.BalanceQuantity = row.find("TD").eq(6).html();
-                    TOCExecution.BalanceValue = row.find("TD").eq(7).html();
+                    TOCExecution.ItemId = row.find("TD").eq(0).attr('data-itemid');
+                    TOCExecution.Quantity = row.find("TD").eq(1).html();
+                    TOCExecution.Unit = row.find("TD").eq(2).html();
+                    TOCExecution.UnitPrice = row.find("TD").eq(3).html();
+                    TOCExecution.Value = row.find("TD").eq(4).html();
+                    TOCExecution.TotalBilledQuantity = row.find("TD").eq(5).html();
+                    TOCExecution.TotalBilledValue = row.find("TD").eq(6).html();
+                    TOCExecution.BalanceQuantity = row.find("TD").eq(7).html();
+                    TOCExecution.BalanceValue = row.find("TD").eq(8).html();
                     TOCExecution.BilledQuantity = "";
                     for (var o = 0; o < $('.BillQuantity' + len).length; o++) {
-                        if ($('.BillQuantity' + len)[o].value != "") {
+
+                        //if ($('.BillQuantity' + len)[o].value != "") {
+                        if ($('.BillQuantity' + len)[o].innerHTML != "") {
+                            TOCExecution.BilledQuantity = TOCExecution.BilledQuantity + "," + $('.BillQuantity' + len)[o].innerHTML;
+                        }
+                        else {
                             TOCExecution.BilledQuantity = TOCExecution.BilledQuantity + "," + $('.BillQuantity' + len)[o].value;
                         }
+                        //}
                     }
                     TOCExecution.BilledValue = "";
                     for (var o = 0; o < $('.BillValue' + len).length; o++) {
-                        if ($('.BillValue' + len)[o].value != "") {
-
+                        if ($('.BillValue' + len)[o].innerHTML != "") {
+                            TOCExecution.BilledValue = TOCExecution.BilledValue + "," + $('.BillValue' + len)[o].innerHTML;
+                        }
+                        else {
                             TOCExecution.BilledValue = TOCExecution.BilledValue + "," + $('.BillValue' + len)[o].value;
                         }
                     }
@@ -991,7 +1012,7 @@
                     var getResult = result.d;
                     if (getResult != "0") {
                         alert(getResult);
-                        ClearInputBoxValues(Mode);
+                        ClearInputBoxValues();
                     }
                     else {
                         alert("There is an Error");
@@ -1016,8 +1037,10 @@
             }
         }
         function GetExecutionDetailsForUpdate(ExecutionId, QuotationId, CreationDate, Documentno, Division, VersionNo, SupplierName) {
-
-            GetQuotationDetails(0);
+            $("#tblCustomers").load("Execution.aspx #tblCustomers");
+            $('#hidHotelId').val(ExecutionId);
+            $("#btnAdd").show();
+            //GetQuotationDetails(0);
             GetTOCExecutionDetails(ExecutionId);
 
             $('#ddlQuotationId').val(QuotationId);
@@ -1032,26 +1055,44 @@
             $("#btnSave").hide();
         }
 
-        //function Remove(button) {
 
 
+        function Calculate(x) {
+            //alert($(x).attr('data-id'))
+            var id = $(x).attr('data-id');
+            var value = $(x).prop('value');
+            var UqId = $(x).attr('data-UqId');
 
-        //    //Determine the reference of the Row using the Button.
-        //    var row = $(button).closest("TR");
+            var BilledQuantity = parseInt($('#txtBillQty' + UqId).val());
+            var BilledValue = parseInt($('#txtBillValue' + UqId).val());
+            var TotalBilledQuantity = parseInt($('#tdTotalBilledQty' + id).text());
+            var TotalBilledValue = parseInt($('#tdTotalBilledVal' + id).text());
+            var BalanceQuantity = parseInt($('#tdBalanceQty' + id).text());
+            var BalanceValue = parseInt($('#tdBalanceVal' + id).text());
+            var Rate = parseInt($('#tdRate' + id).text());
 
-        //    // alert("recalculate fun called" + row[0].cells[7].innerText);
-        //    //  funRecalculateAfterRemoving(row[0].cells[7].innerText, row[0].cells[6].innerText);
+            if (parseInt($('#tdTotalBilledQty' + id).text()) == 0 && (parseInt($("#tdPurchasedQty" + id).text()) < parseInt($('#txtBillQty' + UqId).val()))) {
+                //if (parseInt($('#txtBillQty' + UqId).val()) >= parseInt($("#tdPurchasedQty" + id).text())) {
+                $('#txtBillQty' + UqId).val("0");
+                $('#txtBillValue' + UqId).val("0");
+                alert("Billed Quantity Should Not Be Greater then Required Quantity");
+                return false;
+            }
 
+            else if (parseInt($('#tdTotalBilledQty' + id).text()) != 0 && (parseInt($('#tdBalanceQty' + id).text()) < parseInt($('#txtBillQty' + UqId).val()))) {
+                $('#txtBillQty' + UqId).val("0");
+                $('#txtBillValue' + UqId).val("0");
+                alert("Billed Quantity Should Not Be Greater then Required Quantity");
+                return false;
+            }
 
-        //    var name = $("TD", row).eq(0).html();
-        //    if (confirm("Do you want to delete: " + name)) {
-        //        //Get the reference of the Table.
-        //        var table = $("#tblCustomers")[0];
+            $("#txtBillValue" + UqId).val((BilledQuantity) * (Rate));
+            $("#tdTotalBilledQty" + id).text(BilledQuantity + TotalBilledQuantity);
+            $("#tdTotalBilledVal" + id).text(parseInt($("#tdTotalBilledQty" + id).text()) * (Rate));
+            $("#tdBalanceQty" + id).text(BalanceQuantity - BilledQuantity);
+            $("#tdBalanceVal" + id).text(parseInt($("#tdBalanceQty" + id).text()) * (Rate));
 
-        //        //Delete the Table row using it's Index.
-        //        table.deleteRow(row[0].rowIndex);
-        //    }
-        //};
+        };
 
 
     </script>

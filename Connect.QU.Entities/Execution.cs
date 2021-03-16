@@ -42,6 +42,8 @@ namespace Connect.QU.Entities
         public DateTime? CreatedDate { get; set; }
         public string UpdatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
+        public string Quantity { get; set; }
+        public int ItemId { get; set; }
     }
 
 }
