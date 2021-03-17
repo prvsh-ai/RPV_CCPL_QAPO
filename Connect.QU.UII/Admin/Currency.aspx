@@ -7,6 +7,9 @@
             margin-left: 33px;
         }
     </style>
+
+    
+<link href="../css/Admin.css" rel="stylesheet" />
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="EAWarpper" runat="server">
@@ -73,8 +76,28 @@
         <input id="hidCurrencyId" type="hidden" />
     </div>
 
-    <script type="text/javascript">
+     <div id="overlay">
+            <div class="cv-spinner">
+                <span class="spinner"></span>
+            </div>
+        </div>
 
+    <script type="text/javascript">
+        $body = $("body");
+
+        $(document).on({
+            ajaxStart: function () { $("#overlay").fadeIn(300);; },
+            ajaxStop: function () {
+                setTimeout(function () {
+                    $("#overlay").fadeOut(300);
+                }, 200);
+            },
+            ajaxError: function () {
+                setTimeout(function () {
+                    $("#overlay").fadeOut(300);
+                }, 200);
+            }
+        });
         $(document).ready(function () {
             GetCurrencyDetails(0, "");
 

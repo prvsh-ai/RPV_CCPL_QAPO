@@ -170,8 +170,18 @@ namespace Connect.QU.DAL
                     CL.SignatureDate = Convert.ToDateTime(sdr["SignatureDate"]);
                     CL.SignatureData = sdr["SignatureData"].ToString();
                     CL.Approved = Convert.ToBoolean(sdr["Approved"]);
-                    CL.IsRequisition = Convert.ToBoolean(sdr["IsRequisition"]);
-                    CL.IsExecution = Convert.ToBoolean(sdr["IsExecution"]);
+                    if (!string.IsNullOrEmpty(sdr["IsRequisition"].ToString()))
+                    {
+                        CL.IsRequisition = Convert.ToBoolean(sdr["IsRequisition"]);
+
+                    }
+                    if (!string.IsNullOrEmpty(sdr["IsExecution"].ToString()))
+                    {
+
+                        CL.IsExecution = Convert.ToBoolean(sdr["IsExecution"]);
+
+
+                    }
 
                     if (!string.IsNullOrEmpty(sdr["CurrencyId"].ToString()))
                     {

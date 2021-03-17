@@ -452,6 +452,11 @@
                 setTimeout(function () {
                     $("#overlay").fadeOut(300);
                 }, 200);
+            },
+            ajaxError: function () {
+                setTimeout(function () {
+                    $("#overlay").fadeOut(300);
+                }, 200);
             }
         });
 

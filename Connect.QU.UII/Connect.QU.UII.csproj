@@ -90,6 +90,9 @@
     <Content Include="bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="bootstrap\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="css\Admin.css" />
+    <Content Include="css\boostrap.3.3.7.min.css" />
+    <Content Include="css\bootstrap-datepicker.1.6.4.min.css" />
     <Content Include="css\DataTable\dataTablesbootstrap.css" />
     <Content Include="datatables\extensions\ColReorder\Readme.md" />
     <Content Include="datatables\extensions\ColVis\Readme.md" />
@@ -108,6 +111,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="images\Connectlogo.JPG" />
     <Content Include="images\loadingimage.png" />
+    <Content Include="js\bootstrap-datetimepicker.4.17.37.min.js" />
+    <Content Include="js\bootstrap.3.3.7.min.js" />
+    <Content Include="js\botstrap-datepiker.1.6.4.min.js" />
+    <Content Include="js\datables.1.10.16.mn.js" />
+    <Content Include="js\datatables.1.10.2.min.js" />
+    <Content Include="js\moment.2.13.0.min.js" />
     <Content Include="js\validations.js" />
     <Content Include="scripts\bootstrap-select.js.map" />
     <Content Include="scripts\jquery-3.1.1.min.map" />
@@ -115,6 +124,7 @@
     <None Include="Properties\PublishProfiles\Attendance.pubxml" />
     <Content Include="Store\Execution.aspx" />
     <Content Include="Store\Store.Master" />
+    <None Include="Properties\PublishProfiles\QAPO.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

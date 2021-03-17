@@ -155,6 +155,9 @@
             margin-left: 1%;
         }
     </style>
+
+    <link href="../css/Admin.css" rel="stylesheet" />
+
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="EAWarpper" runat="Server">
     <div class="container">
@@ -189,8 +192,8 @@
                                 <div class="form-group">
                                     <label>&nbsp;GSTIN No </label>
                                     <select id="ddlQGstinNoType" class="form-control" name="GstinNoType">
-                                        <option value="1"><a href="xyz" target="_blank">07AAACC4708J1ZS</a></option>
-                                        <option value="2"><a href="xyz" target="_blank">07AAACC4708sfsS</a></option>
+                                        <option value="07AAACC4708J1ZS"><a href="xyz" target="_blank">07AAACC4708J1ZS</a></option>
+                                        <option value="07SKACC4708J12T"><a href="xyz" target="_blank">07SKACC4708J12T</a></option>
                                     </select>
                                     &nbsp;&nbsp;
                                       <label id="QuotationNoText">&nbsp;Quotation No</label>
@@ -500,6 +503,14 @@
     <div class="container" style="margin-top: 5%; margin-bottom: 1%; width: 100%;">
         <table id="CityTableId" class="table table-striped cf table-bordered table-striped table-responsive dataTable" style="table-layout: fixed"></table>
     </div>
+
+    <div id="overlay">
+        <div class="cv-spinner">
+            <span class="spinner"></span>
+        </div>
+    </div>
+
+
     <input id="hidHotelId" type="hidden" />
     <!--/Slider -->
     <div class="container" style="width: 70%;">
@@ -507,7 +518,7 @@
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+   <%-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" rel="stylesheet" />
@@ -515,12 +526,39 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../css/DataTable/dataTablesbootstrap.css" rel="stylesheet" />
     <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>--%>
 
+<%--    Own JS and CSS--%>
+    <script src="../js/moment.2.13.0.min.js"></script>
+    <script src="../js/bootstrap-datetimepicker.4.17.37.min.js"></script>
+    <script src="../js/botstrap-datepiker.1.6.4.min.js"></script>
+    <link href="../css/bootstrap-datepicker.1.6.4.min.css" rel="stylesheet" />
+    <script src="../js/bootstrap.3.3.7.min.js"></script>
+    <link href="../css/boostrap.3.3.7.min.css" rel="stylesheet" />
+     <link href="../css/DataTable/dataTablesbootstrap.css" rel="stylesheet" />
+    <script src="../js/datatables.1.10.2.min.js"></script>
+    <script src="../js/datables.1.10.16.mn.js"></script>
+
+<%--    ends here--%>
+    
     <script src="../js/validations.js"></script>
 
     <script type="text/javascript">
+        $body = $("body");
 
+        $(document).on({
+            ajaxStart: function () { $("#overlay").fadeIn(300);; },
+            ajaxStop: function () {
+                setTimeout(function () {
+                    $("#overlay").fadeOut(300);
+                }, 200);
+            },
+            ajaxError: function () {
+                setTimeout(function () {
+                    $("#overlay").fadeOut(300);
+                }, 200);
+            }
+        });
 
         // debugger;
         var dropArr = new Array();
@@ -1245,7 +1283,11 @@
 
             GetTOCDetails(QID);
             $('#hidHotelId').val(QID);
+
+
             $('#ddlQuotationType').val(QType);
+
+
             $('#txtQuotationNo').val(QNo);
             $('#txtQuotationDate').val(QDate);
             $('#txtProjectName').val(ProjectName);

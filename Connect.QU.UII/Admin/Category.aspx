@@ -63,6 +63,8 @@
         }
     </style>
 
+    <link href="../css/Admin.css" rel="stylesheet" />
+
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="EAWarpper" runat="server">
@@ -173,7 +175,11 @@
         </div>
         <input id="txtCategoryIdUpdate" type="hidden" />
     </div>
-
+     <div id="overlay">
+            <div class="cv-spinner">
+                <span class="spinner"></span>
+            </div>
+        </div>
     <link href="../css/DataTable/dataTablesbootstrap.css" rel="stylesheet" />
     <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
@@ -181,7 +187,21 @@
      <script src="../js/validations.js"></script>
 
     <script type="text/javascript">
+        $body = $("body");
 
+        $(document).on({
+            ajaxStart: function () { $("#overlay").fadeIn(300);; },
+            ajaxStop: function () {
+                setTimeout(function () {
+                    $("#overlay").fadeOut(300);
+                }, 200);
+            },
+            ajaxError: function () {
+                setTimeout(function () {
+                    $("#overlay").fadeOut(300);
+                }, 200);
+            }
+        });
         $(document).ready(function () {
 
             //validation starts
