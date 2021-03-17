@@ -585,8 +585,8 @@
                     ct.attr("type", "text");
                     ct.attr("data-ID", i);
                     ct.attr("data-UqId", i + '-' + count);
-                    ct.attr("class", "BillQuantity" + i);
-                    ct.attr("class", "integer");
+                    ct.attr("class", "integer BillQuantity" + i);
+                    //ct.attr("class", "integer");
                     ct.attr("style", "width:100%");
 
                     ct.attr("id", "txtBillQty" + i + '-' + count);
@@ -665,7 +665,17 @@
                     element = element + '</tr></thead><tbody>';
 
                     if (len == 0) {
-                        element = element + '<tr><td colspan="3"><p class="text-center">No Execution Data Available</p></td></tr>'
+                        element = element + '<tr>';
+                        element = element + '<td>No Data Available</td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                   
+                        element = element + '</tr>';
+
+                        //element = element + '<tr><td colspan="3"><p class="text-center">No Execution Data Available</p></td></tr>'
                     }
 
                     for (var i = 0; i < len; i++) {
@@ -872,8 +882,8 @@
                     // alert(index + ': ' + value);   // alerts 0:[1 ,  and  1:2]
                     cell = $(row.insertCell(-1));
                     cell.html(value);
-                    cell.attr("class", "BillQuantity" + counter);
-                    cell.attr("class", "integer");
+                    cell.attr("class", "integer BillQuantity" + counter);
+                    //cell.attr("class", "integer");
                     cell = $(row.insertCell(-1));
                     cell.html(txtUnitPrice * value);
                     cell.attr("class", "BillValue" + counter);

@@ -609,7 +609,8 @@ namespace Connect.QU.DAL
                     CL.ItemName = sdr["ItemName"].ToString();
                     CL.CategoryId = Convert.ToInt32(sdr["CategoryId"]);
                     CL.LastPrice = Convert.ToInt32(sdr["LastPrice"]);
-                    CL.GstApplicable = (sdr["GstApplicable"].ToString())=="1"?"Applicable":"Not Applicable";
+                    //CL.GstApplicable = (sdr["GstApplicable"].ToString())=="1"?"Applicable":"Not Applicable";
+                    CL.GstApplicable = sdr["GstApplicable"].ToString();
                     CL.GstRate = Convert.ToInt32(sdr["GstRate"]);
                     CL.RadStock = Convert.ToBoolean(sdr["RadStock"]);
                     CL.RadService = Convert.ToBoolean(sdr["RadService"]);
@@ -1195,7 +1196,7 @@ namespace Connect.QU.DAL
                 SqlDataReader sdr = myCmd.ExecuteReader();
                 while (sdr.Read())
                 {
-                    CL = new Entities.ExecutionReport();                    
+                    CL = new Entities.ExecutionReport();
                     CL.DocumentNumber = sdr["DocumentNumber"].ToString();
                     CL.Division = sdr["Division"].ToString();
                     CL.VersionNember = sdr["VersionNember"].ToString();
@@ -1241,7 +1242,7 @@ namespace Connect.QU.DAL
                 if (Requisitionid != 0)
                 {
                     myCmd.Parameters.AddWithValue("@Requisitionid", Requisitionid);
-                    
+
                 }
                 myCmd.Parameters.AddWithValue("@Mode", mode);
 
@@ -1334,7 +1335,7 @@ namespace Connect.QU.DAL
             return Entities;
         }
 
-        public List<QU.Entities.QuotationGenerateReport> GenerateQuotationReports(int QId,int mode)
+        public List<QU.Entities.QuotationGenerateReport> GenerateQuotationReports(int QId, int mode)
         {
             List<Entities.QuotationGenerateReport> Entities = new List<Entities.QuotationGenerateReport>();
             Entities.QuotationGenerateReport CL = null;
@@ -1354,7 +1355,7 @@ namespace Connect.QU.DAL
                 SqlDataReader sdr = myCmd.ExecuteReader();
                 while (sdr.Read())
                 {
-                    CL = new Entities.QuotationGenerateReport();                   
+                    CL = new Entities.QuotationGenerateReport();
                     CL.QuotationNumber = sdr["QNo"].ToString();
                     //CL.QType = sdr["QType"].ToString();
                     if (sdr["QType"].ToString() == "1")
@@ -1378,14 +1379,14 @@ namespace Connect.QU.DAL
                     CL.QuotationFromEmailID = sdr["QFromEmailID"].ToString();
                     CL.QuotationFromGSTINNo = sdr["QFromGSTINNo"].ToString();
                     CL.ProjectName = sdr["ProjectName"].ToString();
-                    CL.FinancialYear = sdr["FinantialYear"].ToString();                    
+                    CL.FinancialYear = sdr["FinantialYear"].ToString();
                     CL.QuotationToCompanyName = sdr["QToCompanyName"].ToString();
                     CL.QuotationToGSTINNo = sdr["QToGSTINNo"].ToString();
                     CL.QuotationToContactPerson = sdr["QToContactPerson"].ToString();
                     CL.QuotationToAddress = sdr["QToAddress"].ToString();
                     CL.PaymentTerms = sdr["PaymentTerms"].ToString();
                     CL.ValidityOfQuote = sdr["ValidityOfQuote"].ToString();
-                    CL.PlaceOfSupply = sdr["PlaceOfSupply"].ToString();                    
+                    CL.PlaceOfSupply = sdr["PlaceOfSupply"].ToString();
                     CL.TotalAmountDigit = sdr["TotalAmountDigit"].ToString();
                     CL.TotalAmountWords = sdr["TotalAmountWords"].ToString();
                     CL.TaxableAmount = sdr["TaxableAmount"].ToString();
@@ -1397,7 +1398,7 @@ namespace Connect.QU.DAL
                     CL.TermsAndCondition = sdr["TermsAndCondition"].ToString();
                     CL.Comment1 = sdr["Note1"].ToString();
                     CL.Comment2 = sdr["Note2"].ToString();
-                    CL.SignatureDate = Convert.ToDateTime(sdr["SignatureDate"]);                    
+                    CL.SignatureDate = Convert.ToDateTime(sdr["SignatureDate"]);
                     CL.Approved = Convert.ToBoolean(sdr["Approved"]);
                     CL.CreatedDate = Convert.ToDateTime(sdr["CreatedDate"]);
                     CL.DescriptionOfGoods = sdr["DescriptionOfGoods"].ToString();
@@ -1410,8 +1411,8 @@ namespace Connect.QU.DAL
                     CL.TotalAmount = sdr["TotalAmount1"].ToString();
                     CL.ItemLineNumber = sdr["ItemLineNumber"].ToString();
                     CL.ItemName = sdr["ItemName"].ToString();
-                    CL.LastRate =Convert.ToInt32(sdr["LastPrice"]);
-                    CL.InStockQuantity = sdr["InStockQuantity"].ToString();                    
+                    CL.LastRate = Convert.ToInt32(sdr["LastPrice"]);
+                    CL.InStockQuantity = sdr["InStockQuantity"].ToString();
                     Entities.Add(CL);
                 }
             }
@@ -1428,7 +1429,7 @@ namespace Connect.QU.DAL
         }
 
 
-        public List<QU.Entities.ItemReports> GenerateItemReports(int ItemID, string ItemName,int mode)
+        public List<QU.Entities.ItemReports> GenerateItemReports(int ItemID, string ItemName, int mode)
         {
             List<Entities.ItemReports> Entities = new List<Entities.ItemReports>();
             Entities.ItemReports CL = null;
@@ -1452,8 +1453,8 @@ namespace Connect.QU.DAL
                 SqlDataReader sdr = myCmd.ExecuteReader();
                 while (sdr.Read())
                 {
-                    CL = new Entities.ItemReports();                    
-                    CL.ItemName = sdr["ItemName"].ToString();                    
+                    CL = new Entities.ItemReports();
+                    CL.ItemName = sdr["ItemName"].ToString();
                     CL.LastPrice = Convert.ToInt32(sdr["LastPrice"]);
                     CL.GstApplicable = (sdr["GstApplicable"].ToString()) == "1" ? "Applicable" : "Not Applicable";
                     CL.GstRate = Convert.ToInt32(sdr["GstRate"]);

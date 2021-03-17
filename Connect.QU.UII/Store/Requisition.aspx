@@ -363,13 +363,13 @@
         <div id="pageloaddiv" class="pageloaddiv" style="display: none;">
         </div>
         <input id="hidHotelId" type="hidden" />
-      
+
     </div>
-      <div id="overlay">
-            <div class="cv-spinner">
-                <span class="spinner"></span>
-            </div>
+    <div id="overlay">
+        <div class="cv-spinner">
+            <span class="spinner"></span>
         </div>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
@@ -527,7 +527,7 @@
 
             $("body").on("click", "#btnAdd", function () {
 
-                dropArr.push($("#ddlItem option:selected").attr('data-itemid'));
+                dropArr.push(parseInt($("#ddlItem option:selected").attr('data-itemid')));
 
                 var validations = Validation_TOCRequisition(
                "#ddlItem",
@@ -615,7 +615,9 @@
                     $("#ddlQuotationId").append('<option value="0">Select</option>');
                     for (var i = 0; i < len; i++) {
                         // if (getResult[i].Approved) {
-                        if (getResult[i].Approved && !(getResult[i].IsRequisition)) {
+                        if (getResult[i].Approved)
+                            {
+                            // && !(getResult[i].IsRequisition)) {
                             $("#ddlQuotationId").append('<option value=' + getResult[i].QID + '>' + getResult[i].QNo + '</option>');
                         }
                     }
@@ -675,7 +677,18 @@
                     element = element + '<th>Action</th>';
                     element = element + '</tr></thead><tbody>';
                     if (len == 0) {
-                        element = element + '<tr><td colspan="3"><p class="text-center">No Requisition Data Available</p></td></tr>'
+                        element = element + '<tr>';
+                        element = element + '<td>No Data Available</td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '</tr>';
+
+
+                        //element = element + '<tr><td colspan="3"><p class="text-center">No Requisition Data Available</p></td></tr>'
                     }
                     for (var i = 0; i < len; i++) {
                         element = element + '<tr>';
@@ -763,19 +776,11 @@
                     $("#ddlItem").empty();
                     $("#ddlItem").append('<option value="0">Select</option>');
                     for (var i = 0; i < len; i++) {
-
-                        debugger;
                         if (getResult[i].ItemName != undefined) {
-
-
-                            var x = jQuery.inArray(getResult[i].ItemId.toString(), dropArr);
-
-
+                            var x = jQuery.inArray(parseInt(getResult[i].ItemId.toString()), dropArr);
                             if (x == (-1)) {
                                 $("#ddlItem").append('<option data-itemName=' + getResult[i].ItemName + ' data-itemId=' + getResult[i].ItemId + ' value=' + getResult[i].ItemId + '>' + getResult[i].ItemName + '</option>');
                             }
-
-
                         }
                     }
                 },
@@ -926,7 +931,11 @@
         }
 
         function GetRequisitionDetailsForUpdate(RequisitionId, QuotationId, RequisitionDate, RequisitionNumber, RequiredBy, ApprovedBy, PreparedBy) {
+
             $("#tblCustomers").load("Quotation.aspx #tblCustomers");
+
+            //pravesh
+            //GetQuotationDetails(0);
             GetTOCDetails(RequisitionId);
             $('#hidHotelId').val(RequisitionId);
             $('#ddlQuotationId').val(QuotationId),
@@ -952,14 +961,15 @@
 
             funRecalculateAfterRemoving(row[0].cells[5].innerText);
 
+            debugger;
             var x = row[0].cells[0].getAttribute('data-itemid');
             // alert(x);
 
 
             if (confirm("Do you want to delete: " + name)) {
 
-                dropArr.splice($.inArray((x), dropArr), 1);
-                alert(dropArr);
+                dropArr.splice($.inArray((parseInt(x)), dropArr), 1);
+                // alert(dropArr);
                 var table = $("#tblCustomers")[0];
 
                 table.deleteRow(row[0].rowIndex);

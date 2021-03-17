@@ -254,7 +254,19 @@
                     element = element + '<th>Action</th>';
                     element = element + '</tr></thead><tbody>';
                     if (len == 0) {
-                        element = element + '<tr><td colspan="3"><p class="text-center">No Login Data Available</p></td></tr>'
+                        element = element + '<tr>';
+                        element = element + '<td>No Data Available</td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '</tr>';
+
+                        // element = element + '<tr><td colspan="3"><p class="text-center">No Login Data Available</p></td></tr>'
                     }
                     for (var i = 0; i < len; i++) {
                         element = element + '<tr>';

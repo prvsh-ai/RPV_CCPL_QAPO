@@ -574,7 +574,19 @@
                     element += '<th>Details</th>';
                     element += '</tr></thead><tbody>';
                     if (len == 0) {
-                        element = element + '<tr><td colspan="3"><p class="text-center">No Approval Data Available</p></td></tr>'
+                        element = element + '<tr>';
+                        element = element + '<td>No Data Available</td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '</tr>';
+
+
+                        //element = element + '<tr><td colspan="3"><p class="text-center">No Approval Data Available</p></td></tr>'
                     }
                     for (var i = 0; i < len; i++) {
                         element = element + '<tr>';
@@ -642,7 +654,20 @@
                     element = element + '<th>Approved By</th>';
                     element = element + '</tr></thead><tbody>';
                     if (len == 0) {
-                        element = element + '<tr><td colspan="3"><p class="text-center">No Requisition Data Available</p></td></tr>'
+
+                        element = element + '<tr>';
+                        element = element + '<td>No Data Available</td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                   
+                        element = element + '</tr>';
+
+
+
+                        //element = element + '<tr><td colspan="3"><p class="text-center">No Requisition Data Available</p></td></tr>'
                     }
                     for (var i = 0; i < len; i++) {
                         element = element + '<tr>';
@@ -825,13 +850,32 @@
                     element = element + '<th>PU</th>';
                     element = element + '</tr></thead><tbody>';
                     if (len == 0) {
-                        element = element + '<tr><td colspan="3"><p class="text-center">No Company Data Available</p></td></tr>'
+
+                        element = element + '<tr>';
+                        element = element + '<td>No Data Available</td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+
+                        element = element + '</tr>';
+
+                        // element = element + '<tr><td colspan="3"><p class="text-center">No Company Data Available</p></td></tr>'
                     }
                     for (var i = 0; i < len; i++) {
                         element = element + '<tr>';
                         element = element + '<td>' + getResult[i].ItemName + '</td>';
                         element = element + '<td>' + getResult[i].CategoryName + '</td>';
-                        element = element + '<td>' + getResult[i].GstApplicable + '</td>';
+
+                        if (getResult[i].GstApplicable == "1") {
+                            element = element + '<td>Yes</td>';
+                        }
+                        else {
+                            element = element + '<td>No</td>';
+                        }
+
+                      //  element = element + '<td>' + getResult[i].GstApplicable + '</td>';
                         element = element + '<td>' + getResult[i].HsnCode + '</td>';
                         element = element + '<td>' + getResult[i].SKU + '</td>';
                         element = element + '<td>' + getResult[i].PU + '</td>';
@@ -888,7 +932,18 @@
                     element = element + '</tr></thead><tbody>';
 
                     if (len == 0) {
-                        element = element + '<tr><td colspan="3"><p class="text-center">No Execution Data Available</p></td></tr>'
+
+                        element = element + '<tr>';
+                        element = element + '<td>No Data Available</td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+
+                        element = element + '</tr>';
+
+                        //element = element + '<tr><td colspan="3"><p class="text-center">No Execution Data Available</p></td></tr>'
                     }
 
                     for (var i = 0; i < len; i++) {

@@ -292,7 +292,7 @@ function Validation_Company(companyname, gstin, panno, servicetaxno, emailid, ad
             return false;
         }
     }
-    if (!($("input[name=chkCustomer]").prop("checked") || $("input[name=chkVendor]").prop("checked"))) {
+    if (!($("input[name=chkCustomer]").prop("checked") || $("input[name=chkVendor]").prop("checked") || $("input[name=chkCustomerUpdate]").prop("checked") || $("input[name=chkVendorUpdate]").prop("checked"))) {
         alert("Please Select Customer or Vendor");
         return false;
     }
@@ -390,7 +390,11 @@ function Validation_Category(name, code, sku, pu) {
         $(pu).focus();
         return false;
     }
-    if (!($("input[name=Brand]").prop("checked") || $("input[name=Type]").prop("checked") || $("input[name=Name]").prop("checked") || $("input[name=Number]").prop("checked") || $("input[name=Color]").prop("checked") || $("input[name=Size]").prop("checked"))) {
+    if (!(
+        $("input[name=Brand]").prop("checked") || $("input[name=Type]").prop("checked") || $("input[name=Name]").prop("checked") || $("input[name=Number]").prop("checked") || $("input[name=Color]").prop("checked") || $("input[name=Size]").prop("checked") ||
+        $("input[name=Brand2]").prop("checked") || $("input[name=Type2]").prop("checked") || $("input[name=Name2]").prop("checked") || $("input[name=Number2]").prop("checked") || $("input[name=Color2]").prop("checked") || $("input[name=Size2]").prop("checked")
+
+        )) {
         alert("Please Select Atleast One Specification");
         return false;
     }

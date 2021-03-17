@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Admin/Admin.Master" CodeBehind="Item.aspx.cs" Inherits="Connect.QU.UII.Admin.Item" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <title>Company Details</title>
+    <title>Item Details</title>
 
     <style type="text/css">
         .label1 {
@@ -68,7 +68,7 @@
         }
     </style>
 
-<link href="../css/Admin.css" rel="stylesheet" />
+    <link href="../css/Admin.css" rel="stylesheet" />
 
 
 </asp:Content>
@@ -273,11 +273,11 @@
         </div>
         <input id="hidHotelId" type="hidden" />
     </div>
-     <div id="overlay">
-            <div class="cv-spinner">
-                <span class="spinner"></span>
-            </div>
+    <div id="overlay">
+        <div class="cv-spinner">
+            <span class="spinner"></span>
         </div>
+    </div>
     <link href="../css/DataTable/dataTablesbootstrap.css" rel="stylesheet" />
     <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
@@ -645,13 +645,32 @@
                     element = element + '<th>Action</th>';
                     element = element + '</tr></thead><tbody>';
                     if (len == 0) {
-                        element = element + '<tr><td colspan="3"><p class="text-center">No Company Data Available</p></td></tr>'
+
+                        element = element + '<tr>';
+                        element = element + '<td>No Data Available</td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '</tr>';
+
+                        //    element = element + '<tr><td colspan="3"><p class="text-center">No Company Data Available</p></td></tr>'
                     }
                     for (var i = 0; i < len; i++) {
                         element = element + '<tr>';
                         element = element + '<td>' + getResult[i].ItemName + '</td>';
                         element = element + '<td>' + getResult[i].CategoryName + '</td>';
-                        element = element + '<td>' + getResult[i].GstApplicable + '</td>';
+                        //element = element + '<td>' + getResult[i].GstApplicable + '</td>';
+
+                        if (getResult[i].GstApplicable == "1") {
+                            element = element + '<td>Yes</td>';
+                        }
+                        else {
+                            element = element + '<td>No</td>';
+                        }
+
                         element = element + '<td>' + getResult[i].HsnCode + '</td>';
                         element = element + '<td>' + getResult[i].SKU + '</td>';
                         element = element + '<td>' + getResult[i].PU + '</td>';
@@ -682,6 +701,7 @@
             //alert(RadStock);
             //alert(RadService);
 
+           // alert(GstApplicable)
             debugger;
             $('#hidHotelId').val(ItemID);
             $('#txtItemNameUpdate').val(ItemName);

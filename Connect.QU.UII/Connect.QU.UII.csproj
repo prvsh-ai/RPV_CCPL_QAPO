@@ -124,6 +124,7 @@
     <None Include="Properties\PublishProfiles\Attendance.pubxml" />
     <Content Include="Store\Execution.aspx" />
     <Content Include="Store\Store.Master" />
+    <None Include="Properties\PublishProfiles\ConnectQAPO.pubxml" />
     <None Include="Properties\PublishProfiles\QAPO.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -701,7 +701,7 @@
             };
 
             $("body").on("click", "#btnAdd", function () {
-                dropArr.push($("#ddlItem option:selected").attr('data-itemid'));
+                dropArr.push( parseInt($("#ddlItem option:selected").attr('data-itemid')));
                 CounterSno = CounterSno + 10;
                 var validations = Validation_TOCQuotation(
              "#ddlItem",
@@ -985,6 +985,8 @@
         }
 
         function funRecalculateAfterRemoving(amount, tax) {
+            debugger;
+
             var TotalAmount = 0;
             if ($('#txtGrandTotal').val() != "") {
                 TotalAmount = parseInt($('#txtGrandTotal').val());
@@ -998,7 +1000,7 @@
                 TotalTax = parseInt($('#txtTaxableAmount').val());
             }
             var RemovedTax = parseInt(tax);
-            var NewTax = RemovedTax - TotalTax;
+            var NewTax = TotalTax-RemovedTax;
             $('#txtTaxableAmount').val(NewTax);
         }
 
@@ -1029,12 +1031,12 @@
             //Determine the reference of the Row using the Button.
             var row = $(button).closest("TR");
             // alert("recalculate fun called" + row[0].cells[7].innerText);
-            funRecalculateAfterRemoving(row[0].cells[7].innerText, row[0].cells[6].innerText);
+            funRecalculateAfterRemoving(row[0].cells[8].innerText, row[0].cells[7].innerText);
             var x = row[0].cells[1].getAttribute('data-itemid');
             var name = $("TD", row).eq(0).html();
             if (confirm("Do you want to delete: " + name)) {
 
-                dropArr.splice($.inArray((x), dropArr), 1);
+                dropArr.splice($.inArray((parseInt(x)), dropArr), 1);
                 var table = $("#tblCustomers")[0];
                 //Delete the Table row using it's Index.
                 table.deleteRow(row[0].rowIndex);
@@ -1132,7 +1134,20 @@
                     element = element + '<th style="width:80px">Action</th>';
                     element = element + '</tr></thead><tbody>';
                     if (len == 0) {
-                        element = element + '<tr><td colspan="3"><p class="text-center">No Quotation Data Available</p></td></tr>'
+
+                        element = element + '<tr>';
+                        element = element + '<td>No Data Available</td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '</tr>';
+
+
+                        //element = element + '<tr><td colspan="3"><p class="text-center">No Quotation Data Available</p></td></tr>'
                     }
                     for (var i = 0; i < len; i++) {
                         element = element + '<tr>';
@@ -1157,7 +1172,7 @@
                         element = element + '<td>' + GetProperDate(getResult[i].QDate) + '</td>';
                         if (!getResult[i].Approved) {
                             element = element + '<td>' + '<input type="checkbox" disabled name="Approve"   id="chkApprove" />';
-                            element = element + '<td><a href="#"><span class="label label-warning" onclick="GetQuotationDetailsForUpdate(' + getResult[i].QID + ',' + getResult[i].QType + ',\'' + getResult[i].QNo + '\',\'' + GetProperDate(getResult[i].QDate) + '\',\'' + getResult[i].ProjectName + '\',\'' + getResult[i].FinantialYear + '\',\'' + getResult[i].QToCompanyName + '\',\'' + getResult[i].QToGSTINNo + '\',\'' + getResult[i].QToContactPerson + '\',\'' + getResult[i].QToAddress + '\',\'' + getResult[i].PaymentTerms + '\',\'' + getResult[i].ValidityOfQuote + '\',\'' + getResult[i].PlaceOfSupply + '\',\'' + getResult[i].TotalAmountDigit + '\',\'' + getResult[i].TotalAmountWords + '\',\'' + getResult[i].TaxableAmount + '\',\'' + getResult[i].Freight + '\',\'' + getResult[i].BankName + '\',\'' + getResult[i].BranchName + '\',\'' + getResult[i].BankBranchIFSC + '\',\'' + getResult[i].BankAccountNo + '\',\'' + getResult[i].TermsAndCondition + '\',\'' + getResult[i].Note1 + '\',\'' + getResult[i].Note2 + '\' ,\'' + GetProperDate(getResult[i].SignatureDate) + '\',' + getResult[i].CurrencyId + ',' + getResult[i].LocationId + ',' + getResult[i].QToCompanyID + '); return false;" ><i class="fa fa-file-text"  aria-hidden="true"></i> Edit </span></a></td>'
+                            element = element + '<td><a href="#"><span class="label label-warning" onclick="GetQuotationDetailsForUpdate(' + getResult[i].QID + ',' + getResult[i].QType + ',\'' + getResult[i].QNo + '\',\'' + GetProperDate(getResult[i].QDate) + '\',\'' + getResult[i].ProjectName + '\',\'' + getResult[i].FinantialYear + '\',\'' + getResult[i].QToCompanyName + '\',\'' + getResult[i].QToGSTINNo + '\',\'' + getResult[i].QToContactPerson + '\',\'' + getResult[i].QToAddress + '\',\'' + getResult[i].PaymentTerms + '\',\'' + getResult[i].ValidityOfQuote + '\',\'' + getResult[i].PlaceOfSupply + '\',\'' + getResult[i].TotalAmountDigit + '\',\'' + getResult[i].TotalAmountWords + '\',\'' + getResult[i].TaxableAmount + '\',\'' + getResult[i].Freight + '\',\'' + getResult[i].BankName + '\',\'' + getResult[i].BranchName + '\',\'' + getResult[i].BankBranchIFSC + '\',\'' + getResult[i].BankAccountNo + '\',\'' + getResult[i].TermsAndCondition + '\',\'' + getResult[i].Note1 + '\',\'' + getResult[i].Note2 + '\' ,\'' + GetProperDate(getResult[i].SignatureDate) + '\',' + getResult[i].CurrencyId + ',' + getResult[i].LocationId + ',' + getResult[i].QToCompanyID + ',\'' + getResult[i].QFromGSTINNo + '\'); return false;" ><i class="fa fa-file-text"  aria-hidden="true"></i> Edit </span></a></td>'
                         }
                         else {
                             element = element + '<td>' + '<input type="checkbox" disabled checked name="Approve" id="chkApprove" />';
@@ -1186,7 +1201,7 @@
         function btnAddCall(ItemLineNumber, DescriptionOfGoods, Qty, Hsn, Rate, Value, Igst, Amount, TotalAmount1, ItemId) {
             //Reference the Name and Country TextBoxes.
             dropArr.push(ItemId);
-
+          
             var itellinenumber = ItemLineNumber;
             var txtDescriptionOfGoods = DescriptionOfGoods;//$("#txtDescriptionOfGoods");
             var txtQty = Qty;//$("#txtQty");
@@ -1239,6 +1254,8 @@
             btnRemove.attr("onclick", "Remove(this);");
             btnRemove.val("Remove");
             cell.append(btnRemove);
+
+
         }
 
         function GetTOCDetails(QID) {
@@ -1275,15 +1292,20 @@
             });
         }
 
-        function GetQuotationDetailsForUpdate(QID, QType, QNo, QDate, ProjectName, FinantialYear, QToCompanyName, QToGSTINNo, QToContactPerson, QToAddress, PaymentTerms, ValidityOfQuote, PlaceOfSupply, TotalAmountDigit, TotalAmountWords, TaxableAmount, Freight, BankName, BranchName, BankBranchIFSC, BankAccNo, TermsAndCondition, Note1, Note2, SignatureDate, CurrencyId, LocationId, QToCompanyId) {
-            $("#tblCustomers").load("Quotation.aspx #tblCustomers");
+        function GetQuotationDetailsForUpdate(QID, QType, QNo, QDate, ProjectName, FinantialYear, QToCompanyName, QToGSTINNo, QToContactPerson, QToAddress, PaymentTerms, ValidityOfQuote, PlaceOfSupply, TotalAmountDigit, TotalAmountWords, TaxableAmount, Freight, BankName, BranchName, BankBranchIFSC, BankAccNo, TermsAndCondition, Note1, Note2, SignatureDate, CurrencyId, LocationId, QToCompanyId,QFromGstinNo) {
+           // $("#tblCustomers").load("Quotation.aspx #tblCustomers");
             GetCurrencyDetails(0, "");
             GetCompanyDetails(0, "");
             GetCompanyLocations(QToCompanyId);
 
             GetTOCDetails(QID);
+            GetItemDetails(0,"");
+
+            
+            $('#ddlQGstinNoType').val(QFromGstinNo);
             $('#hidHotelId').val(QID);
 
+          //  alert(QFromGstinNo);
 
             $('#ddlQuotationType').val(QType);
 
@@ -1473,10 +1495,12 @@
                     $("#ddlItem").append('<option value="0">Select</option>');
                     for (var i = 0; i < len; i++) {
 
+                      
+
                         if (getResult[i].Approved) {
-                            var x = jQuery.inArray(getResult[i].ItemId.toString(), dropArr);
+                            var x = jQuery.inArray(parseInt(getResult[i].ItemId.toString()), dropArr);
                             if (x == (-1)) {
-                                $("#ddlItem").append('<option data-itemName=' + getResult[i].ItemName + ' data-itemId=' + getResult[i].ItemId + ' value=' + getResult[i].ItemId + '>' + getResult[i].ItemName + '</option>');
+                              $("#ddlItem").append('<option data-itemName=' + getResult[i].ItemName + ' data-itemId=' + getResult[i].ItemId + ' value=' + getResult[i].ItemId + '>' + getResult[i].ItemName + '</option>');
                             }
 
                             //$("#ddlItem").append('<option data-itemName=' + getResult[i].ItemName + ' data-itemId=' + getResult[i].ItemId + ' value=' + getResult[i].ItemId + '>' + getResult[i].ItemName + '</option>');

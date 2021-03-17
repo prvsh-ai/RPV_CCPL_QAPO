@@ -418,7 +418,19 @@
                     element += '<th>Details</th>';
                     element += '</tr></thead><tbody>';
                     if (len == 0) {
-                        element = element + '<tr><td colspan="3"><p class="text-center">No Approval Data Available</p></td></tr>'
+                        element = element + '<tr>';
+                        element = element + '<td>No Data Available</td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '</tr>';
+
+
+                        //element = element + '<tr><td colspan="3"><p class="text-center">No Approval Data Available</p></td></tr>'
                     }
                     for (var i = 0; i < len; i++) {
                         element = element + '<tr>';
@@ -500,7 +512,7 @@
                     var len = getResult.length;
                     if (len > 0) {
                         $('#txtProjectName').val(getResult[0].ProjectName),
-                        $('#txtFinantialYear').val(getResult[0].FinantialYear),
+                        $('#txtFinancialYear').val(getResult[0].FinantialYear),
                        $('#txtQuotationDate').val(GetProperDate(getResult[0].QDate)),
                         $('#txtCompanyName').val(getResult[0].QToCompanyName),
                         $('#txtGstinParty').val(getResult[0].QToGSTINNo),
@@ -515,7 +527,7 @@
                         $('#txtFreight').val(getResult[0].Freight),
                        $('#txtBankName').val(getResult[0].BankName),
                        $('#txtBranchName').val(getResult[0].BranchName),
-                        $('#txtBankAccountNo').val(getResult[0].BankAccNo),
+                        $('#txtBankAccountNo').val(getResult[0].BankAccountNo),
                        $('#txtBranchIfsc').val(getResult[0].BankBranchIFSC),
                        $('#txtSignatureDate').val(GetProperDate(getResult[0].SignatureDate))
                         $('#txtDescriptionOdGoods').val(getResult[0].DescriptionOfGoods),

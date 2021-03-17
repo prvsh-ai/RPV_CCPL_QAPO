@@ -145,17 +145,17 @@
                                             <label class="label1">Specification    </label>
                                             <div class="form-group" style="margin-top: 1%; width: 100%;">
                                                 <label class="label1" for="chkBrandUpdate">Brand</label>
-                                                <input type="checkbox" name="Brand" id="chkBrandUpdate" value="Brand" />
+                                                <input type="checkbox" name="Brand2" id="chkBrandUpdate" value="Brand" />
                                                 <label class="label1" for="chkTypeUpdate">Type</label>
-                                                <input type="checkbox" name="Type" value="Type" id="chkTypeUpdate" />
+                                                <input type="checkbox" name="Type2" value="Type" id="chkTypeUpdate" />
                                                 <label class="label1" for="chkNameUpdate">Name</label>
-                                                <input type="checkbox" name="Name" value="Name" id="chkNameUpdate" />
+                                                <input type="checkbox" name="Name2" value="Name" id="chkNameUpdate" />
                                                 <label class="label1" for="chkNumberUpdate">Number</label>
-                                                <input type="checkbox" name="Number" value="Number" id="chkNumberUpdate" />
+                                                <input type="checkbox" name="Number2" value="Number" id="chkNumberUpdate" />
                                                 <label class="label1" for="chkColorUpdate">Color</label>
-                                                <input type="checkbox" name="Color" value="Color" id="chkColorUpdate" />
+                                                <input type="checkbox" name="Color2" value="Color" id="chkColorUpdate" />
                                                 <label class="label1" for="chkSizeUpdate">Size</label>
-                                                <input type="checkbox" name="Size" value="Size" id="chkSizeUpdate" />
+                                                <input type="checkbox" name="Size2" value="Size" id="chkSizeUpdate" />
                                             </div>
                                         </div>
                                     </div>
@@ -307,7 +307,15 @@
                     element = element + '<th style="width:190px">Action</th>';
                     element = element + '</tr></thead><tbody>';
                     if (len == 0) {
-                        element = element + '<tr><td colspan="3"><p class="text-center">No Category Data Available</p></td></tr>'
+                        element = element + '<tr>';
+                        element = element + '<td>No Data Available</td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '</tr>';
+
+                        //element = element + '<tr><td colspan="3"><p class="text-center">No Category Data Available</p></td></tr>'
                     }
                     for (var i = 0; i < len; i++) {
                         element = element + '<tr>';
@@ -362,7 +370,7 @@
                     if (getResult != "0") {
                         alert(getResult);
                         GetCategoryDetails(0, "");
-                        ClearInputBoxValues(Mode);
+                        ClearInputBoxValues();
                     }
                     else {
                         alert("There is an Error");
@@ -374,15 +382,15 @@
             });
         }
 
-        function ClearInputBoxValues(Mode) {
-            if (Mode == 1) {
+        function ClearInputBoxValues() {
+           
                 $('input[type=text]').each(function () {
                     $(this).val('');
                 });
                 $('select').each(function () {
                     $(this).val('0');
                 });
-            }
+           
         }
     </script>
 
