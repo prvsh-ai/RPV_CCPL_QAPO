@@ -45,4 +45,25 @@ namespace Connect.QU.Entities
 
     }
 
+    public class RequisitionReport
+    {
+        public string QuotationNumber { get; set; }
+        public string DescriptionOfGoods { get; set; }
+        public int RequiredQty { get; set; }
+        public int InStockQty { get; set; }
+        public int PurchaseQty { get; set; }
+        public int Rate { get; set; }
+        public int Amount { get; set; }
+        public bool BillAvailable { get; set; }
+        public string POItemNo { get; set; }       
+        public string ItemName { get; set; }
+        public DateTime RequisitionDate { get; set; }
+        public string RequiredBy { get; set; }
+        public string ApprovedBy { get; set; }
+        public string PreparedBy { get; set; }
+        public string RequisitionNumber { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime? CreatedDate { get; set; }
+
+    }
 }

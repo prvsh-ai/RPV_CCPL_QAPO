@@ -599,7 +599,7 @@ namespace Connect.QU.DAL
                     CL.ItemName = sdr["ItemName"].ToString();
                     CL.CategoryId = Convert.ToInt32(sdr["CategoryId"]);
                     CL.LastPrice = Convert.ToInt32(sdr["LastPrice"]);
-                    CL.GstApplicable = sdr["GstApplicable"].ToString();
+                    CL.GstApplicable = (sdr["GstApplicable"].ToString())=="1"?"Applicable":"Not Applicable";
                     CL.GstRate = Convert.ToInt32(sdr["GstRate"]);
                     CL.RadStock = Convert.ToBoolean(sdr["RadStock"]);
                     CL.RadService = Convert.ToBoolean(sdr["RadService"]);
@@ -1165,6 +1165,258 @@ namespace Connect.QU.DAL
 
             return Entities;
         }
+
+        public List<QU.Entities.ExecutionReport> GenerateExecutionReport(int ExecutionId, int mode)
+        {
+            List<Entities.ExecutionReport> Entities = new List<Entities.ExecutionReport>();
+            Entities.ExecutionReport CL = null;
+            try
+            {
+                myCon = myDBConectionDAL.AssignConnection();
+                myCmd = new SqlCommand("spGenerateExecutionReport", myCon);
+                myCmd.CommandType = CommandType.StoredProcedure;
+                if (ExecutionId != 0)
+                {
+                    myCmd.Parameters.AddWithValue("@ExecutionId", ExecutionId);
+                }
+                myCmd.Parameters.AddWithValue("@mode", mode);
+
+                myDBConectionDAL.OpenConnection();
+                SqlDataReader sdr = myCmd.ExecuteReader();
+                while (sdr.Read())
+                {
+                    CL = new Entities.ExecutionReport();                    
+                    CL.DocumentNumber = sdr["DocumentNumber"].ToString();
+                    CL.Division = sdr["Division"].ToString();
+                    CL.VersionNember = sdr["VersionNember"].ToString();
+                    CL.SupplierName = sdr["SupplierName"].ToString();
+                    CL.ItemDescription = sdr["ItemDescription"].ToString();
+                    CL.Unit = sdr["Unit"].ToString();
+                    CL.Quantity = sdr["Quantity"].ToString();
+                    CL.UnitPrice = sdr["UnitPrice"].ToString();
+                    CL.Value = sdr["Value"].ToString();
+                    CL.TotalBilledQuantity = sdr["TotalBilledQuantity"].ToString();
+                    CL.TotalBilledValue = sdr["TotalBilledValue"].ToString();
+                    CL.BalanceQuantity = sdr["BalanceQuantity"].ToString();
+                    CL.BalanceValue = sdr["BalanceValue"].ToString();
+                    CL.BilledQuantity = sdr["BilledQuantity"].ToString();
+                    CL.BilledValue = sdr["BilledValue"].ToString();
+                    CL.CreatedDate = Convert.ToDateTime(sdr["CreatedDate"]);
+                    CL.CreatedBy = sdr["CreatedBy"].ToString();
+
+                    Entities.Add(CL);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                myDBConectionDAL.CloseConnection();
+            }
+
+            return Entities;
+        }
+
+        public List<QU.Entities.RequisitionReport> GenerateRequisitionReport(int Requisitionid, int mode)
+        {
+            List<Entities.RequisitionReport> Entities = new List<Entities.RequisitionReport>();
+            Entities.RequisitionReport CL = null;
+            try
+            {
+                myCon = myDBConectionDAL.AssignConnection();
+                myCmd = new SqlCommand("spGenerateExecutionReport", myCon);
+                myCmd.CommandType = CommandType.StoredProcedure;
+                if (Requisitionid != 0)
+                {
+                    myCmd.Parameters.AddWithValue("@Requisitionid", Requisitionid);
+                    
+                }
+                myCmd.Parameters.AddWithValue("@Mode", mode);
+
+
+                myDBConectionDAL.OpenConnection();
+                SqlDataReader sdr = myCmd.ExecuteReader();
+                while (sdr.Read())
+                {
+                    CL = new Entities.RequisitionReport();
+                    if (!string.IsNullOrEmpty(sdr["QNo"].ToString()))
+                    {
+                        CL.QuotationNumber = sdr["QNo"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["DescriptionOfGoods"].ToString()))
+                    {
+                        CL.DescriptionOfGoods = sdr["DescriptionOfGoods"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(Convert.ToInt32(sdr["RequiredQty"]).ToString()))
+                    {
+                        CL.RequiredQty = Convert.ToInt32(sdr["RequiredQty"]);
+                    }
+                    if (!string.IsNullOrEmpty(Convert.ToInt32(sdr["InStockQty"]).ToString()))
+                    {
+                        CL.InStockQty = Convert.ToInt32(sdr["InStockQty"]);
+                    }
+                    if (!string.IsNullOrEmpty(Convert.ToInt32(sdr["PurchaseQty"]).ToString()))
+                    {
+                        CL.PurchaseQty = Convert.ToInt32(sdr["PurchaseQty"]);
+                    }
+                    if (!string.IsNullOrEmpty(Convert.ToInt32(sdr["Rate"]).ToString()))
+                    {
+                        CL.Rate = Convert.ToInt32(sdr["Rate"]);
+                    }
+                    if (!string.IsNullOrEmpty(Convert.ToBoolean(sdr["BillAvailable"]).ToString()))
+                    {
+                        CL.BillAvailable = Convert.ToBoolean(sdr["BillAvailable"].ToString());
+                    }
+                    if (!string.IsNullOrEmpty(Convert.ToInt32(sdr["Amount"]).ToString()))
+                    {
+                        CL.Amount = Convert.ToInt32(sdr["Amount"]);
+                    }
+                    if (!string.IsNullOrEmpty(sdr["POItemNo"].ToString()))
+                    {
+                        CL.POItemNo = sdr["POItemNo"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["ItemName"].ToString()))
+                    {
+                        CL.ItemName = sdr["ItemName"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(Convert.ToDateTime(sdr["RequisitionDate"]).ToString()))
+                    {
+                        CL.RequisitionDate = Convert.ToDateTime(sdr["RequisitionDate"].ToString());
+                    }
+                    if (!string.IsNullOrEmpty((sdr["RequiredBy"]).ToString()))
+                    {
+                        CL.RequiredBy = sdr["RequiredBy"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty((sdr["ApprovedBy"]).ToString()))
+                    {
+                        CL.ApprovedBy = sdr["ApprovedBy"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty((sdr["PreparedBy"]).ToString()))
+                    {
+                        CL.PreparedBy = sdr["PreparedBy"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty((sdr["RequisitionNumber"]).ToString()))
+                    {
+                        CL.RequisitionNumber = sdr["RequisitionNumber"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty((sdr["CreatedBy"]).ToString()))
+                    {
+                        CL.CreatedBy = sdr["CreatedBy"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(Convert.ToDateTime(sdr["CreatedDate"]).ToString()))
+                    {
+                        CL.CreatedDate = Convert.ToDateTime(sdr["CreatedDate"].ToString());
+                    }
+                    Entities.Add(CL);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                myDBConectionDAL.CloseConnection();
+            }
+
+            return Entities;
+        }
+
+        public List<QU.Entities.QuotationGenerateReport> GenerateQuotationReports(int QId,int mode)
+        {
+            List<Entities.QuotationGenerateReport> Entities = new List<Entities.QuotationGenerateReport>();
+            Entities.QuotationGenerateReport CL = null;
+            try
+            {
+                myCon = myDBConectionDAL.AssignConnection();
+                myCmd = new SqlCommand("spGenerateExecutionReport", myCon);
+                myCmd.CommandType = CommandType.StoredProcedure;
+                if (QId != 0)
+                {
+                    myCmd.Parameters.AddWithValue("@QID", QId);
+                }
+
+                myCmd.Parameters.AddWithValue("@mode", mode);
+
+                myDBConectionDAL.OpenConnection();
+                SqlDataReader sdr = myCmd.ExecuteReader();
+                while (sdr.Read())
+                {
+                    CL = new Entities.QuotationGenerateReport();                   
+                    CL.QuotationNumber = sdr["QNo"].ToString();
+                    //CL.QType = sdr["QType"].ToString();
+                    if (sdr["QType"].ToString() == "1")
+                    {
+                        CL.QuotationType = "SU";
+                    }
+                    else if (sdr["QType"].ToString() == "2")
+                    {
+                        CL.QuotationType = "SER";
+                    }
+                    else
+                    {
+                        CL.QuotationType = "TEN";
+                    }
+
+                    CL.QuotationDate = Convert.ToDateTime(sdr["QDate"]);
+                    CL.QuotationFromCompanyName = sdr["QFromCompanyName"].ToString();
+                    CL.QuotationFromAddress = sdr["QFromAddress"].ToString();
+                    CL.QuotationFromContactNo = sdr["QFromContactNo"].ToString();
+                    CL.QuotationFromContactPerson = sdr["QFromContactPerson"].ToString();
+                    CL.QuotationFromEmailID = sdr["QFromEmailID"].ToString();
+                    CL.QuotationFromGSTINNo = sdr["QFromGSTINNo"].ToString();
+                    CL.ProjectName = sdr["ProjectName"].ToString();
+                    CL.FinancialYear = sdr["FinantialYear"].ToString();                    
+                    CL.QuotationToCompanyName = sdr["QToCompanyName"].ToString();
+                    CL.QuotationToGSTINNo = sdr["QToGSTINNo"].ToString();
+                    CL.QuotationToContactPerson = sdr["QToContactPerson"].ToString();
+                    CL.QuotationToAddress = sdr["QToAddress"].ToString();
+                    CL.PaymentTerms = sdr["PaymentTerms"].ToString();
+                    CL.ValidityOfQuote = sdr["ValidityOfQuote"].ToString();
+                    CL.PlaceOfSupply = sdr["PlaceOfSupply"].ToString();                    
+                    CL.TotalAmountDigit = sdr["TotalAmountDigit"].ToString();
+                    CL.TotalAmountWords = sdr["TotalAmountWords"].ToString();
+                    CL.TaxableAmount = sdr["TaxableAmount"].ToString();
+                    CL.Freight = sdr["Freight"].ToString();
+                    CL.BankName = sdr["BankName"].ToString();
+                    CL.BranchName = sdr["BranchName"].ToString();
+                    CL.BankAccountNo = sdr["BankAccountNo"].ToString();
+                    CL.BankBranchIFSC = sdr["BankBranchIFSC"].ToString();
+                    CL.TermsAndCondition = sdr["TermsAndCondition"].ToString();
+                    CL.Comment1 = sdr["Note1"].ToString();
+                    CL.Comment2 = sdr["Note2"].ToString();
+                    CL.SignatureDate = Convert.ToDateTime(sdr["SignatureDate"]);                    
+                    CL.Approved = Convert.ToBoolean(sdr["Approved"]);
+                    CL.CreatedDate = Convert.ToDateTime(sdr["CreatedDate"]);
+                    CL.DescriptionOfGoods = sdr["DescriptionOfGoods"].ToString();
+                    CL.Quantity = sdr["Quantity"].ToString();
+                    CL.HsnCode = sdr["HsnCode"].ToString();
+                    CL.Rate = sdr["Rate"].ToString();
+                    CL.Value = sdr["Value"].ToString();
+                    CL.Igst = sdr["Igst"].ToString();
+                    CL.Amount = sdr["Amount"].ToString();
+                    CL.TotalAmount = sdr["TotalAmount1"].ToString();
+                    CL.ItemLineNumber = sdr["ItemLineNumber"].ToString();
+                    CL.ItemName = sdr["ItemName"].ToString();
+                    CL.LastRate =Convert.ToInt32(sdr["LastPrice"]);
+                    CL.InStockQuantity = sdr["InStockQuantity"].ToString();                    
+                    Entities.Add(CL);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                myDBConectionDAL.CloseConnection();
+            }
+
+            return Entities;
+        }
+
         public string InsertApprovalData(bool chkVal, int QID, string UserId)
         {
             string Result = null;
@@ -1771,5 +2023,6 @@ namespace Connect.QU.DAL
             }
             return Message;
         }
+
     }
 }

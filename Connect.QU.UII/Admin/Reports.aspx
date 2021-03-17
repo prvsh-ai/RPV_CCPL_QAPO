@@ -100,6 +100,43 @@
             border-bottom: 1px solid #999 !important;
             border-radius: 0;
         }
+         /*Spinner Style Start*/
+        #overlay {
+            position: fixed;
+            top: 0;
+            z-index: 100;
+            width: 100%;
+            height: 100%;
+            display: none;
+            background: rgba(0,0,0,0.6);
+        }
+
+        .cv-spinner {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px #ddd solid;
+            border-top: 4px #2e93e6 solid;
+            border-radius: 50%;
+            animation: sp-anime 0.8s infinite linear;
+        }
+
+        @keyframes sp-anime {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .is-hide {
+            display: none;
+        }
+        /*Spinner Style End*/
     </style>
 </asp:Content>
 
@@ -129,7 +166,7 @@
             <div class="form-group" id="dvdItems" style="margin-top: 2.5%; margin-left: 89%; width: 100%;">
                 <input id="btnGenerateItems" type="button" value="Generate Report" class="btn btn-success" />
             </div>
-             <div class="form-group" id="dvdExecution" style="margin-top: 2.5%; margin-left: 89%; width: 100%;">
+            <div class="form-group" id="dvdExecution" style="margin-top: 2.5%; margin-left: 89%; width: 100%;">
                 <input id="btnGenerateExecution" type="button" value="Generate Report" class="btn btn-success" />
             </div>
             <div class="container" id="QuotationTable" style="margin-top: 3%; margin-bottom: 1%; width: 100%;">
@@ -362,11 +399,29 @@
         </section>
     </div>
 
+     <div id="overlay">
+        <div class="cv-spinner">
+            <span class="spinner"></span>
+        </div>
+    </div>
+
     <link href="../css/DataTable/dataTablesbootstrap.css" rel="stylesheet" />
     <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 
     <script type="text/javascript">
+
+        $body = $("body");
+
+        $(document).on({
+            ajaxStart: function () { $("#overlay").fadeIn(300);; },
+            ajaxStop: function () {
+                setTimeout(function () {
+                    $("#overlay").fadeOut(300);
+                }, 200);
+            }
+        });
+
         $(document).ready(function () {
 
             $('#ApplicationForm').hide();
@@ -398,16 +453,18 @@
         });
 
         $('#btnGenerate').on('click', function () {
+            var QId = 0;
             $.ajax({
                 contentType: "application/json; charset=utf-8",
-                url: "Reports.aspx/GenerateExcelForQuotation",
+                url: "Reports.aspx/GenerateQuotationReports",
                 type: "POST",
+                data: "{QId:" + QId + "}",
                 dataType: "json",
                 success: function (result) {
                     var getResult = result.d;
                     var len = getResult.length;
                     if (len > 0) {
-                        alert('Generate Report Successfully')
+                        alert('Generate Quotation Report Successfully')
                     }
                 },
                 error: function (err) {
@@ -427,7 +484,7 @@
                     var getResult = result.d;
                     var len = getResult.length;
                     if (len > 0) {
-                        alert('Generate Report Successfully')
+                        alert('Generate Items Report Successfully')
                     }
                 },
                 error: function (err) {
@@ -438,16 +495,40 @@
         });
 
         $('#btnGenerateRequisition').on('click', function () {
+            var Requisitionid = 0;
             $.ajax({
                 contentType: "application/json; charset=utf-8",
-                url: "Reports.aspx/GenerateExcelForRequisition",
+                url: "Reports.aspx/GenerateRequisitionReport",
                 type: "POST",
+                data: "{Requisitionid:" + Requisitionid + "}",
                 dataType: "json",
                 success: function (result) {
                     var getResult = result.d;
                     var len = getResult.length;
                     if (len > 0) {
-                        alert('Generate Report Successfully')
+                        alert('Generate Requisition Report Successfully')
+                    }
+                },
+                error: function (err) {
+                    return;
+                }
+            });
+
+        });
+
+        $('#btnGenerateExecution').on('click', function () {
+            var ExecutionId = 0;
+            $.ajax({
+                contentType: "application/json; charset=utf-8",
+                url: "Reports.aspx/GenerateExecutionReport",
+                type: "POST",
+                data: "{ExecutionId:" + ExecutionId + "}",
+                dataType: "json",
+                success: function (result) {
+                    var getResult = result.d;
+                    var len = getResult.length;
+                    if (len > 0) {
+                        alert('Generate Execution Report Successfully')
                     }
                 },
                 error: function (err) {

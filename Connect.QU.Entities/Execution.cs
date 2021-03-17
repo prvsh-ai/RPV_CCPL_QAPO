@@ -46,4 +46,27 @@ namespace Connect.QU.Entities
         public int ItemId { get; set; }
     }
 
+    public class ExecutionReport
+    {
+        //public int ExecutionID { get; set; }
+        public string DocumentNumber { get; set; }
+        public string Division { get; set; }
+        public string VersionNember { get; set; }
+        public string SupplierName { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public string ItemDescription { get; set; }
+        public string Unit { get; set; }
+        public string Quantity { get; set; }
+        public string UnitPrice { get; set; }
+        public string Value { get; set; }
+        public string TotalBilledQuantity { get; set; }
+        public string TotalBilledValue { get; set; }
+        public string BalanceQuantity { get; set; }
+        public string BalanceValue { get; set; }
+        public string BilledQuantity { get; set; }
+        public string BilledValue { get; set; }       
+
+    }
+
 }

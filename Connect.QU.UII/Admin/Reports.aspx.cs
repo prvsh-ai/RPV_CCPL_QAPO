@@ -8,6 +8,7 @@ using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+
 namespace Connect.QU.UII.Admin
 {
     public partial class Reports : System.Web.UI.Page
@@ -16,6 +17,7 @@ namespace Connect.QU.UII.Admin
         {
 
         }
+      public static QU.BAL.CommonBAL bal = new BAL.CommonBAL();
 
         [WebMethod]
         public static List<QU.Entities.Quotation> GetQuotationDetails(int QID)
@@ -42,21 +44,49 @@ namespace Connect.QU.UII.Admin
             return new QU.BAL.CommonBAL().GetExecutionDetails(ExecutionId);
         }
 
+        //[WebMethod]
+        //public static string GenerateExcelForQuotation()
+        //{
+        //    DataTable dt = new DataTable();
+        //    string Result = "";
+        //    try
+        //    {
+        //        string filename = "QuotationReports" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".xlsx";
+        //        string path = @"C:\Users" + "\\" + Environment.UserName + @"\Downloads\ExcelGenerate";
+        //        if (!Directory.Exists(path))
+        //        {
+        //            Directory.CreateDirectory(@"C:\Users" + "\\" + Environment.UserName + @"\Downloads\ExcelGenerate");
+        //        }
+        //        string pathandFileName = @"C:\Users" + "\\" + Environment.UserName + @"\Downloads\ExcelGenerate" + "\\" + filename;
+        //        dt = QU.BAL.UtilityBal.ConvertToDataTable(GetQuotationDetails(0));
+        //        Result = QU.BAL.UtilityBal.GenerateExcel(dt, pathandFileName);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //    return Result;
+
+        //}
+
+
         [WebMethod]
-        public static string GenerateExcelForQuotation()
+        public static string GenerateQuotationReports(int QId)
         {
             DataTable dt = new DataTable();
+            List<QU.Entities.QuotationGenerateReport> el = new List<Entities.QuotationGenerateReport>();
             string Result = "";
             try
             {
-                string filename = "QuotationReports" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".xlsx";
+                el = bal.GenerateQuotationReports(QId, 1);
+                string filename = "QuotationReport" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".xlsx";
                 string path = @"C:\Users" + "\\" + Environment.UserName + @"\Downloads\ExcelGenerate";
                 if (!Directory.Exists(path))
                 {
                     Directory.CreateDirectory(@"C:\Users" + "\\" + Environment.UserName + @"\Downloads\ExcelGenerate");
                 }
                 string pathandFileName = @"C:\Users" + "\\" + Environment.UserName + @"\Downloads\ExcelGenerate" + "\\" + filename;
-                dt = QU.BAL.UtilityBal.ConvertToDataTable(GetQuotationDetails(0));
+                dt = QU.BAL.UtilityBal.ConvertToDataTable(el);
                 Result = QU.BAL.UtilityBal.GenerateExcel(dt, pathandFileName);
             }
             catch (Exception ex)
@@ -64,24 +94,50 @@ namespace Connect.QU.UII.Admin
                 throw ex;
             }
             return Result;
-
         }
 
         [WebMethod]
-        public static string GenerateExcelForRequisition()
+        public static string GenerateExecutionReport(int ExecutionId)
         {
-            DataTable dt = new DataTable();
+            DataTable dt = new DataTable();            
+            List<QU.Entities.ExecutionReport> el = new List<Entities.ExecutionReport>();            
             string Result = "";
             try
             {
-                string filename = "RequisitionReports" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".xlsx";
+                el = bal.GenerateExecutionReport(ExecutionId,3);
+                string filename = "ExecutionReport" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".xlsx";
                 string path = @"C:\Users" + "\\" + Environment.UserName + @"\Downloads\ExcelGenerate";
                 if (!Directory.Exists(path))
                 {
                     Directory.CreateDirectory(@"C:\Users" + "\\" + Environment.UserName + @"\Downloads\ExcelGenerate");
                 }
                 string pathandFileName = @"C:\Users" + "\\" + Environment.UserName + @"\Downloads\ExcelGenerate" + "\\" + filename;
-                dt = QU.BAL.UtilityBal.ConvertToDataTable(GetRequisitionDetails(0));
+                dt = QU.BAL.UtilityBal.ConvertToDataTable(el);
+                Result = QU.BAL.UtilityBal.GenerateExcel(dt, pathandFileName);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return Result;
+        }
+        [WebMethod]
+        public static string GenerateRequisitionReport(int Requisitionid)
+        {
+            DataTable dt = new DataTable();
+            List<QU.Entities.RequisitionReport> el = new List<Entities.RequisitionReport>();
+            string Result = "";
+            try
+            {
+                el = bal.GenerateRequisitionReport(Requisitionid, 2);
+                string filename = "RequisitionReport" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".xlsx";
+                string path = @"C:\Users" + "\\" + Environment.UserName + @"\Downloads\ExcelGenerate";
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(@"C:\Users" + "\\" + Environment.UserName + @"\Downloads\ExcelGenerate");
+                }
+                string pathandFileName = @"C:\Users" + "\\" + Environment.UserName + @"\Downloads\ExcelGenerate" + "\\" + filename;
+                dt = QU.BAL.UtilityBal.ConvertToDataTable(el);
                 Result = QU.BAL.UtilityBal.GenerateExcel(dt, pathandFileName);
             }
             catch (Exception ex)
@@ -91,7 +147,7 @@ namespace Connect.QU.UII.Admin
             return Result;
         }
 
-        [WebMethod]
+         [WebMethod]
         public static string GenerateExcelForItems()
         {
             DataTable dt = new DataTable();
@@ -114,5 +170,7 @@ namespace Connect.QU.UII.Admin
             }
             return Result;
         }
+
+        
     }
 }

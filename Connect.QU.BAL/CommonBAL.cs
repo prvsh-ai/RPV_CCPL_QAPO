@@ -91,6 +91,21 @@ namespace Connect.QU.BAL
         {
             return new CommonDAL().GetExecutionDetails(ExecutionId);
         }
+        public List<QU.Entities.ExecutionReport> GenerateExecutionReport(int ExecutionId,int mode)
+        {
+            return new CommonDAL().GenerateExecutionReport(ExecutionId,mode);
+        }
+
+        public List<QU.Entities.RequisitionReport> GenerateRequisitionReport(int Requisitionid, int mode)
+        {
+            return new CommonDAL().GenerateRequisitionReport(Requisitionid, mode);
+        }
+
+        public List<QU.Entities.QuotationGenerateReport> GenerateQuotationReports(int QId, int mode)
+        {
+            return new CommonDAL().GenerateQuotationReports(QId, mode);
+        }
+
         public string InsertApprovalData(bool chkVal, int QID, string UserId)
         {
             return new CommonDAL().InsertApprovalData(chkVal, QID, UserId);
