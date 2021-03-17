@@ -1417,6 +1417,68 @@ namespace Connect.QU.DAL
             return Entities;
         }
 
+
+        public List<QU.Entities.ItemReports> GenerateItemReports(int ItemID, string ItemName,int mode)
+        {
+            List<Entities.ItemReports> Entities = new List<Entities.ItemReports>();
+            Entities.ItemReports CL = null;
+            try
+            {
+                myCon = myDBConectionDAL.AssignConnection();
+                myCmd = new SqlCommand("spGenerateExecutionReport", myCon);
+                myCmd.CommandType = CommandType.StoredProcedure;
+                if (ItemID != 0)
+                {
+                    myCmd.Parameters.AddWithValue("@ItemID", ItemID);
+                }
+
+                if (ItemName.Trim() != "")
+                {
+                    myCmd.Parameters.AddWithValue("@ItemName", ItemName);
+                }
+                myCmd.Parameters.AddWithValue("@mode", mode);
+
+                myDBConectionDAL.OpenConnection();
+                SqlDataReader sdr = myCmd.ExecuteReader();
+                while (sdr.Read())
+                {
+                    CL = new Entities.ItemReports();                    
+                    CL.ItemName = sdr["ItemName"].ToString();                    
+                    CL.LastPrice = Convert.ToInt32(sdr["LastPrice"]);
+                    CL.GstApplicable = (sdr["GstApplicable"].ToString()) == "1" ? "Applicable" : "Not Applicable";
+                    CL.GstRate = Convert.ToInt32(sdr["GstRate"]);
+                    CL.RadStock = Convert.ToBoolean(sdr["RadStock"]);
+                    CL.RadService = Convert.ToBoolean(sdr["RadService"]);
+                    CL.SKU = sdr["SKU"].ToString();
+                    CL.PU = sdr["PU"].ToString();
+                    CL.HsnCode = sdr["HsnCode"].ToString();
+                    CL.EffectiveStartDate = Convert.ToDateTime(sdr["EffectiveStartDate"]);
+                    CL.EffectiveEndDate = Convert.ToDateTime(sdr["EffectiveEndDate"]);
+                    CL.Brand = sdr["Brand"].ToString();
+                    CL.Type = sdr["Type"].ToString();
+                    CL.Name = sdr["Name"].ToString();
+                    CL.Number = sdr["Number"].ToString();
+                    CL.Color = sdr["Color"].ToString();
+                    CL.Size = sdr["Size"].ToString();
+                    CL.CategoryName = sdr["categoryName"].ToString();
+                    CL.InStockQuantity = sdr["InStockQuantity"].ToString();
+                    CL.Approved = Convert.ToBoolean(sdr["Approved"]);
+                    Entities.Add(CL);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                myDBConectionDAL.CloseConnection();
+            }
+
+            return Entities;
+        }
+
+
         public string InsertApprovalData(bool chkVal, int QID, string UserId)
         {
             string Result = null;

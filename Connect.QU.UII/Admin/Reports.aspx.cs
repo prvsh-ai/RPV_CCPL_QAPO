@@ -43,32 +43,7 @@ namespace Connect.QU.UII.Admin
         {
             return new QU.BAL.CommonBAL().GetExecutionDetails(ExecutionId);
         }
-
-        //[WebMethod]
-        //public static string GenerateExcelForQuotation()
-        //{
-        //    DataTable dt = new DataTable();
-        //    string Result = "";
-        //    try
-        //    {
-        //        string filename = "QuotationReports" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".xlsx";
-        //        string path = @"C:\Users" + "\\" + Environment.UserName + @"\Downloads\ExcelGenerate";
-        //        if (!Directory.Exists(path))
-        //        {
-        //            Directory.CreateDirectory(@"C:\Users" + "\\" + Environment.UserName + @"\Downloads\ExcelGenerate");
-        //        }
-        //        string pathandFileName = @"C:\Users" + "\\" + Environment.UserName + @"\Downloads\ExcelGenerate" + "\\" + filename;
-        //        dt = QU.BAL.UtilityBal.ConvertToDataTable(GetQuotationDetails(0));
-        //        Result = QU.BAL.UtilityBal.GenerateExcel(dt, pathandFileName);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //    return Result;
-
-        //}
-
+       
 
         [WebMethod]
         public static string GenerateQuotationReports(int QId)
@@ -146,7 +121,31 @@ namespace Connect.QU.UII.Admin
             }
             return Result;
         }
-
+        [WebMethod]
+        public static string GenerateItemReports(int ItemID, string ItemName)
+        {
+            DataTable dt = new DataTable();
+            List<QU.Entities.ItemReports> el = new List<Entities.ItemReports>();
+            string Result = "";
+            try
+            {
+                el = bal.GenerateItemReports(ItemID,ItemName ,4);
+                string filename = "ItemReports" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".xlsx";
+                string path = @"C:\Users" + "\\" + Environment.UserName + @"\Downloads\ExcelGenerate";
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(@"C:\Users" + "\\" + Environment.UserName + @"\Downloads\ExcelGenerate");
+                }
+                string pathandFileName = @"C:\Users" + "\\" + Environment.UserName + @"\Downloads\ExcelGenerate" + "\\" + filename;
+                dt = QU.BAL.UtilityBal.ConvertToDataTable(el);
+                Result = QU.BAL.UtilityBal.GenerateExcel(dt, pathandFileName);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return Result;
+        }        
          [WebMethod]
         public static string GenerateExcelForItems()
         {

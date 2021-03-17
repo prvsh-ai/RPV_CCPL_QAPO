@@ -475,10 +475,13 @@
         });
 
         $('#btnGenerateItems').on('click', function () {
+            var ItemID = 0;
+            var ItemName = "";
             $.ajax({
                 contentType: "application/json; charset=utf-8",
-                url: "Reports.aspx/GenerateExcelForItems",
+                url: "Reports.aspx/GenerateItemReports",
                 type: "POST",
+                data: "{ItemID:" + ItemID + ",ItemName:'" + ItemName + "'}",
                 dataType: "json",
                 success: function (result) {
                     var getResult = result.d;
