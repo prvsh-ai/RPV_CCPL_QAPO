@@ -2,42 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>Company Details</title>
-
     <style type="text/css">
-        .label1 {
-            display: inline-block;
-            max-width: 24%;
-            margin-bottom: 5px;
-            margin-top: 1%;
-            font-weight: 700;
-            width: 9%;
-            text-align: right;
-            margin-right: 1%;
-        }
-
-        .ddlstyle {
-            padding: 6px 17px;
-            font-size: 14px;
-            line-height: 1.42857143;
-            color: #555;
-            background-color: #fff;
-            background-image: none;
-            /*border: 1px solid;*/
-            width: 17.5%;
-        }
-
-        @media (min-width: 768px) {
-            .ddlstyle {
-                display: inline-block;
-                width: auto;
-                vertical-align: middle;
-            }
-        }
-
-        .modal-title {
-            text-align: center;
-        }
-
         .form-control {
             width: 159px !important;
         }
@@ -57,29 +22,16 @@
         .select2 {
             width: 159px !important;
         }
-
-        .paginate_button {
-            margin-left: 1%;
-        }
     </style>
     <link href="../css/Admin.css" rel="stylesheet" />
 </asp:Content>
-
 <asp:Content ID="Content2" ContentPlaceHolderID="EAWarpper" runat="server">
-
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-
-        <!-- Main content -->
         <section class="content">
-            <!-- START CUSTOM TABS -->
             <div class="container">
-
                 <div class="box box-solid">
-
                     <div class="box-body">
                         <div class="form-inline">
-
                             <div class="form-group" style="width: 100%; margin-top: 1%;">
                                 <label class="label1" for="txtCompanyName">Company Name</label>
                                 <input id="txtCompanyName" class="form-control" type="text" />
@@ -88,7 +40,6 @@
                                 <label class="label1" for="txtPanNo">Pan No</label>
                                 <input id="txtPanNo" class="form-control" type="text" />
                             </div>
-
                             <div class="form-group" style="width: 100%; margin-top: 1%;">
                                 <label class="label1" for="txtServiceTaxNo">Service Tax No</label>
                                 <input id="txtServiceTaxNo" class="form-control" type="text" />
@@ -97,7 +48,6 @@
                                 <label class="label1" for="txtAddress">Address</label>
                                 <input id="txtAddress" class="form-control" type="text" />
                             </div>
-
                             <div class="form-group" style="width: 100%; margin-top: 1%;">
                                 <label class="label1" for="ddlCountry">Country</label>
                                 <select id="ddlCountry" name="ddlCountryName" class="selectBox form-control"></select>
@@ -106,7 +56,6 @@
                                 <label class="label1" for="ddlCity">City</label>
                                 <select id="ddlCity" name="ddlCityName" class="selectBox form-control"></select>
                             </div>
-
                             <div class="form-group" style="width: 100%; margin-top: 1%;">
                                 <label class="label1" for="ddlCompanyLocation">Location </label>
                                 <select id="ddlCompanyLocation" name="ddlCompanyLocationName" class="selectBox" multiple="multiple"></select>
@@ -115,7 +64,6 @@
                                 <label class="label1" for="txtZipCode">Zipcode</label>
                                 <input id="txtZipCode" class="form-control integer" type="text" />
                             </div>
-
                             <div class="form-group" style="width: 100%; margin-top: 1%;">
                                 <label class="label1" for="txtBankName">Bank Name</label>
                                 <input id="txtBankName" class="form-control" type="text" />
@@ -124,7 +72,6 @@
                                 <label class="label1" for="txtAccountNo">Account No</label>
                                 <input id="txtAccountNo" class="form-control integer" type="text" />
                             </div>
-
                             <div class="form-group" style="width: 100%; margin-top: 1%;">
                                 <label class="label1" for="txtBankIFSC">Bank IFSC</label>
                                 <input id="txtBankIFSC" class="form-control" type="text" />
@@ -133,14 +80,12 @@
                                 <label class="label1" for="txtPOCNo">POC No</label>
                                 <input id="txtPOCNo" class="form-control integer" type="text" />
                             </div>
-
                             <div class="form-group" style="width: 100%; margin-top: 1%;">
                                 <label class="label1" for="chkCustomer">Customer</label>
                                 <input type="checkbox" name="chkCustomer" value="Customer" id="chkCustomer" />
                                 <label class="label1" for="chkVendor">Vendor</label>
                                 <input type="checkbox" name="chkVendor" value="Vendor" id="chkVendor" />
                             </div>
-
                             <div class="form-group" style="margin-top: 1%; width: 100%;">
                                 <input id="btnSave" type="button" value="Save" class="btn btn-success" />
                             </div>
@@ -148,16 +93,11 @@
                     </div>
                 </div>
             </div>
-
-            <%--Datatable Changes--%>
             <div class="container" style="margin-top: 5%; margin-bottom: 1%; width: 100%;">
                 <table id="CityTableId" class="table table-striped cf table-bordered table-striped table-responsive dataTable" style="table-layout: fixed"></table>
             </div>
-            <!-- /.row -->
-
             <div id="CityModal" class="modal fade" role="dialog">
                 <div class="modal-dialog">
-                    <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -175,7 +115,6 @@
                                             <label class="label1" for="txtPanNoUpdate">Pan No</label>
                                             <input id="txtPanNoUpdate" class="form-control" type="text" />
                                         </div>
-
                                         <div class="form-group" style="width: 100%; margin-top: 1%;">
                                             <label class="label1" for="txtServiceTaxNoUpdate">Service Tax No</label>
                                             <input id="txtServiceTaxNoUpdate" class="form-control" type="text" />
@@ -184,7 +123,6 @@
                                             <label class="label1" for="txtAddressUpdate">Address</label>
                                             <input id="txtAddressUpdate" class="form-control" type="text" />
                                         </div>
-
                                         <div class="form-group" style="width: 100%; margin-top: 1%;">
                                             <label class="label1" for="ddlCountryUpdate">Country</label>
                                             <select id="ddlCountryUpdate" name="ddlCountryUpdateName" class="selectBox form-control"></select>
@@ -193,7 +131,6 @@
                                             <label class="label1" for="ddlCityUpdate">City</label>
                                             <select id="ddlCityUpdate" name="ddlCityUpdateName" class="selectBox form-control"></select>
                                         </div>
-
                                         <div class="form-group" style="width: 100%; margin-top: 1%;">
                                             <label class="label1" for="ddlCompanyLocationUpdate">Location </label>
                                             <select id="ddlCompanyLocationUpdate" name="ddlCompanyLocationUpdateName" class="selectBox" multiple="multiple"></select>
@@ -202,7 +139,6 @@
                                             <label class="label1" for="txtZipCodeUpdate">Zipcode</label>
                                             <input id="txtZipCodeUpdate" class="form-control integer" type="text" />
                                         </div>
-
                                         <div class="form-group" style="width: 100%; margin-top: 1%;">
                                             <label class="label1" for="txtBankNameUpdate">Bank Name</label>
                                             <input id="txtBankNameUpdate" class="form-control" type="text" />
@@ -211,7 +147,6 @@
                                             <label class="label1" for="txtAccountNoUpdate">Account No</label>
                                             <input id="txtAccountNoUpdate" class="form-control integer" type="text" />
                                         </div>
-
                                         <div class="form-group" style="width: 100%; margin-top: 1%;">
                                             <label class="label1" for="txtBankIFSCUpdate">Bank IFSC</label>
                                             <input id="txtBankIFSCUpdate" class="form-control" type="text" />
@@ -220,7 +155,6 @@
                                             <label class="label1" for="txtPOCNoUpdate">POC No</label>
                                             <input id="txtPOCNoUpdate" class="form-control integer" type="text" />
                                         </div>
-
                                         <div class="form-group" style="width: 100%; margin-top: 1%;">
                                             <label class="label1" for="chkCustomerUpdate">Customer</label>
                                             <input type="checkbox" name="chkCustomerUpdate" value="Customer" id="chkCustomerUpdate" />
@@ -239,28 +173,22 @@
                 </div>
             </div>
         </section>
-        <!-- /.content -->
-
         <div id="pageloaddiv" class="pageloaddiv" style="display: none;">
         </div>
-
         <input id="hidHotelId" type="hidden" />
-
     </div>
     <div id="overlay">
-            <div class="cv-spinner">
-                <span class="spinner"></span>
-            </div>
+        <div class="cv-spinner">
+            <span class="spinner"></span>
         </div>
-    <%--Datatable Changes--%>
-
+    </div>
     <link href="../css/DataTable/dataTablesbootstrap.css" rel="stylesheet" />
-    <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="../js/datatables.1.10.2.min.js"></script>
+    <script src="../js/datables.1.10.16.mn.js"></script>
     <script src="../js/validations.js"></script>
+    <script src="../js/Admin.js"></script>
     <script type="text/javascript">
         $body = $("body");
-
         $(document).on({
             ajaxStart: function () { $("#overlay").fadeIn(300);; },
             ajaxStop: function () {
@@ -275,26 +203,18 @@
             }
         });
         $(document).ready(function () {
-
-
-            $('.integer').keyup(function (e) {
-                if (/\D/g.test(this.value)) {
-                    this.value = this.value.replace(/\D/g, '');
-                }
-            });
-
-            //validation starts
+            //$('.integer').keyup(function (e) {
+            //    if (/\D/g.test(this.value)) {
+            //        this.value = this.value.replace(/\D/g, '');
+            //    }
+            //});
             checkNameEmpty("#txtCompanyName");
             checkNameEmpty("#txtGSTIN");
-            checkNameEmpty("#txtPanNo"); 
+            checkNameEmpty("#txtPanNo");
             checkNameEmpty("#txtServiceTaxNo");
             checkValidEmail("#txtEmailId");
             checkNameEmpty("#txtAddress");
-            //checkNameEmpty("#ddlCountry"); //ddl
-            //checkNameEmpty("#ddlState");
-            //checkNameEmpty("#ddlCity");
-            //checkNameEmpty("#ddlCompanyLocation");
-            checkvalidPhoneNumber("#txtContactNo"); 
+            checkvalidPhoneNumber("#txtContactNo");
             checkNameEmpty("#txtZipCode"); ///integer
             checkNameEmpty("#txtBankName");
             checkNameEmpty("#txtBankBranch");
@@ -302,8 +222,6 @@
             checkNameEmpty("#txtBankIFSC");
             checkNameEmpty("#txtPOC");
             checkNameEmpty("#txtPOCNo"); //integer
-            //validation ends
-
             GetCountryDetails(0, "");
             GetLocationDetails(0, "");
             GetCompanyDetails(0, "");
@@ -311,15 +229,11 @@
             $(function () {
                 $('#ddlCompanyLocation').select2({
                     placeholder: "Select Nationality",
-                    // minimumInputLength: 1,
                     maximumInputLength: 1
-                    // allowClear: true
                 });
                 $('#ddlCompanyLocationUpdate').select2({
                     placeholder: "Select Nationality",
-                    // minimumInputLength: 1,
                     maximumInputLength: 1
-                    // allowClear: true
                 });
             });
             $('#ddlCountry').change(function () {
@@ -416,7 +330,7 @@
                 "#ddlStateUpdate",
                 "#ddlCityUpdate",
                 "#ddlCompanyLocationUpdate",
-                "#txtContactNoUpdate", 
+                "#txtContactNoUpdate",
                 "#txtZipCodeUpdate",
                 "#txtBankNameUpdate",
                 "#txtBankBranchUpdate",
@@ -430,8 +344,6 @@
                 else {
                     return false;
                 }
-
-
                 data.Mode = "2";
                 data.CompanyId = $('#hidHotelId').val();
                 data.CompanyName = $('#txtCompanyNameUpdate').val();
@@ -443,7 +355,7 @@
                 data.CountryId = parseInt($('#ddlCountryUpdate').val());
                 data.StateId = parseInt($('#ddlStateUpdate').val());
                 data.CityId = parseInt($('#ddlCityUpdate').val());
-                data.LocationsId = $('#ddlCompanyLocationUpdate').val().toString(); 
+                data.LocationsId = $('#ddlCompanyLocationUpdate').val().toString();
                 data.MobileNo = parseInt($('#txtContactNoUpdate').val());
                 data.ZipCode = parseInt($('#txtZipCodeUpdate').val());
                 data.BankName = $('#txtBankNameUpdate').val();
@@ -458,7 +370,6 @@
             });
             var ArrData = [];
         });
-
         function GetCityDetailsNew(CityId, CityName, StateId) {
             var element = "";
             $.ajax({
@@ -485,7 +396,6 @@
                 }
             });
         }
-
         function GetCountryDetails(CountryId, CountryName) {
             var element = "";
             $.ajax({
@@ -512,7 +422,6 @@
                 }
             });
         }
-
         function GetStateDetails(StateId, StateName, CountryId) {
             var element = "";
             $.ajax({
@@ -539,7 +448,6 @@
                 }
             });
         }
-
         function GetLocationDetails(StateId, StateName) {
             var element = "";
             $.ajax({
@@ -565,7 +473,6 @@
                 }
             });
         }
-
         function GetCompanyDetails(CompanyID, CompanyName) {
             var element = "";
             $.ajax({
@@ -595,10 +502,7 @@
                         element = element + '<td></td>';
                         element = element + '<td></td>';
                         element = element + '<td></td>';
-
                         element = element + '</tr>';
-
-                       // element = element + '<tr><td colspan="3"><p class="text-center">No Company Data Available</p></td></tr>'
                     }
                     for (var i = 0; i < len; i++) {
                         element = element + '<tr>';
@@ -611,7 +515,6 @@
                         element = element + '</tr>';
                     }
                     element = element + '</tbody>';
-                    //Datatable Changes
                     $("#CityTableId").append(element);
                     $('#CityTableId').dataTable({
                         "paging": true,
@@ -628,7 +531,6 @@
                 }
             });
         }
-
         function GetCompanyDetailsForUpdate(CompanyID, CompanyName, GstinNo, PanNo, ServiceTaxNo, EmailId, MobiletNo, ZipCode, Address, CountryId, StateId, CityId, LocationsId, BankName, BankBranch, BankAccountNo, BankIfsc, Poc, PocNo, Customer, Vendor) {
             GetStateDetails(0, "", CountryId);
             GetCityDetailsNew(0, "", StateId);
@@ -644,14 +546,12 @@
             $('#ddlCountryUpdate').val(CountryId); //pravesh
             $('#ddlStateUpdate').val(StateId);
             $('#ddlCityUpdate').val(CityId);
-            // $('#ddlCompanyLocationUpdate').val(LocationsId); //
             $('#txtBankNameUpdate').val(BankName);
             $('#txtBankBranchUpdate').val(BankBranch);
             $('#txtAccountNoUpdate').val(BankAccountNo);
             $('#txtBankIFSCUpdate').val(BankIfsc);
             $('#txtPOCUpdate').val(Poc);
             $('#txtPOCNoUpdate').val(PocNo);
-
             var ArrayOfInts = LocationsId.split(',').map(Number);
             $.each($("#ddlCompanyLocationUpdate"), function () {
                 $(this).select2('val', ArrayOfInts);
@@ -659,9 +559,7 @@
             $('#chkCustomerUpdate').prop('checked', Customer);
             $('#chkVendorUpdate').prop('checked', Vendor);
         }
-
         function SaveUpdateCompanyDetails(data) {
-            ///   alert(data);
             $.ajax({
                 contentType: "application/json; charset=utf-8",
                 url: "Company.aspx/SaveUpdateCompanyDetailsNew",
@@ -673,9 +571,8 @@
                     var getResult = result.d;
                     if (getResult != "0") {
                         alert(getResult);
-                        //GetCityDetails(0, "", 0);
                         GetCompanyDetails(0, "");
-                        ClearInputBoxValues(data.Mode);
+                        ClearInputBoxValues();
                     }
                     else {
                         alert("There is an Error");
@@ -686,16 +583,13 @@
                 }
             });
         }
-
-        function ClearInputBoxValues(Mode) {
-            if (Mode == 1) {
-                $('input[type=text]').each(function () {
-                    $(this).val('');
-                });
-                $('select').each(function () {
-                    $(this).val('0');
-                });
-            }
+        function ClearInputBoxValues() {
+            $('input[type=text]').each(function () {
+                $(this).val('');
+            });
+            $('select').each(function () {
+                $(this).val('0');
+            });
         }
 
     </script>

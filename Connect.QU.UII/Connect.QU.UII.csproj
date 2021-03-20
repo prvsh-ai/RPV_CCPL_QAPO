@@ -111,6 +111,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="images\Connectlogo.JPG" />
     <Content Include="images\loadingimage.png" />
+    <Content Include="js\Admin.js" />
     <Content Include="js\bootstrap-datetimepicker.4.17.37.min.js" />
     <Content Include="js\bootstrap.3.3.7.min.js" />
     <Content Include="js\botstrap-datepiker.1.6.4.min.js" />

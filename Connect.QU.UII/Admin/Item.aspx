@@ -2,42 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>Item Details</title>
-
     <style type="text/css">
-        .label1 {
-            display: inline-block;
-            max-width: 24%;
-            margin-bottom: 5px;
-            margin-top: 1%;
-            font-weight: 700;
-            width: 9%;
-            text-align: right;
-            margin-right: 1%;
-        }
-
-        .ddlstyle {
-            padding: 6px 17px;
-            font-size: 14px;
-            line-height: 1.42857143;
-            color: #555;
-            background-color: #fff;
-            background-image: none;
-            /*border: 1px solid;*/
-            width: 17.5%;
-        }
-
-        @media (min-width: 768px) {
-            .ddlstyle {
-                display: inline-block;
-                width: auto;
-                vertical-align: middle;
-            }
-        }
-
-        .modal-title {
-            text-align: center;
-        }
-
         .form-control {
             width: 159px !important;
         }
@@ -48,7 +13,6 @@
 
         .selectBox {
             display: inline-block;
-            /*width: auto;*/
             width: 159px;
             vertical-align: middle;
             height: 30px;
@@ -62,23 +26,12 @@
             width: 119px;
             height: 30px;
         }
-
-        .paginate_button {
-            margin-left: 1%;
-        }
     </style>
-
     <link href="../css/Admin.css" rel="stylesheet" />
-
-
 </asp:Content>
-
 <asp:Content ID="Content2" ContentPlaceHolderID="EAWarpper" runat="server">
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <!-- Main content -->
         <section class="content">
-            <!-- START CUSTOM TABS -->
             <div class="container">
                 <div class="box box-solid">
                     <div class="box-body">
@@ -134,11 +87,8 @@
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
                                 </div>
-
                                 <label class="label1" for="txtInStockQuantity">Stock Quantity</label>
                                 <input id="txtInStockQuantity" class="form-control" type="text" />
-
-
                                 <label class="label1" for="chkApprove">Approve</label>
                                 <input type="checkbox" name="chkApprove" value="YES" id="chkApprove" />
                             </div>
@@ -169,10 +119,8 @@
             <div class="container" style="margin-top: 3%; margin-bottom: 1%; width: 100%;">
                 <table id="CityTableId" class="table table-striped cf table-bordered table-striped table-responsive dataTable" style="table-layout: fixed"></table>
             </div>
-            <!-- /.row -->
             <div id="CityModal" class="modal fade" role="dialog">
                 <div class="modal-dialog">
-                    <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -268,7 +216,6 @@
                 </div>
             </div>
         </section>
-        <!-- /.content -->
         <div id="pageloaddiv" class="pageloaddiv" style="display: none;">
         </div>
         <input id="hidHotelId" type="hidden" />
@@ -279,14 +226,12 @@
         </div>
     </div>
     <link href="../css/DataTable/dataTablesbootstrap.css" rel="stylesheet" />
-    <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-
+    <script src="../js/datatables.1.10.2.min.js"></script>
+    <script src="../js/datables.1.10.16.mn.js"></script>
     <script src="../js/validations.js"></script>
-
+    <script src="../js/Admin.js"></script>
     <script type="text/javascript">
         $body = $("body");
-
         $(document).on({
             ajaxStart: function () { $("#overlay").fadeIn(300);; },
             ajaxStop: function () {
@@ -301,33 +246,21 @@
             }
         });
         $(document).ready(function () {
-
-
-            //validation starts
-            $('.integer').keyup(function (e) {
-                if (/\D/g.test(this.value)) {
-                    this.value = this.value.replace(/\D/g, '');
-                }
-            });
+            //$('.integer').keyup(function (e) {
+            //    if (/\D/g.test(this.value)) {
+            //        this.value = this.value.replace(/\D/g, '');
+            //    }
+            //});
             checkNameEmpty("#txtItemName");
-            //checkNameEmpty("#ddlCategoryId"); //ddl
             checkNameEmpty("#txtLastPrice"); //integer
-            //checkNameEmpty("#ddlGstApplicable"); //ddl
-            //checkValidEmail("#ddlGstRate"); //ddl
             checkNameEmpty("#txtHsnCode");
             checkNameEmpty("#txtEffectiveFrom");
             checkNameEmpty("#txtEffectiveTo");
             checkNameEmpty("#txtInStockQuantity");
-            //validation ends
-
-
             GetItemDetails(0, "");
-
             var data = {};
             $('#divSpecification').hide();
-
             $("#radStock").attr('checked', true);
-
             $('#ddlGstApplicable').change(function () {
                 if ($('#ddlGstApplicable').val() == 1) {
                     $("#ddlGstRate").removeAttr('disabled');
@@ -337,7 +270,6 @@
                     $("#ddlGstRate").prop('disabled', 'disabled');
                 }
             });
-
             $('#ddlGstApplicableUpdate').change(function () {
                 if ($('#ddlGstApplicableUpdate').val() == 1) {
                     $("#ddlGstRateUpdate").removeAttr('disabled');
@@ -347,7 +279,6 @@
                     $("#ddlGstRateUpdate").prop('disabled', 'disabled');
                 }
             });
-
             $('#ddlCategoryId').change(function () {
                 if ($('#ddlCategoryId').val() == 0) {
                     $('#divSpecification').hide();
@@ -359,7 +290,6 @@
                     $('#divSpecification').show();
                 }
             });
-
             $('#ddlCategoryIdUpdate').change(function () {
                 if ($('#ddlCategoryIdUpdate').val() == 0) {
                     $('#divSpecificationUpdate').hide();
@@ -371,18 +301,14 @@
                     $('#divSpecificationUpdate').show();
                 }
             });
-
             GetCategoryDetails(0, "");
-
             $(function () {
                 $('#txtValidityFrom').datetimepicker();
                 $('#txtValidityTo').datetimepicker();
                 $('#txtValidityFromUpdate').datetimepicker();
                 $('#txtValidityToUpdate').datetimepicker();
             });
-
             $("#btnSave").click(function () {
-
                 var validations = Validation_Item(
                "#txtItemName",
                "#ddlCategoryId",
@@ -397,7 +323,6 @@
                 else {
                     return false;
                 }
-
                 data.Mode = 1;
                 data.ItemId = 0;
                 data.ItemName = $('#txtItemName').val();
@@ -423,9 +348,7 @@
                 SaveUpdateItemDetails(
                   data);
             });
-
             $("#btnUpdate").click(function () {
-
                 var validations = Validation_Item(
               "#txtItemNameUpdate",
               "#ddlCategoryIdUpdate",
@@ -440,7 +363,6 @@
                 else {
                     return false;
                 }
-
                 data.Mode = 2;
                 data.ItemId = $('#hidHotelId').val();
                 data.ItemName = $('#txtItemNameUpdate').val();
@@ -468,7 +390,6 @@
             });
             var ArrData = [];
         });
-
         function GetSpecificationDetails(CategoryID, CategoryName) {
             var element = "";
             $.ajax({
@@ -532,7 +453,6 @@
                 }
             });
         }
-
         function GetSpecificationDetailsUpdate(CategoryID, CategoryName) {
             var element = "";
             $.ajax({
@@ -596,7 +516,6 @@
                 }
             });
         }
-
         function GetCategoryDetails(CategoryID, CategoryName) {
             var element = "";
             $.ajax({
@@ -622,7 +541,6 @@
                 }
             });
         }
-
         function GetItemDetails(ItemID, ItemName) {
             var element = "";
             $.ajax({
@@ -645,7 +563,6 @@
                     element = element + '<th>Action</th>';
                     element = element + '</tr></thead><tbody>';
                     if (len == 0) {
-
                         element = element + '<tr>';
                         element = element + '<td>No Data Available</td>';
                         element = element + '<td></td>';
@@ -655,22 +572,17 @@
                         element = element + '<td></td>';
                         element = element + '<td></td>';
                         element = element + '</tr>';
-
-                        //    element = element + '<tr><td colspan="3"><p class="text-center">No Company Data Available</p></td></tr>'
                     }
                     for (var i = 0; i < len; i++) {
                         element = element + '<tr>';
                         element = element + '<td>' + getResult[i].ItemName + '</td>';
                         element = element + '<td>' + getResult[i].CategoryName + '</td>';
-                        //element = element + '<td>' + getResult[i].GstApplicable + '</td>';
-
                         if (getResult[i].GstApplicable == "1") {
                             element = element + '<td>Yes</td>';
                         }
                         else {
                             element = element + '<td>No</td>';
                         }
-
                         element = element + '<td>' + getResult[i].HsnCode + '</td>';
                         element = element + '<td>' + getResult[i].SKU + '</td>';
                         element = element + '<td>' + getResult[i].PU + '</td>';
@@ -694,15 +606,7 @@
                 }
             });
         }
-
         function GetItemDetailsForUpdate(ItemID, ItemName, CategoryId, CategoryName, LastPrice, GstApplicable, GstRate, RadStock, RadService, SKU, PU, HsnCode, EffectiveStartDate, EffectiveEndDate, Brand, Type, Name, Number, Color, Size, InStockQuantity, Approved) {
-
-
-            //alert(RadStock);
-            //alert(RadService);
-
-           // alert(GstApplicable)
-            debugger;
             $('#hidHotelId').val(ItemID);
             $('#txtItemNameUpdate').val(ItemName);
             $('#ddlCategoryIdUpdate').val(CategoryId);
@@ -724,11 +628,7 @@
             $('#txtSizeUpdate').val(Size);
             $('#txtInStockQuantityUpdate').val(InStockQuantity);
             $('#chkApproveUpdate').prop('checked', Approved);
-
-
-
         }
-
         function SaveUpdateItemDetails(data) {
             $.ajax({
                 contentType: "application/json; charset=utf-8",
@@ -741,7 +641,7 @@
                     if (getResult != "0") {
                         alert(getResult);
                         GetItemDetails(0, "");
-                        ClearInputBoxValues(data.Mode);
+                        ClearInputBoxValues();
                     }
                     else {
                         alert("There is an Error");
@@ -752,31 +652,25 @@
                 }
             });
         }
-
-        function ClearInputBoxValues(Mode) {
-            if (Mode == 1) {
-                $('input[type=text]').each(function () {
-                    $(this).val('');
-                });
-                $('select').each(function () {
-                    $(this).val('0');
-                });
-            }
+        function ClearInputBoxValues() {
+            $('input[type=text]').each(function () {
+                $(this).val('');
+            });
+            $('select').each(function () {
+                $(this).val('0');
+            });
         }
-
-        function GetProperDate(DateStr) {
-            if (DateStr != null && DateStr != undefined && DateStr != "") {
-                var dateString = DateStr.substr(6);
-                var currentTime = new Date(parseInt(dateString));
-                var month = currentTime.getMonth() + 1;
-                var day = currentTime.getDate();
-                var year = currentTime.getFullYear();
-                var date = ('0' + month).slice(-2) + "/" + day + "/" + year;
-                return date;
-            }
-        }
-
+        //function GetProperDate(DateStr) {
+        //    if (DateStr != null && DateStr != undefined && DateStr != "") {
+        //        var dateString = DateStr.substr(6);
+        //        var currentTime = new Date(parseInt(dateString));
+        //        var month = currentTime.getMonth() + 1;
+        //        var day = currentTime.getDate();
+        //        var year = currentTime.getFullYear();
+        //        var date = ('0' + month).slice(-2) + "/" + day + "/" + year;
+        //        return date;
+        //    }
+        //}
     </script>
-
 </asp:Content>
 

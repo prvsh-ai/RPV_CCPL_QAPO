@@ -7,17 +7,11 @@
             margin-left: 33px;
         }
     </style>
-
-    
-<link href="../css/Admin.css" rel="stylesheet" />
+    <link href="../css/Admin.css" rel="stylesheet" />
 </asp:Content>
-
 <asp:Content ID="Content2" ContentPlaceHolderID="EAWarpper" runat="server">
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <!-- Main content -->
         <section class="content">
-            <!-- START CUSTOM TABS -->
             <div class="row">
                 <div class="col-md-12">
                     <div class="box box-solid">
@@ -30,7 +24,6 @@
                                             <input id="txtCurrencyName" class="form-control" type="text" />
                                         </div>
                                         <input id="btnSave" type="button" value="Save" class="btn btn-success" />
-
                                     </div>
                                 </div>
                             </div>
@@ -40,10 +33,8 @@
                     </div>
                 </div>
             </div>
-            <!-- /.row -->
             <div id="CurrencyModal" class="modal fade" role="dialog">
                 <div class="modal-dialog">
-                    <!-- Modal content-->
                     <div class="modal-content">
                         <div class="panel panel-success">
                             <div class="panel-heading">
@@ -70,21 +61,18 @@
                 </div>
             </div>
         </section>
-        <!-- /.content -->
         <div id="pageloaddiv" class="pageloaddiv" style="display: none;">
         </div>
         <input id="hidCurrencyId" type="hidden" />
     </div>
-
-     <div id="overlay">
-            <div class="cv-spinner">
-                <span class="spinner"></span>
-            </div>
+    <div id="overlay">
+        <div class="cv-spinner">
+            <span class="spinner"></span>
         </div>
-
+    </div>
+    <script src="../js/Admin.js"></script>
     <script type="text/javascript">
         $body = $("body");
-
         $(document).on({
             ajaxStart: function () { $("#overlay").fadeIn(300);; },
             ajaxStop: function () {
@@ -100,7 +88,6 @@
         });
         $(document).ready(function () {
             GetCurrencyDetails(0, "");
-
             $("#btnSave").click(function () {
                 if ($('#txtCurrencyName').val().trim() != '') {
                     data.Mode = 1;
@@ -109,7 +96,6 @@
                     InsertUpdateCurrencyDetails(data);
                 }
             });
-
             $("#btnUpdate").click(function () {
                 if ($('#txtCurrencyNameUpdate').val().trim() != '') {
                     data.Mode = 2;
@@ -119,7 +105,6 @@
                 }
             });
         });
-
         function GetCurrencyDetails(CurrencyId, CurrencyName) {
             var element = "";
             $.ajax({
@@ -137,17 +122,12 @@
                     element = element + '<th>Action</th>';
                     element = element + '</tr></thead><tbody>';
                     if (len == 0) {
-
                         element = element + '<tr>';
                         element = element + '<td>No Data Available</td>';
                         element = element + '<td></td>';
-                        
                         element = element + '</tr>';
-
-                       // element = element + '<tr><td colspan="3"><p class="text-center">No Currency Data Available</p></td></tr>'
                     }
                     for (var i = 0; i < len; i++) {
-
                         element = element + '<tr>';
                         element = element + '<td>' + getResult[i].CurrencyName + '</td>';
                         element = element + '<td><a href="#"><span class="label label-warning" onclick="GetCurrencyDetailsForUpdate(' + getResult[i].CurrencyId + ',\'' + getResult[i].CurrencyName + '\'); return false;" data-toggle="modal" data-target="#CurrencyModal"><i class="fa fa-file-text"  aria-hidden="true"></i> Edit </span></a></td>';
@@ -161,14 +141,11 @@
                 }
             });
         }
-
         function GetCurrencyDetailsForUpdate(CurrencyId, CurrencyName) {
-
             $('#hidCurrencyId').val(CurrencyId);
             $('#txtCurrencyNameUpdate').val(CurrencyName);
 
         }
-
         function InsertUpdateCurrencyDetails(data) {
             $.ajax({
                 contentType: "application/json; charset=utf-8",
@@ -192,5 +169,4 @@
             });
         }
     </script>
-
 </asp:Content>

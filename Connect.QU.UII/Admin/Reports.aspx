@@ -2,144 +2,16 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>Reports</title>
-
-
     <style>
-        .paginate_button {
-            margin-left: 1%;
-        }
-
-        #ApplicationForm {
-            padding: 0;
-            border: 0px solid #ddd;
-            width: 100%;
-            margin: 0 auto;
-        }
-
-            #ApplicationForm .list-inline > li {
-                display: block;
-            }
-
-            #ApplicationForm .APLogo {
-                max-width: 255px;
-            }
-
-            #ApplicationForm .HR2App {
-                border: 1px solid #555;
-            }
-
-            #ApplicationForm .AppFormBody input[type='text'], .PasswordControl {
-                height: 25px;
-                color: #1b2cef;
-                width: 100%;
-            }
-
-            #ApplicationForm .AppFormdatetimepicker .form-control {
-                height: 34px !important;
-                box-shadow: none;
-                border-radius: 0;
-            }
-
-            #ApplicationForm .AppFormdatetimepicker .input-group-addon {
-                border-radius: 0;
-            }
-
-            #ApplicationForm .AppFormTxtArea {
-                margin: 40px auto;
-            }
-
-                #ApplicationForm .AppFormTxtArea p {
-                    margin: 10px 0 0;
-                }
-
-
         @media (min-width: 480px) {
             #ApplicationForm {
                 padding: 45px !important;
-                border: 2px solid #ddd;
-                width: 90%;
-                margin: 20px auto;
-                background-color: white;
+                background-color: white !important;
             }
         }
-
-        @media (min-width: 768px) {
-            #ApplicationForm .AppFormBody .AppX input[type='text'], .PasswordControl {
-                border: none;
-                height: 30px;
-                border-bottom: 1px solid #999;
-                color: #1b2cef;
-                width: auto;
-            }
-        }
-
-        @media (min-width: 768px) {
-            #ApplicationForm .AppFormBody .APPTest input[type='text'], .PasswordControl {
-                border: none;
-                height: 30px;
-                border-bottom: 1px solid #999;
-                color: #1b2cef;
-            }
-        }
-
-        #ApplicationForm .list-inline > li {
-            display: inline-block;
-        }
-
-        #ApplicationForm .AppFormdatetimepicker .form-control {
-            border: none;
-            box-shadow: 0 0 0 0;
-            border-radius: 0;
-            border-bottom: 1px solid #555;
-            height: 30px;
-        }
-
-        #ApplicationForm .AppFormdatetimepicker .input-group-addon {
-            background: transparent;
-            border: 0;
-            border-bottom: 1px solid #999 !important;
-            border-radius: 0;
-        }
-         /*Spinner Style Start*/
-        #overlay {
-            position: fixed;
-            top: 0;
-            z-index: 100;
-            width: 100%;
-            height: 100%;
-            display: none;
-            background: rgba(0,0,0,0.6);
-        }
-
-        .cv-spinner {
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .spinner {
-            width: 60px;
-            height: 60px;
-            border: 4px #ddd solid;
-            border-top: 4px #2e93e6 solid;
-            border-radius: 50%;
-            animation: sp-anime 0.8s infinite linear;
-        }
-
-        @keyframes sp-anime {
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        .is-hide {
-            display: none;
-        }
-        /*Spinner Style End*/
     </style>
+    <link href="../css/Admin.css" rel="stylesheet" />
 </asp:Content>
-
 <asp:Content ID="Content2" ContentPlaceHolderID="EAWarpper" runat="server">
     <div class="content-wrapper">
         <section class="content">
@@ -181,7 +53,6 @@
             <div class="container" id="ExecutionTable" style="margin-top: 3%; margin-bottom: 1%; width: 100%;">
                 <table id="ExecutionTableId" class="table table-striped cf table-bordered table-striped table-responsive dataTable" style="table-layout: fixed"></table>
             </div>
-            <%--Quotation Details Start--%>
             <div class="AppFormBody" id="ApplicationForm">
                 <h4 class="text-center" id="QuotationApplicationText"><b>QUOTATION APPLICATION</b></h4>
                 <p>
@@ -195,7 +66,6 @@
                                     </div>
                                     <div class="col-lg-4">
                                         <label class="control-label" style="margin-right: 5%">Financial Year</label><b />
-
                                         <input type='text' class="form-control" id="txtFinancialYear" disabled />
                                     </div>
                                     <div class="col-lg-4">
@@ -395,39 +265,35 @@
                     </div>
                 </p>
             </div>
-            <%--Quotation Details End --%>
         </section>
     </div>
-
-     <div id="overlay">
+    <div id="overlay">
         <div class="cv-spinner">
             <span class="spinner"></span>
         </div>
     </div>
-
     <link href="../css/DataTable/dataTablesbootstrap.css" rel="stylesheet" />
-    <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-
+    <script src="../js/datatables.1.10.2.min.js"></script>
+    <script src="../js/datables.1.10.16.mn.js"></script>
+    <script src="../js/Admin.js"></script>
     <script type="text/javascript">
-
         $body = $("body");
-
         $(document).on({
             ajaxStart: function () { $("#overlay").fadeIn(300);; },
             ajaxStop: function () {
                 setTimeout(function () {
                     $("#overlay").fadeOut(300);
                 }, 200);
+            },
+            ajaxError: function () {
+                setTimeout(function () {
+                    $("#overlay").fadeOut(300);
+                }, 200);
             }
         });
-
         $(document).ready(function () {
-
             $('#ApplicationForm').hide();
-
             GetQuotationDetails(0);
-
             $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
                 var currentTab = $(e.target).text(); // get current tab               
                 switch (currentTab) {
@@ -451,7 +317,6 @@
                 };
             });
         });
-
         $('#btnGenerate').on('click', function () {
             var QId = 0;
             $.ajax({
@@ -473,7 +338,6 @@
             });
 
         });
-
         $('#btnGenerateItems').on('click', function () {
             var ItemID = 0;
             var ItemName = "";
@@ -494,9 +358,7 @@
                     return;
                 }
             });
-
         });
-
         $('#btnGenerateRequisition').on('click', function () {
             var Requisitionid = 0;
             $.ajax({
@@ -516,9 +378,7 @@
                     return;
                 }
             });
-
         });
-
         $('#btnGenerateExecution').on('click', function () {
             var ExecutionId = 0;
             $.ajax({
@@ -540,7 +400,6 @@
             });
 
         });
-
         function GetQuotationDetails(QID) {
             var element = "";
             var Counter = 1;
@@ -584,9 +443,6 @@
                         element = element + '<td></td>';
                         element = element + '<td></td>';
                         element = element + '</tr>';
-
-
-                        //element = element + '<tr><td colspan="3"><p class="text-center">No Approval Data Available</p></td></tr>'
                     }
                     for (var i = 0; i < len; i++) {
                         element = element + '<tr>';
@@ -623,7 +479,6 @@
                 }
             });
         }
-
         function GetRequisitionDetails(RequisitionId) {
             var element = "";
             var Counter = 1;
@@ -654,7 +509,6 @@
                     element = element + '<th>Approved By</th>';
                     element = element + '</tr></thead><tbody>';
                     if (len == 0) {
-
                         element = element + '<tr>';
                         element = element + '<td>No Data Available</td>';
                         element = element + '<td></td>';
@@ -662,12 +516,7 @@
                         element = element + '<td></td>';
                         element = element + '<td></td>';
                         element = element + '<td></td>';
-                   
                         element = element + '</tr>';
-
-
-
-                        //element = element + '<tr><td colspan="3"><p class="text-center">No Requisition Data Available</p></td></tr>'
                     }
                     for (var i = 0; i < len; i++) {
                         element = element + '<tr>';
@@ -696,7 +545,6 @@
                 }
             });
         }
-
         function btnAddCall(DescriptionOfGoods, Qty, Hsn, Rate, Value, Igst, Amount, TotalAmount1) {
             var txtDescriptionOfGoods = DescriptionOfGoods;//$("#txtDescriptionOfGoods");
             var txtQty = Qty;//$("#txtQty");
@@ -725,7 +573,6 @@
             cell = $(row.insertCell(-1));
             cell.html(TotalAmount1);
         }
-
         function GetTOCDetails(QID) {
             var element = "";
             $("#tblCustomers > TBODY").empty();
@@ -755,7 +602,6 @@
                 }
             });
         }
-
         function ViewDetails(QID) {
             $('#ApplicationForm').show();
             GetTOCDetails(QID);
@@ -769,33 +615,33 @@
                     var getResult = result.d;
                     var len = getResult.length;
                     if (len > 0) {
-                        $('#txtProjectName').val(getResult[0].ProjectName),
-                        $('#txtFinantialYear').val(getResult[0].FinantialYear),
-                       $('#txtQuotationDate').val(GetProperDate(getResult[0].QDate)),
-                        $('#txtCompanyName').val(getResult[0].QToCompanyName),
-                        $('#txtGstinParty').val(getResult[0].QToGSTINNo),
-                        $('#txtContactPerson').val(getResult[0].QToContactPerson),
-                        $('#txtAddress').val(getResult[0].QToAddress),
-                        $('#txtaymentTerms').val(getResult[0].PaymentTerms),
-                        $('#txtValidityOfQuote').val(getResult[0].ValidityOfQuote),
-                        $('#txtPlaceOfSupply').val(getResult[0].PlaceOfSupply),
-                        $('#txtGrandTotal').val(getResult[0].TotalAmountDigit),
-                        $('#txtTotalWords').val(getResult[0].TotalAmountWords),
-                        $('#txtTaxableAmount').val(getResult[0].TaxableAmount),
-                        $('#txtFreight').val(getResult[0].Freight),
-                       $('#txtBankName').val(getResult[0].BankName),
-                       $('#txtBranchName').val(getResult[0].BranchName),
-                        $('#txtBankAccountNo').val(getResult[0].BankAccNo),
-                       $('#txtBranchIfsc').val(getResult[0].BankBranchIFSC),
-                       $('#txtSignatureDate').val(GetProperDate(getResult[0].SignatureDate))
-                        $('#txtDescriptionOdGoods').val(getResult[0].DescriptionOfGoods),
-                        $('#txtQty').val(getResult[0].Quantity),
-                        $('#txtHsn').val(getResult[0].HsnCode),
-                        $('#txtRate').val(getResult[0].Rate),
-                        $('#txtValue').val(getResult[0].Value),
-                        $('#txtIgst').val(getResult[0].Igst),
-                        $('#txtAmount').val(getResult[0].Amount),
-                        $('#txtTotalAmount1').val(getResult[0].TotalAmount1)
+                        $('#txtProjectName').val(getResult[0].ProjectName);
+                        $('#txtFinantialYear').val(getResult[0].FinantialYear);
+                        $('#txtQuotationDate').val(GetProperDate(getResult[0].QDate));
+                        $('#txtCompanyName').val(getResult[0].QToCompanyName);
+                        $('#txtGstinParty').val(getResult[0].QToGSTINNo);
+                        $('#txtContactPerson').val(getResult[0].QToContactPerson);
+                        $('#txtAddress').val(getResult[0].QToAddress);
+                        $('#txtaymentTerms').val(getResult[0].PaymentTerms);
+                        $('#txtValidityOfQuote').val(getResult[0].ValidityOfQuote);
+                        $('#txtPlaceOfSupply').val(getResult[0].PlaceOfSupply);
+                        $('#txtGrandTotal').val(getResult[0].TotalAmountDigit);
+                        $('#txtTotalWords').val(getResult[0].TotalAmountWords);
+                        $('#txtTaxableAmount').val(getResult[0].TaxableAmount);
+                        $('#txtFreight').val(getResult[0].Freight);
+                        $('#txtBankName').val(getResult[0].BankName);
+                        $('#txtBranchName').val(getResult[0].BranchName);
+                        $('#txtBankAccountNo').val(getResult[0].BankAccNo);
+                        $('#txtBranchIfsc').val(getResult[0].BankBranchIFSC);
+                        $('#txtSignatureDate').val(GetProperDate(getResult[0].SignatureDate));
+                        $('#txtDescriptionOdGoods').val(getResult[0].DescriptionOfGoods);
+                        $('#txtQty').val(getResult[0].Quantity);
+                        $('#txtHsn').val(getResult[0].HsnCode);
+                        $('#txtRate').val(getResult[0].Rate);
+                        $('#txtValue').val(getResult[0].Value);
+                        $('#txtIgst').val(getResult[0].Igst);
+                        $('#txtAmount').val(getResult[0].Amount);
+                        $('#txtTotalAmount1').val(getResult[0].TotalAmount1);
                     }
                 },
                 error: function (err) {
@@ -803,23 +649,20 @@
                 }
             });
         }
-
         function HideDetails() {
             $('#ApplicationForm').hide();
         }
-
-        function GetProperDate(DateStr) {
-            if (DateStr != null && DateStr != undefined && DateStr != "") {
-                var dateString = DateStr.substr(6);
-                var currentTime = new Date(parseInt(dateString));
-                var month = currentTime.getMonth() + 1;
-                var day = currentTime.getDate();
-                var year = currentTime.getFullYear();
-                var date = ('0' + month).slice(-2) + "/" + day + "/" + year;
-                return date;
-            }
-        }
-
+        //function GetProperDate(DateStr) {
+        //            if (DateStr != null && DateStr != undefined && DateStr != "") {
+        //                var dateString = DateStr.substr(6);
+        //                var currentTime = new Date(parseInt(dateString));
+        //                var month = currentTime.getMonth() + 1;
+        //                var day = currentTime.getDate();
+        //                var year = currentTime.getFullYear();
+        //                var date = ('0' + month).slice(-2) + "/" + day + "/" + year;
+        //                return date;
+        //            }
+        //        }
         function GetItemDetails(ItemID, ItemName) {
             var element = "";
             $.ajax({
@@ -850,7 +693,6 @@
                     element = element + '<th>PU</th>';
                     element = element + '</tr></thead><tbody>';
                     if (len == 0) {
-
                         element = element + '<tr>';
                         element = element + '<td>No Data Available</td>';
                         element = element + '<td></td>';
@@ -858,24 +700,18 @@
                         element = element + '<td></td>';
                         element = element + '<td></td>';
                         element = element + '<td></td>';
-
                         element = element + '</tr>';
-
-                        // element = element + '<tr><td colspan="3"><p class="text-center">No Company Data Available</p></td></tr>'
                     }
                     for (var i = 0; i < len; i++) {
                         element = element + '<tr>';
                         element = element + '<td>' + getResult[i].ItemName + '</td>';
                         element = element + '<td>' + getResult[i].CategoryName + '</td>';
-
                         if (getResult[i].GstApplicable == "1") {
                             element = element + '<td>Yes</td>';
                         }
                         else {
                             element = element + '<td>No</td>';
                         }
-
-                      //  element = element + '<td>' + getResult[i].GstApplicable + '</td>';
                         element = element + '<td>' + getResult[i].HsnCode + '</td>';
                         element = element + '<td>' + getResult[i].SKU + '</td>';
                         element = element + '<td>' + getResult[i].PU + '</td>';
@@ -898,7 +734,6 @@
                 }
             });
         }
-
         function GetExecutionDetails(ExecutionId) {
             var element = "";
             var Counter = 1;
@@ -921,7 +756,6 @@
                     $('#dvdrequisition').hide();
                     $('#dvdItems').hide();
                     $('#tblApprove').empty();
-                    //style = "width:59px"
                     element = element + '<thead class="cf"><tr class="bgblue-Over">';
                     element = element + '<th>Document Number</th>';
                     element = element + '<th>Division</th>';
@@ -930,9 +764,7 @@
                     element = element + '<th>Creation Date</th>';
                     element = element + '<th>Created By</th>';
                     element = element + '</tr></thead><tbody>';
-
                     if (len == 0) {
-
                         element = element + '<tr>';
                         element = element + '<td>No Data Available</td>';
                         element = element + '<td></td>';
@@ -940,19 +772,10 @@
                         element = element + '<td></td>';
                         element = element + '<td></td>';
                         element = element + '<td></td>';
-
                         element = element + '</tr>';
-
-                        //element = element + '<tr><td colspan="3"><p class="text-center">No Execution Data Available</p></td></tr>'
                     }
-
                     for (var i = 0; i < len; i++) {
-                        //alert(i);
-
-                        //   alert(getResult[i].RequisitionDate);
-
                         element = element + '<tr>';
-                        //element = element + '<td>' + Counter++ + '</td>';
                         element = element + '<td>' + getResult[i].DocumentNumber + '</td>';
                         element = element + '<td>' + getResult[i].Division + '</td>';
                         element = element + '<td>' + getResult[i].VersionNember + '</td>';
@@ -970,18 +793,13 @@
                         "pagingType": "simple_numbers"[{
                             style: 'Margin-left:1%'
                         }]
-
                     });
                     $('.dataTables_length').addClass('bs-select');
-
-
                 },
                 error: function (err) {
                     // alert(err.statusText)
                 }
             });
         }
-
-
     </script>
 </asp:Content>

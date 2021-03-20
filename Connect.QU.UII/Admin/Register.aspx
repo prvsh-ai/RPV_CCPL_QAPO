@@ -4,14 +4,7 @@
     <title>User Register</title>
     <style type="text/css">
         .label1 {
-            display: inline-block;
-            max-width: 24%;
-            margin-bottom: 5px;
-            margin-top: 1%;
-            font-weight: 700;
-            width: 9%;
-            text-align: right;
-            margin-right: 14px;
+            margin-right: 14px !important;
         }
 
         .selectBox {
@@ -32,16 +25,9 @@
     </style>
     <link href="../css/Admin.css" rel="stylesheet" />
 </asp:Content>
-
 <asp:Content ID="Content2" ContentPlaceHolderID="EAWarpper" runat="server">
-    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
-
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <!-- Main content -->
         <section class="content">
-            <!-- START CUSTOM TABS -->
             <div class="container">
                 <div class="box box-solid">
                     <div class="box-body">
@@ -78,10 +64,8 @@
             </div>
         </section>
     </div>
-    <!-- /.row -->
     <div id="LoginModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
-            <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -124,38 +108,21 @@
             </div>
         </div>
     </div>
-    <!-- /.content -->
     <div id="pageloaddiv" class="pageloaddiv" style="display: none;">
     </div>
-
     <div id="overlay">
         <div class="cv-spinner">
             <span class="spinner"></span>
         </div>
     </div>
-
     <input id="hidLoginId" type="hidden" />
-
-    <style type="text/css">
-        label.error {
-            float: none;
-            color: red;
-            padding-left: .5em;
-            vertical-align: top;
-        }
-
-        .paginate_button {
-            margin-left: 1%;
-        }
-    </style>
-
     <link href="../css/DataTable/dataTablesbootstrap.css" rel="stylesheet" />
-    <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="../js/datatables.1.10.2.min.js"></script>
+    <script src="../js/datables.1.10.16.mn.js"></script>
     <script src="../js/validations.js"></script>
+    <script src="../js/Admin.js"></script>
     <script type="text/javascript">
         $body = $("body");
-
         $(document).on({
             ajaxStart: function () { $("#overlay").fadeIn(300);; },
             ajaxStop: function () {
@@ -170,14 +137,11 @@
             }
         });
         $(document).ready(function () {
-
-            $('.integer').keyup(function (e) {
-                if (/\D/g.test(this.value)) {
-                    this.value = this.value.replace(/\D/g, '');
-                }
-            });
-
-            //validation starts
+            //$('.integer').keyup(function (e) {
+            //    if (/\D/g.test(this.value)) {
+            //        this.value = this.value.replace(/\D/g, '');
+            //    }
+            //});
             checkNameEmpty("#txtUserId");
             checkNameEmpty("#txtPassword");
             checkNameEmpty("#txtName");
@@ -185,7 +149,6 @@
             checkNameEmpty("#txtDesignation");
             checkValidEmail("#txtEmailId");
             checkComment("#txtAddress");
-            //validation ends
             var data = {};
             GetUserLoginDetails(0, "");
             GetRoleDetails(0, "");
@@ -208,7 +171,6 @@
                 data.Address = $('#txtAddress').val();
                 InsertUpdateUserLoginDetails(data);
             });
-
             $("#btnUpdate").click(function () {
                 var validations = Validation_Register("#txtUserIdUpdate", "#txtPasswordUpdate", "#txtNameUpdate", "#txtMobileNoUpdate", "#txtDesignationUpdate", "#txtEmailIdUpdate", "#txtAddressUpdate", "#ddlRoleIdUpdate");
                 if (validations) {
@@ -229,7 +191,6 @@
                 InsertUpdateUserLoginDetails(data);
             });
         });
-
         function GetUserLoginDetails(LoginId, Name) {
             var element = "";
             $.ajax({
@@ -265,8 +226,6 @@
                         element = element + '<td></td>';
                         element = element + '<td></td>';
                         element = element + '</tr>';
-
-                        // element = element + '<tr><td colspan="3"><p class="text-center">No Login Data Available</p></td></tr>'
                     }
                     for (var i = 0; i < len; i++) {
                         element = element + '<tr>';
@@ -298,7 +257,6 @@
                 }
             });
         }
-
         function GetUserLoginDetailsForUpdate(LoginId, UserId, Password, Name, MobileNo, Designation, EmailId, RoleId, Address) {
             $('#hidLoginId').val(LoginId);
             $('#txtUserIdUpdate').val(UserId);
@@ -310,7 +268,6 @@
             $('#txtPasswordUpdate').val(Password);
             $('#ddlRoleIdUpdate').val(RoleId);
         }
-
         function GetRoleDetails(RoleID, RoleName) {
             var element = "";
             $.ajax({
@@ -336,7 +293,6 @@
                 }
             });
         }
-
         function GetUserLoginDetails(LoginId, Name) {
             var element = "";
             $.ajax({
@@ -393,7 +349,6 @@
                 }
             });
         }
-
         function InsertUpdateUserLoginDetails(data) {
             $.ajax({
                 contentType: "application/json; charset=utf-8",
@@ -416,9 +371,5 @@
                 }
             });
         }
-
-
-
     </script>
-
 </asp:Content>

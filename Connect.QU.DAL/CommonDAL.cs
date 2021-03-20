@@ -1176,7 +1176,6 @@ namespace Connect.QU.DAL
 
             return Entities;
         }
-
         public List<QU.Entities.ExecutionReport> GenerateExecutionReport(int ExecutionId, int mode)
         {
             List<Entities.ExecutionReport> Entities = new List<Entities.ExecutionReport>();
@@ -1229,7 +1228,6 @@ namespace Connect.QU.DAL
 
             return Entities;
         }
-
         public List<QU.Entities.RequisitionReport> GenerateRequisitionReport(int Requisitionid, int mode)
         {
             List<Entities.RequisitionReport> Entities = new List<Entities.RequisitionReport>();
@@ -1334,7 +1332,6 @@ namespace Connect.QU.DAL
 
             return Entities;
         }
-
         public List<QU.Entities.QuotationGenerateReport> GenerateQuotationReports(int QId, int mode)
         {
             List<Entities.QuotationGenerateReport> Entities = new List<Entities.QuotationGenerateReport>();
@@ -1427,8 +1424,6 @@ namespace Connect.QU.DAL
 
             return Entities;
         }
-
-
         public List<QU.Entities.ItemReports> GenerateItemReports(int ItemID, string ItemName, int mode)
         {
             List<Entities.ItemReports> Entities = new List<Entities.ItemReports>();
@@ -1488,8 +1483,6 @@ namespace Connect.QU.DAL
 
             return Entities;
         }
-
-
         public string InsertApprovalData(bool chkVal, int QID, string UserId)
         {
             string Result = null;
@@ -1641,7 +1634,7 @@ namespace Connect.QU.DAL
 
             try
             {
-                myCmd = new SqlCommand("spCompanyDetailsInsertUpdateNew", myCon);
+                myCmd = new SqlCommand("spCompanyDetailsInsertUpdate", myCon);
                 myCmd.CommandType = CommandType.StoredProcedure;
                 //if (CompanyID != 0)
                 //{

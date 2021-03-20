@@ -1,163 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/User/User.Master" CodeBehind="Quotation.aspx.cs" Inherits="Connect.QU.UII.User.Quotation" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="Server">
-
-    <style type="text/css">
-        .FormHeader {
-            text-align: center;
-            margin: 15px auto;
-        }
-
-            .FormHeader h2, .FormHeader h4, .FormHeader h5, .FormHeader p {
-                text-align: center;
-                margin-top: 2px;
-                margin-bottom: 2px;
-            }
-
-            .FormHeader h4 {
-                text-decoration: underline;
-            }
-
-        /*Application Form
-    ------------------- 
-    Updated on Mar 07 2021
-    ----------------------------
-*/
-        #ApplicationForm {
-            padding: 0;
-            border: 0px solid #ddd;
-            width: 100%;
-            margin: 0 auto;
-        }
-
-            #ApplicationForm .list-inline > li {
-                display: block;
-            }
-
-            #ApplicationForm .APLogo {
-                max-width: 255px;
-            }
-
-            #ApplicationForm .HR2App {
-                border: 1px solid #555;
-            }
-
-            #ApplicationForm .AppFormBody input[type='text'], .PasswordControl {
-                height: 25px;
-                color: #1b2cef;
-                width: 100%;
-            }
-
-            #ApplicationForm .AppFormdatetimepicker .form-control {
-                height: 34px !important;
-                box-shadow: none;
-                border-radius: 0;
-            }
-
-            #ApplicationForm .AppFormdatetimepicker .input-group-addon {
-                border-radius: 0;
-            }
-
-            #ApplicationForm .AppFormTxtArea {
-                margin: 40px auto;
-            }
-
-                #ApplicationForm .AppFormTxtArea p {
-                    margin: 10px 0 0;
-                }
-
-        @media (min-width: 480px) {
-            #ApplicationForm {
-                padding: 10px;
-                border: 2px solid #ddd;
-                width: 90%;
-                margin: 20px auto;
-            }
-        }
-
-        @media (min-width: 768px) {
-            #ApplicationForm .AppFormBody .AppX input[type='text'], .PasswordControl {
-                border: none;
-                height: 30px;
-                border-bottom: 1px solid #999;
-                color: #1b2cef;
-                width: auto;
-            }
-        }
-
-        @media (min-width: 768px) {
-            #ApplicationForm .AppFormBody .APPTest input[type='text'], .PasswordControl {
-                border: none;
-                height: 30px;
-                border-bottom: 1px solid #999;
-                color: #1b2cef;
-            }
-        }
-
-        #ApplicationForm .list-inline > li {
-            display: inline-block;
-        }
-
-        #ApplicationForm .AppFormdatetimepicker .form-control {
-            border: none;
-            box-shadow: 0 0 0 0;
-            border-radius: 0;
-            border-bottom: 1px solid #555;
-            height: 30px;
-        }
-
-        #ApplicationForm .AppFormdatetimepicker .input-group-addon {
-            background: transparent;
-            border: 0;
-            border-bottom: 1px solid #999 !important;
-            border-radius: 0;
-        }
-
-
-        .text-bold {
-            font-weight: bold;
-        }
-
-        .QS-Block {
-            border: 1px solid #999;
-            margin: 5px 0;
-            padding: 5px;
-            box-shadow: 3px 5px 6px #ddd;
-        }
-
-            .QS-Block .QSoption-List input[type='radio'] {
-                margin: 0 3px;
-            }
-
-        table, td, th {
-            border: 1px solid black;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        #watermark {
-            color: beige;
-            font-size: 131pt;
-            -webkit-transform: rotate(-45deg);
-            -moz-transform: rotate(-45deg);
-            position: absolute;
-            width: 100%;
-            margin: 0;
-            z-index: -1;
-            left: -100px;
-            top: -200px;
-        }
-
-        .paginate_button {
-            margin-left: 1%;
-        }
-    </style>
-
-    <link href="../css/Admin.css" rel="stylesheet" />
-
+<link href="../css/Admin.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="EAWarpper" runat="Server">
     <div class="container">
@@ -170,7 +14,6 @@
                                 <select id="ddlPageType" class="form-control" name="GstinNoType">
                                     <option value="0">Quotation</option>
                                     <option value="1">Purchase Order</option>
-
                                 </select>
                             </div>
                         </div>
@@ -205,7 +48,7 @@
                                         <option value="2"><a href="xyz" target="_blank">SER</a></option>
                                         <option value="3"><a href="xyz" target="_blank">TEN</a></option>
                                     </select>
-                                    <label class="label1" for="ddlCurrency">Currency</label>
+                                    <label class="label11" for="ddlCurrency">Currency</label>
                                     <select id="ddlCurrency" class="form-control"></select>
                                 </div>
                             </div>
@@ -266,19 +109,14 @@
                                         <label class="control-label">Company Name </label>
                                         <select id="ddlCompanyId" name="ddlCompanyName" class="selectBox form-control" style="width: 57%;"></select>
                                     </div>
-
                                     <div class="col-lg-4">
                                         <label class="control-label">Location </label>
                                         <select id="ddlCompanyLocationId" name="ddlCompanyLocation" class="selectBox form-control" style="width: 57%;"></select>
                                     </div>
-
-
-
                                     <div class="col-lg-4">
                                         <label class="control-label">Contact Person   </label>
                                         <input type="text" id="txtContactPerson" style="width: 57%;" class="form-control" disabled />
                                     </div>
-
                                 </div>
                             </div>
                         </p>
@@ -299,7 +137,6 @@
                                         <label class="control-label">Payment Terms</label>
                                         <input type="text" id="txtaymentTerms" style="width: 58%;" class="form-control" />
                                     </div>
-
                                 </div>
                             </div>
                             <br />
@@ -323,7 +160,6 @@
                         <br />
                         <br />
                         <br />
-
                         <div class="row APPTest">
                             <div class="col-lg-12">
                                 <div style="overflow-x: auto">
@@ -343,19 +179,6 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <%--<tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td>
-                                                    <input type="button" value="Remove" onclick="Remove(this)" /></td>
-                                            </tr>--%>
                                         </tbody>
                                         <tfoot>
                                             <tr>
@@ -388,7 +211,6 @@
                         <p>
                             <br />
                             <br />
-
                             <div class="form-inline AppX">
                                 <div class="form-row">
                                     <div class="col-lg-6">
@@ -422,7 +244,6 @@
                         <br />
                         <br />
                         <p>Bank Details</p>
-
                         <p>
                             <div class="form-inline AppX">
                                 <div class="form-row">
@@ -466,10 +287,8 @@
                         <br />
                         <p><b>Note 2 :</b></p>
                         <textarea class="form-control" rows="2" cols="2" id="txtNotes2"></textarea>
-
                         <br />
                         <br />
-
                         <ul class="list-inline">
                             <li>
                                 <div class="form-inline">
@@ -503,49 +322,29 @@
     <div class="container" style="margin-top: 5%; margin-bottom: 1%; width: 100%;">
         <table id="CityTableId" class="table table-striped cf table-bordered table-striped table-responsive dataTable" style="table-layout: fixed"></table>
     </div>
-
     <div id="overlay">
         <div class="cv-spinner">
             <span class="spinner"></span>
         </div>
     </div>
-
-
     <input id="hidHotelId" type="hidden" />
-    <!--/Slider -->
     <div class="container" style="width: 70%;">
         <div class="container" id="DivPage2" style="display: block;">
         </div>
     </div>
-
-   <%-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" rel="stylesheet" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../css/DataTable/dataTablesbootstrap.css" rel="stylesheet" />
-    <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>--%>
-
-<%--    Own JS and CSS--%>
     <script src="../js/moment.2.13.0.min.js"></script>
     <script src="../js/bootstrap-datetimepicker.4.17.37.min.js"></script>
     <script src="../js/botstrap-datepiker.1.6.4.min.js"></script>
     <link href="../css/bootstrap-datepicker.1.6.4.min.css" rel="stylesheet" />
     <script src="../js/bootstrap.3.3.7.min.js"></script>
     <link href="../css/boostrap.3.3.7.min.css" rel="stylesheet" />
-     <link href="../css/DataTable/dataTablesbootstrap.css" rel="stylesheet" />
+    <link href="../css/DataTable/dataTablesbootstrap.css" rel="stylesheet" />
     <script src="../js/datatables.1.10.2.min.js"></script>
     <script src="../js/datables.1.10.16.mn.js"></script>
-
-<%--    ends here--%>
-    
     <script src="../js/validations.js"></script>
-
+    <script src="../js/Admin.js"></script>
     <script type="text/javascript">
         $body = $("body");
-
         $(document).on({
             ajaxStart: function () { $("#overlay").fadeIn(300);; },
             ajaxStop: function () {
@@ -559,22 +358,16 @@
                 }, 200);
             }
         });
-
-        // debugger;
         var dropArr = new Array();
         $(document).ready(function () {
-
-            $('.integer').keyup(function (e) {
-                if (/\D/g.test(this.value)) {
-                    this.value = this.value.replace(/\D/g, '');
-                }
-            });
+            //$('.integer').keyup(function (e) {
+            //    if (/\D/g.test(this.value)) {
+            //        this.value = this.value.replace(/\D/g, '');
+            //    }
+            //});
             $("#btnUpdate").hide();
             $("#btnSave").show();
-
-
             $('#btnExportToPdf').prop('disabled', true);
-
             var data = {};
             $('#ddlPageType').change(function () {
                 if ($('#ddlPageType').val() == 0) {
@@ -588,7 +381,6 @@
                     $('#QuotationApplicationText').text("PURCHASE ORDER APPLICATION");
                 }
             });
-
             $('#ddlCompanyId').change(function () {
                 if ($('#ddlCompanyId').val() == 0) {
 
@@ -598,7 +390,6 @@
                     GetCompanyDataDetails($('#ddlCompanyId').val(), "");
                 }
             });
-
             $('#ddlItem').change(function () {
                 if ($('#ddlItem').val() == 0) {
 
@@ -607,13 +398,9 @@
                     GetItemDataDetails($('#ddlItem').val(), "");
                 }
             });
-
-            //Number to Words
             $('#txtGrandTotal').change(function () {
                 $('#txtTotalWords').val(numberToWords($('#txtGrandTotal').val()));
             });
-
-            //qty to rate = value without tax
             $('#txtRate,#txtQty,#txtValue').change(function () {
                 var a = 1;
                 if ($('#txtQty').val() != "") {
@@ -623,24 +410,18 @@
                 var c = a * b;
                 $('#txtValue').val(c);
             });
-
-            //igst
             $('#txtIgst,#txtAmount,#txtValue,#txtRate,#txtQty').change(function () {
                 var igstTax = parseInt($('#txtIgst').val());
                 var totalRate = parseInt($('#txtValue').val());
                 var z = totalRate * (igstTax / 100);
                 $('#txtAmount').val(z.toFixed(2));
             });
-
-            //total amount
             $('#txtTotalAmount1,#txtIgst,#txtAmount,#txtValue,#txtRate,#txtQty').change(function () {
                 var igstTaxValue = parseInt($('#txtValue').val());
                 var Value = parseInt($('#txtAmount').val());
                 var z = igstTaxValue + Value;
                 $('#txtTotalAmount1').val(z.toFixed(2));
             });
-
-            //financialYear
             $('#txtFinancialYear').datepicker({
                 format: "yyyy",
                 viewMode: "years",
@@ -656,7 +437,6 @@
                 }
             });
             var CounterSno = 0;
-            // Export to PDF
             $('#btnExportToPdf').on('click', function () {
                 QID = $('#hidHotelId').val();
                 $.ajax({
@@ -666,11 +446,8 @@
                     data: "{QID:" + QID + "}",
                     dataType: "json",
                     success: function (result) {
-                        //Convert Base64 string to Byte Array.
                         var bytes = Base64ToBytes(result.d);
-                        //Convert Byte Array to BLOB.
                         var blob = new Blob([bytes], { type: "application/octetstream" });
-                        //Check the Browser type and download the File.
                         var isIE = false || !!document.documentMode;
                         if (isIE) {
                             window.navigator.msSaveBlob(blob, 'QuotationData' + new Date(Date.now()) + '.pdf');
@@ -690,7 +467,6 @@
                     }
                 });
             });
-
             function Base64ToBytes(base64) {
                 var s = window.atob(base64);
                 var bytes = new Uint8Array(s.length);
@@ -699,24 +475,21 @@
                 }
                 return bytes;
             };
-
             $("body").on("click", "#btnAdd", function () {
-                dropArr.push( parseInt($("#ddlItem option:selected").attr('data-itemid')));
+                dropArr.push(parseInt($("#ddlItem option:selected").attr('data-itemid')));
                 CounterSno = CounterSno + 10;
                 var validations = Validation_TOCQuotation(
-             "#ddlItem",
-             "#txtQty",
-             "#txtRate",
-             "#txtValue",
-             "#txtTotalAmount1");
+                "#ddlItem",
+                "#txtQty",
+                "#txtRate",
+                "#txtValue",
+                "#txtTotalAmount1");
                 if (validations) {
                 }
                 else {
                     return false;
                 }
-
                 var txtDescriptionOfGoods = $("#ddlItem option:selected").text();
-                //  alert(txtDescriptionOfGoods);
                 var txtQty = $("#txtQty");
                 var txtHsn = $("#txtHsn");
                 var txtRate = $("#txtRate");
@@ -725,17 +498,12 @@
                 var txtAmount = $("#txtAmount");
                 var txtTotalAmount1 = $("#txtTotalAmount1");
                 var tBody = $("#tblCustomers > TBODY")[0];
-                //Add Row.
                 var row = tBody.insertRow(-1);
-                //Add Name cell.
                 var cell = $(row.insertCell(-1));
                 cell.html(CounterSno);
-
-
                 var cell = $(row.insertCell(-1));
                 cell.html(txtDescriptionOfGoods);
                 cell.attr('data-itemid', $("#ddlItem option:selected").attr('data-itemid'));
-
                 cell = $(row.insertCell(-1));
                 cell.html(txtQty.val());
                 cell = $(row.insertCell(-1));
@@ -751,14 +519,12 @@
                 cell = $(row.insertCell(-1));
                 cell.html(txtTotalAmount1.val());
                 funRecalculateAfterAdding(txtTotalAmount1.val(), txtAmount.val());
-                //Add Button cell.
                 cell = $(row.insertCell(-1));
                 var btnRemove = $("<input />");
                 btnRemove.attr("type", "button");
                 btnRemove.attr("onclick", "Remove(this);");
                 btnRemove.val("Remove");
                 cell.append(btnRemove);
-                //Clear the TextBoxes.
                 $("#ddlItem option").prop("selected", false);
                 txtQty.val("");
                 txtHsn.val("");
@@ -767,18 +533,13 @@
                 txtIgst.val("");
                 txtAmount.val("");
                 txtTotalAmount1.val("");
-
-                //calling dropdown item
                 GetItemDetails(0, "");
             });
-
             GetCurrencyDetails(0, "");
             GetCompanyDetails(0, "");
             GetItemDetails(0, "");
             GetQuotationDetailsOnQuotationType(1);
-
             $('#txtQuotationNo').val("CCPL/2019-2020/SU000" + Math.floor((Math.random() * 100) + 1));
-
             GetQuotationDetails(0);
             var xTotalAmount = 0; //, xTotalQty=0;
             $("#btnTotal").on("click", function (e) {
@@ -792,12 +553,10 @@
                 else
                     $('#txtTotalAmount').val(xTotalAmount);
             });
-
             $(function () {
                 $('#datetimepicker3').datetimepicker({ defaultDate: new Date() });
                 $('#datetimepicker2').datetimepicker({ defaultDate: new Date() });
             });
-
             function isNumber(evt) {
                 evt = (evt) ? evt : window.event;
                 var charCode = (evt.which) ? evt.which : evt.keyCode;
@@ -806,7 +565,6 @@
                 }
                 return true;
             }
-
             function myFunction(eve) {
                 if ($(eve).val() == 1) {
                     $('#txtHandoutText').show();
@@ -815,9 +573,7 @@
                     $('#txtHandoutText').hide();
                 }
             }
-
             $("#btnSave").click(function () {
-
                 var validations = Validation_Quotation(
               "#txtProjectName",
               "#txtFinancialYear",
@@ -836,11 +592,6 @@
                 else {
                     return false;
                 }
-
-
-
-
-
                 data.Mode = 1;
                 data.QID = 0;//QID Pravesh
                 data.FormType = $('#ddlPageType').val();
@@ -871,16 +622,12 @@
                 data.Note1 = $('#txtNotes1').val();
                 data.Note2 = $('#txtNotes2').val();
                 data.SignatureDate = $('#txtSignatureDate').val();
-
                 data.CurrencyId = $('#ddlCurrency option:selected').val();
                 data.LocationId = $('#ddlCompanyLocationId option:selected').val();
-
                 SaveUpdateQuotationDetails(data);
                 GetQuotationDetails(0);
             });
-
             $("#btnUpdate").click(function () {
-
                 var validations = Validation_Quotation(
               "#txtProjectName",
               "#txtFinancialYear",
@@ -899,9 +646,6 @@
                 else {
                     return false;
                 }
-
-
-
                 data.Mode = 2;
                 data.QID = $('#hidHotelId').val();
                 data.FormType = $('#ddlPageType').val();
@@ -932,18 +676,14 @@
                 data.Note1 = $('#txtNotes1').val();
                 data.Note2 = $('#txtNotes2').val();
                 data.SignatureDate = $('#txtSignatureDate').val();
-
                 data.CurrencyId = $('#ddlCurrency option:selected').val();
                 data.LocationId = $('#ddlCompanyLocationId option:selected').val();
-
                 SaveUpdateQuotationDetails(data);
             });
-
             $("#btnClear").click(function () {
                 ClearInputBoxValues();
                 GetQuotationDetailsOnQuotationType(1);
             });
-
             $('#ddlQuotationType').change(function () {
                 if ($('#ddlQuotationType').val() == 1) {
                     GetQuotationDetailsOnQuotationType(1);
@@ -956,13 +696,11 @@
                 }
             });
         });
-
         function funTotalAmount(val, taxVal) {
             $('#txtTaxableAmount').val(taxVal);
             $('#txtGrandTotal').val(val);
             $('#txtTotalWords').val(numberToWords(val));
         }
-
         function funRecalculateAfterAdding(amount, tax) {
             var TotalAmount = 0;
             if (!isNaN(amount)) {
@@ -983,10 +721,7 @@
             var NewTax = AddedTax + TotalTax;
             $('#txtTaxableAmount').val(NewTax);
         }
-
         function funRecalculateAfterRemoving(amount, tax) {
-            debugger;
-
             var TotalAmount = 0;
             if ($('#txtGrandTotal').val() != "") {
                 TotalAmount = parseInt($('#txtGrandTotal').val());
@@ -1000,16 +735,14 @@
                 TotalTax = parseInt($('#txtTaxableAmount').val());
             }
             var RemovedTax = parseInt(tax);
-            var NewTax = TotalTax-RemovedTax;
+            var NewTax = TotalTax - RemovedTax;
             $('#txtTaxableAmount').val(NewTax);
         }
-
         function EmailQuotationDetails(QID) {
             var EmailId = "pravesh.kr01@gmail.com";
             var Name = "Pravesh";
             var Title = "Quotation";
             var id = QID;
-
             $.ajax({
                 type: "POST",
                 url: "Quotation.aspx/EmailQuotationDetails",
@@ -1018,33 +751,24 @@
                 dataType: "json",
                 success: function (r) {
                     alert("Quotation details sent successfully");
-                    // window.location.href = 'Login.aspx';
                 },
                 error: function (respnse) {
                     // alert(respnse + " wrng");
                 }
             });
         }
-
         function Remove(button) {
-            debugger;
-            //Determine the reference of the Row using the Button.
             var row = $(button).closest("TR");
-            // alert("recalculate fun called" + row[0].cells[7].innerText);
             funRecalculateAfterRemoving(row[0].cells[8].innerText, row[0].cells[7].innerText);
             var x = row[0].cells[1].getAttribute('data-itemid');
             var name = $("TD", row).eq(0).html();
             if (confirm("Do you want to delete: " + name)) {
-
                 dropArr.splice($.inArray((parseInt(x)), dropArr), 1);
                 var table = $("#tblCustomers")[0];
-                //Delete the Table row using it's Index.
                 table.deleteRow(row[0].rowIndex);
-                //calling dropdown item
                 GetItemDetails(0, "");
             }
         };
-
         function GetCurrencyDetails(CurrencyId, CurrencyName) {
             var element = "";
             $.ajax({
@@ -1068,7 +792,6 @@
                 }
             });
         }
-
         function SaveUpdateQuotationDetails(data) {
             var tocArr = new Array();
             $("#tblCustomers TBODY TR").each(function () {
@@ -1086,7 +809,6 @@
                 TOC.TotalAmount1 = row.find("TD").eq(8).html();
                 tocArr.push(TOC);
             });
-
             data.TableOfContent = tocArr;
             $.ajax({
                 contentType: "application/json; charset=utf-8",
@@ -1109,7 +831,6 @@
                 }
             });
         }
-
         function GetQuotationDetails(QID) {
             var element = "";
             var Counter = 1;
@@ -1134,7 +855,6 @@
                     element = element + '<th style="width:80px">Action</th>';
                     element = element + '</tr></thead><tbody>';
                     if (len == 0) {
-
                         element = element + '<tr>';
                         element = element + '<td>No Data Available</td>';
                         element = element + '<td></td>';
@@ -1145,9 +865,6 @@
                         element = element + '<td></td>';
                         element = element + '<td></td>';
                         element = element + '</tr>';
-
-
-                        //element = element + '<tr><td colspan="3"><p class="text-center">No Quotation Data Available</p></td></tr>'
                     }
                     for (var i = 0; i < len; i++) {
                         element = element + '<tr>';
@@ -1165,8 +882,6 @@
                             element = element + '<td>TEN</td>';
 
                         }
-
-
                         element = element + '<td>CCPL</td>';
                         element = element + '<td>' + getResult[i].QToCompanyName + '</td>';
                         element = element + '<td>' + GetProperDate(getResult[i].QDate) + '</td>';
@@ -1197,11 +912,8 @@
                 }
             });
         }
-
         function btnAddCall(ItemLineNumber, DescriptionOfGoods, Qty, Hsn, Rate, Value, Igst, Amount, TotalAmount1, ItemId) {
-            //Reference the Name and Country TextBoxes.
             dropArr.push(ItemId);
-          
             var itellinenumber = ItemLineNumber;
             var txtDescriptionOfGoods = DescriptionOfGoods;//$("#txtDescriptionOfGoods");
             var txtQty = Qty;//$("#txtQty");
@@ -1211,53 +923,34 @@
             var txtIgst = Igst;//$("#txtIgst");
             var txtAmount = Amount;//$("#txtAmount");
             var txtTotalAmount1 = TotalAmount1;//$("#txtTotalAmount1");
-            //Get the reference of the Table's TBODY element.
             var tBody = $("#tblCustomers > TBODY")[0];
-            //Add Row.
             var row = tBody.insertRow(-1);
-            //Add Name cell.
             var cell = $(row.insertCell(-1));
-            //add cells
-
             cell.html(ItemLineNumber);
-
             cell = $(row.insertCell(-1));
             cell.html(DescriptionOfGoods);
             cell.attr('data-itemid', ItemId);
-
-
             cell = $(row.insertCell(-1));
             cell.html(Qty);
-
-
             cell = $(row.insertCell(-1));
             cell.html(Hsn);
-
             cell = $(row.insertCell(-1));
             cell.html(Rate);
-
             cell = $(row.insertCell(-1));
             cell.html(Value);
-
             cell = $(row.insertCell(-1));
             cell.html(Igst);
-
             cell = $(row.insertCell(-1));
             cell.html(Amount);
-
             cell = $(row.insertCell(-1));
             cell.html(TotalAmount1);
-
             cell = $(row.insertCell(-1));
             var btnRemove = $("<input />");
             btnRemove.attr("type", "button");
             btnRemove.attr("onclick", "Remove(this);");
             btnRemove.val("Remove");
             cell.append(btnRemove);
-
-
         }
-
         function GetTOCDetails(QID) {
             var element = "";
             $("#tblCustomers > TBODY").empty();
@@ -1271,7 +964,6 @@
                     var getResult = result.d;
                     var len = getResult.length;
                     for (var i = 0; i < len; i++) {
-
                         var a = getResult[i].ItemLineNumber;
                         var b = getResult[i].DescriptionOfGoods;
                         var c = getResult[i].Qty;
@@ -1282,7 +974,6 @@
                         var h = getResult[i].Amount;
                         var j = getResult[i].TotalAmount1;
                         var k = getResult[i].ItemId;
-
                         btnAddCall(a, b, c, d, e, f, g, h, j, k);
                     }
                 },
@@ -1291,25 +982,15 @@
                 }
             });
         }
-
-        function GetQuotationDetailsForUpdate(QID, QType, QNo, QDate, ProjectName, FinantialYear, QToCompanyName, QToGSTINNo, QToContactPerson, QToAddress, PaymentTerms, ValidityOfQuote, PlaceOfSupply, TotalAmountDigit, TotalAmountWords, TaxableAmount, Freight, BankName, BranchName, BankBranchIFSC, BankAccNo, TermsAndCondition, Note1, Note2, SignatureDate, CurrencyId, LocationId, QToCompanyId,QFromGstinNo) {
-           // $("#tblCustomers").load("Quotation.aspx #tblCustomers");
+        function GetQuotationDetailsForUpdate(QID, QType, QNo, QDate, ProjectName, FinantialYear, QToCompanyName, QToGSTINNo, QToContactPerson, QToAddress, PaymentTerms, ValidityOfQuote, PlaceOfSupply, TotalAmountDigit, TotalAmountWords, TaxableAmount, Freight, BankName, BranchName, BankBranchIFSC, BankAccNo, TermsAndCondition, Note1, Note2, SignatureDate, CurrencyId, LocationId, QToCompanyId, QFromGstinNo) {
             GetCurrencyDetails(0, "");
             GetCompanyDetails(0, "");
             GetCompanyLocations(QToCompanyId);
-
             GetTOCDetails(QID);
-            GetItemDetails(0,"");
-
-            
+            GetItemDetails(0, "");
             $('#ddlQGstinNoType').val(QFromGstinNo);
             $('#hidHotelId').val(QID);
-
-          //  alert(QFromGstinNo);
-
             $('#ddlQuotationType').val(QType);
-
-
             $('#txtQuotationNo').val(QNo);
             $('#txtQuotationDate').val(QDate);
             $('#txtProjectName').val(ProjectName);
@@ -1341,38 +1022,9 @@
             $("#btnUpdate").show();
             $("#btnSave").hide();
         }
-
-        function GetProperDate(DateStr) {
-            if (DateStr != null && DateStr != undefined && DateStr != "") {
-                var dateString = DateStr.substr(6);
-                var currentTime = new Date(parseInt(dateString));
-                var month = currentTime.getMonth() + 1;
-                var day = currentTime.getDate();
-                var year = currentTime.getFullYear();
-                var date = ('0' + month).slice(-2) + "/" + day + "/" + year;
-                return date;
-            }
-        }
-
-        function ClearInputBoxValues() {
-            // if (Mode == 1) {
-            $("#tblCustomers").load("Quotation.aspx #tblCustomers");
-            $('input[type=text]').each(function () {
-                $(this).val('');
-            });
-            $('select').each(function () {
-                $(this).val('0');
-            });
-            $('#txtTermsAndConditions,#txtNotes1,#txtNotes2').val('');
-            $('#txtGstinNo').val("07AAACC4708J1ZS");
-            $('#ddlQuotationType').val("1");
-            // }
-        }
-
         var ones = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
         var tens = ['', '', 'twenty', 'thirty', 'fourty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
         var sep = ['', ' thousand ', ' million ', ' billion ', ' trillion ', ' quadrillion ', ' quintillion ', ' sextillion '];
-
         function numberToWords(val) {
             arr = [],
             str = '',
@@ -1399,7 +1051,6 @@
             }
             return str;
         } (ones, tens, sep);
-
         function GetCompanyDetails(CompanyID, CompanyName) {
             var element = "";
             $.ajax({
@@ -1423,8 +1074,6 @@
                 }
             });
         }
-
-        //company location pravesh
         function GetCompanyLocations(CompanyID) {
             var element = "";
             $.ajax({
@@ -1448,11 +1097,6 @@
                 }
             });
         }
-
-
-        //ends here
-
-
         function GetCompanyDataDetails(CompanyID, CompanyName) {
             var element = "";
             $.ajax({
@@ -1479,7 +1123,6 @@
                 }
             });
         }
-
         function GetItemDetails(ItemID, ItemName) {
             var element = "";
             $.ajax({
@@ -1494,16 +1137,11 @@
                     $("#ddlItem").empty();
                     $("#ddlItem").append('<option value="0">Select</option>');
                     for (var i = 0; i < len; i++) {
-
-                      
-
                         if (getResult[i].Approved) {
                             var x = jQuery.inArray(parseInt(getResult[i].ItemId.toString()), dropArr);
                             if (x == (-1)) {
-                              $("#ddlItem").append('<option data-itemName=' + getResult[i].ItemName + ' data-itemId=' + getResult[i].ItemId + ' value=' + getResult[i].ItemId + '>' + getResult[i].ItemName + '</option>');
+                                $("#ddlItem").append('<option data-itemName=' + getResult[i].ItemName + ' data-itemId=' + getResult[i].ItemId + ' value=' + getResult[i].ItemId + '>' + getResult[i].ItemName + '</option>');
                             }
-
-                            //$("#ddlItem").append('<option data-itemName=' + getResult[i].ItemName + ' data-itemId=' + getResult[i].ItemId + ' value=' + getResult[i].ItemId + '>' + getResult[i].ItemName + '</option>');
                         }
                     }
                 },
@@ -1512,7 +1150,6 @@
                 }
             });
         }
-
         function GetItemDataDetails(ItemID, ItemName) {
             var element = "";
             $.ajax({
@@ -1534,7 +1171,6 @@
                 }
             });
         }
-
         function GetQuotationDetailsOnQuotationType(QuotationType) {
             $.ajax({
                 contentType: "application/json; charset=utf-8",
@@ -1560,13 +1196,28 @@
                 }
             });
         }
-
-        //Validations starts
-
-
-
-
-        //Validation ends
-
+        //function GetProperDate(DateStr) {
+        //    if (DateStr != null && DateStr != undefined && DateStr != "") {
+        //        var dateString = DateStr.substr(6);
+        //        var currentTime = new Date(parseInt(dateString));
+        //        var month = currentTime.getMonth() + 1;
+        //        var day = currentTime.getDate();
+        //        var year = currentTime.getFullYear();
+        //        var date = ('0' + month).slice(-2) + "/" + day + "/" + year;
+        //        return date;
+        //    }
+        //}
+        function ClearInputBoxValues() {
+            $("#tblCustomers").load("Quotation.aspx #tblCustomers");
+            $('input[type=text]').each(function () {
+                $(this).val('');
+            });
+            $('select').each(function () {
+                $(this).val('0');
+            });
+            $('#txtTermsAndConditions,#txtNotes1,#txtNotes2').val('');
+            $('#txtGstinNo').val("07AAACC4708J1ZS");
+            $('#ddlQuotationType').val("1");
+        }
     </script>
 </asp:Content>

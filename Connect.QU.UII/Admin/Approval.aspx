@@ -2,118 +2,22 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>Admin Approval</title>
-
-
     <style>
-        .paginate_button {
-            margin-left: 1%;
-        }
-
-        #ApplicationForm {
-            padding: 0;
-            border: 0px solid #ddd;
-            width: 100%;
-            margin: 0 auto;
-        }
-
-            #ApplicationForm .list-inline > li {
-                display: block;
-            }
-
-            #ApplicationForm .APLogo {
-                max-width: 255px;
-            }
-
-            #ApplicationForm .HR2App {
-                border: 1px solid #555;
-            }
-
-            #ApplicationForm .AppFormBody input[type='text'], .PasswordControl {
-                height: 25px;
-                color: #1b2cef;
-                width: 100%;
-            }
-
-            #ApplicationForm .AppFormdatetimepicker .form-control {
-                height: 34px !important;
-                box-shadow: none;
-                border-radius: 0;
-            }
-
-            #ApplicationForm .AppFormdatetimepicker .input-group-addon {
-                border-radius: 0;
-            }
-
-            #ApplicationForm .AppFormTxtArea {
-                margin: 40px auto;
-            }
-
-                #ApplicationForm .AppFormTxtArea p {
-                    margin: 10px 0 0;
-                }
-
-
         @media (min-width: 480px) {
             #ApplicationForm {
                 padding: 45px !important;
-                border: 2px solid #ddd;
-                width: 90%;
-                margin: 20px auto;
-                background-color: white;
+                background-color: white !important;
             }
-        }
-
-        @media (min-width: 768px) {
-            #ApplicationForm .AppFormBody .AppX input[type='text'], .PasswordControl {
-                border: none;
-                height: 30px;
-                border-bottom: 1px solid #999;
-                color: #1b2cef;
-                width: auto;
-            }
-        }
-
-        @media (min-width: 768px) {
-            #ApplicationForm .AppFormBody .APPTest input[type='text'], .PasswordControl {
-                border: none;
-                height: 30px;
-                border-bottom: 1px solid #999;
-                color: #1b2cef;
-            }
-        }
-
-
-
-        #ApplicationForm .list-inline > li {
-            display: inline-block;
-        }
-
-        #ApplicationForm .AppFormdatetimepicker .form-control {
-            border: none;
-            box-shadow: 0 0 0 0;
-            border-radius: 0;
-            border-bottom: 1px solid #555;
-            height: 30px;
-        }
-
-        #ApplicationForm .AppFormdatetimepicker .input-group-addon {
-            background: transparent;
-            border: 0;
-            border-bottom: 1px solid #999 !important;
-            border-radius: 0;
         }
     </style>
-
     <link href="../css/Admin.css" rel="stylesheet" />
 </asp:Content>
-
 <asp:Content ID="Content2" ContentPlaceHolderID="EAWarpper" runat="server">
     <div class="content-wrapper">
         <section class="content">
             <div class="container" style="margin-top: 5%; margin-bottom: 1%; width: 100%;">
                 <table id="tblApprove" class="table table-striped cf table-bordered table-striped table-responsive dataTable" style="table-layout: fixed"></table>
             </div>
-            <%--Quotation Details Start--%>
             <div class="AppFormBody" id="ApplicationForm">
                 <h4 class="text-center" id="QuotationApplicationText"><b>QUOTATION APPLICATION</b></h4>
                 <p>
@@ -327,7 +231,6 @@
                 </p>
 
             </div>
-            <%--Quotation Details End --%>
         </section>
     </div>
     <div id="overlay">
@@ -336,13 +239,11 @@
         </div>
     </div>
     <link href="../css/DataTable/dataTablesbootstrap.css" rel="stylesheet" />
-    <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-
+    <script src="../js/datatables.1.10.2.min.js"></script>
+    <script src="../js/datables.1.10.16.mn.js"></script>
+    <script src="../js/Admin.js"></script>
     <script type="text/javascript">
-
         $body = $("body");
-
         $(document).on({
             ajaxStart: function () { $("#overlay").fadeIn(300);; },
             ajaxStop: function () {
@@ -356,13 +257,11 @@
                 }, 200);
             }
         });
-
         $(document).ready(function () {
             $('#ApplicationForm').hide();
             GetQuotationDetails(0);
 
         });
-
         function AskApproval(evnt, QID) {
             event.preventDefault();
             var conf = confirm("Are you sure you want to Approve the Quotation ?")
@@ -393,7 +292,6 @@
                 }
             });
         }
-
         function GetQuotationDetails(QID) {
             var element = "";
             var Counter = 1;
@@ -428,9 +326,6 @@
                         element = element + '<td></td>';
                         element = element + '<td></td>';
                         element = element + '</tr>';
-
-
-                        //element = element + '<tr><td colspan="3"><p class="text-center">No Approval Data Available</p></td></tr>'
                     }
                     for (var i = 0; i < len; i++) {
                         element = element + '<tr>';
@@ -447,7 +342,6 @@
                             element = element + '<td>' + '<input type="checkbox" name="Approve" onclick="AskApproval(event,' + getResult[i].QID + ');return false;"  id="chkApprove" />';
                         }
                         element = element + '<td><a href="#"><span class="label label-success" onclick="ViewDetails(' + getResult[i].QID + ');return false;"<i class="fa fa-file-text"  aria-hidden="true"></i> View </span><span class="label label-warning"   onclick="HideDetails(' + getResult[i].QID + '); return false;" style="margin-left: 23px;"><i class="fa fa-file-text"  aria-hidden="true"></i>Hide</span></a></td>';
-
                         element = element + '</tr>';
                     }
                     element = element + '</tbody>';
@@ -467,7 +361,6 @@
                 }
             });
         }
-
         function GetTOCDetails(QID) {
             var element = "";
             $("#tblCustomers > TBODY").empty();
@@ -497,7 +390,6 @@
                 }
             });
         }
-
         function ViewDetails(QID) {
             $('#ApplicationForm').show();
             GetTOCDetails(QID);
@@ -513,7 +405,7 @@
                     if (len > 0) {
                         $('#txtProjectName').val(getResult[0].ProjectName),
                         $('#txtFinancialYear').val(getResult[0].FinantialYear),
-                       $('#txtQuotationDate').val(GetProperDate(getResult[0].QDate)),
+                        $('#txtQuotationDate').val(GetProperDate(getResult[0].QDate)),
                         $('#txtCompanyName').val(getResult[0].QToCompanyName),
                         $('#txtGstinParty').val(getResult[0].QToGSTINNo),
                         $('#txtContactPerson').val(getResult[0].QToContactPerson),
@@ -525,11 +417,11 @@
                         $('#txtTotalWords').val(getResult[0].TotalAmountWords),
                         $('#txtTaxableAmount').val(getResult[0].TaxableAmount),
                         $('#txtFreight').val(getResult[0].Freight),
-                       $('#txtBankName').val(getResult[0].BankName),
-                       $('#txtBranchName').val(getResult[0].BranchName),
+                        $('#txtBankName').val(getResult[0].BankName),
+                        $('#txtBranchName').val(getResult[0].BranchName),
                         $('#txtBankAccountNo').val(getResult[0].BankAccountNo),
-                       $('#txtBranchIfsc').val(getResult[0].BankBranchIFSC),
-                       $('#txtSignatureDate').val(GetProperDate(getResult[0].SignatureDate))
+                        $('#txtBranchIfsc').val(getResult[0].BankBranchIFSC),
+                        $('#txtSignatureDate').val(GetProperDate(getResult[0].SignatureDate))
                         $('#txtDescriptionOdGoods').val(getResult[0].DescriptionOfGoods),
                         $('#txtQty').val(getResult[0].Quantity),
                         $('#txtHsn').val(getResult[0].HsnCode),
@@ -545,14 +437,10 @@
                 }
             });
         }
-
         function HideDetails() {
             $('#ApplicationForm').hide();
         }
-
         function btnAddCall(DescriptionOfGoods, Qty, Hsn, Rate, Value, Igst, Amount, TotalAmount1) {
-
-            //Reference the Name and Country TextBoxes.
             var txtDescriptionOfGoods = DescriptionOfGoods;//$("#txtDescriptionOfGoods");
             var txtQty = Qty;//$("#txtQty");
             var txtHsn = Hsn;//$("#txtHsn");
@@ -561,51 +449,35 @@
             var txtIgst = Igst;//$("#txtIgst");
             var txtAmount = Amount;//$("#txtAmount");
             var txtTotalAmount1 = TotalAmount1;//$("#txtTotalAmount1");
-
-            //Get the reference of the Table's TBODY element.
             var tBody = $("#tblCustomers > TBODY")[0];
-
-            //Add Row.
             var row = tBody.insertRow(-1);
-
-            //Add Name cell.
             var cell = $(row.insertCell(-1));
             cell.html(DescriptionOfGoods);
-
-            //Add Country cell.
             cell = $(row.insertCell(-1));
             cell.html(Qty);
-
             cell = $(row.insertCell(-1));
             cell.html(Hsn);
-
             cell = $(row.insertCell(-1));
             cell.html(Rate);
-
             cell = $(row.insertCell(-1));
             cell.html(Value);
-
             cell = $(row.insertCell(-1));
             cell.html(Igst);
             cell = $(row.insertCell(-1));
             cell.html(Amount);
-
             cell = $(row.insertCell(-1));
             cell.html(TotalAmount1);
-
         }
-
-        function GetProperDate(DateStr) {
-            if (DateStr != null && DateStr != undefined && DateStr != "") {
-                var dateString = DateStr.substr(6);
-                var currentTime = new Date(parseInt(dateString));
-                var month = currentTime.getMonth() + 1;
-                var day = currentTime.getDate();
-                var year = currentTime.getFullYear();
-                var date = ('0' + month).slice(-2) + "/" + day + "/" + year;
-                return date;
-            }
-        }
-
+        //function GetProperDate(DateStr) {
+        //    if (DateStr != null && DateStr != undefined && DateStr != "") {
+        //        var dateString = DateStr.substr(6);
+        //        var currentTime = new Date(parseInt(dateString));
+        //        var month = currentTime.getMonth() + 1;
+        //        var day = currentTime.getDate();
+        //        var year = currentTime.getFullYear();
+        //        var date = ('0' + month).slice(-2) + "/" + day + "/" + year;
+        //        return date;
+        //    }
+        //}
     </script>
 </asp:Content>

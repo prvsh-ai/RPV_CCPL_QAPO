@@ -2,42 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>Company Details</title>
-
     <style type="text/css">
-        .label1 {
-            display: inline-block;
-            max-width: 24%;
-            margin-bottom: 5px;
-            margin-top: 1%;
-            font-weight: 700;
-            width: 9%;
-            text-align: right;
-            margin-right: 1%;
-        }
-
-        .ddlstyle {
-            padding: 6px 17px;
-            font-size: 14px;
-            line-height: 1.42857143;
-            color: #555;
-            background-color: #fff;
-            background-image: none;
-            /*border: 1px solid;*/
-            width: 17.5%;
-        }
-
-        @media (min-width: 768px) {
-            .ddlstyle {
-                display: inline-block;
-                width: auto;
-                vertical-align: middle;
-            }
-        }
-
-        .modal-title {
-            text-align: center;
-        }
-
         .form-control {
             width: 159px !important;
         }
@@ -57,23 +22,12 @@
         .select2 {
             width: 159px !important;
         }
-
-        .paginate_button {
-            margin-left: 1%;
-        }
     </style>
-
     <link href="../css/Admin.css" rel="stylesheet" />
-
 </asp:Content>
-
 <asp:Content ID="Content2" ContentPlaceHolderID="EAWarpper" runat="server">
-
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <!-- Main content -->
         <section class="content">
-            <!-- START CUSTOM TABS -->
             <div class="container">
                 <div class="box box-solid">
                     <div class="box-body">
@@ -119,7 +73,6 @@
             </div>
             <div id="CategoryModal" class="modal fade" role="dialog">
                 <div class="modal-dialog">
-                    <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -170,25 +123,22 @@
                 </div>
             </div>
         </section>
-        <!-- /.content -->
         <div id="pageloaddiv" class="pageloaddiv" style="display: none;">
         </div>
         <input id="txtCategoryIdUpdate" type="hidden" />
     </div>
-     <div id="overlay">
-            <div class="cv-spinner">
-                <span class="spinner"></span>
-            </div>
+    <div id="overlay">
+        <div class="cv-spinner">
+            <span class="spinner"></span>
         </div>
+    </div>
     <link href="../css/DataTable/dataTablesbootstrap.css" rel="stylesheet" />
-    <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-
-     <script src="../js/validations.js"></script>
-
+    <script src="../js/datatables.1.10.2.min.js"></script>
+    <script src="../js/datables.1.10.16.mn.js"></script>
+    <script src="../js/Admin.js"></script>
+    <script src="../js/validations.js"></script>
     <script type="text/javascript">
         $body = $("body");
-
         $(document).on({
             ajaxStart: function () { $("#overlay").fadeIn(300);; },
             ajaxStop: function () {
@@ -203,36 +153,24 @@
             }
         });
         $(document).ready(function () {
-
-            //validation starts
             checkNameEmpty("#txtCategoryName");
             checkNameEmpty("#txtCode"); //integer
             checkNameEmpty("#txtDefaultSKU");
             checkNameEmpty("#txtDefaultPU");
-            //validation ends
-
             var data = {};
             GetCategoryDetails(0, "");
-
             $(function () {
                 $('#ddlRoomCategory').select2({
                     placeholder: "Select a Category",
-                    // minimumInputLength: 1,
                     maximumInputLength: 1
-                    // allowClear: true
                 });
-
                 $('#ddlRoomCategoryUpdate').select2({
                     placeholder: "Select a Category",
-                    // minimumInputLength: 1,
                     maximumInputLength: 1,
                     refresh: true
-                    // allowClear: true
                 });
             });
-
             $("#btnSave").click(function () {
-
                 var validations = Validation_Category(
               "#txtCategoryName",
               "#txtCode",
@@ -243,7 +181,6 @@
                 else {
                     return false;
                 }
-
                 data.Mode = 1;
                 data.CategoryID = 0;
                 data.CategoryName = $('#txtCategoryName').val();
@@ -258,7 +195,6 @@
                 data.Size = $('#chkSize').prop("checked");
                 SaveUpdateCategoryDetails(data);
             });
-
             $("#btnUpdate").click(function () {
                 var validations = Validation_Category(
                 "#txtCategoryNameUpdate",
@@ -286,7 +222,6 @@
             });
             var ArrData = [];
         });
-
         function GetCategoryDetails(CategoryID, CategoryName) {
             var element = "";
             $.ajax({
@@ -314,8 +249,6 @@
                         element = element + '<td></td>';
                         element = element + '<td></td>';
                         element = element + '</tr>';
-
-                        //element = element + '<tr><td colspan="3"><p class="text-center">No Category Data Available</p></td></tr>'
                     }
                     for (var i = 0; i < len; i++) {
                         element = element + '<tr>';
@@ -343,7 +276,6 @@
                 }
             });
         }
-
         function GetCategoryDetailsForUpdate(CategoryID, CategoryName, Code, DefaultSKU, DefaultPU, Brand, Type, Name, Number, Color, Size) {
             $('#txtCategoryIdUpdate').val(CategoryID);
             $('#txtCategoryNameUpdate').val(CategoryName);
@@ -357,7 +289,6 @@
             $('#chkColorUpdate').prop('checked', Color);
             $('#chkSizeUpdate').prop('checked', Size);
         }
-
         function SaveUpdateCategoryDetails(data) {
             $.ajax({
                 contentType: "application/json; charset=utf-8",
@@ -381,18 +312,14 @@
                 }
             });
         }
-
         function ClearInputBoxValues() {
-           
-                $('input[type=text]').each(function () {
-                    $(this).val('');
-                });
-                $('select').each(function () {
-                    $(this).val('0');
-                });
-           
+            $('input[type=text]').each(function () {
+                $(this).val('');
+            });
+            $('select').each(function () {
+                $(this).val('0');
+            });
         }
     </script>
-
 </asp:Content>
 
