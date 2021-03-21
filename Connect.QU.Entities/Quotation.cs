@@ -11,7 +11,7 @@ namespace Connect.QU.Entities
         public int LoginId { get; set; }
         public int UserId { get; set; }
 
-         //Table type data for 
+        //Table type data for 
         public List<TOC> TableOfContent { get; set; }
         public string DigitalSignature { get; set; }
         public string RevisedQuote { get; set; }
@@ -80,10 +80,11 @@ namespace Connect.QU.Entities
         public string QNo { get; set; }
         public string FinancialYear { get; set; }
         public string Result { get; set; }
+        public int NoOfRows { get; set; }
     }
 
     public class QuotationGenerateReport
-    {    
+    {
         public string QuotationType { get; set; }
         public string QuotationNumber { get; set; }
         public DateTime QuotationDate { get; set; }
@@ -94,14 +95,14 @@ namespace Connect.QU.Entities
         public string QuotationFromEmailID { get; set; }
         public string QuotationFromGSTINNo { get; set; }
         public string ProjectName { get; set; }
-        public string FinancialYear { get; set; }     
+        public string FinancialYear { get; set; }
         public string QuotationToCompanyName { get; set; }
         public string QuotationToGSTINNo { get; set; }
         public string QuotationToContactPerson { get; set; }
         public string QuotationToAddress { get; set; }
         public string PaymentTerms { get; set; }
         public string ValidityOfQuote { get; set; }
-        public string PlaceOfSupply { get; set; }        
+        public string PlaceOfSupply { get; set; }
         public string TotalAmountDigit { get; set; }
         public string TotalAmountWords { get; set; }
         public string TaxableAmount { get; set; }
@@ -113,8 +114,8 @@ namespace Connect.QU.Entities
         public string TermsAndCondition { get; set; }
         public string Comment1 { get; set; }
         public string Comment2 { get; set; }
-        public DateTime SignatureDate { get; set; }          
-        public bool Approved { get; set; }       
+        public DateTime SignatureDate { get; set; }
+        public bool Approved { get; set; }
         public DateTime? CreatedDate { get; set; }
 
 
@@ -131,6 +132,6 @@ namespace Connect.QU.Entities
         public string ItemName { get; set; }
         public int LastRate { get; set; }
         public string InStockQuantity { get; set; }
-       
+
     }
 }

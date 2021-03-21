@@ -32,5 +32,10 @@ namespace Connect.QU.UII.Admin
         {
             return new QU.BAL.CommonBAL().SaveUpdateUserLoginDetails(cnt);
         }
+        [WebMethod]
+        public static string RemoveRegistrationDetails(int LoginId)
+        {
+            return new QU.BAL.CommonBAL().RemoveDetails(LoginId, "Register");
+        }
     }
 }

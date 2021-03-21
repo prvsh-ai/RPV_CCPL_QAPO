@@ -11,6 +11,10 @@ namespace Connect.QU.BAL
 {
     public class CommonBAL
     {
+        public string RemoveDetails(int Id, string Name)
+        {
+            return new CommonDAL().RemoveDetails(Id, Name);
+        }
         public List<QU.Entities.Location> GetLocationDetails(int CompanyId)
         {
             return new CommonDAL().GetLocationDetails(CompanyId);

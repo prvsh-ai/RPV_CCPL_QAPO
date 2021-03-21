@@ -947,6 +947,7 @@ namespace Connect.QU.DAL
 
             return Entities;
         }
+
         public QU.Entities.QuotationTypeDetails GetQuotationDetailsOnQuotationType(int QuotationType)
         {
             QuotationTypeDetails Entities = new QuotationTypeDetails();
@@ -970,29 +971,20 @@ namespace Connect.QU.DAL
                     {
                         Entities.QNo = "0";
                     }
-                    if (QuotationType == 1)
-                    {
-                        Entities.QNo = sdr["QNo"].ToString().Substring(17);
-                    }
-                    else
-                    {
-                        Entities.QNo = sdr["QNo"].ToString().Substring(18);
-                    }
-
-                    if (sdr["FinantialYear"].ToString() == null || sdr["FinantialYear"].ToString() == null)
+                    else if (sdr["FinantialYear"].ToString() == null || sdr["FinantialYear"].ToString() == "")
                     {
                         Entities.FinancialYear = DateTime.Now.Year + "-" + (DateTime.Now.Year + 1);
+                    }
 
-                    }
-                    else
-                    {
-                        Entities.FinancialYear = sdr["FinantialYear"].ToString();
-                    }
+                    Entities.QNo = sdr["QNo"].ToString();
+                    Entities.NoOfRows = Convert.ToInt32(sdr["NoOfRows"]);
+                    Entities.FinancialYear = sdr["FinantialYear"].ToString();
+
                 }
                 else
                 {
                     Entities.Result = "Quotation Type is not Available";
-                    Entities.QNo = "0";
+                    Entities.NoOfRows = 0;
                     Entities.FinancialYear = DateTime.Now.Year + "-" + (DateTime.Now.Year + 1);
                 }
             }
@@ -1008,6 +1000,98 @@ namespace Connect.QU.DAL
 
             return Entities;
         }
+
+        public string RemoveDetails(int Id, string Name)
+        {
+            string Result = "";
+            myCon = myDBConectionDAL.AssignConnection();
+            try
+            {
+                myCmd = new SqlCommand("spRemoveDetails", myCon);
+                myCmd.CommandType = CommandType.StoredProcedure;
+
+                myCmd.Parameters.AddWithValue("@Id", Id);
+                myCmd.Parameters.AddWithValue("@Name", Name);
+                myDBConectionDAL.OpenConnection();
+                myCmd.ExecuteNonQuery();
+                Result = "Remove Details Successfully";
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                myDBConectionDAL.CloseConnection();
+            }
+            return Result;
+        }
+
+
+        //public QU.Entities.QuotationTypeDetails GetQuotationDetailsOnQuotationType(int QuotationType)
+        //{
+        //    QuotationTypeDetails Entities = new QuotationTypeDetails();
+
+        //    try
+        //    {
+        //        myCon = myDBConectionDAL.AssignConnection();
+        //        myCmd = new SqlCommand("spRetQuotationDetailsOnQuotationType", myCon);
+        //        myCmd.CommandType = CommandType.StoredProcedure;
+        //        if (QuotationType != 0)
+        //        {
+        //            myCmd.Parameters.AddWithValue("@QuotationType", QuotationType);
+
+        //        }
+
+        //        myDBConectionDAL.OpenConnection();
+        //        SqlDataReader sdr = myCmd.ExecuteReader();
+        //        if (sdr.Read())
+        //        {
+        //            if (sdr["QNo"].ToString() == null || sdr["QNo"].ToString() == "")
+        //            {
+        //                Entities.QNo = "0";
+        //            }
+        //            if (QuotationType == 1)
+        //            {
+        //                Entities.QNo = sdr["QNo"].ToString().Substring(17);
+        //            }
+        //            else
+        //            {
+        //                Entities.QNo = sdr["QNo"].ToString().Substring(18);
+        //            }
+
+        //            if (sdr["FinantialYear"].ToString() == null || sdr["FinantialYear"].ToString() == null)
+        //            {
+        //                Entities.FinancialYear = DateTime.Now.Year + "-" + (DateTime.Now.Year + 1);
+
+        //            }
+        //            else
+        //            {
+        //                Entities.FinancialYear = sdr["FinantialYear"].ToString();
+        //            }
+        //        }
+        //        else
+        //        {
+        //            Entities.Result = "Quotation Type is not Available";
+        //            Entities.QNo = "0";
+        //            Entities.FinancialYear = DateTime.Now.Year + "-" + (DateTime.Now.Year + 1);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        throw;
+        //    }
+        //    finally
+        //    {
+        //        myDBConectionDAL.CloseConnection();
+        //    }
+
+        //    return Entities;
+        //}
+
+
+
         public List<QU.Entities.TOCRequisition> GetTOCRequisitionDetails(int Requisitionid, int mode)
         {
             List<Entities.TOCRequisition> Entities = new List<Entities.TOCRequisition>();

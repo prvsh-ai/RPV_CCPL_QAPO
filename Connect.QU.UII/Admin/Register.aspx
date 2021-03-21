@@ -235,7 +235,8 @@
                         element = element + '<td>' + getResult[i].RoleName + '</td>';
                         element = element + '<td>' + getResult[i].UserId + '</td>';
                         element = element + '<td>' + getResult[i].Password + '</td>';
-                        element = element + '<td><a href="#"><span class="label label-warning" onclick="GetUserLoginDetailsForUpdate(' + getResult[i].LoginId + ',\'' + getResult[i].UserId + '\',\'' + getResult[i].Password + '\',\'' + getResult[i].Name + '\',\'' + getResult[i].MobileNo + '\',\'' + getResult[i].Designation + '\',\'' + getResult[i].EmailId + '\',' + getResult[i].RoleId + ',\'' + getResult[i].Address + '\'); return false;" data-toggle="modal" data-target="#LoginModal"><i class="fa fa-file-text"  aria-hidden="true"></i> Edit </span></a></td>';
+                     //   element = element + '<td><a href="#"><span class="label label-warning" onclick="GetUserLoginDetailsForUpdate(' + getResult[i].LoginId + ',\'' + getResult[i].UserId + '\',\'' + getResult[i].Password + '\',\'' + getResult[i].Name + '\',\'' + getResult[i].MobileNo + '\',\'' + getResult[i].Designation + '\',\'' + getResult[i].EmailId + '\',' + getResult[i].RoleId + ',\'' + getResult[i].Address + '\'); return false;" data-toggle="modal" data-target="#LoginModal"><i class="fa fa-file-text"  aria-hidden="true"></i> Edit </span></a></td>';
+                        element = element + '<td><a href="#"><span class="label label-warning" onclick="GetUserLoginDetailsForUpdate(' + getResult[i].LoginId + ',\'' + getResult[i].UserId + '\',\'' + getResult[i].Password + '\',\'' + getResult[i].Name + '\',\'' + getResult[i].MobileNo + '\',\'' + getResult[i].Designation + '\',\'' + getResult[i].EmailId + '\',' + getResult[i].RoleId + ',\'' + getResult[i].Address + '\'); return false;" data-toggle="modal" data-target="#LoginModal"><i class="fa fa-file-text"  aria-hidden="true"></i> Edit </span></a><a href="#"><span class="label label-danger"   onclick="RemoveRegistration(' + getResult[i].LoginId + '); return false;" style="margin-left: 23px;"><i class="fa fa-file-text"  aria-hidden="true"></i>Remove</span></a></td>';
                         element = element + '</tr>';
                     }
                     element = element + '</tbody>';
@@ -327,7 +328,9 @@
                         element = element + '<td>' + getResult[i].RoleName + '</td>';
                         element = element + '<td>' + getResult[i].UserId + '</td>';
                         element = element + '<td>' + getResult[i].Password + '</td>';
-                        element = element + '<td><a href="#"><span class="label label-warning" onclick="GetUserLoginDetailsForUpdate(' + getResult[i].LoginId + ',\'' + getResult[i].UserId + '\',\'' + getResult[i].Password + '\',\'' + getResult[i].Name + '\',\'' + getResult[i].MobileNo + '\',\'' + getResult[i].Designation + '\',\'' + getResult[i].EmailId + '\',' + getResult[i].RoleId + ',\'' + getResult[i].Address + '\'); return false;" data-toggle="modal" data-target="#LoginModal"><i class="fa fa-file-text"  aria-hidden="true"></i> Edit </span></a></td>';
+                    //    element = element + '<td><a href="#"><span class="label label-warning" onclick="GetUserLoginDetailsForUpdate(' + getResult[i].LoginId + ',\'' + getResult[i].UserId + '\',\'' + getResult[i].Password + '\',\'' + getResult[i].Name + '\',\'' + getResult[i].MobileNo + '\',\'' + getResult[i].Designation + '\',\'' + getResult[i].EmailId + '\',' + getResult[i].RoleId + ',\'' + getResult[i].Address + '\'); return false;" data-toggle="modal" data-target="#LoginModal"><i class="fa fa-file-text"  aria-hidden="true"></i> Edit </span></a></td>';
+                        element = element + '<td><a href="#"><span class="label label-warning" onclick="GetUserLoginDetailsForUpdate(' + getResult[i].LoginId + ',\'' + getResult[i].UserId + '\',\'' + getResult[i].Password + '\',\'' + getResult[i].Name + '\',\'' + getResult[i].MobileNo + '\',\'' + getResult[i].Designation + '\',\'' + getResult[i].EmailId + '\',' + getResult[i].RoleId + ',\'' + getResult[i].Address + '\'); return false;" data-toggle="modal" data-target="#LoginModal"><i class="fa fa-file-text"  aria-hidden="true"></i> Edit </span></a><a href="#"><span class="label label-danger"   onclick="RemoveRegistration(' + getResult[i].LoginId + '); return false;" style="margin-left: 23px;"><i class="fa fa-file-text"  aria-hidden="true"></i>Remove</span></a></td>';
+
                         element = element + '</tr>';
                     }
                     element = element + '</tbody>';
@@ -353,6 +356,33 @@
                 url: "Register.aspx/SaveUpdateUserLoginDetails",
                 type: "POST",
                 data: JSON.stringify({ 'cnt': data }),
+                dataType: "json",
+                success: function (result) {
+                    var getResult = result.d;
+                    if (getResult != "0") {
+                        alert(getResult);
+                        GetUserLoginDetails(0, "");
+                    }
+                    else {
+                        alert("There is an Error");
+                    }
+                },
+                error: function (err) {
+                    // alert(err.statusText)
+                }
+            });
+        }
+
+        function RemoveRegistration(LoginId) {
+            var conf = confirm("Are you sure you want to Remove Registration Details ?")
+            if (!conf) {
+                return false;
+            }
+            $.ajax({
+                contentType: "application/json; charset=utf-8",
+                url: "Register.aspx/RemoveRegistrationDetails",
+                type: "POST",
+                data: "{LoginId:" + LoginId + "}",
                 dataType: "json",
                 success: function (result) {
                     var getResult = result.d;

@@ -40,7 +40,7 @@
                                     </select>
                                     &nbsp;&nbsp;
                                       <label id="QuotationNoText">&nbsp;Quotation No</label>
-                                    <input type="text" id="txtQuotationNo" disabled />
+                                    <input type="text" id="txtQuotationNo" />
                                     &nbsp;&nbsp;
                                    <label id="QuotationTypeText">&nbsp;Quotation Type</label>
                                     <select id="ddlQuotationType" class="form-control" name="QuotationType">
@@ -557,7 +557,7 @@
                             a.attr("href", link);
                             $("body").append(a);
                             a[0].click();
-                           // $("body").remove(a);
+                            // $("body").remove(a);
                         }
                     },
                     error: function (err) {
@@ -967,7 +967,7 @@
             var row = $(button).closest("TR");
             funRecalculateAfterRemoving(row[0].cells[12].innerText, row[0].cells[7].innerText, row[0].cells[5].innerText, row[0].cells[9].innerText, row[0].cells[11].innerText);
             var x = row[0].cells[1].getAttribute('data-itemid');
-           // var name = $("TD", row).eq(0).html();
+            // var name = $("TD", row).eq(0).html();
             if (confirm("Do you want to delete the ROw ")) {
                 dropArr.splice($.inArray((parseInt(x)), dropArr), 1);
                 var table = $("#tblCustomers")[0];
@@ -1426,7 +1426,8 @@
                 dataType: "json",
                 success: function (result) {
                     var getResult = result.d;
-                    var QuotationNo = parseInt(getResult.QNo) + 1;
+                    var QuotationNo = parseInt(getResult.NoOfRows) + 1;
+
                     if (QuotationType == 1) {
                         $('#txtQuotationNo').val("CCPL/" + getResult.FinancialYear + "/SU" + QuotationNo);
                     }
@@ -1442,6 +1443,31 @@
                 }
             });
         }
+        //function GetQuotationDetailsOnQuotationType(QuotationType) {
+        //    $.ajax({
+        //        contentType: "application/json; charset=utf-8",
+        //        url: "Quotation.aspx/GetQuotationDetailsOnQuotationType",
+        //        type: "POST",
+        //        data: "{QuotationType:" + QuotationType + "}",
+        //        dataType: "json",
+        //        success: function (result) {
+        //            var getResult = result.d;
+        //            var QuotationNo = parseInt(getResult.QNo) + 1;
+        //            if (QuotationType == 1) {
+        //                $('#txtQuotationNo').val("CCPL/" + getResult.FinancialYear + "/SU" + QuotationNo);
+        //            }
+        //            else if (QuotationType == 2) {
+        //                $('#txtQuotationNo').val("CCPL/" + getResult.FinancialYear + "/SER" + QuotationNo);
+        //            }
+        //            else {
+        //                $('#txtQuotationNo').val("CCPL/" + getResult.FinancialYear + "/TEN" + QuotationNo);
+        //            }
+        //        },
+        //        error: function (err) {
+        //            alert("Data is not Available for this Quotation Type")
+        //        }
+        //    });
+        //}
         //function GetProperDate(DateStr) {
         //    if (DateStr != null && DateStr != undefined && DateStr != "") {
         //        var dateString = DateStr.substr(6);
@@ -1453,6 +1479,19 @@
         //        return date;
         //    }
         //}
+
+
+        $('#txtFinancialYear').on('change', function () {
+            var x = $('#txtQuotationNo').val();
+            if (!x.match("^CCPL")) {
+                return false;
+            }
+            var A = new Array();
+            A = $('#txtQuotationNo').val().split("/");
+            var B = parseInt($('#txtFinancialYear').val()) + 1;
+            $('#txtQuotationNo').val(A[0] + "/" + $('#txtFinancialYear').val() + "-" + B + "/" + A[2])
+        });
+
         function ClearInputBoxValues() {
             $("#tblCustomers").load("Quotation.aspx #tblCustomers");
             $('input[type=text]').each(function () {
