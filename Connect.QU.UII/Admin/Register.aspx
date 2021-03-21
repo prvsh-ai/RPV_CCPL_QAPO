@@ -145,9 +145,7 @@
             checkNameEmpty("#txtUserId");
             checkNameEmpty("#txtPassword");
             checkNameEmpty("#txtName");
-            checkvalidPhoneNumber("#txtMobileNo");
             checkNameEmpty("#txtDesignation");
-            checkValidEmail("#txtEmailId");
             checkComment("#txtAddress");
             var data = {};
             GetUserLoginDetails(0, "");
@@ -165,8 +163,8 @@
                 data.Password = $('#txtPassword').val();
                 data.Name = $('#txtName').val();
                 data.MobileNo = $('#txtMobileNo').val();
-                data.Designation = $('#txtEmailId').val();
-                data.EmailId = $('#txtDesignation').val();
+                data.Designation = $('#txtDesignation').val();
+                data.EmailId = $('#txtEmailId').val(); 
                 data.RoleId = $('#ddlRoleId').val();
                 data.Address = $('#txtAddress').val();
                 InsertUpdateUserLoginDetails(data);
@@ -184,8 +182,8 @@
                 data.Password = $('#txtPasswordUpdate').val();
                 data.Name = $('#txtNameUpdate').val();
                 data.MobileNo = $('#txtMobileNoUpdate').val();
-                data.Designation = $('#txtEmailIdUpdate').val();
-                data.EmailId = $('#txtDesignationUpdate').val();
+                data.Designation = $('#txtDesignationUpdate').val();
+                data.EmailId =  $('#txtEmailIdUpdate').val();
                 data.RoleId = $('#ddlRoleIdUpdate').val();
                 data.Address = $('#txtAddressUpdate').val();
                 InsertUpdateUserLoginDetails(data);

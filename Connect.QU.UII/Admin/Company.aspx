@@ -75,9 +75,9 @@
                             <div class="form-group" style="width: 100%; margin-top: 1%;">
                                 <label class="label1" for="txtBankIFSC">Bank IFSC</label>
                                 <input id="txtBankIFSC" class="form-control" type="text" />
-                                <label class="label1" for="txtPOC">POC</label>
+                                <label class="label1" for="txtPOC">Contact Person</label>
                                 <input id="txtPOC" class="form-control" type="text" />
-                                <label class="label1" for="txtPOCNo">POC No</label>
+                                <label class="label1" for="txtPOCNo">Contact Person No</label>
                                 <input id="txtPOCNo" class="form-control integer" type="text" />
                             </div>
                             <div class="form-group" style="width: 100%; margin-top: 1%;">
@@ -150,9 +150,9 @@
                                         <div class="form-group" style="width: 100%; margin-top: 1%;">
                                             <label class="label1" for="txtBankIFSCUpdate">Bank IFSC</label>
                                             <input id="txtBankIFSCUpdate" class="form-control" type="text" />
-                                            <label class="label1" for="txtPOCUpdate">POC</label>
+                                            <label class="label1" for="txtPOCUpdate">Contact Person</label>
                                             <input id="txtPOCUpdate" class="form-control" type="text" />
-                                            <label class="label1" for="txtPOCNoUpdate">POC No</label>
+                                            <label class="label1" for="txtPOCNoUpdate">Contact Person No</label>
                                             <input id="txtPOCNoUpdate" class="form-control integer" type="text" />
                                         </div>
                                         <div class="form-group" style="width: 100%; margin-top: 1%;">
@@ -209,9 +209,6 @@
             //    }
             //});
             checkNameEmpty("#txtCompanyName");
-            checkNameEmpty("#txtGSTIN");
-            checkNameEmpty("#txtPanNo");
-            checkNameEmpty("#txtServiceTaxNo");
             checkValidEmail("#txtEmailId");
             checkNameEmpty("#txtAddress");
             checkvalidPhoneNumber("#txtContactNo");
@@ -271,9 +268,6 @@
             $("#btnSave").click(function () {
                 var validations = Validation_Company(
                 "#txtCompanyName",
-                "#txtGSTIN",
-                "#txtPanNo",
-                "#txtServiceTaxNo",
                 "#txtEmailId",
                 "#txtAddress",
                 "#ddlCountry",
@@ -321,9 +315,6 @@
             $("#btnUpdate").click(function () {
                 var validations = Validation_Company(
                 "#txtCompanyNameUpdate",
-                "#txtGSTINNoUpdate",
-                "#txtPanNoUpdate",
-                "#txtServiceTaxNoUpdate",
                 "#txtEmailIDUpdate",
                 "#txtAddressUpdate",
                 "#ddlCountryUpdate",

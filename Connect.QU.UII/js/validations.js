@@ -41,7 +41,8 @@ function validatePhone(inputtxt) {
     //+XX.XXXX.XXXX
     //+XX XXXX XXXX
 
-    var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/;
+    //var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/;
+    var phoneno = /^\d{10}$/;
     if (inputtxt.match(phoneno)) {
         return true;
     }
@@ -101,16 +102,10 @@ function Validation_Register(userid, password, name, mobileno, designation, emai
         $(name).focus();
         return false;
     }
-    if ($(mobileno).val() == '') {
-        $(mobileno).css('border', '1px solid red');
-        alert("Please Enter Mobile Number");
-        $(mobileno).focus();
-        return false;
-    }
     if ($(mobileno).val() != '') {
         var getPhone = validatePhone($(mobileno).val());
         if (!getPhone) {
-            alert("Please Enter Valid Mobile Number");
+            alert("Please Enter Valid Contact Number");
             $(mobileno).focus();
             return false;
         }
@@ -156,30 +151,12 @@ function Validation_Register(userid, password, name, mobileno, designation, emai
 }
 
 //Company
-function Validation_Company(companyname, gstin, panno, servicetaxno, emailid, address, country, state, city, companylocation, contactno, zipcode, bankname, bankbranch, bankaccount, bankifsc, poc, pocno) {
+function Validation_Company(companyname, emailid, address, country, state, city, companylocation, contactno, zipcode, bankname, bankbranch, bankaccount, bankifsc, poc, pocno) {
 
     if ($(companyname).val() == '') {
         $(companyname).css('border', '1px solid red');
         alert("Please Enter Company Name");
         $(companyname).focus();
-        return false;
-    }
-    if ($(gstin).val() == '') {
-        $(gstin).css('border', '1px solid red');
-        alert("Please Enter GSTIN Number");
-        $(gstin).focus();
-        return false;
-    }
-    if ($(panno).val() == '') {
-        $(panno).css('border', '1px solid red');
-        alert("Please Enter PAN Number");
-        $(panno).focus();
-        return false;
-    }
-    if ($(servicetaxno).val() == '') {
-        $(servicetaxno).css('border', '1px solid red');
-        alert("Please Enter Service Tax Number");
-        $(servicetaxno).focus();
         return false;
     }
     if ($(emailid).val() != '') {

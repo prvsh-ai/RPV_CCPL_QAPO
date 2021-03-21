@@ -55,8 +55,9 @@
                                     <option id="SelectDefault" value="0" selected="selected">select</option>
                                     <option id="GstOne" value="5">5 %</option>
                                     <option id="GstTwo" value="9">9 %</option>
-                                    <option id="GstThree" value="18">18 %</option>
-                                    <option id="GstFour" value="28">28 %</option>
+                                    <option id="GstThree" value="12">12 %</option>
+                                    <option id="GstFour" value="18">18 %</option>
+                                    <option id="GstFive" value="28">28 %</option>
                                 </select>
                                 <label class="label1" for="RadItemType">Item Type</label>
                                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="radStock" value="option1" />
@@ -149,8 +150,9 @@
                                                 <option id="SelectDefaultUpdate" value="0" selected="selected">select</option>
                                                 <option id="GstOneUpdate" value="5">5 %</option>
                                                 <option id="GstTwoUpdate" value="9">9 %</option>
-                                                <option id="GstThreeUpdate" value="18">18 %</option>
-                                                <option id="GstFourUpdate" value="28">28 %</option>
+                                                <option id="GstThreeUpdate" value="12">12 %</option>
+                                                <option id="GstFourUpdate" value="18">18 %</option>
+                                                <option id="GstFiveUpdate" value="28">28 %</option>
                                             </select>
                                             <label class="label1" for="RadItemType">Item Type</label>
                                             <input class="form-check-input" type="radio" name="inlineRadioOptionsUpdate" id="radStockUpdate" value="option1Update" />

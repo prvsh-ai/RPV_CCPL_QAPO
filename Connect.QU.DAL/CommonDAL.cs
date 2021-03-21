@@ -122,22 +122,14 @@ namespace Connect.QU.DAL
                 {
                     CL = new Entities.Quotation();
                     CL.QID = Convert.ToInt32(sdr["QID"]);
+
+                    CL.ApplicationType = Convert.ToInt32(sdr["ApplicationType"]);
+
+                    CL.ApplicationReference = sdr["ApplicationReference"].ToString();
                     CL.QNo = sdr["QNo"].ToString();
                     CL.QType = sdr["QType"].ToString();
-
-                    //if (sdr["QType"].ToString() == "1")
-                    //{
-                    //    CL.QType = "SU";
-                    //}
-                    //else if (sdr["QType"].ToString() == "2")
-                    //{
-                    //    CL.QType = "SER";
-                    //}
-                    //else
-                    //{
-                    //    CL.QType = "TEN";
-                    //}
-
+                    CL.ApplicationType = Convert.ToInt32(sdr["ApplicationType"]);
+                    CL.ApplicationReference = sdr["ApplicationReference"].ToString();
                     CL.QDate = Convert.ToDateTime(sdr["QDate"]);
                     CL.QFromCompanyName = sdr["QFromCompanyName"].ToString();
                     CL.QFromAddress = sdr["QFromAddress"].ToString();
@@ -151,6 +143,7 @@ namespace Connect.QU.DAL
                     CL.QToCompanyName = sdr["QToCompanyName"].ToString();
                     CL.QToGSTINNo = sdr["QToGSTINNo"].ToString();
                     CL.QToContactPerson = sdr["QToContactPerson"].ToString();
+                    CL.QToEmailID = sdr["QToEmailID"].ToString();
                     CL.QToAddress = sdr["QToAddress"].ToString();
                     CL.PaymentTerms = sdr["PaymentTerms"].ToString();
                     CL.ValidityOfQuote = sdr["ValidityOfQuote"].ToString();
@@ -159,6 +152,9 @@ namespace Connect.QU.DAL
                     CL.TotalAmountDigit = sdr["TotalAmountDigit"].ToString();
                     CL.TotalAmountWords = sdr["TotalAmountWords"].ToString();
                     CL.TaxableAmount = sdr["TaxableAmount"].ToString();
+                    CL.IgstAmount = sdr["IgstAmount"].ToString();
+                    CL.CgstAmount = sdr["CgstAmount"].ToString();
+                    CL.SgstAmount = sdr["SgstAmount"].ToString();
                     CL.Freight = sdr["Freight"].ToString();
                     CL.BankName = sdr["BankName"].ToString();
                     CL.BranchName = sdr["BranchName"].ToString();
@@ -407,10 +403,13 @@ namespace Connect.QU.DAL
                     CL.Rate = sdr["Rate"].ToString();
                     CL.Value = sdr["Value"].ToString();
                     CL.Igst = sdr["Igst"].ToString();
-                    CL.Amount = sdr["Amount"].ToString();
-                    CL.TotalAmount1 = sdr["TotalAmount1"].ToString();
+                    CL.IgstAmount = sdr["IgstAmount"].ToString();
+                    CL.Sgst = sdr["Sgst"].ToString();
+                    CL.SgstAmount = sdr["SgstAmount"].ToString();
+                    CL.Cgst = sdr["Cgst"].ToString();
+                    CL.CgstAmount = sdr["CgstAmount"].ToString();
+                    CL.TotalAmount = sdr["TotalAmount"].ToString();
                     CL.ItemId = Convert.ToInt32(sdr["ItemId"]);
-
                     Entities.Add(CL);
                 }
             }
@@ -695,13 +694,29 @@ namespace Connect.QU.DAL
                     {
                         CL.Igst = sdr["Igst"].ToString();
                     }
-                    if (!string.IsNullOrEmpty(sdr["Amount"].ToString()))
+                    if (!string.IsNullOrEmpty(sdr["IgstAmount"].ToString()))
                     {
-                        CL.Amount = sdr["Amount"].ToString();
+                        CL.IgstAmount = sdr["IgstAmount"].ToString();
                     }
-                    if (!string.IsNullOrEmpty(sdr["TotalAmount1"].ToString()))
+                    if (!string.IsNullOrEmpty(sdr["Sgst"].ToString()))
                     {
-                        CL.TotalAmount1 = sdr["TotalAmount1"].ToString();
+                        CL.Sgst = sdr["Sgst"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["SgstAmount"].ToString()))
+                    {
+                        CL.SgstAmount = sdr["SgstAmount"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["Cgst"].ToString()))
+                    {
+                        CL.Cgst = sdr["Cgst"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["CgstAmount"].ToString()))
+                    {
+                        CL.CgstAmount = sdr["CgstAmount"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["TotalAmount"].ToString()))
+                    {
+                        CL.TotalAmount = sdr["TotalAmount"].ToString();
                     }
                     if (!string.IsNullOrEmpty(sdr["ItemID"].ToString()))
                     {
@@ -785,13 +800,29 @@ namespace Connect.QU.DAL
                     {
                         CL.Igst = sdr["Igst"].ToString();
                     }
-                    if (!string.IsNullOrEmpty(sdr["Amount"].ToString()))
+                    if (!string.IsNullOrEmpty(sdr["IgstAmount"].ToString()))
                     {
-                        CL.Amount = sdr["Amount"].ToString();
+                        CL.IgstAmount = sdr["IgstAmount"].ToString();
                     }
-                    if (!string.IsNullOrEmpty(sdr["TotalAmount1"].ToString()))
+                    if (!string.IsNullOrEmpty(sdr["Sgst"].ToString()))
                     {
-                        CL.TotalAmount1 = sdr["TotalAmount1"].ToString();
+                        CL.Sgst = sdr["Sgst"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["SgstAmount"].ToString()))
+                    {
+                        CL.SgstAmount = sdr["SgstAmount"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["Cgst"].ToString()))
+                    {
+                        CL.Cgst = sdr["Cgst"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["CgstAmount"].ToString()))
+                    {
+                        CL.CgstAmount = sdr["CgstAmount"].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(sdr["TotalAmount"].ToString()))
+                    {
+                        CL.TotalAmount = sdr["TotalAmount"].ToString();
                     }
                     if (!string.IsNullOrEmpty(sdr["ItemID"].ToString()))
                     {
@@ -1777,8 +1808,12 @@ namespace Connect.QU.DAL
             dt.Columns.Add("Rate");
             dt.Columns.Add("Value");
             dt.Columns.Add("Igst");
-            dt.Columns.Add("Amount");
-            dt.Columns.Add("TotalAmount1");
+            dt.Columns.Add("IgstAmount");
+            dt.Columns.Add("Sgst");
+            dt.Columns.Add("SgstAmount");
+            dt.Columns.Add("Cgst");
+            dt.Columns.Add("CgstAmount");
+            dt.Columns.Add("TotalAmount");
             dt.Columns.Add("UserID");
             dt.Columns.Add("CreatedDate");
             dt.Columns.Add("UpdatedBy");
@@ -1797,8 +1832,12 @@ namespace Connect.QU.DAL
                 dr["Rate"] = arr.Rate;
                 dr["Value"] = arr.Value;
                 dr["Igst"] = arr.Igst;
-                dr["Amount"] = arr.Amount;
-                dr["TotalAmount1"] = arr.TotalAmount1;
+                dr["IgstAmount"] = arr.IgstAmount;
+                dr["Sgst"] = arr.Sgst;
+                dr["SgstAmount"] = arr.SgstAmount;
+                dr["Cgst"] = arr.Cgst;
+                dr["CgstAmount"] = arr.CgstAmount;
+                dr["TotalAmount"] = arr.TotalAmount;
                 dr["UserID"] = 1;
                 dr["CreatedDate"] = DateTime.Now;
                 dr["UpdatedBy"] = 1;
@@ -1817,6 +1856,8 @@ namespace Connect.QU.DAL
                     myCmd.Parameters.AddWithValue("@QID", cnt.QID);
                 }
                 myCmd.Parameters.AddWithValue("@Mode", cnt.Mode);
+                myCmd.Parameters.AddWithValue("@ApplicationType", cnt.ApplicationType);
+                myCmd.Parameters.AddWithValue("@ApplicationReference", cnt.ApplicationReference);
                 myCmd.Parameters.AddWithValue("@QType", cnt.QType);
                 myCmd.Parameters.AddWithValue("@QNo", cnt.QNo);
                 myCmd.Parameters.AddWithValue("@QDate", cnt.QDate);
@@ -1832,6 +1873,7 @@ namespace Connect.QU.DAL
                 myCmd.Parameters.AddWithValue("@QToCompanyName", cnt.QToCompanyName);
                 myCmd.Parameters.AddWithValue("@QToGSTINNo", cnt.QToGSTINNo);
                 myCmd.Parameters.AddWithValue("@QToContactPerson", cnt.QToContactPerson);
+                myCmd.Parameters.AddWithValue("@QToEmailID", cnt.QToEmailID);
                 myCmd.Parameters.AddWithValue("@QToAddress", cnt.QToAddress);
                 myCmd.Parameters.AddWithValue("@PaymentTerms", cnt.PaymentTerms);
                 myCmd.Parameters.AddWithValue("@ValidityOfQuote", cnt.ValidityOfQuote);
@@ -1840,6 +1882,9 @@ namespace Connect.QU.DAL
                 myCmd.Parameters.AddWithValue("@TotalAmountDigit", cnt.TotalAmountDigit);
                 myCmd.Parameters.AddWithValue("@TotalAmountWords", cnt.TotalAmountWords);
                 myCmd.Parameters.AddWithValue("@TaxableAmount", cnt.TaxableAmount);
+                myCmd.Parameters.AddWithValue("@IgstAmount", cnt.IgstAmount);
+                myCmd.Parameters.AddWithValue("@SgstAmount", cnt.SgstAmount);
+                myCmd.Parameters.AddWithValue("@CgstAmount", cnt.CgstAmount);
                 myCmd.Parameters.AddWithValue("@Freight", cnt.Freight);
                 myCmd.Parameters.AddWithValue("@BankName", cnt.BankName);
                 myCmd.Parameters.AddWithValue("@BranchName", cnt.BranchName);

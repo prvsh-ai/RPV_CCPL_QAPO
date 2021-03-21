@@ -637,10 +637,10 @@
         }
         function Remove(button) {
             var row = $(button).closest("TR");
-            var name = $("TD", row).eq(0).html();
+            //var name = $("TD", row).eq(0).html();
             funRecalculateAfterRemoving(row[0].cells[5].innerText);
             var x = row[0].cells[0].getAttribute('data-itemid');
-            if (confirm("Do you want to delete: " + name)) {
+            if (confirm("Do you want to delete the Row: ")) {
                 dropArr.splice($.inArray((parseInt(x)), dropArr), 1);
                 var table = $("#tblCustomers")[0];
                 table.deleteRow(row[0].rowIndex);

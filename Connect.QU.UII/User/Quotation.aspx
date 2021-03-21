@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/User/User.Master" CodeBehind="Quotation.aspx.cs" Inherits="Connect.QU.UII.User.Quotation" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="Server">
-<link href="../css/Admin.css" rel="stylesheet" />
+    <link href="../css/Admin.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="EAWarpper" runat="Server">
     <div class="container">
@@ -11,9 +11,9 @@
                     <div class="text-right">
                         <div class="form-inline">
                             <div class="form-group">
-                                <select id="ddlPageType" class="form-control" name="GstinNoType">
-                                    <option value="0">Quotation</option>
-                                    <option value="1">Purchase Order</option>
+                                <select id="ddlApplicationType" class="form-control" name="ApplicationType">
+                                    <option value="1">Quotation</option>
+                                    <option value="2">Purchase Order</option>
                                 </select>
                             </div>
                         </div>
@@ -28,7 +28,7 @@
                             <br />
                             Phone: +91 8800722000  Email anju@connect.co.in         
                             <br />
-                            E-Mail:<a href="mailto:pravesh.kr01@gmail.com"><u> pravesh.kr01@gmail.com</u></a>
+                            E-Mail:<a href="mailto:sales@connect.co.in"><u> sales@connect.co.in</u></a>
                         </p>
                         <p>
                             <div class="form-inline">
@@ -134,8 +134,8 @@
                                         <input type="text" id="txtGstinParty" style="margin-left: 5%; width: 58%;" class="form-control" disabled />
                                     </div>
                                     <div class="col-lg-4">
-                                        <label class="control-label">Payment Terms</label>
-                                        <input type="text" id="txtaymentTerms" style="width: 58%;" class="form-control" />
+                                        <label class="control-label">Company Email</label>
+                                        <input type="text" id="txtCompanyEmailId" style="width: 58%;" class="form-control" disabled />
                                     </div>
                                 </div>
                             </div>
@@ -148,6 +148,8 @@
                                         <input type="text" id="txtValidityOfQuote" style="width: 58%; margin-left: 4%;" class="form-control" />
                                     </div>
                                     <div class="col-lg-4">
+                                        <label class="control-label">Payment</label>
+                                        <input type="text" id="txtPaymentTerms" style="width: 58%;" class="form-control" />
                                     </div>
                                     <div class="col-lg-4">
                                         <label class="control-label">Place Of Supply </label>
@@ -165,7 +167,7 @@
                                 <div style="overflow-x: auto">
                                     <table id="tblCustomers" class="table" cellpadding="0" cellspacing="0">
                                         <thead>
-                                            <tr>
+                                            <tr style="background-color: lightblue;">
                                                 <th style="width: 150px">S No.</th>
                                                 <th style="width: 150px">Description Of Goods</th>
                                                 <th style="width: 150px">Qty</th>
@@ -173,7 +175,11 @@
                                                 <th style="width: 150px">Rate/Unit</th>
                                                 <th style="width: 150px">Value Without Tax</th>
                                                 <th style="width: 150px">IGST %</th>
-                                                <th style="width: 150px">IGST Amount</th>
+                                                <th style="width: 150px">Amount</th>
+                                                <th style="width: 150px">SGST %</th>
+                                                <th style="width: 150px">Amount</th>
+                                                <th style="width: 150px">CGST %</th>
+                                                <th style="width: 150px">Amount</th>
                                                 <th style="width: 150px">Total Amount</th>
                                                 <th></th>
                                             </tr>
@@ -195,11 +201,52 @@
                                                 <td>
                                                     <input type="text" id="txtValue" class="integer" /></td>
                                                 <td>
-                                                    <input type="text" id="txtIgst" disabled /></td>
+                                                    <select id="ddlIgst" style="margin-top: 20%;" name="QuotationType">
+                                                        <option value="0"><a href="xyz" target="_blank">0%</a></option>
+                                                        <option value="5"><a href="xyz" target="_blank">5%</a></option>
+                                                        <option value="9"><a href="xyz" target="_blank">9%</a></option>
+                                                        <option value="12"><a href="xyz" target="_blank">12%</a></option>
+                                                        <option value="18"><a href="xyz" target="_blank">18%</a></option>
+                                                        <option value="28"><a href="xyz" target="_blank">28%</a></option>
+                                                    </select>
+                                                </td>
+
                                                 <td>
                                                     <input type="text" id="txtAmount" class="integer" /></td>
+
                                                 <td>
-                                                    <input type="text" id="txtTotalAmount1" class="integer" /></td>
+                                                    <select id="ddlSgst" style="margin-top: 20%;" name="QuotationType">
+                                                        <option value="0"><a href="xyz" target="_blank">0%</a></option>
+                                                        <option value="5"><a href="xyz" target="_blank">5%</a></option>
+                                                        <option value="9"><a href="xyz" target="_blank">9%</a></option>
+                                                        <option value="12"><a href="xyz" target="_blank">12%</a></option>
+                                                        <option value="18"><a href="xyz" target="_blank">18%</a></option>
+                                                        <option value="28"><a href="xyz" target="_blank">28%</a></option>
+                                                    </select>
+                                                </td>
+
+                                                <td>
+                                                    <input type="text" id="txtSgst" class="integer" /></td>
+
+                                                <td>
+                                                    <select id="ddlCgst" style="margin-top: 20%;" name="QuotationType">
+                                                        <option value="0"><a href="xyz" target="_blank">0%</a></option>
+                                                        <option value="5"><a href="xyz" target="_blank">5%</a></option>
+                                                        <option value="9"><a href="xyz" target="_blank">9%</a></option>
+                                                        <option value="12"><a href="xyz" target="_blank">12%</a></option>
+                                                        <option value="18"><a href="xyz" target="_blank">18%</a></option>
+                                                        <option value="28"><a href="xyz" target="_blank">28%</a></option>
+                                                    </select>
+                                                </td>
+
+                                                <td>
+                                                    <input type="text" id="txtCgst" class="integer" /></td>
+
+
+
+
+                                                <td>
+                                                    <input type="text" id="txtTotalAmount" class="integer" /></td>
                                                 <td>
                                                     <input type="button" id="btnAdd" value="Add" /></td>
                                             </tr>
@@ -209,17 +256,43 @@
                             </div>
                         </div>
                         <p>
+
+                            <br />
+
+                            <br />
+
+                            <div class="form-inline AppX">
+                                <div class="form-row">
+                                    <div class="col-lg-4">
+                                        <label class="control-label">Igst Amount</label>
+                                        <input type="text" id="txtIgstAmount" style="width: 58%; margin-left: 8%;" class="form-control" disabled />
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label class="control-label">Sgst Amount</label>
+                                        <input type="text" id="txtSgstAmount" style="width: 58%;" class="form-control" disabled />
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label class="control-label">Cgst Amount</label>
+                                        <input type="text" id="txtCgstAmount" style="width: 58%;" class="form-control" disabled />
+                                    </div>
+                                </div>
+                            </div>
+
                             <br />
                             <br />
                             <div class="form-inline AppX">
                                 <div class="form-row">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         <label class="control-label">Taxable Amount  </label>
-                                        <input type="text" id="txtTaxableAmount" class="form-control integer" />
+                                        <input type="text" id="txtTaxableAmount" style="width: 58%;" class="form-control" disabled />
                                     </div>
-                                    <div class="col-lg-6">
-                                        <label class="control-label">Total Words </label>
-                                        <input type="text" id="txtTotalWords" style="width: 69%; margin-left: 8%;" class="form-control" />
+                                    <div class="col-lg-4">
+                                        <label class="control-label">Freight </label>
+                                        <input type="text" id="txtFreight" style="width: 58%; margin-left: 13%;" class="form-control" />
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label class="control-label">Grand Total</label>
+                                        <input type="text" id="txtGrandTotal" style="width: 58%; margin-left: 3%;" disabled class="form-control integer" />
                                     </div>
                                 </div>
                             </div>
@@ -229,14 +302,11 @@
                         <p>
                             <div class="form-inline AppX">
                                 <div class="form-row">
-                                    <div class="col-lg-6">
-                                        <label class="control-label">Freight </label>
-                                        <input type="text" id="txtFreight" style="margin-left: 13%;" class="form-control" />
+                                    <div class="col-lg-12">
+                                        <label class="control-label">Total Words </label>
+                                        <input type="text" id="txtTotalWords" style="margin-left: 3%; width: 84%;" disabled class="form-control" />
                                     </div>
-                                    <div class="col-lg-6">
-                                        <label class="control-label">Grand Total</label>
-                                        <input type="text" id="txtGrandTotal" style="margin-left: 9%;" class="form-control integer" />
-                                    </div>
+
                                 </div>
                             </div>
                         </p>
@@ -369,8 +439,8 @@
             $("#btnSave").show();
             $('#btnExportToPdf').prop('disabled', true);
             var data = {};
-            $('#ddlPageType').change(function () {
-                if ($('#ddlPageType').val() == 0) {
+            $('#ddlApplicationType').change(function () {
+                if ($('#ddlApplicationType').val() == 0) {
                     $('#QuotationNoText').text("Quotation No");
                     $('#QuotationTypeText').text("Quotation Type");
                     $('#QuotationApplicationText').text("QUOTATION APPLICATION");
@@ -410,18 +480,46 @@
                 var c = a * b;
                 $('#txtValue').val(c);
             });
-            $('#txtIgst,#txtAmount,#txtValue,#txtRate,#txtQty').change(function () {
-                var igstTax = parseInt($('#txtIgst').val());
+
+
+
+
+            $('#ddlIgst,#ddlSgst,#ddlCgst,#txtAmount,#txtValue,#txtRate,#txtQty').change(function () {
+                var igstTax = parseInt($('#ddlIgst').val());
+                var sgstTax = parseInt($('#ddlSgst').val());
+                var cgstTax = parseInt($('#ddlCgst').val());
+
                 var totalRate = parseInt($('#txtValue').val());
                 var z = totalRate * (igstTax / 100);
                 $('#txtAmount').val(z.toFixed(2));
+
+
+                var totalRate1 = parseInt($('#txtValue').val());
+                var z1 = totalRate1 * (sgstTax / 100);
+                $('#txtSgst').val(z1.toFixed(2));
+
+
+                var totalRate2 = parseInt($('#txtValue').val());
+                var z2 = totalRate2 * (cgstTax / 100);
+                $('#txtCgst').val(z2.toFixed(2));
+
+
+
+
             });
-            $('#txtTotalAmount1,#txtIgst,#txtAmount,#txtValue,#txtRate,#txtQty').change(function () {
-                var igstTaxValue = parseInt($('#txtValue').val());
-                var Value = parseInt($('#txtAmount').val());
-                var z = igstTaxValue + Value;
-                $('#txtTotalAmount1').val(z.toFixed(2));
+            $('#txtTotalAmount,#ddlIgst,#ddlSgst,#ddlCgst,#txtAmount,#txtValue,#txtRate,#txtQty').change(function () {
+                var igstTaxValue = parseInt($('#txtAmount').val());
+                var sgstTaxValue = parseInt($('#txtSgst').val());
+                var cgstTaxValue = parseInt($('#txtCgst').val());
+                var Value = parseInt($('#txtValue').val());
+                var z = igstTaxValue + Value + sgstTaxValue + cgstTaxValue;
+                $('#txtTotalAmount').val(z.toFixed(2));
             });
+
+
+
+
+
             $('#txtFinancialYear').datepicker({
                 format: "yyyy",
                 viewMode: "years",
@@ -459,7 +557,7 @@
                             a.attr("href", link);
                             $("body").append(a);
                             a[0].click();
-                            $("body").remove(a);
+                           // $("body").remove(a);
                         }
                     },
                     error: function (err) {
@@ -483,7 +581,7 @@
                 "#txtQty",
                 "#txtRate",
                 "#txtValue",
-                "#txtTotalAmount1");
+                "#txtTotalAmount");
                 if (validations) {
                 }
                 else {
@@ -494,9 +592,16 @@
                 var txtHsn = $("#txtHsn");
                 var txtRate = $("#txtRate");
                 var txtValue = $("#txtValue");
-                var txtIgst = $("#txtIgst");
-                var txtAmount = $("#txtAmount");
-                var txtTotalAmount1 = $("#txtTotalAmount1");
+                var txtIgst = $("#ddlIgst");   //ddl pravesh
+                var txtIgstAmount = $("#txtAmount");
+                //new fields
+                var txtSgst = $("#ddlSgst");   //ddl pravesh
+                var txtSgstAmount = $("#txtSgst");
+                var txtCgst = $("#ddlCgst");   //ddl pravesh
+                var txtCgstAmount = $("#txtCgst");
+
+                //ends here
+                var txtTotalAmount = $("#txtTotalAmount");
                 var tBody = $("#tblCustomers > TBODY")[0];
                 var row = tBody.insertRow(-1);
                 var cell = $(row.insertCell(-1));
@@ -515,10 +620,24 @@
                 cell = $(row.insertCell(-1));
                 cell.html(txtIgst.val());
                 cell = $(row.insertCell(-1));
-                cell.html(txtAmount.val());
+                cell.html(txtIgstAmount.val());
+
+                //new fields
                 cell = $(row.insertCell(-1));
-                cell.html(txtTotalAmount1.val());
-                funRecalculateAfterAdding(txtTotalAmount1.val(), txtAmount.val());
+                cell.html(txtSgst.val());
+                cell = $(row.insertCell(-1));
+                cell.html(txtSgstAmount.val());
+                cell = $(row.insertCell(-1));
+                cell.html(txtCgst.val());
+                cell = $(row.insertCell(-1));
+                cell.html(txtCgstAmount.val());
+                //ends here
+
+
+
+                cell = $(row.insertCell(-1));
+                cell.html(txtTotalAmount.val());
+                funRecalculateAfterAdding(txtTotalAmount.val(), txtIgstAmount.val(), txtValue.val(), txtSgstAmount.val(), txtCgstAmount.val());
                 cell = $(row.insertCell(-1));
                 var btnRemove = $("<input />");
                 btnRemove.attr("type", "button");
@@ -531,8 +650,14 @@
                 txtRate.val("");
                 txtValue.val("");
                 txtIgst.val("");
-                txtAmount.val("");
-                txtTotalAmount1.val("");
+                txtIgstAmount.val("");
+
+                txtSgst.val("");
+                txtSgstAmount.val("");
+                txtCgst.val("");
+                txtCgstAmount.val("");
+
+                txtTotalAmount.val("");
                 GetItemDetails(0, "");
             });
             GetCurrencyDetails(0, "");
@@ -594,7 +719,8 @@
                 }
                 data.Mode = 1;
                 data.QID = 0;//QID Pravesh
-                data.FormType = $('#ddlPageType').val();
+                data.ApplicationType = $('#ddlApplicationType').val();
+                data.ApplicationReference = "0";
                 data.QFromGSTINNo = $("#ddlQGstinNoType option:selected").text();//
                 data.QuotationType = $('#ddlQuotationType').val();
                 data.QNo = $('#txtQuotationNo').val();
@@ -606,13 +732,17 @@
                 data.QToCompanyName = $('#ddlCompanyId option:selected').text();//$('#txtCompanyName').val();
                 data.QToGSTINNo = $('#txtGstinParty').val();
                 data.QToContactPerson = $('#txtContactPerson').val();
+                data.QToEmailID = $('#txtCompanyEmailId').val();
                 data.QToAddress = $('#txtAddress').val();
-                data.PaymentTerms = $('#txtaymentTerms').val();
+                data.PaymentTerms = $('#txtPaymentTerms').val();
                 data.ValidityOfQuote = $('#txtValidityOfQuote').val();
                 data.PlaceOfSupply = $('#txtPlaceOfSupply').val();
                 data.TotalAmountDigit = $('#txtGrandTotal').val();
                 data.TotalAmountWords = $('#txtTotalWords').val();
                 data.TaxableAmount = $('#txtTaxableAmount').val();
+                data.IgstAmount = $('#txtIgstAmount').val();
+                data.SgstAmount = $('#txtSgstAmount').val();
+                data.CgstAmount = $('#txtCgstAmount').val();
                 data.Freight = $('#txtFreight').val();
                 data.BankName = $('#txtBankName').val();
                 data.BranchName = $('#txtBranchName').val();
@@ -648,6 +778,8 @@
                 }
                 data.Mode = 2;
                 data.QID = $('#hidHotelId').val();
+                data.ApplicationType = $('#ddlApplicationType').val();
+                data.ApplicationReference = "0";
                 data.FormType = $('#ddlPageType').val();
                 data.QFromGSTINNo = $("#ddlQGstinNoType option:selected").text();//
                 data.QuotationType = $('#ddlQuotationType').val();
@@ -660,13 +792,17 @@
                 data.QToCompanyName = $('#ddlCompanyId option:selected').text();//$('#txtCompanyName').val();
                 data.QToGSTINNo = $('#txtGstinParty').val();
                 data.QToContactPerson = $('#txtContactPerson').val();
+                data.QToEmailID = $('#txtCompanyEmailId').val();
                 data.QToAddress = $('#txtAddress').val();
-                data.PaymentTerms = $('#txtaymentTerms').val();
+                data.PaymentTerms = $('#txtPaymentTerms').val();
                 data.ValidityOfQuote = $('#txtValidityOfQuote').val();
                 data.PlaceOfSupply = $('#txtPlaceOfSupply').val();
                 data.TotalAmountDigit = $('#txtGrandTotal').val();
                 data.TotalAmountWords = $('#txtTotalWords').val();
                 data.TaxableAmount = $('#txtTaxableAmount').val();
+                data.IgstAmount = $('#txtIgstAmount').val();
+                data.SgstAmount = $('#txtSgstAmount').val();
+                data.CgstAmount = $('#txtCgstAmount').val();
                 data.Freight = $('#txtFreight').val();
                 data.BankName = $('#txtBankName').val();
                 data.BranchName = $('#txtBranchName').val();
@@ -696,12 +832,13 @@
                 }
             });
         });
-        function funTotalAmount(val, taxVal) {
-            $('#txtTaxableAmount').val(taxVal);
-            $('#txtGrandTotal').val(val);
+        //Calculations Starts here
+        function funTotalAmount(val, taxIgstVal) {
+            $('#txtIgstAmount').val(parseFloat(taxIgstVal).toFixed(2));
+            $('#txtGrandTotal').val(parseFloat(val).toFixed(2)); //pravesh
             $('#txtTotalWords').val(numberToWords(val));
         }
-        function funRecalculateAfterAdding(amount, tax) {
+        function funRecalculateAfterAdding(amount, Igsttax, totalwithouttax, SgstTax, CgstTax) {
             var TotalAmount = 0;
             if (!isNaN(amount)) {
                 TotalAmount = amount;
@@ -711,34 +848,103 @@
             }
             var AddedAmount = parseInt(amount);
             var NewAmount = TotalAmount + AddedAmount;
-            $('#txtGrandTotal').val(NewAmount);
+            $('#txtGrandTotal').val(parseFloat(NewAmount).toFixed(2));
             $('#txtTotalWords').val(numberToWords(NewAmount));
-            var TotalTax = 0;
-            if ($('#txtTaxableAmount').val() != "") {
-                TotalTax = parseInt($('#txtTaxableAmount').val());
+
+            //Igst tax
+            var TotalIgstTax = 0;
+            if ($('#txtIgstAmount').val() != "") {
+                TotalIgstTax = parseInt($('#txtIgstAmount').val());
             }
-            var AddedTax = parseInt(tax);
-            var NewTax = AddedTax + TotalTax;
-            $('#txtTaxableAmount').val(NewTax);
+            var AddedIgstTax = parseInt(Igsttax);
+            var NewIgstTax = AddedIgstTax + TotalIgstTax;
+            $('#txtIgstAmount').val(parseFloat(NewIgstTax).toFixed(2));
+
+
+            //Total without tax
+            var TotalWithoutTax = 0;
+            if ($('#txtTaxableAmount').val() != "") {
+                TotalWithoutTax = parseInt($('#txtTaxableAmount').val());
+            }
+            var AddedWithoutTax = parseInt(totalwithouttax);
+            var NewWithoutTax = AddedWithoutTax + TotalWithoutTax;
+            $('#txtTaxableAmount').val(parseFloat(NewWithoutTax).toFixed(2));
+
+
+            //Sgst tax
+            var TotalSgstTax = 0;
+            if ($('#txtSgstAmount').val() != "") {
+                TotalSgstTax = parseInt($('#txtSgstAmount').val());
+            }
+            var AddedSgstTax = parseInt(SgstTax);
+            var NewSgstTax = AddedSgstTax + TotalSgstTax;
+            $('#txtSgstAmount').val(parseFloat(NewSgstTax).toFixed(2));
+
+
+            //Cgst tax
+            var TotalCgstTax = 0;
+            if ($('#txtCgstAmount').val() != "") {
+                TotalCgstTax = parseInt($('#txtCgstAmount').val());
+            }
+            var AddedCgstTax = parseInt(CgstTax);
+            var NewCgstTax = AddedCgstTax + TotalCgstTax;
+            $('#txtCgstAmount').val(parseFloat(NewCgstTax).toFixed(2));
+
         }
-        function funRecalculateAfterRemoving(amount, tax) {
+        function funRecalculateAfterRemoving(amount, Igsttax, totalwithouttax, sgsttax, cgsttax) {
             var TotalAmount = 0;
             if ($('#txtGrandTotal').val() != "") {
                 TotalAmount = parseInt($('#txtGrandTotal').val());
             }
             var RemovedAmount = parseInt(amount);
             var NewAmount = TotalAmount - RemovedAmount;
-            $('#txtGrandTotal').val(NewAmount);
+            $('#txtGrandTotal').val(parseFloat(NewAmount).toFixed(2));
             $('#txtTotalWords').val(numberToWords(NewAmount));
-            var TotalTax = 0;
-            if ($('#txtTaxableAmount').val() != "") {
-                TotalTax = parseInt($('#txtTaxableAmount').val());
+
+            //igst tax
+            var TotalIgstTax = 0;
+            if ($('#txtIgstAmount').val() != "") {
+                TotalIgstTax = parseInt($('#txtIgstAmount').val());
             }
-            var RemovedTax = parseInt(tax);
-            var NewTax = TotalTax - RemovedTax;
-            $('#txtTaxableAmount').val(NewTax);
+            var RemovedIgstTax = parseInt(Igsttax);
+            var NewIgstTax = TotalIgstTax - RemovedIgstTax;
+            $('#txtIgstAmount').val(parseFloat(NewIgstTax).toFixed(2));
+
+            //Total Without Tax
+            var TotalWithoutTax = 0;
+            if ($('#txtTaxableAmount').val() != "") {
+                TotalWithoutTax = parseInt($('#txtTaxableAmount').val());
+            }
+            var RemovedWithoutTax = parseInt(totalwithouttax);
+            var NewWithoutTax = TotalWithoutTax - RemovedWithoutTax;
+            $('#txtTaxableAmount').val(parseFloat(NewWithoutTax).toFixed(2));
+
+            //sgst tax
+            var TotalSgstTax = 0;
+            if ($('#txtSgstAmount').val() != "") {
+                TotalSgstTax = parseInt($('#txtSgstAmount').val());
+            }
+            var RemovedSgstTax = parseInt(sgsttax);
+            var NewSgstTax = TotalSgstTax - RemovedSgstTax;
+            $('#txtSgstAmount').val(parseFloat(NewSgstTax).toFixed(2));
+
+
+            //cgst tax
+            var TotalCgstTax = 0;
+            if ($('#txtCgstAmount').val() != "") {
+                TotalCgstTax = parseInt($('#txtCgstAmount').val());
+            }
+            var RemovedCgstTax = parseInt(cgsttax);
+            var NewCgstTax = TotalCgstTax - RemovedCgstTax;
+            $('#txtCgstAmount').val(parseFloat(NewCgstTax).toFixed(2));
+
+
         }
-        function EmailQuotationDetails(QID) {
+        //Calculations Ends here
+
+
+
+        function EmailQuotationDetails(QID, FromEmailId, ToEmailId) {
             var EmailId = "pravesh.kr01@gmail.com";
             var Name = "Pravesh";
             var Title = "Quotation";
@@ -746,7 +952,7 @@
             $.ajax({
                 type: "POST",
                 url: "Quotation.aspx/EmailQuotationDetails",
-                data: JSON.stringify({ 'EmailId': EmailId, 'Name': Name, 'Title': Title, 'ID': id }),
+                data: JSON.stringify({ 'FromEmailId': FromEmailId, 'ToEmailId': ToEmailId, 'Name': Name, 'Title': Title, 'ID': id }),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (r) {
@@ -759,10 +965,10 @@
         }
         function Remove(button) {
             var row = $(button).closest("TR");
-            funRecalculateAfterRemoving(row[0].cells[8].innerText, row[0].cells[7].innerText);
+            funRecalculateAfterRemoving(row[0].cells[12].innerText, row[0].cells[7].innerText, row[0].cells[5].innerText, row[0].cells[9].innerText, row[0].cells[11].innerText);
             var x = row[0].cells[1].getAttribute('data-itemid');
-            var name = $("TD", row).eq(0).html();
-            if (confirm("Do you want to delete: " + name)) {
+           // var name = $("TD", row).eq(0).html();
+            if (confirm("Do you want to delete the ROw ")) {
                 dropArr.splice($.inArray((parseInt(x)), dropArr), 1);
                 var table = $("#tblCustomers")[0];
                 table.deleteRow(row[0].rowIndex);
@@ -805,8 +1011,12 @@
                 TOC.Rate = row.find("TD").eq(4).html();
                 TOC.Value = row.find("TD").eq(5).html();
                 TOC.Igst = row.find("TD").eq(6).html();
-                TOC.Amount = row.find("TD").eq(7).html();
-                TOC.TotalAmount1 = row.find("TD").eq(8).html();
+                TOC.IgstAmount = row.find("TD").eq(7).html();
+                TOC.Sgst = row.find("TD").eq(8).html();
+                TOC.SgstAmount = row.find("TD").eq(9).html();
+                TOC.Cgst = row.find("TD").eq(10).html();
+                TOC.CgstAmount = row.find("TD").eq(11).html();
+                TOC.TotalAmount = row.find("TD").eq(12).html();
                 tocArr.push(TOC);
             });
             data.TableOfContent = tocArr;
@@ -886,12 +1096,13 @@
                         element = element + '<td>' + getResult[i].QToCompanyName + '</td>';
                         element = element + '<td>' + GetProperDate(getResult[i].QDate) + '</td>';
                         if (!getResult[i].Approved) {
+
                             element = element + '<td>' + '<input type="checkbox" disabled name="Approve"   id="chkApprove" />';
-                            element = element + '<td><a href="#"><span class="label label-warning" onclick="GetQuotationDetailsForUpdate(' + getResult[i].QID + ',' + getResult[i].QType + ',\'' + getResult[i].QNo + '\',\'' + GetProperDate(getResult[i].QDate) + '\',\'' + getResult[i].ProjectName + '\',\'' + getResult[i].FinantialYear + '\',\'' + getResult[i].QToCompanyName + '\',\'' + getResult[i].QToGSTINNo + '\',\'' + getResult[i].QToContactPerson + '\',\'' + getResult[i].QToAddress + '\',\'' + getResult[i].PaymentTerms + '\',\'' + getResult[i].ValidityOfQuote + '\',\'' + getResult[i].PlaceOfSupply + '\',\'' + getResult[i].TotalAmountDigit + '\',\'' + getResult[i].TotalAmountWords + '\',\'' + getResult[i].TaxableAmount + '\',\'' + getResult[i].Freight + '\',\'' + getResult[i].BankName + '\',\'' + getResult[i].BranchName + '\',\'' + getResult[i].BankBranchIFSC + '\',\'' + getResult[i].BankAccountNo + '\',\'' + getResult[i].TermsAndCondition + '\',\'' + getResult[i].Note1 + '\',\'' + getResult[i].Note2 + '\' ,\'' + GetProperDate(getResult[i].SignatureDate) + '\',' + getResult[i].CurrencyId + ',' + getResult[i].LocationId + ',' + getResult[i].QToCompanyID + ',\'' + getResult[i].QFromGSTINNo + '\'); return false;" ><i class="fa fa-file-text"  aria-hidden="true"></i> Edit </span></a></td>'
+                            element = element + '<td><a href="#"><span class="label label-warning" onclick="GetQuotationDetailsForUpdate(' + getResult[i].QID + ',' + getResult[i].ApplicationType + ',\'' + getResult[i].ApplicationReference + '\',' + getResult[i].QType + ',\'' + getResult[i].QNo + '\',\'' + GetProperDate(getResult[i].QDate) + '\',\'' + getResult[i].ProjectName + '\',\'' + getResult[i].FinantialYear + '\',\'' + getResult[i].QToCompanyName + '\',\'' + getResult[i].QToGSTINNo + '\',\'' + getResult[i].QToContactPerson + '\',\'' + getResult[i].QToEmailID + '\',\'' + getResult[i].QToAddress + '\',\'' + getResult[i].PaymentTerms + '\',\'' + getResult[i].ValidityOfQuote + '\',\'' + getResult[i].PlaceOfSupply + '\',\'' + getResult[i].TotalAmountDigit + '\',\'' + getResult[i].TotalAmountWords + '\',\'' + getResult[i].TaxableAmount + '\',\'' + getResult[i].IgstAmount + '\',\'' + getResult[i].SgstAmount + '\',\'' + getResult[i].CgstAmount + '\',\'' + getResult[i].Freight + '\',\'' + getResult[i].BankName + '\',\'' + getResult[i].BranchName + '\',\'' + getResult[i].BankBranchIFSC + '\',\'' + getResult[i].BankAccountNo + '\',\'' + getResult[i].TermsAndCondition + '\',\'' + getResult[i].Note1 + '\',\'' + getResult[i].Note2 + '\' ,\'' + GetProperDate(getResult[i].SignatureDate) + '\',' + getResult[i].CurrencyId + ',' + getResult[i].LocationId + ',' + getResult[i].QToCompanyID + ',\'' + getResult[i].QFromGSTINNo + '\'); return false;" ><i class="fa fa-file-text"  aria-hidden="true"></i> Edit </span></a></td>'
                         }
                         else {
                             element = element + '<td>' + '<input type="checkbox" disabled checked name="Approve" id="chkApprove" />';
-                            element = element + '<td><a href="#" ><span class="label label-success"   onclick="EmailQuotationDetails(' + getResult[i].QID + '); return false;"><i class="fa fa-print"  aria-hidden="true"></i>   Send</span></a></td>'
+                            element = element + '<td><a href="#" ><span class="label label-success"   onclick="EmailQuotationDetails(' + getResult[i].QID + ',\'' + getResult[i].QFromEmailID + '\',\'' + getResult[i].QToEmailID + '\'); return false;"><i class="fa fa-print"  aria-hidden="true"></i>   Send</span></a></td>'
                         }
                         element = element + '</tr>';
                     }
@@ -912,17 +1123,26 @@
                 }
             });
         }
-        function btnAddCall(ItemLineNumber, DescriptionOfGoods, Qty, Hsn, Rate, Value, Igst, Amount, TotalAmount1, ItemId) {
+        function btnAddCall(ItemLineNumber, DescriptionOfGoods, Qty, Hsn, Rate, Value, Igst, Amount, TotalAmount, ItemId, Sgst, SgstAmount, Cgst, CgstAmount) {
             dropArr.push(ItemId);
             var itellinenumber = ItemLineNumber;
-            var txtDescriptionOfGoods = DescriptionOfGoods;//$("#txtDescriptionOfGoods");
-            var txtQty = Qty;//$("#txtQty");
-            var txtHsn = Hsn;//$("#txtHsn");
-            var txtRate = Rate;//$("#txtRate");
-            var txtValue = Value;//$("#txtValue");
-            var txtIgst = Igst;//$("#txtIgst");
-            var txtAmount = Amount;//$("#txtAmount");
-            var txtTotalAmount1 = TotalAmount1;//$("#txtTotalAmount1");
+            var txtDescriptionOfGoods = DescriptionOfGoods;
+            var txtQty = Qty;
+            var txtHsn = Hsn;
+            var txtRate = Rate;
+            var txtValue = Value;
+            var txtIgst = Igst;
+            var txtAmount = Amount;
+            var txtTotalAmount = TotalAmount;
+
+            var ddlSgst = Sgst;
+            var txtSgst = SgstAmount;
+            var ddlCgst = Cgst;
+            var txtCgst = CgstAmount;
+
+
+
+
             var tBody = $("#tblCustomers > TBODY")[0];
             var row = tBody.insertRow(-1);
             var cell = $(row.insertCell(-1));
@@ -942,8 +1162,20 @@
             cell.html(Igst);
             cell = $(row.insertCell(-1));
             cell.html(Amount);
+
+            //new entry
             cell = $(row.insertCell(-1));
-            cell.html(TotalAmount1);
+            cell.html(Sgst);
+            cell = $(row.insertCell(-1));
+            cell.html(SgstAmount);
+
+            cell = $(row.insertCell(-1));
+            cell.html(Cgst);
+            cell = $(row.insertCell(-1));
+            cell.html(CgstAmount);
+            //ends here
+            cell = $(row.insertCell(-1));
+            cell.html(TotalAmount);
             cell = $(row.insertCell(-1));
             var btnRemove = $("<input />");
             btnRemove.attr("type", "button");
@@ -971,10 +1203,15 @@
                         var e = getResult[i].Rate;
                         var f = getResult[i].Value;
                         var g = getResult[i].Igst;
-                        var h = getResult[i].Amount;
-                        var j = getResult[i].TotalAmount1;
+                        var h = getResult[i].IgstAmount;
+                        var j = getResult[i].TotalAmount;
                         var k = getResult[i].ItemId;
-                        btnAddCall(a, b, c, d, e, f, g, h, j, k);
+
+                        var l = getResult[i].Sgst;
+                        var m = getResult[i].SgstAmount;
+                        var n = getResult[i].Cgst;
+                        var o = getResult[i].CgstAmount;
+                        btnAddCall(a, b, c, d, e, f, g, h, j, k, l, m, n, o);
                     }
                 },
                 error: function (err) {
@@ -982,12 +1219,14 @@
                 }
             });
         }
-        function GetQuotationDetailsForUpdate(QID, QType, QNo, QDate, ProjectName, FinantialYear, QToCompanyName, QToGSTINNo, QToContactPerson, QToAddress, PaymentTerms, ValidityOfQuote, PlaceOfSupply, TotalAmountDigit, TotalAmountWords, TaxableAmount, Freight, BankName, BranchName, BankBranchIFSC, BankAccNo, TermsAndCondition, Note1, Note2, SignatureDate, CurrencyId, LocationId, QToCompanyId, QFromGstinNo) {
+        function GetQuotationDetailsForUpdate(QID, ApplicationType, ApplicationReference, QType, QNo, QDate, ProjectName, FinantialYear, QToCompanyName, QToGSTINNo, QToContactPerson, QToEmailId, QToAddress, PaymentTerms, ValidityOfQuote, PlaceOfSupply, TotalAmountDigit, TotalAmountWords, TaxableAmount, IgstAmount, SgstAmount, CgstAmount, Freight, BankName, BranchName, BankBranchIFSC, BankAccNo, TermsAndCondition, Note1, Note2, SignatureDate, CurrencyId, LocationId, QToCompanyId, QFromGstinNo) {
+
             GetCurrencyDetails(0, "");
             GetCompanyDetails(0, "");
             GetCompanyLocations(QToCompanyId);
             GetTOCDetails(QID);
             GetItemDetails(0, "");
+            $('#ddlApplicationType').val(ApplicationType);
             $('#ddlQGstinNoType').val(QFromGstinNo);
             $('#hidHotelId').val(QID);
             $('#ddlQuotationType').val(QType);
@@ -998,14 +1237,18 @@
             0, // CO ID
             $('#txtCompanyName').val(QToCompanyName);
             $('#txtGstinParty').val(QToGSTINNo);
+            $('#txtCompanyEmailId').val(QToEmailId);
             $('#txtContactPerson').val(QToContactPerson);
             $('#txtAddress').val(QToAddress);
-            $('#txtaymentTerms').val(PaymentTerms);
+            $('#txtPaymentTerms').val(PaymentTerms);
             $('#txtValidityOfQuote').val(ValidityOfQuote);
             $('#txtPlaceOfSupply').val(PlaceOfSupply);
             $('#txtGrandTotal').val(TotalAmountDigit);
             $('#txtTotalWords').val(TotalAmountWords);
             $('#txtTaxableAmount').val(TaxableAmount);
+            $('#txtIgstAmount').val(IgstAmount);
+            $('#txtSgstAmount').val(SgstAmount);
+            $('#txtCgstAmount').val(CgstAmount);
             $('#txtFreight').val(Freight);
             $('#txtBankName').val(BankName);
             $('#txtBranchName').val(BranchName);
@@ -1019,6 +1262,8 @@
             $('#ddlCompanyLocationId').val(LocationId);
             $('#ddlCompanyId').val(QToCompanyId);
             $('#btnExportToPdf').prop('disabled', false);
+            $('#ddlQGstinNoType,#ddlQuotationType,#ddlApplicationType,#ddlCurrency,#ddlCompanyId,#ddlCompanyLocationId').prop('disabled', true);
+            ApplicationTypeChange(ApplicationType);
             $("#btnUpdate").show();
             $("#btnSave").hide();
         }
@@ -1112,6 +1357,7 @@
                         $("#txtContactPerson").val(getResult[i].POC + '-' + getResult[i].POCNo);
                         $("#txtAddress").val(getResult[i].Address);
                         $("#txtGstinParty").val(getResult[i].GstinNo);
+                        $("#txtCompanyEmailId").val(getResult[i].EmailId);
                         $("#txtBankName").val(getResult[i].BankName);
                         $("#txtBranchName").val(getResult[i].BankBranch);
                         $("#txtBankAccountNo").val(getResult[i].BankAccountNo);
@@ -1163,7 +1409,7 @@
                     var len = getResult.length;
                     for (var i = 0; i < len; i++) {
                         $("#txtHsn").val(getResult[i].HsnCode);
-                        $("#txtIgst").val(getResult[i].GstRate);
+                        $("#ddlIgst").val(getResult[i].GstRate);
                     }
                 },
                 error: function (err) {
@@ -1219,5 +1465,22 @@
             $('#txtGstinNo').val("07AAACC4708J1ZS");
             $('#ddlQuotationType').val("1");
         }
+        function ApplicationTypeChange(Type) {
+
+
+            if (Type == 0) {
+                $('#QuotationNoText').text("Quotation No");
+                $('#QuotationTypeText').text("Quotation Type");
+                $('#QuotationApplicationText').text("QUOTATION APPLICATION");
+            }
+            else {
+                $('#QuotationNoText').text("Purchase Order No");
+                $('#QuotationTypeText').text("Purchase Order Type");
+                $('#QuotationApplicationText').text("PURCHASE ORDER APPLICATION");
+            }
+        }
+
+
+
     </script>
 </asp:Content>

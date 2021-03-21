@@ -598,6 +598,7 @@
             $('#txtVersionNumber').val(VersionNo);
             $('#txtSupplierName').val(SupplierName);
             $('#txtModificationDate').val(CreationDate);
+            $('#ddlQuotationId').prop('disabled', true);
             $("#btnUpdate").show();
             $("#btnSave").hide();
         }

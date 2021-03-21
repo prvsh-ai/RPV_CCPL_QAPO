@@ -35,15 +35,13 @@ namespace Connect.QU.UII.User
         {
             return new QU.BAL.CommonBAL().GetItemDetails(ItemID, ItemName);
         }
-
         [WebMethod]
         public static List<QU.Entities.CompanyDetails> GetCompanyDetailsNew(int CompanyID, string CompanyName)
         {
             return new QU.BAL.CommonBAL().GetCompanyDetailsNew(CompanyID, CompanyName);
         }
-     
         [WebMethod]
-        public static string EmailQuotationDetails(string EmailId, string Name, string Title, int ID)
+        public static string EmailQuotationDetails(string FromEmailId, string ToEmailId, string Name, string Title, int ID)
         {
             List<QU.Entities.TOC> TableOfContent = new QU.BAL.CommonBAL().GetTOCDetails(ID);
             List<QU.Entities.Quotation> quotationData = new QU.BAL.CommonBAL().GetQuotationDetails(ID);
@@ -55,6 +53,10 @@ namespace Connect.QU.UII.User
             dt.Columns.Add("Value Without Tax");
             dt.Columns.Add("Igst %");
             dt.Columns.Add("Igst Amount");
+            dt.Columns.Add("Sgst %");
+            dt.Columns.Add("Sgst Amount");
+            dt.Columns.Add("Cgst %");
+            dt.Columns.Add("Cgst Amount");
             dt.Columns.Add("Total");
             foreach (var arr in TableOfContent)
             {
@@ -67,12 +69,25 @@ namespace Connect.QU.UII.User
                     dr["Unit Price"] = arr.Rate;
                     dr["Value Without Tax"] = arr.Value;
                     dr["Igst %"] = arr.Igst;
-                    dr["Igst Amount"] = arr.Amount;
-                    dr["Total"] = arr.TotalAmount1;
+                    dr["Igst Amount"] = arr.IgstAmount;
+                    dr["Sgst %"] = arr.Sgst;
+                    dr["Sgst Amount"] = arr.SgstAmount;
+                    dr["Cgst %"] = arr.Cgst;
+                    dr["Cgst Amount"] = arr.CgstAmount;
+                    dr["Total"] = arr.TotalAmount;
                     dt.Rows.Add(dr);
                 }
             }
             var quoteNo = quotationData[0].QNo.ToString();
+            var applicationType = quotationData[0].ApplicationType.ToString();
+            var ApplicationTypeText = "Quotation Type";
+            if (applicationType == "2")
+            {
+                ApplicationTypeText = "Purchase Order Type";
+            }
+
+            var applicationReference = quotationData[0].ApplicationReference.ToString();
+
             var QTypeValue = quotationData[0].QType.ToString();
             var QType = "SALE";
             if (QTypeValue == "2")
@@ -95,11 +110,17 @@ namespace Connect.QU.UII.User
             var freigt = quotationData[0].Freight.ToString();
             var grandTotal = quotationData[0].TotalAmountDigit.ToString();
             var taxableAmount = quotationData[0].TaxableAmount.ToString();
+            var igstAmount = quotationData[0].IgstAmount.ToString();
+            var sgstAmount = quotationData[0].SgstAmount.ToString();
+            var cgstAmount = quotationData[0].CgstAmount.ToString();
             var ifsc = quotationData[0].BankBranchIFSC.ToString();
             var bankName = quotationData[0].BankName.ToString();
             var branchName = quotationData[0].BranchName.ToString();
             var accountNo = quotationData[0].BankAccountNo.ToString();
             var gstPaybaleOnReverseCharge = quotationData[0].TaxableAmount.ToString();
+            var termsAndCondition = quotationData[0].TermsAndCondition.ToString();
+            var note1 = quotationData[0].Note1.ToString();
+            var note2 = quotationData[0].Note2.ToString();
             var authorisedSignatory = quotationData[0].SignatureData.ToString();
             using (StringWriter sw = new StringWriter())
             {
@@ -120,7 +141,7 @@ namespace Connect.QU.UII.User
                     sb.Append("<table width='100%' cellspacing='0' cellpadding='0' border='1'>");
                     sb.Append("<tr><td><b> GSTIN No : </b>");
                     sb.Append("07AAACC4708J1ZS");
-                    sb.Append("</td><td><b> Quotation Type : </b>");
+                    sb.Append("</td><td><b>" + ApplicationTypeText + " : </b>");
                     sb.Append(QType);   //Quotation Type
                     sb.Append(" </td></tr></table>");
                     //space
@@ -168,8 +189,23 @@ namespace Connect.QU.UII.User
                         sb.Append("</tr>");
                     }
                     sb.Append("</table>");
-                    sb.Append("<table border='1'><tr><td colspan = '2'><b>Total in Words : </b>" + totalInWords + "</td> <td colspan = '2'><b>Freigt : </b>" + freigt + "</td></tr>");
-                    sb.Append("<tr><td colspan = '2'><b>Grand Total : </b>" + grandTotal + "</td> <td colspan = '2'><b>Taxable amount : </b>" + taxableAmount + "</td></tr></table>");
+
+
+
+                    //     sb.Append("<table border='1'><tr><td colspan = '2'><b>Total in Words : </b>" + totalInWords + "</td> <td colspan = '2'><b>Freigt : </b>" + freigt + "</td></tr>");
+                    //     sb.Append("<tr><td colspan = '2'><b>Grand Total : </b>" + grandTotal + "</td> <td colspan = '2'><b>Taxable amount : </b>" + taxableAmount + "</td></tr></table>");
+                    sb.Append("<table><tr><td colspan = '2'><b>                                                                           </b> ");
+                    sb.Append("</td></tr></table>");
+
+                    sb.Append("<table border='1'><tr><td colspan = '2'><b>Igst Amount : </b>" + igstAmount + "</td> <td colspan = '2'><b>Sgst Amount : </b>" + sgstAmount + "</td></tr>");
+                    sb.Append("<tr><td colspan = '2'><b>Cgst Amount : </b>" + cgstAmount + "</td> <td colspan = '2'><b>Freigt : </b>" + freigt + "</td></tr>");
+                    sb.Append("<tr><td colspan = '2'><b>Grand Total : </b>" + grandTotal + "</td> <td colspan = '2'><b>Taxable amount : </b>" + taxableAmount + "</td></tr>");
+                    sb.Append("<tr><td colspan = '12'><b>Total in Words : </b>" + totalInWords + "</td></tr></table>");
+                    sb.Append("<table><tr><td colspan = '2'><b>                                                                           </b> ");
+                    sb.Append("</td></tr></table>");
+
+
+
                     //space
                     sb.Append("<table><tr><td colspan = '2'><b>                                                                           </b> ");
                     sb.Append("</td></tr></table>");
@@ -184,10 +220,12 @@ namespace Connect.QU.UII.User
                     sb.Append("</td></tr>");
                     sb.Append("<tr><td colspan = '2'><b></b> ");
                     sb.Append("1. All Disputes are Subject to Delhi Jurisdiction Only");
-                    sb.Append("1. All Disputes are Subject to Delhi Jurisdiction Only");
-                    sb.Append("1. All Disputes are Subject to Delhi Jurisdiction Only");
-                    sb.Append("1. All Disputes are Subject to Delhi Jurisdiction Only");
-                    sb.Append("1. All Disputes are Subject to Delhi Jurisdiction Only");
+                    sb.Append("<br />");
+                    sb.Append(termsAndCondition);
+                    sb.Append("<br />");
+                    sb.Append(note1);
+                    sb.Append("<br />");
+                    sb.Append(note2);
                     sb.Append("</td></tr> </table>");
                     sb.Append("<table><tr><td colspan = '2'><b>                                                                           </b> ");
                     sb.Append("</td></tr></table>");
@@ -211,17 +249,25 @@ namespace Connect.QU.UII.User
                             pdfDoc.Close();
                             byte[] bytes = memoryStream.ToArray();
                             memoryStream.Close();
-                            MailMessage mm = new MailMessage("pravesh.kr01@gmail.com", "pravesh.kr04@gmail.com");
-                            mm.Subject = "Quotation PDF";
-                            mm.Body = "Quotation PDF Attachment";
+                            //MailMessage mm = new MailMessage("pravesh.kr01@gmail.com", "pravesh.kr04@gmail.com");
+                            MailMessage mm = new MailMessage();
+                            mm.IsBodyHtml = true;
+                            mm.From = new MailAddress(FromEmailId);
+                            mm.To.Add(ToEmailId);
+                            mm.CC.Add(ConfigurationManager.AppSettings["CC"]);
+                            //mm.Subject = "Quotation PDF";
+                            //mm.Body = "Quotation PDF Attachment";
+                            mm.Subject = ConfigurationManager.AppSettings["Subject"];
+                            mm.Body = ConfigurationManager.AppSettings["Body"];
                             mm.Attachments.Add(new Attachment(new MemoryStream(bytes), "QuotationPDF.pdf"));
                             mm.IsBodyHtml = true;
                             SmtpClient smtp = new SmtpClient();
                             smtp.Host = "smtp.gmail.com";
                             smtp.EnableSsl = true;
-                            NetworkCredential NetworkCred = new NetworkCredential();
-                            NetworkCred.UserName = "pravesh.kr01@gmail.com";
-                            NetworkCred.Password = "LoveShivani";
+                            System.Net.NetworkCredential NetworkCred = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["SmtpUser"], ConfigurationManager.AppSettings["SmtpPassword"]);
+                            //NetworkCredential NetworkCred = new NetworkCredential();
+                            //NetworkCred.UserName = "pravesh.kr01@gmail.com";
+                            //NetworkCred.Password = "LoveShivani";
                             smtp.UseDefaultCredentials = true;
                             smtp.Credentials = NetworkCred;
                             smtp.Port = 587;
@@ -236,25 +282,21 @@ namespace Connect.QU.UII.User
             }
             return "Successfully sent the Mail";
         }
-
         [WebMethod]
         public static List<QU.Entities.Quotation> GetQuotationDetails(int QID)
         {
             return new QU.BAL.CommonBAL().GetQuotationDetails(QID);
         }
-
         [WebMethod]
         public static List<QU.Entities.Currency> GetCurrencyDetails(int CurrencyId, string CurrencyName)
         {
             return new QU.BAL.CommonBAL().GetCurrencyDetails(CurrencyId, CurrencyName);
         }
-
         [WebMethod]
         public static List<QU.Entities.TOC> GetTOCDetails(int QID)
         {
             return new QU.BAL.CommonBAL().GetTOCDetails(QID);
         }
-
         [WebMethod]
         public static string SaveUpdateQuotationDetails(Connect.QU.Entities.Quotation cnt)
         {
@@ -268,7 +310,6 @@ namespace Connect.QU.UII.User
             cnt.QFromEmailID = "anju@connect.co.in";
             return new QU.BAL.CommonBAL().SaveUpdateQuotationDetails(cnt);
         }
-
         [WebMethod]
         public static string ExportToPDF(int QID)
         {
@@ -283,6 +324,10 @@ namespace Connect.QU.UII.User
             dt.Columns.Add("Value Without Tax");
             dt.Columns.Add("Igst %");
             dt.Columns.Add("Igst Amount");
+            dt.Columns.Add("Sgst %");
+            dt.Columns.Add("Sgst Amount");
+            dt.Columns.Add("Cgst %");
+            dt.Columns.Add("Cgst Amount");
             dt.Columns.Add("Total");
             foreach (var arr in TableOfContent)
             {
@@ -295,12 +340,28 @@ namespace Connect.QU.UII.User
                     dr["Unit Price"] = arr.Rate;
                     dr["Value Without Tax"] = arr.Value;
                     dr["Igst %"] = arr.Igst;
-                    dr["Igst Amount"] = arr.Amount;
-                    dr["Total"] = arr.TotalAmount1;
+                    dr["Igst Amount"] = arr.IgstAmount;
+                    dr["Sgst %"] = arr.Sgst;
+                    dr["Sgst Amount"] = arr.SgstAmount;
+                    dr["Cgst %"] = arr.Cgst;
+                    dr["Cgst Amount"] = arr.CgstAmount;
+                    dr["Total"] = arr.TotalAmount;
                     dt.Rows.Add(dr);
                 }
             }
             var quoteNo = quotationData[0].QNo.ToString();
+            var applicationType = quotationData[0].ApplicationType.ToString();
+            var ApplicationTypeText = "Quotation Type";
+            if (applicationType == "2")
+            {
+                ApplicationTypeText = "Purchase Order Type";
+            }
+
+
+            var applicationReference = quotationData[0].ApplicationReference.ToString();
+
+
+
             var QTypeValue = quotationData[0].QType.ToString();
             var QType = "SALE";
             if (QTypeValue == "2")
@@ -323,11 +384,20 @@ namespace Connect.QU.UII.User
             var freigt = quotationData[0].Freight.ToString();
             var grandTotal = quotationData[0].TotalAmountDigit.ToString();
             var taxableAmount = quotationData[0].TaxableAmount.ToString();
+            var igstAmount = quotationData[0].IgstAmount.ToString();
+            var sgstAmount = quotationData[0].SgstAmount.ToString();
+            var cgstAmount = quotationData[0].CgstAmount.ToString();
+
             var ifsc = quotationData[0].BankBranchIFSC.ToString();
             var bankName = quotationData[0].BankName.ToString();
             var branchName = quotationData[0].BranchName.ToString();
             var accountNo = quotationData[0].BankAccountNo.ToString();
             var gstPaybaleOnReverseCharge = quotationData[0].TaxableAmount.ToString();
+
+            var termsAndCondition = quotationData[0].TermsAndCondition.ToString();
+            var note1 = quotationData[0].Note1.ToString();
+            var note2 = quotationData[0].Note2.ToString();
+
             var authorisedSignatory = quotationData[0].SignatureData.ToString();
             using (StringWriter sw = new StringWriter())
             {
@@ -347,7 +417,7 @@ namespace Connect.QU.UII.User
                     sb.Append("<table width='100%' cellspacing='0' cellpadding='0' border='1'>");
                     sb.Append("<tr><td><b> GSTIN No : </b>");
                     sb.Append("07AAACC4708J1ZS");
-                    sb.Append("</td><td><b> Quotation Type : </b>");
+                    sb.Append("</td><td><b> " + ApplicationTypeText + " : </b>");
                     sb.Append(QType);   //Quotation Type
                     sb.Append(" </td></tr></table>");
                     sb.Append("<table><tr><td colspan = '2'><b>                                                                           </b> ");
@@ -391,10 +461,21 @@ namespace Connect.QU.UII.User
                         sb.Append("</tr>");
                     }
                     sb.Append("</table>");
-                    sb.Append("<table border='1'><tr><td colspan = '2'><b>Total in Words : </b>" + totalInWords + "</td> <td colspan = '2'><b>Freigt : </b>" + freigt + "</td></tr>");
-                    sb.Append("<tr><td colspan = '2'><b>Grand Total : </b>" + grandTotal + "</td> <td colspan = '2'><b>Taxable amount : </b>" + taxableAmount + "</td></tr></table>");
+                    //sb.Append("<table border='1'><tr><td colspan = '2'><b>Total in Words : </b>" + totalInWords + "</td> <td colspan = '2'><b>Freigt : </b>" + freigt + "</td></tr>");
+                    //sb.Append("<tr><td colspan = '2'><b>Grand Total : </b>" + grandTotal + "</td> <td colspan = '2'><b>Taxable amount : </b>" + taxableAmount + "</td></tr></table>");
+                    //sb.Append("<table><tr><td colspan = '2'><b>                                                                           </b> ");
+                    //sb.Append("</td></tr></table>");
                     sb.Append("<table><tr><td colspan = '2'><b>                                                                           </b> ");
                     sb.Append("</td></tr></table>");
+
+                    sb.Append("<table border='1'><tr><td colspan = '2'><b>Igst Amount : </b>" + igstAmount + "</td> <td colspan = '2'><b>Sgst Amount : </b>" + sgstAmount + "</td></tr>");
+                    sb.Append("<tr><td colspan = '2'><b>Cgst Amount : </b>" + cgstAmount + "</td> <td colspan = '2'><b>Freigt : </b>" + freigt + "</td></tr>");
+                    sb.Append("<tr><td colspan = '2'><b>Grand Total : </b>" + grandTotal + "</td> <td colspan = '2'><b>Taxable amount : </b>" + taxableAmount + "</td></tr>");
+                    sb.Append("<tr><td colspan = '12'><b>Total in Words : </b>" + totalInWords + "</td></tr></table>");
+                    sb.Append("<table><tr><td colspan = '2'><b>                                                                           </b> ");
+                    sb.Append("</td></tr></table>");
+
+
                     sb.Append("<table border='1'><tr><td colspan = '2' style='background-color: #18B5F0'><b>Bank Details</b> ");
                     sb.Append("</td></tr></table>");
                     sb.Append("<table border='1'><tr><td colspan = '2'><b>Bank Name : </b>" + bankName + "</td> <td colspan = '2'><b>Branch : </b>" + branchName + "</td></tr>");
@@ -405,10 +486,12 @@ namespace Connect.QU.UII.User
                     sb.Append("</td></tr>");
                     sb.Append("<tr><td colspan = '2'><b></b> ");
                     sb.Append("1. All Disputes are Subject to Delhi Jurisdiction Only");
-                    sb.Append("1. All Disputes are Subject to Delhi Jurisdiction Only");
-                    sb.Append("1. All Disputes are Subject to Delhi Jurisdiction Only");
-                    sb.Append("1. All Disputes are Subject to Delhi Jurisdiction Only");
-                    sb.Append("1. All Disputes are Subject to Delhi Jurisdiction Only");
+                    sb.Append("<br />");
+                    sb.Append(termsAndCondition);
+                    sb.Append("<br />");
+                    sb.Append(note1);
+                    sb.Append("<br />");
+                    sb.Append(note2);
                     sb.Append("</td></tr> </table>");
                     sb.Append("<table><tr><td colspan = '2'><b>                                                                           </b> ");
                     sb.Append("</td></tr></table>");
@@ -449,203 +532,5 @@ namespace Connect.QU.UII.User
             return new QU.BAL.CommonBAL().GetLocationDetails(CompanyID);
         }
 
-
-        //private static void DrawLine(PdfWriter writer, float x1, float y1, float x2, float y2, Color color)
-        //{
-        //    PdfContentByte contentByte = writer.DirectContent;
-        //    contentByte.SetColorStroke(color);
-        //    contentByte.MoveTo(x1, y1);
-        //    contentByte.LineTo(x2, y2);
-        //    contentByte.Stroke();
-        //}
-        //private static PdfPCell PhraseCell(Phrase phrase, int align)
-        //{
-        //    PdfPCell cell = new PdfPCell(phrase);
-        //    cell.BorderColor = Color.WHITE;
-        //    cell.VerticalAlignment = PdfCell.ALIGN_TOP;
-        //    cell.HorizontalAlignment = align;
-        //    cell.PaddingBottom = 2f;
-        //    cell.PaddingTop = 0f;
-        //    return cell;
-        //}
-        //private static PdfPCell ImageCell(string path, float scale, int align)
-        //{
-        //    iTextSharp.text.Image image = iTextSharp.text.Image.GetInstance(HttpContext.Current.Server.MapPath(path));
-        //    image.ScalePercent(scale);
-        //    PdfPCell cell = new PdfPCell(image);
-        //    cell.BorderColor = Color.WHITE;
-        //    cell.VerticalAlignment = PdfCell.ALIGN_TOP;
-        //    cell.HorizontalAlignment = align;
-        //    cell.PaddingBottom = 0f;
-        //    cell.PaddingTop = 0f;
-        //    return cell;
-        //}
-
-        //[WebMethod]
-        //public static string EmailQuotationDetails_Working(string EmailId, string Name, string Title)
-        //{
-        //    DataTable dt = new DataTable();
-        //    dt.Columns.Add("S No");
-        //    dt.Columns.Add("Name OF Product/Services");
-        //    dt.Columns.Add("HSN/SAC");
-        //    dt.Columns.Add("Qty");
-        //    dt.Columns.Add("Unit Price");
-        //    dt.Columns.Add("Value Without Tax");
-        //    dt.Columns.Add("Igst %");
-        //    dt.Columns.Add("Igst Amount");
-        //    dt.Columns.Add("Total");
-        //    string[] TableOfContent = { "1" };
-        //    foreach (var arr in TableOfContent)
-        //    {
-        //        for (var i = 0; i < 1; i++)//arr.Length; i++)
-        //        {
-        //            DataRow dr = dt.NewRow();
-        //            dr["S No"] = i;
-        //            dr["Name OF Product/Services"] = "sfd";
-        //            dr["HSN/SAC"] = 1;
-        //            dr["Qty"] = DateTime.Now;
-        //            dr["Unit Price"] = 1;
-        //            dr["Value Without Tax"] = DateTime.Now;
-        //            dr["Igst %"] = "1";
-        //            dr["Igst Amount"] = DateTime.Now;
-        //            dr["Total"] = "1";
-        //            dt.Rows.Add(dr);
-        //        }
-        //    }
-        //    using (StringWriter sw = new StringWriter())
-        //    {
-        //        using (HtmlTextWriter hw = new HtmlTextWriter(sw))
-        //        {
-        //            string companyName = "Connect Compusys";
-        //            int orderNo = 2303;
-        //            StringBuilder sb = new StringBuilder();
-        //            sb.Append("<table  width='100%' cellspacing='0' cellpadding='0' border='1'>");
-        //            sb.Append("<tr><td align='center' style='background-color: #18B5F0' colspan = '2'><b>Connect Compusys Pvt Ltd</b></td></tr>");
-        //            sb.Append("<tr><td colspan = '2'></td></tr>");
-        //            sb.Append("<tr><td rowspan='2'><b>Corporate Office:</b> Flat No. 57 Navjeevan Apartment Pocket 6/3 , Sector 1A, Dwarka NEW DELHI – 110 045:");
-        //            sb.Append("</td><td><table><tr><td>Phone: +91-8800722000 </td></tr><tr><td>Email: anju@connect.co.in </td></tr></table>");
-        //            sb.Append("Site: www.connect.in</td></tr></table>");
-        //            //gstin qtype
-        //            sb.Append("<table width='100%' cellspacing='0' cellpadding='0' border='1'>");
-        //            sb.Append("<tr><td><b>GSTIN No:</b>");
-        //            sb.Append("07AAACC4708J1ZS");
-        //            sb.Append("</td><td><b>Q Type: </b>");
-        //            sb.Append("QType");   //Quotation Type
-        //            sb.Append(" </td></tr></table>");
-        //            //space
-        //            sb.Append("<table><tr><td colspan = '2'><b>                                                                           </b> ");
-        //            sb.Append("</td></tr></table>");
-        //            //customer details new
-        //            sb.Append("<table border='1'><tr><td ><b>Customer Details:</b>");
-        //            sb.Append("CustomerDetails 1 customerdeails fdkfjkdjfkjkadfljsdk  df dkf dkfkd fd f  d fd f d fd  fd fd f df d fd fdf");   //customer details 1
-        //            sb.Append("</td><td><table border='1'><tr><td>Finantial year:</td></tr><tr><td>Quote No:</td></tr></table><b>Date: </b>");
-        //            sb.Append(DateTime.Now);                    //Finantial year
-        //            sb.Append("</td><td><b>PaymentTerms (MSME Vendor) :</b>");
-        //            sb.Append("PaymentTerms");     //PaymentTerms
-        //            sb.Append(" </td></tr></table>");
-        //            sb.Append("<table width='100%' cellspacing='0' cellpadding='0' border='1'><tr><td ><b>Party Gst no:</b>");
-        //            sb.Append("gfgfgfgfgfgfgfgfgfgffgfg");   //customer details 1
-        //            sb.Append("</td><td><b>Project Name :</b>");
-        //            sb.Append("ssfsfsfsfsfsf");
-        //            sb.Append("</td><td><table  width='100%' cellspacing='0' cellpadding='0' border='1'><tr><td>validity:</td></tr></table><b>place: </b>");
-        //            sb.Append(DateTime.Now);                    //Finantial year
-        //            sb.Append("</td></tr></table>");
-        //            //space
-        //            sb.Append("<table><tr><td colspan = '2'><b>                                                                           </b> ");
-        //            sb.Append("</td></tr></table>");
-        //            sb.Append("<table border='1'><tr><td colspan = '2'><b>Goods And Services :</b> ");
-        //            sb.Append("</td></tr></table>");
-        //            //DT Table
-        //            sb.Append("<table border = '1'>");
-        //            sb.Append("<tr>");
-        //            foreach (DataColumn column in dt.Columns)
-        //            {
-        //                sb.Append("<th style = 'background-color: #D20B0C;color:#ffffff'>");
-        //                sb.Append(column.ColumnName);
-        //                sb.Append("</th>");
-        //            }
-        //            sb.Append("</tr>");
-        //            foreach (DataRow row in dt.Rows)
-        //            {
-        //                sb.Append("<tr>");
-        //                foreach (DataColumn column in dt.Columns)
-        //                {
-        //                    sb.Append("<td style='height:100px;width:30px'>");
-        //                    sb.Append(row[column]);
-        //                    sb.Append("</td>");
-        //                }
-        //                sb.Append("</tr>");
-        //            }
-        //            sb.Append("</table>");
-        //            sb.Append("<table border='1'><tr><td colspan = '2'><b>Total in Words:</b></td> <td colspan = '2'><b>Freigt:</b></td></tr>");
-        //            sb.Append("<tr><td colspan = '2'><b>Grand Total:    </b></td> <td colspan = '2'><b>Taxable amount:</b></td></tr></table>");
-        //            //space
-        //            sb.Append("<table><tr><td colspan = '2'><b>                                                                           </b> ");
-        //            sb.Append("</td></tr></table>");
-        //            sb.Append("<table border='1'><tr><td colspan = '2'><b>Bank Details</b> ");
-        //            sb.Append("</td></tr></table>");
-        //            sb.Append("<table border='1'><tr><td colspan = '2'><b>Bank Name:</b></td> <td colspan = '2'><b>Branch :</b></td></tr>");
-        //            sb.Append("<tr><td colspan = '2'><b>IFSC:</b></td> <td colspan = '2'><b>Account No:</b></td></tr></table>");
-        //            sb.Append("<table><tr><td colspan = '2'><b>                                                                           </b> ");
-        //            sb.Append("</td></tr></table>");
-        //            //T&C
-        //            sb.Append("<table border='1'><tr><td colspan = '2'><b>Terms and conditionn</b> ");
-        //            sb.Append("</td></tr>");
-        //            sb.Append("<tr><td colspan = '2'><b></b> ");
-        //            sb.Append("1. All Disputes are Subject to Delhi Jurisdiction Only");
-        //            sb.Append("1. All Disputes are Subject to Delhi Jurisdiction Only");
-        //            sb.Append("1. All Disputes are Subject to Delhi Jurisdiction Only");
-        //            sb.Append("1. All Disputes are Subject to Delhi Jurisdiction Only");
-        //            sb.Append("1. All Disputes are Subject to Delhi Jurisdiction Only");
-        //            sb.Append("</td></tr> </table>");
-        //            sb.Append("<table><tr><td colspan = '2'><b>                                                                           </b> ");
-        //            sb.Append("</td></tr></table>");
-        //            sb.Append("<table border='1'><tr><td><b>GST Paybale on Reverse Charge:</b>");
-        //            sb.Append("NA");
-        //            sb.Append("</td><td><b>Authorised Signatory: </b>");
-        //            sb.Append("Authorised Signatory");
-        //            sb.Append(" </td></tr>");
-        //            sb.Append("</table>");
-        //            sb.Append("<br />");
-        //            StringReader sr = new StringReader(sb.ToString());
-        //            Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
-        //            HTMLWorker htmlparser = new HTMLWorker(pdfDoc);
-        //            try
-        //            {
-        //                using (MemoryStream memoryStream = new MemoryStream())
-        //                {
-        //                    PdfWriter writer = PdfWriter.GetInstance(pdfDoc, memoryStream);
-        //                    pdfDoc.Open();
-        //                    htmlparser.Parse(sr);
-        //                    pdfDoc.Close();
-        //                    byte[] bytes = memoryStream.ToArray();
-        //                    memoryStream.Close();
-        //                    MailMessage mm = new MailMessage("pravesh.kr01@gmail.com", "pravesh.kr04@gmail.com");
-        //                    mm.Subject = "Quotation PDF";
-        //                    mm.Body = "Quotation PDF Attachment";
-        //                    mm.Attachments.Add(new Attachment(new MemoryStream(bytes), "QuotationPDF.pdf"));
-        //                    mm.IsBodyHtml = true;
-        //                    SmtpClient smtp = new SmtpClient();
-        //                    smtp.Host = "smtp.gmail.com";
-        //                    smtp.EnableSsl = true;
-        //                    NetworkCredential NetworkCred = new NetworkCredential();
-        //                    NetworkCred.UserName = "pravesh.kr01@gmail.com";
-        //                    NetworkCred.Password = "LoveShivani";
-        //                    smtp.UseDefaultCredentials = true;
-        //                    smtp.Credentials = NetworkCred;
-        //                    smtp.Port = 587;
-        //                    smtp.Send(mm);
-        //                }
-
-        //            }
-        //            catch (Exception ex)
-        //            {
-
-        //                throw;
-        //            }
-        //        }
-        //    }
-        //    return "Successfully sent the Mail";
-        //}
     }
 }

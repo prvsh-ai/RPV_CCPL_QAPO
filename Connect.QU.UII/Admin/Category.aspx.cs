@@ -28,5 +28,6 @@ namespace Connect.QU.UII.Admin
             cnt.UserId = HttpContext.Current.User.Identity.Name.ToString();
             return new QU.BAL.CommonBAL().SaveUpdateCategoryDetails(cnt);
         }
+
     }
 }

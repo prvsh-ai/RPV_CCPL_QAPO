@@ -16,8 +16,12 @@ namespace Connect.QU.Entities
         public string Rate { get; set; }//RateUnit
         public string Value { get; set; }
         public string Igst { get; set; }
-        public string Amount { get; set; }//RateUnit
-        public string TotalAmount1 { get; set; }
+        public string IgstAmount { get; set; }
+        public string Sgst { get; set; }
+        public string SgstAmount { get; set; }
+        public string Cgst { get; set; }
+        public string CgstAmount { get; set; }
+        public string TotalAmount { get; set; }
         public string ItemLineNumber { get; set; }
 
         public int ItemId { get; set; }

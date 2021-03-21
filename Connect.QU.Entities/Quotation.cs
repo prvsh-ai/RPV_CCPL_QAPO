@@ -24,6 +24,7 @@ namespace Connect.QU.Entities
         public string QFromContactNo { get; set; }
         public string QFromContactPerson { get; set; }
         public string QFromEmailID { get; set; }
+        public string QToEmailID { get; set; }
         public string QFromGSTINNo { get; set; }
         public string ProjectName { get; set; }
         public string FinantialYear { get; set; }
@@ -62,6 +63,14 @@ namespace Connect.QU.Entities
         public bool? IsExecution { get; set; }
         public int? CurrencyId { get; set; }
         public int? LocationId { get; set; }
+
+        public int ApplicationType { get; set; }
+        public string ApplicationReference { get; set; }
+
+        public string IgstAmount { get; set; }
+
+        public string SgstAmount { get; set; }
+        public string CgstAmount { get; set; }
 
     }
 
