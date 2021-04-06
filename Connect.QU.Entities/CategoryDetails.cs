@@ -11,8 +11,8 @@ namespace Connect.QU.Entities
         public int CategoryID { get; set; }
         public string CategoryName { get; set; }
         public string Code { get; set; }
-        public string DefaultSKU { get; set; }
-        public string DefaultPU { get; set; }
+        public int DefaultSKU { get; set; }
+       // public string DefaultPU { get; set; }
         public bool Brand { get; set; }
         public bool Type { get; set; }
         public bool Name { get; set; }

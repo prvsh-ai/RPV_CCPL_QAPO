@@ -71,6 +71,7 @@
     <Content Include="Admin\Approval.aspx" />
     <Content Include="Admin\Category.aspx" />
     <Content Include="Admin\Company.aspx" />
+    <Content Include="Admin\Role.aspx" />
     <Content Include="Admin\Item.aspx" />
     <Content Include="Admin\Reports.aspx" />
     <Content Include="bin\Connect.QU.BAL.dll" />
@@ -119,9 +120,20 @@
     <Content Include="js\datatables.1.10.2.min.js" />
     <Content Include="js\moment.2.13.0.min.js" />
     <Content Include="js\validations.js" />
+    <Content Include="Page\Approval.aspx" />
+    <Content Include="Page\Category.aspx" />
+    <Content Include="Page\Company.aspx" />
+    <Content Include="Page\Currency.aspx" />
+    <Content Include="Page\Execution.aspx" />
+    <Content Include="Page\Item.aspx" />
+    <Content Include="Page\Register.aspx" />
+    <Content Include="Page\Reports.aspx" />
+    <Content Include="Page\Requisition.aspx" />
+    <Content Include="Page\Role.aspx" />
     <Content Include="scripts\bootstrap-select.js.map" />
     <Content Include="scripts\jquery-3.1.1.min.map" />
     <Content Include="scripts\jquery-3.1.1.slim.min.map" />
+    <Content Include="Page\Page.Master" />
     <None Include="Properties\PublishProfiles\Attendance.pubxml" />
     <Content Include="Store\Execution.aspx" />
     <Content Include="Store\Store.Master" />
@@ -581,6 +593,13 @@
     <Compile Include="Admin\Company.aspx.designer.cs">
       <DependentUpon>Company.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\Role.aspx.cs">
+      <DependentUpon>Role.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Role.aspx.designer.cs">
+      <DependentUpon>Role.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Item.aspx.cs">
       <DependentUpon>Item.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -632,6 +651,83 @@
     </Compile>
     <Compile Include="Main.Master.designer.cs">
       <DependentUpon>Main.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Page\Approval.aspx.cs">
+      <DependentUpon>Approval.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page\Approval.aspx.designer.cs">
+      <DependentUpon>Approval.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page\Category.aspx.cs">
+      <DependentUpon>Category.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page\Category.aspx.designer.cs">
+      <DependentUpon>Category.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page\Company.aspx.cs">
+      <DependentUpon>Company.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page\Company.aspx.designer.cs">
+      <DependentUpon>Company.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page\Currency.aspx.cs">
+      <DependentUpon>Currency.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page\Currency.aspx.designer.cs">
+      <DependentUpon>Currency.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page\Execution.aspx.cs">
+      <DependentUpon>Execution.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page\Execution.aspx.designer.cs">
+      <DependentUpon>Execution.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page\Item.aspx.cs">
+      <DependentUpon>Item.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page\Item.aspx.designer.cs">
+      <DependentUpon>Item.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page\Page.Master.cs">
+      <DependentUpon>Page.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page\Page.Master.designer.cs">
+      <DependentUpon>Page.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Page\Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page\Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page\Reports.aspx.cs">
+      <DependentUpon>Reports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page\Reports.aspx.designer.cs">
+      <DependentUpon>Reports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page\Requisition.aspx.cs">
+      <DependentUpon>Requisition.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page\Requisition.aspx.designer.cs">
+      <DependentUpon>Requisition.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page\Role.aspx.cs">
+      <DependentUpon>Role.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page\Role.aspx.designer.cs">
+      <DependentUpon>Role.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Redirect.aspx.cs">

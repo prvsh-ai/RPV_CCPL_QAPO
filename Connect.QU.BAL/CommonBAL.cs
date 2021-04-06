@@ -47,6 +47,13 @@ namespace Connect.QU.BAL
         {
             return new CommonDAL().GetCurrencyDetails(CurrencyId, CurrencyName);
         }
+
+        //Role
+        public List<QU.Entities.RoleUser> GetRoleUserDetails(int RoleId, string RoleName)
+        {
+            return new CommonDAL().GetRoleUserDetails(RoleId, RoleName);
+        }
+
         public List<QU.Entities.TOC> GetTOCDetails(int QID)
         {
             return new CommonDAL().GetTOCDetails(QID);
@@ -138,6 +145,11 @@ namespace Connect.QU.BAL
         public string SaveUpdateCurrencyDetails(Currency cnt)
         {
             return new CommonDAL().SaveUpdateCurrencyDetails(cnt);
+        }
+        //Role
+        public string SaveUpdateRoleUserDetails(RoleUser cnt)
+        {
+            return new CommonDAL().SaveUpdateRoleUserDetails(cnt);
         }
         public string SaveUpdateQuotationDetails(Quotation cnt)
         {

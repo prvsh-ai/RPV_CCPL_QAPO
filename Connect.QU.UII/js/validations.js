@@ -151,7 +151,7 @@ function Validation_Register(userid, password, name, mobileno, designation, emai
 }
 
 //Company
-function Validation_Company(companyname, emailid, address, country, state, city, companylocation, contactno, zipcode, bankname, bankbranch, bankaccount, bankifsc, poc, pocno) {
+function Validation_Company(companyname, emailid, address, country, state, city, companylocation, contactno, zipcode, poc, pocno) {
 
     if ($(companyname).val() == '') {
         $(companyname).css('border', '1px solid red');
@@ -231,30 +231,6 @@ function Validation_Company(companyname, emailid, address, country, state, city,
         $(zipcode).focus();
         return false;
     }
-    if ($(bankname).val() == '') {
-        $(bankname).css('border', '1px solid red');
-        alert("Please Enter Bank Name");
-        $(bankname).focus();
-        return false;
-    }
-    if ($(bankbranch).val() == '') {
-        $(bankbranch).css('border', '1px solid red');
-        alert("Please Enter Bank Branch Name");
-        $(bankbranch).focus();
-        return false;
-    }
-    if ($(bankaccount).val() == '') {
-        $(bankaccount).css('border', '1px solid red');
-        alert("Please Enter Bank Account Number");
-        $(bankaccount).focus();
-        return false;
-    }
-    if ($(bankifsc).val() == '') {
-        $(bankifsc).css('border', '1px solid red');
-        alert("Please Enter Bank IFSC Number");
-        $(bankifsc).focus();
-        return false;
-    }
     if ($(poc).val() == '') {
         $(poc).css('border', '1px solid red');
         alert("Please Enter Point Of Contact person name");
@@ -298,7 +274,7 @@ function Validation_Item(name, category, lastprice, gstavailable, gstrate, effec
     }
     if ($(lastprice).val() == '') {
         $(lastprice).css('border', '1px solid red');
-        alert("Please Enter GSTIN Number");
+        alert("Please Enter List Price");
         $(lastprice).focus();
         return false;
     }
@@ -341,7 +317,7 @@ function Validation_Item(name, category, lastprice, gstavailable, gstrate, effec
 }
 
 //Category
-function Validation_Category(name, code, sku, pu) {
+function Validation_Category(name, code) {
 
     if ($(name).val() == '') {
         $(name).css('border', '1px solid red');
@@ -353,18 +329,6 @@ function Validation_Category(name, code, sku, pu) {
         $(code).css('border', '1px solid red');
         alert("Please Enter Item Name");
         $(code).focus();
-        return false;
-    }
-    if ($(sku).val() == '') {
-        $(sku).css('border', '1px solid red');
-        alert("Please Enter Item Name");
-        $(sku).focus();
-        return false;
-    }
-    if ($(pu).val() == '') {
-        $(pu).css('border', '1px solid red');
-        alert("Please Enter Item Name");
-        $(pu).focus();
         return false;
     }
     if (!(

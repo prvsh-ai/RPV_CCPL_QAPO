@@ -377,6 +377,95 @@ namespace Connect.QU.DAL
 
             return Entities;
         }
+
+        //Role
+
+        public List<QU.Entities.RoleUser> GetRoleUserDetails(int RoleId, string RoleName)
+        {
+            List<Entities.RoleUser> Entities = new List<Entities.RoleUser>();
+            Entities.RoleUser CL = null;
+            try
+            {
+                myCon = myDBConectionDAL.AssignConnection();
+                myCmd = new SqlCommand("spRetRoleUser", myCon);
+                myCmd.CommandType = CommandType.StoredProcedure;
+                if (RoleId != 0)
+                {
+                    myCmd.Parameters.AddWithValue("@RoleId", RoleId);
+                }
+                if (RoleName.Trim() != "")
+                {
+                    myCmd.Parameters.AddWithValue("@RoleName", RoleName);
+                }
+                myDBConectionDAL.OpenConnection();
+                SqlDataReader sdr = myCmd.ExecuteReader();
+                while (sdr.Read())
+                {
+                    CL = new Entities.RoleUser();
+                    CL.RoleId = Convert.ToInt32(sdr["RoleId"]);
+                    CL.RoleName = sdr["RoleName"].ToString();
+
+                    if (!string.IsNullOrEmpty(sdr["RegisterPage"].ToString()))
+                    {
+                        CL.RegisterPage = Convert.ToBoolean(sdr["RegisterPage"]);
+                    }
+                    if (!string.IsNullOrEmpty(sdr["ReportsPage"].ToString()))
+                    {
+                        CL.ReportsPage = Convert.ToBoolean(sdr["ReportsPage"]);
+                    }
+                    if (!string.IsNullOrEmpty(sdr["RolePage"].ToString()))
+                    {
+                        CL.RolePage = Convert.ToBoolean(sdr["RolePage"]);
+                    }
+                    if (!string.IsNullOrEmpty(sdr["ItemPage"].ToString()))
+                    {
+                        CL.ItemPage = Convert.ToBoolean(sdr["ItemPage"]);
+                    }
+                    if (!string.IsNullOrEmpty(sdr["CompanyPage"].ToString()))
+                    {
+                        CL.CompanyPage = Convert.ToBoolean(sdr["CompanyPage"]);
+                    }
+                    if (!string.IsNullOrEmpty(sdr["CategoryPage"].ToString()))
+                    {
+                        CL.CategoryPage = Convert.ToBoolean(sdr["CategoryPage"]);
+                    }
+                    if (!string.IsNullOrEmpty(sdr["QuotationApprovalPage"].ToString()))
+                    {
+                        CL.QuotationApprovalPage = Convert.ToBoolean(sdr["QuotationApprovalPage"]);
+                    }
+                    if (!string.IsNullOrEmpty(sdr["QuotationPage"].ToString()))
+                    {
+                        CL.QuotationPage = Convert.ToBoolean(sdr["QuotationPage"]);
+                    }
+                    if (!string.IsNullOrEmpty(sdr["RequisitionPage"].ToString()))
+                    {
+                        CL.RequisitionPage = Convert.ToBoolean(sdr["RequisitionPage"]);
+                    }
+
+                    if (!string.IsNullOrEmpty(sdr["ExecutionPage"].ToString()))
+                    {
+                        CL.ExecutionPage = Convert.ToBoolean(sdr["ExecutionPage"]);
+                    }
+                    if (!string.IsNullOrEmpty(sdr["ItemApprovalPage"].ToString()))
+                    {
+                        CL.ItemApprovalPage = Convert.ToBoolean(sdr["ItemApprovalPage"]);
+                    }
+                  
+                    Entities.Add(CL);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                myDBConectionDAL.CloseConnection();
+            }
+
+            return Entities;
+        }
+
         public List<QU.Entities.TOC> GetTOCDetails(int QID)
         {
             List<Entities.TOC> Entities = new List<Entities.TOC>();
@@ -451,8 +540,8 @@ namespace Connect.QU.DAL
                     CL.CategoryID = Convert.ToInt32(sdr["CategoryID"]);
                     CL.CategoryName = sdr["CategoryName"].ToString();
                     CL.Code = sdr["Code"].ToString();
-                    CL.DefaultSKU = sdr["DefaultSKU"].ToString();
-                    CL.DefaultPU = sdr["DefaultPU"].ToString();
+                    CL.DefaultSKU = Convert.ToInt32(sdr["DefaultSKU"]);
+                   // CL.DefaultPU = sdr["DefaultPU"].ToString();
                     CL.Brand = Convert.ToBoolean(sdr["Brand"].ToString());
                     CL.Type = Convert.ToBoolean(sdr["Type"].ToString());
                     CL.Name = Convert.ToBoolean(sdr["Name"].ToString());
@@ -613,8 +702,8 @@ namespace Connect.QU.DAL
                     CL.GstRate = Convert.ToInt32(sdr["GstRate"]);
                     CL.RadStock = Convert.ToBoolean(sdr["RadStock"]);
                     CL.RadService = Convert.ToBoolean(sdr["RadService"]);
-                    CL.SKU = sdr["SKU"].ToString();
-                    CL.PU = sdr["PU"].ToString();
+                    CL.IQ = sdr["SKU"].ToString();
+                    CL.PQ = sdr["PU"].ToString();
                     CL.HsnCode = sdr["HsnCode"].ToString();
                     CL.EffectiveStartDate = Convert.ToDateTime(sdr["EffectiveStartDate"]);
                     CL.EffectiveEndDate = Convert.ToDateTime(sdr["EffectiveEndDate"]);
@@ -1646,7 +1735,7 @@ namespace Connect.QU.DAL
                 myCmd.Parameters.AddWithValue("@CategoryName", cnt.CategoryName);
                 myCmd.Parameters.AddWithValue("@Code", cnt.Code);
                 myCmd.Parameters.AddWithValue("@DefaultSKU", cnt.DefaultSKU);
-                myCmd.Parameters.AddWithValue("@DefaultPU", cnt.DefaultPU);
+               // myCmd.Parameters.AddWithValue("@DefaultPU", cnt.DefaultPU);
                 myCmd.Parameters.AddWithValue("@Brand", cnt.Brand);
                 myCmd.Parameters.AddWithValue("@Type", cnt.Type);
                 myCmd.Parameters.AddWithValue("@Name", cnt.Name);
@@ -1695,8 +1784,8 @@ namespace Connect.QU.DAL
                 myCmd.Parameters.AddWithValue("@GstRate", cnt.GstRate);
                 myCmd.Parameters.AddWithValue("@RadStock", cnt.RadStock);
                 myCmd.Parameters.AddWithValue("@RadService", cnt.RadService);
-                myCmd.Parameters.AddWithValue("@SKU", cnt.SKU);
-                myCmd.Parameters.AddWithValue("@PU", cnt.PU);
+                myCmd.Parameters.AddWithValue("@SKU", cnt.IQ);
+                myCmd.Parameters.AddWithValue("@PU", cnt.PQ);
                 myCmd.Parameters.AddWithValue("@HsnCode", cnt.HsnCode);
                 myCmd.Parameters.AddWithValue("@EffectiveStartDate", cnt.EffectiveStartDate);
                 myCmd.Parameters.AddWithValue("@EffectiveEndDate", cnt.EffectiveEndDate);
@@ -1853,6 +1942,53 @@ namespace Connect.QU.DAL
                 myCmd.Parameters.AddWithValue("@Mode", cnt.Mode);
                 myCmd.Parameters.AddWithValue("@CurrencyId", cnt.CurrencyId);
                 myCmd.Parameters.AddWithValue("@CurrencyName", cnt.CurrencyName);
+
+                myCmd.Parameters.Add("@Message", SqlDbType.VarChar, 100);
+                myCmd.Parameters["@Message"].Direction = ParameterDirection.Output;
+
+                myDBConectionDAL.OpenConnection();
+                myCmd.ExecuteNonQuery();
+
+                Result = myCmd.Parameters["@Message"].Value.ToString();
+            }
+            catch (Exception ex)
+            {
+                Result = "0";
+                throw;
+            }
+            finally
+            {
+                myDBConectionDAL.CloseConnection();
+            }
+
+            return Result;
+        }
+        //Role
+        public string SaveUpdateRoleUserDetails(RoleUser cnt)
+        {
+            string Result = "0";
+
+            try
+            {
+                myCon = myDBConectionDAL.AssignConnection();
+                myCmd = new SqlCommand("spRoleUserInsertUpdate", myCon);
+                myCmd.CommandType = CommandType.StoredProcedure;
+                myCmd.Parameters.AddWithValue("@Mode", cnt.Mode);
+                myCmd.Parameters.AddWithValue("@RoleId", cnt.RoleId);
+                myCmd.Parameters.AddWithValue("@RoleName", cnt.RoleName);
+
+                myCmd.Parameters.AddWithValue("@RegisterPage", cnt.RegisterPage);
+                myCmd.Parameters.AddWithValue("@ReportsPage", cnt.ReportsPage);
+                myCmd.Parameters.AddWithValue("@RolePage", cnt.RolePage);
+                myCmd.Parameters.AddWithValue("@ItemPage", cnt.ItemPage);
+                myCmd.Parameters.AddWithValue("@CurrencyPage", cnt.CurrencyPage);
+                myCmd.Parameters.AddWithValue("@CompanyPage", cnt.CompanyPage);
+                myCmd.Parameters.AddWithValue("@CategoryPage", cnt.CategoryPage);
+                myCmd.Parameters.AddWithValue("@QuotationApprovalPage", cnt.QuotationApprovalPage);
+                myCmd.Parameters.AddWithValue("@QuotationPage", cnt.QuotationPage);
+                myCmd.Parameters.AddWithValue("@RequisitionPage", cnt.RequisitionPage);
+                myCmd.Parameters.AddWithValue("@ExecutionPage", cnt.ExecutionPage);
+                myCmd.Parameters.AddWithValue("@ItemApprovalPage", cnt.ItemApprovalPage);
 
                 myCmd.Parameters.Add("@Message", SqlDbType.VarChar, 100);
                 myCmd.Parameters["@Message"].Direction = ParameterDirection.Output;

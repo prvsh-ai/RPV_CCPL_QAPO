@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Admin.master.cs" Inherits="Connect.QU.UII.Admin.Admin" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Page.Master.cs" Inherits="Connect.QU.UII.Page.Page" %>
 
 <!DOCTYPE html>
 
@@ -44,7 +44,11 @@
                     <div class="col-md-12 col-md-header">
                         <%--<a href="../Redirect.aspx" class="logo">--%>
                         <a href="CompanyDetails.aspx" class="logo">
-                            <img src="../images/Connectlogo.JPG" width="115" alt="Logo" />
+<%--                            <img src="../images/Connectlogo.JPG" width="115" alt="Logo" />--%>
+
+                            <img src="../images/Connectlogo.JPG" width="80" alt="Logo" /> 
+
+
                             <!-- mini logo for sidebar mini 50x50 pixels -->
                             <span class="logo-mini"><b>Connect</b></span>
                             <!-- logo for regular state and mobile devices -->
@@ -93,10 +97,9 @@
                         <li id="lstItem"><a href="Item.aspx"><i class="fa fa-user"></i><span>Item</span> </a></li>
                         <li id="lstApproval"><a href="Approval.aspx"><i class="fa fa-user"></i><span>Approval</span> </a></li>
                         <li id="lstReport"><a href="Reports.aspx"><i class="fa fa-user"></i><span>Reports</span> </a></li>
-                        <li id="lstExecution"><a href="Store/Execution.aspx"><i class="fa fa-user"></i><span>Execution</span> </a></li>
-                        <li id="lstRequisition"><a href="Store/Requisition.aspx"><i class="fa fa-user"></i><span>Requisition</span> </a></li>
+                        <li id="lstExecution"><a href="Execution.aspx"><i class="fa fa-user"></i><span>Execution</span> </a></li>
+                        <li id="lstRequisition"><a href="Requisition.aspx"><i class="fa fa-user"></i><span>Requisition</span> </a></li>
                         <li id="lstItemApproval"><a href="ItemApproval.aspx"><i class="fa fa-user"></i><span>ItemApproval</span> </a></li>
-                        <li id="lstQuotation"><a href="User/Quotation.aspx"><i class="fa fa-user"></i><span>Quotation</span> </a></li>
                     </ul>
                 </section>
                 <!-- /.sidebar -->
@@ -143,7 +146,7 @@
                 $('#lstExecution').hide();
                 $('#lstRequisition').hide();
                 $('#lstItemApproval').hide();
-                $('#lstQuotation').hide();
+               
 
 
                 if (($.parseJSON('<%= RegisterPage %>'.toLowerCase()))) {
@@ -181,10 +184,7 @@
                     $('#lstItemApproval').show();
                 }
 
-                if (($.parseJSON('<%= QuotationPage %>'.toLowerCase()))) {
-                    $('#lstQuotation').show();
-                }
-
+          
                 // window.history.forward(1);
                 $(document).ajaxError(function (xhr, props) {
                     if (props.status === 401) {

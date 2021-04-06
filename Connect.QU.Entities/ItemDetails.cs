@@ -21,8 +21,8 @@ namespace Connect.QU.Entities
         public bool RadService { get; set; }
         public DateTime EffectiveStartDate { get; set; }
         public DateTime EffectiveEndDate { get; set; }
-        public string SKU { get; set; }
-        public string PU { get; set; }
+        public string IQ { get; set; }
+        public string PQ { get; set; }
         public string InStockQuantity { get; set; }
         public bool Approved { get; set; }
         public string HsnCode { get; set; }

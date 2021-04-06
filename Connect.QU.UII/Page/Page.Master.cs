@@ -6,9 +6,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Connect.QU.UII.Admin
+namespace Connect.QU.UII.Page
 {
-    public partial class Admin : System.Web.UI.MasterPage
+    public partial class Page : System.Web.UI.MasterPage
     {
         public string UserName = "";
         public bool RegisterPage = false;
@@ -38,7 +38,6 @@ namespace Connect.QU.UII.Admin
                     CompanyPage = ((_User)(Session["objUser"])).obj_txn_Page.CompanyPage;
                     CategoryPage = ((_User)(Session["objUser"])).obj_txn_Page.CategoryPage;
                     QuotationApprovalPage = ((_User)(Session["objUser"])).obj_txn_Page.QuotationApprovalPage;
-                    QuotationPage = ((_User)(Session["objUser"])).obj_txn_Page.QuotationPage;
                     RequisitionPage = ((_User)(Session["objUser"])).obj_txn_Page.RequisitionPage;
                     ExecutionPage = ((_User)(Session["objUser"])).obj_txn_Page.ExecutionPage;
                     ItemApprovalPage = ((_User)(Session["objUser"])).obj_txn_Page.ItemApprovalPage;

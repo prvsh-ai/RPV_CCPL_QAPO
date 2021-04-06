@@ -10,5 +10,6 @@ namespace Connect.QU.Entities
    {
        public Txn_User obj_txn_User = new Txn_User();
        public Txn_Login obj_txn_Login = new Txn_Login();
+       public RoleUser obj_txn_Page = new RoleUser();
     }
 }

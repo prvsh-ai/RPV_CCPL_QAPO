@@ -1,0 +1,805 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Page/Page.Master" CodeBehind="Reports.aspx.cs" Inherits="Connect.QU.UII.Page.Reports" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <title>Reports</title>
+    <style>
+        @media (min-width: 480px) {
+            #ApplicationForm {
+                padding: 45px !important;
+                background-color: white !important;
+            }
+        }
+    </style>
+    <link href="../css/Admin.css" rel="stylesheet" />
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="EAWarpper" runat="server">
+    <div class="content-wrapper">
+        <section class="content">
+            <ul class="nav nav-tabs" role="tablist" style="margin-top: 2%; background-color: white; border-color: lightskyblue; font-weight: bold; width: 100%; margin-left: 0%;">
+                <li class="active">
+                    <a href="#Quotation" data-toggle="tab">Quotation</a>
+                </li>
+                <li>
+                    <a href="#Items" data-toggle="tab">Items</a>
+                </li>
+                <li>
+                    <a href="#Requisition" data-toggle="tab">Requisition</a>
+                </li>
+                <li>
+                    <a href="#Execution" data-toggle="tab">Execution</a>
+                </li>
+            </ul>
+            <div class="form-group" id="dvdQuotation" style="margin-top: 2.5%; margin-left: 89%; width: 100%;">
+                <input id="btnGenerate" type="button" value="Generate Report" class="btn btn-success" />
+            </div>
+            <div class="form-group" id="dvdrequisition" style="margin-top: 2.5%; margin-left: 89%; width: 100%;">
+                <input id="btnGenerateRequisition" type="button" value="Generate Report" class="btn btn-success" />
+            </div>
+            <div class="form-group" id="dvdItems" style="margin-top: 2.5%; margin-left: 89%; width: 100%;">
+                <input id="btnGenerateItems" type="button" value="Generate Report" class="btn btn-success" />
+            </div>
+            <div class="form-group" id="dvdExecution" style="margin-top: 2.5%; margin-left: 89%; width: 100%;">
+                <input id="btnGenerateExecution" type="button" value="Generate Report" class="btn btn-success" />
+            </div>
+            <div class="container" id="QuotationTable" style="margin-top: 3%; margin-bottom: 1%; width: 100%;">
+                <table id="tblApprove" class="table table-striped cf table-bordered table-striped table-responsive dataTable" style="table-layout: fixed"></table>
+            </div>
+            <div class="container" id="itemTable" style="margin-top: 3%; margin-bottom: 1%; width: 100%;">
+                <table id="CityTableId" class="table table-striped cf table-bordered table-striped table-responsive dataTable" style="table-layout: fixed"></table>
+            </div>
+            <div class="container" id="RequisitionTable" style="margin-top: 3%; margin-bottom: 1%; width: 100%;">
+                <table id="RequisitionTableId" class="table table-striped cf table-bordered table-striped table-responsive dataTable" style="table-layout: fixed"></table>
+            </div>
+            <div class="container" id="ExecutionTable" style="margin-top: 3%; margin-bottom: 1%; width: 100%;">
+                <table id="ExecutionTableId" class="table table-striped cf table-bordered table-striped table-responsive dataTable" style="table-layout: fixed"></table>
+            </div>
+            <div class="AppFormBody" id="ApplicationForm">
+                <h4 class="text-center" id="QuotationApplicationText"><b>QUOTATION APPLICATION</b></h4>
+                <p>
+                    </br>
+                            <div class="form-inline AppX">
+                                <div class="form-row">
+                                    <div class="col-lg-4">
+                                        <label class="control-label" style="margin-right: 6.5%">Project Name </label>
+                                        <b />
+                                        <input type="text" id="txtProjectName" class="form-control" disabled />
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label class="control-label" style="margin-right: 5%">Financial Year</label><b />
+                                        <input type='text' class="form-control" id="txtFinancialYear" disabled />
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label for="txtQuotationDate" class="control-label" style="margin-right: 9%">Date</label><b />
+                                        <input type='text' class="form-control" id="txtQuotationDate" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                </p>
+                <br />
+                <br />
+                <p>
+                    <div class="form-inline AppX">
+                        <div class="form-row">
+                            <div class="col-lg-4">
+                                <label class="control-label" style="margin-right: 2%">Company Name </label>
+                                <input type="text" id="txtCompanyName" class="form-control" disabled />
+                            </div>
+                            <div class="col-lg-4">
+                                <label class="control-label" style="margin-right: 2%">Contact Person   </label>
+                                <input type="text" id="txtContactPerson" class="form-control" disabled />
+                            </div>
+                            <div class="col-lg-4">
+                                <label class="control-label" style="margin-right: 2%">Address </label>
+                                <input type="text" id="txtAddress" class="form-control" disabled />
+                            </div>
+                        </div>
+                    </div>
+                </p>
+                <br />
+                <br />
+                <p>
+                    <div class="form-inline AppX">
+                        <div class="form-row">
+                            <div class="col-lg-4">
+                                <label class="control-label" style="margin-right: 20.8%">GSTIN</label>
+                                <input type="text" id="txtGstinParty" class="form-control" disabled />
+                            </div>
+                            <div class="col-lg-4">
+                                <label class="control-label" style="margin-right: 1.8%">Payment Terms</label>
+                                <input type="text" id="txtaymentTerms" class="form-control" disabled />
+                            </div>
+                            <div class="col-lg-4">
+                                <label class="control-label" style="margin-left: -13%">Quote Validity </label>
+                                &nbsp;&nbsp;
+                                        <input type="text" id="txtValidityOfQuote" class="form-control" disabled />
+                            </div>
+                        </div>
+                </p>
+                <br />
+                <br />
+                <p>
+                    <div class="form-inline AppX">
+                        <div class="form-row">
+                            <div class="col-lg-4">
+                                <label class="control-label" style="margin-right: 2%">Place Of Supply </label>
+                                <input type="text" id="txtPlaceOfSupply" class="form-control" disabled />
+                            </div>
+                        </div>
+                    </div>
+                </p>
+                <br />
+                <br />
+                <br />
+                <div class="row APPTest">
+                    <div class="col-lg-12">
+                        <div style="overflow-x: auto">
+                            <table id="tblCustomers" class="table" cellpadding="0" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 150px">Description Of Goods</th>
+                                        <th style="width: 150px">Qty</th>
+                                        <th style="width: 150px">HSN/SAC</th>
+                                        <th style="width: 150px">Rate/Unit</th>
+                                        <th style="width: 150px">Value Without Tax</th>
+                                        <th style="width: 150px">IGST %</th>
+                                        <th style="width: 150px">Amount</th>
+                                        <th style="width: 150px">Total Amount</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <input type="button" value="Remove" onclick="Remove(this)" /></td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td>
+                                            <select id="ddlItem" name="ddlItemName" class="selectBox form-control hidden"></select>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="txtQty" hidden /></td>
+                                        <td>
+                                            <input type="text" id="txtHsn" hidden /></td>
+                                        <td>
+                                            <input type="text" id="txtRate" hidden /></td>
+                                        <td>
+                                            <input type="text" id="txtValue" hidden /></td>
+                                        <td>
+                                            <input type="text" id="txtIgst" hidden /></td>
+                                        <td>
+                                            <input type="text" id="txtAmount" hidden /></td>
+                                        <td>
+                                            <input type="text" id="txtTotalAmount1" hidden /></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <p>
+                    <div class="form-inline AppX">
+                        <div class="form-row">
+                            <div class="col-lg-4">
+                                <label class="control-label" style="margin-right: 3%">Taxable Amount  </label>
+                                <input type="text" id="txtTaxableAmount" class="form-control" disabled />
+                            </div>
+                            <div class="col-lg-8">
+                                <label class="control-label" style="margin-right: 3%">Total Words </label>
+                                <input type="text" id="txtTotalWords" class="form-control" disabled />
+                            </div>
+                        </div>
+                    </div>
+                </p>
+                <br />
+                <br />
+                <p>
+                    <div class="form-inline AppX">
+                        <div class="form-row">
+                            <div class="col-lg-4">
+                                <label class="control-label" style="margin-right: 6%; margin-left: 14%">Freight </label>
+                                <input type="text" id="txtFreight" class="form-control" disabled />
+                            </div>
+                            <div class="col-lg-8">
+                                <label class="control-label" style="margin-right: 3%">Grand Total</label>
+                                <input type="text" id="txtGrandTotal" class="form-control" disabled />
+                            </div>
+                        </div>
+                    </div>
+                </p>
+                <br />
+                <br />
+                <br />
+                <p>Bank Details</p>
+                <p>
+                    <div class="form-inline AppX">
+                        <div class="form-row">
+                            <div class="col-lg-4">
+                                <label class="control-label" style="margin-right: 3%">Bank Name </label>
+                                <input type="text" id="txtBankName" class="form-control" disabled />
+                            </div>
+                            <div class="col-lg-4">
+                                <label class="control-label" style="margin-right: 3%">Branch Name</label>
+                                <input type="text" id="txtBranchName" class="form-control" disabled />
+                            </div>
+                            <div class="col-lg-4">
+                                <label class="control-label" style="margin-right: 3%">Account No.</label>
+                                <input type="text" id="txtBankAccountNo" class="form-control" disabled />
+                            </div>
+                        </div>
+                    </div>
+                </p>
+                <br />
+                <br />
+                <p>
+                    <div class="form-inline AppX">
+                        <div class="form-row">
+                            <div class="col-lg-12">
+                                <label class="control-label" style="margin-left: -3.6%">Bank Branch IFSC</label>
+                                &nbsp;&nbsp;
+                                <input type="text" id="txtBranchIfsc" class="form-control" disabled />
+                            </div>
+                        </div>
+                    </div>
+                </p>
+                <br />
+                <br />
+                <p>
+                    <div class="form-inline AppX">
+                        <div class="form-row">
+                            <div class="col-lg-12">
+                                <label class="control-label" style="margin-left: -2%; margin-right: 1%">Signature Date</label>
+                                <input type="text" id="txtSignatureDate" class="form-control" disabled />
+                            </div>
+                        </div>
+                    </div>
+                </p>
+            </div>
+        </section>
+    </div>
+    <div id="overlay">
+        <div class="cv-spinner">
+            <span class="spinner"></span>
+        </div>
+    </div>
+    <link href="../css/DataTable/dataTablesbootstrap.css" rel="stylesheet" />
+    <script src="../js/datatables.1.10.2.min.js"></script>
+    <script src="../js/datables.1.10.16.mn.js"></script>
+    <script src="../js/Admin.js"></script>
+    <script type="text/javascript">
+        $body = $("body");
+        $(document).on({
+            ajaxStart: function () { $("#overlay").fadeIn(300);; },
+            ajaxStop: function () {
+                setTimeout(function () {
+                    $("#overlay").fadeOut(300);
+                }, 200);
+            },
+            ajaxError: function () {
+                setTimeout(function () {
+                    $("#overlay").fadeOut(300);
+                }, 200);
+            }
+        });
+        $(document).ready(function () {
+            $('#ApplicationForm').hide();
+            GetQuotationDetails(0);
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                var currentTab = $(e.target).text(); // get current tab               
+                switch (currentTab) {
+                    case 'Quotation':
+                        GetQuotationDetails(0);
+                        $('#ApplicationForm').hide();
+                        break;
+                    case 'Items':
+                        GetItemDetails(0, "");
+                        $('#ApplicationForm').hide();
+                        break;
+                    case 'Requisition':
+                        GetRequisitionDetails(0);
+                        $('#ApplicationForm').hide();
+                        break;
+                    case 'Execution':
+                        GetExecutionDetails(0);
+                        $('#ApplicationForm').hide();
+                        break;
+                    default:
+                };
+            });
+        });
+        $('#btnGenerate').on('click', function () {
+            var QId = 0;
+            $.ajax({
+                contentType: "application/json; charset=utf-8",
+                url: "Reports.aspx/GenerateQuotationReports",
+                type: "POST",
+                data: "{QId:" + QId + "}",
+                dataType: "json",
+                success: function (result) {
+                    var getResult = result.d;
+                    var len = getResult.length;
+                    if (len > 0) {
+                        alert('Generate Quotation Report Successfully')
+                    }
+                },
+                error: function (err) {
+                    return;
+                }
+            });
+
+        });
+        $('#btnGenerateItems').on('click', function () {
+            var ItemID = 0;
+            var ItemName = "";
+            $.ajax({
+                contentType: "application/json; charset=utf-8",
+                url: "Reports.aspx/GenerateItemReports",
+                type: "POST",
+                data: "{ItemID:" + ItemID + ",ItemName:'" + ItemName + "'}",
+                dataType: "json",
+                success: function (result) {
+                    var getResult = result.d;
+                    var len = getResult.length;
+                    if (len > 0) {
+                        alert('Generate Items Report Successfully')
+                    }
+                },
+                error: function (err) {
+                    return;
+                }
+            });
+        });
+        $('#btnGenerateRequisition').on('click', function () {
+            var Requisitionid = 0;
+            $.ajax({
+                contentType: "application/json; charset=utf-8",
+                url: "Reports.aspx/GenerateRequisitionReport",
+                type: "POST",
+                data: "{Requisitionid:" + Requisitionid + "}",
+                dataType: "json",
+                success: function (result) {
+                    var getResult = result.d;
+                    var len = getResult.length;
+                    if (len > 0) {
+                        alert('Generate Requisition Report Successfully')
+                    }
+                },
+                error: function (err) {
+                    return;
+                }
+            });
+        });
+        $('#btnGenerateExecution').on('click', function () {
+            var ExecutionId = 0;
+            $.ajax({
+                contentType: "application/json; charset=utf-8",
+                url: "Reports.aspx/GenerateExecutionReport",
+                type: "POST",
+                data: "{ExecutionId:" + ExecutionId + "}",
+                dataType: "json",
+                success: function (result) {
+                    var getResult = result.d;
+                    var len = getResult.length;
+                    if (len > 0) {
+                        alert('Generate Execution Report Successfully')
+                    }
+                },
+                error: function (err) {
+                    return;
+                }
+            });
+
+        });
+        function GetQuotationDetails(QID) {
+            var element = "";
+            var Counter = 1;
+            $.ajax({
+                contentType: "application/json; charset=utf-8",
+                url: "Reports.aspx/GetQuotationDetails",
+                type: "POST",
+                data: "{QID:" + QID + "}",
+                dataType: "json",
+                success: function (result) {
+                    var getResult = result.d;
+                    var len = getResult.length;
+                    $('#CityTableId').empty();
+                    $('#itemTable').hide();
+                    $('#RequisitionTable').hide();
+                    $('#QuotationTable').show();
+                    $('#dvdQuotation').show();
+                    $('#dvdItems').hide();
+                    $('#dvdrequisition').hide();
+                    $('#dvdExecution').hide();
+                    $('#ExecutionTable').hide();
+                    $('#tblApprove').empty();
+                    element += '<thead class="cf"><tr class="bgblue-Over">';
+                    element += '<th>S NO</th>';
+                    element += '<th>Q NO</th>';
+                    element += '<th>Q Type</th>';
+                    element += '<th>Q From</th>';
+                    element += '<th>Q To</th>';
+                    element += '<th>Date</th>';
+                    element += '<th>Approve</th>';
+                    element += '<th>Details</th>';
+                    element += '</tr></thead><tbody>';
+                    if (len == 0) {
+                        element = element + '<tr>';
+                        element = element + '<td>No Data Available</td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '</tr>';
+                    }
+                    for (var i = 0; i < len; i++) {
+                        element = element + '<tr>';
+                        element = element + '<td>' + getResult[i].QID + '</td>';
+                        element = element + '<td>' + getResult[i].QNo + '</td>';
+                        element = element + '<td>' + getResult[i].QType + '</td>';
+                        element = element + '<td>CCPL</td>';
+                        element = element + '<td>' + getResult[i].QToCompanyName + '</td>';
+                        element = element + '<td>' + GetProperDate(getResult[i].QDate) + '</td>';
+                        if (getResult[i].Approved) {
+                            element = element + '<td>' + '<input type="checkbox" disabled checked name="Approve" id="chkApprove" />';
+                        }
+                        else {
+                            element = element + '<td>' + '<input type="checkbox" disabled name="Approve"   id="chkApprove" />';
+                        }
+                        element = element + '<td><a href="#"><span class="label label-success" onclick="ViewDetails(' + getResult[i].QID + ');return false;"<i class="fa fa-file-text"  aria-hidden="true"></i> View </span><span class="label label-warning"   onclick="HideDetails(' + getResult[i].QID + '); return false;" style="margin-left: 23px;"><i class="fa fa-file-text"  aria-hidden="true"></i>Hide</span></a></td>';
+
+                        element = element + '</tr>';
+                    }
+                    element = element + '</tbody>';
+                    $("#tblApprove").append(element);
+                    $('#tblApprove').dataTable({
+                        "paging": true,
+                        //"scrollY": 400,
+                        "destroy": true,
+                        "pagingType": "simple_numbers"[{
+                            style: 'Margin-left:1%'
+                        }]
+                    });
+                    $('.dataTables_length').addClass('bs-select');
+                },
+                error: function (err) {
+                    // alert(err.statusText)
+                }
+            });
+        }
+        function GetRequisitionDetails(RequisitionId) {
+            var element = "";
+            var Counter = 1;
+            $.ajax({
+                contentType: "application/json; charset=utf-8",
+                url: "Reports.aspx/GetRequisitionDetails",
+                type: "POST",
+                data: "{RequisitionId:" + RequisitionId + "}",
+                dataType: "json",
+                success: function (result) {
+                    var getResult = result.d;
+                    var len = getResult.length;
+                    $('#RequisitionTableId').empty();
+                    $('#itemTable').hide();
+                    $('#QuotationTable').hide();
+                    $('#RequisitionTable').show();
+                    $('#dvdQuotation').hide();
+                    $('#dvdItems').hide();
+                    $('#dvdExecution').hide();
+                    $('#ExecutionTable').hide();
+                    $('#dvdrequisition').show();
+                    element = element + '<thead class="cf"><tr class="bgblue-Over">';
+                    element = element + '<th style="width:59px">S NO</th>';
+                    element = element + '<th style="width:160px">Req Id</th>';
+                    element = element + '<th>Quo Id</th>';
+                    element = element + '<th>Date</th>';
+                    element = element + '<th>Required By</th>';
+                    element = element + '<th>Approved By</th>';
+                    element = element + '</tr></thead><tbody>';
+                    if (len == 0) {
+                        element = element + '<tr>';
+                        element = element + '<td>No Data Available</td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '</tr>';
+                    }
+                    for (var i = 0; i < len; i++) {
+                        element = element + '<tr>';
+                        element = element + '<td>' + Counter++ + '</td>';
+                        element = element + '<td>' + getResult[i].RequisitionId + '</td>';
+                        element = element + '<td>' + getResult[i].QuotationId + '</td>';
+                        element = element + '<td>' + GetProperDate(getResult[i].RequisitionDate) + '</td>';
+                        element = element + '<td>' + getResult[i].RequiredBy + '</td>';
+                        element = element + '<td>' + getResult[i].ApprovedBy + '</td>';
+                        element = element + '</tr>';
+                    }
+                    element = element + '</tbody>';
+                    $("#RequisitionTableId").append(element);
+                    $('#RequisitionTableId').dataTable({
+                        "paging": true,
+                        //"scrollY": 400,
+                        "destroy": true,
+                        "pagingType": "simple_numbers"[{
+                            style: 'Margin-left:1%'
+                        }]
+                    });
+                    $('.dataTables_length').addClass('bs-select');
+                },
+                error: function (err) {
+                    // alert(err.statusText)
+                }
+            });
+        }
+        function btnAddCall(DescriptionOfGoods, Qty, Hsn, Rate, Value, Igst, Amount, TotalAmount1) {
+            var txtDescriptionOfGoods = DescriptionOfGoods;//$("#txtDescriptionOfGoods");
+            var txtQty = Qty;//$("#txtQty");
+            var txtHsn = Hsn;//$("#txtHsn");
+            var txtRate = Rate;//$("#txtRate");
+            var txtValue = Value;//$("#txtValue");
+            var txtIgst = Igst;//$("#txtIgst");
+            var txtAmount = Amount;//$("#txtAmount");
+            var txtTotalAmount1 = TotalAmount1;//$("#txtTotalAmount1");
+            var tBody = $("#tblCustomers > TBODY")[0];
+            var row = tBody.insertRow(-1);
+            var cell = $(row.insertCell(-1));
+            cell.html(DescriptionOfGoods);
+            cell = $(row.insertCell(-1));
+            cell.html(Qty);
+            cell = $(row.insertCell(-1));
+            cell.html(Hsn);
+            cell = $(row.insertCell(-1));
+            cell.html(Rate);
+            cell = $(row.insertCell(-1));
+            cell.html(Value);
+            cell = $(row.insertCell(-1));
+            cell.html(Igst);
+            cell = $(row.insertCell(-1));
+            cell.html(Amount);
+            cell = $(row.insertCell(-1));
+            cell.html(TotalAmount1);
+        }
+        function GetTOCDetails(QID) {
+            var element = "";
+            $("#tblCustomers > TBODY").empty();
+            $.ajax({
+                contentType: "application/json; charset=utf-8",
+                url: "Approval.aspx/GetTOCDetails",
+                type: "POST",
+                data: "{QID:" + QID + "}",
+                dataType: "json",
+                success: function (result) {
+                    var getResult = result.d;
+                    var len = getResult.length;
+                    for (var i = 0; i < len; i++) {
+                        var a = getResult[i].DescriptionOfGoods;
+                        var b = getResult[i].Qty;
+                        var c = getResult[i].Hsn;
+                        var d = getResult[i].Rate;
+                        var e = getResult[i].Value;
+                        var f = getResult[i].Igst;
+                        var g = getResult[i].Amount;
+                        var h = getResult[i].TotalAmount1;
+                        btnAddCall(a, b, c, d, e, f, g, h);
+                    }
+                },
+                error: function (err) {
+                    //alert(err.statusText)
+                }
+            });
+        }
+        function ViewDetails(QID) {
+            $('#ApplicationForm').show();
+            GetTOCDetails(QID);
+            $.ajax({
+                contentType: "application/json; charset=utf-8",
+                url: "Approval.aspx/GetQuotationDetails",
+                type: "POST",
+                data: "{QID:" + QID + "}",
+                dataType: "json",
+                success: function (result) {
+                    var getResult = result.d;
+                    var len = getResult.length;
+                    if (len > 0) {
+                        $('#txtProjectName').val(getResult[0].ProjectName);
+                        $('#txtFinantialYear').val(getResult[0].FinantialYear);
+                        $('#txtQuotationDate').val(GetProperDate(getResult[0].QDate));
+                        $('#txtCompanyName').val(getResult[0].QToCompanyName);
+                        $('#txtGstinParty').val(getResult[0].QToGSTINNo);
+                        $('#txtContactPerson').val(getResult[0].QToContactPerson);
+                        $('#txtAddress').val(getResult[0].QToAddress);
+                        $('#txtaymentTerms').val(getResult[0].PaymentTerms);
+                        $('#txtValidityOfQuote').val(getResult[0].ValidityOfQuote);
+                        $('#txtPlaceOfSupply').val(getResult[0].PlaceOfSupply);
+                        $('#txtGrandTotal').val(getResult[0].TotalAmountDigit);
+                        $('#txtTotalWords').val(getResult[0].TotalAmountWords);
+                        $('#txtTaxableAmount').val(getResult[0].TaxableAmount);
+                        $('#txtFreight').val(getResult[0].Freight);
+                        $('#txtBankName').val(getResult[0].BankName);
+                        $('#txtBranchName').val(getResult[0].BranchName);
+                        $('#txtBankAccountNo').val(getResult[0].BankAccNo);
+                        $('#txtBranchIfsc').val(getResult[0].BankBranchIFSC);
+                        $('#txtSignatureDate').val(GetProperDate(getResult[0].SignatureDate));
+                        $('#txtDescriptionOdGoods').val(getResult[0].DescriptionOfGoods);
+                        $('#txtQty').val(getResult[0].Quantity);
+                        $('#txtHsn').val(getResult[0].HsnCode);
+                        $('#txtRate').val(getResult[0].Rate);
+                        $('#txtValue').val(getResult[0].Value);
+                        $('#txtIgst').val(getResult[0].Igst);
+                        $('#txtAmount').val(getResult[0].Amount);
+                        $('#txtTotalAmount1').val(getResult[0].TotalAmount1);
+                    }
+                },
+                error: function (err) {
+                    alert('No Data Available');
+                }
+            });
+        }
+        function HideDetails() {
+            $('#ApplicationForm').hide();
+        }
+        //function GetProperDate(DateStr) {
+        //            if (DateStr != null && DateStr != undefined && DateStr != "") {
+        //                var dateString = DateStr.substr(6);
+        //                var currentTime = new Date(parseInt(dateString));
+        //                var month = currentTime.getMonth() + 1;
+        //                var day = currentTime.getDate();
+        //                var year = currentTime.getFullYear();
+        //                var date = ('0' + month).slice(-2) + "/" + day + "/" + year;
+        //                return date;
+        //            }
+        //        }
+        function GetItemDetails(ItemID, ItemName) {
+            var element = "";
+            $.ajax({
+                contentType: "application/json; charset=utf-8",
+                url: "Reports.aspx/GetItemDetails",
+                type: "POST",
+                data: "{ItemID:" + ItemID + ",ItemName:'" + ItemName + "'}",
+                dataType: "json",
+                success: function (result) {
+                    var getResult = result.d;
+                    var len = getResult.length;
+                    $('#CityTableId').empty();
+                    $('#itemTable').show();
+                    $('#QuotationTable').hide();
+                    $('#RequisitionTable').hide();
+                    $('#ExecutionTable').hide();
+                    $('#dvdQuotation').hide();
+                    $('#dvdExecution').hide();
+                    $('#dvdrequisition').hide();
+                    $('#dvdItems').show();
+                    $('#tblApprove').empty();
+                    element = element + '<thead class="cf"><tr class="bgblue-Over">';
+                    element = element + '<th>Item Name</th>';
+                    element = element + '<th>Category</th>';
+                    element = element + '<th>Gst Applicable</th>';
+                    element = element + '<th>HSN</th>';
+                    element = element + '<th>SKU</th>';
+                    element = element + '<th>PU</th>';
+                    element = element + '</tr></thead><tbody>';
+                    if (len == 0) {
+                        element = element + '<tr>';
+                        element = element + '<td>No Data Available</td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '</tr>';
+                    }
+                    for (var i = 0; i < len; i++) {
+                        element = element + '<tr>';
+                        element = element + '<td>' + getResult[i].ItemName + '</td>';
+                        element = element + '<td>' + getResult[i].CategoryName + '</td>';
+                        if (getResult[i].GstApplicable == "1") {
+                            element = element + '<td>Yes</td>';
+                        }
+                        else {
+                            element = element + '<td>No</td>';
+                        }
+                        element = element + '<td>' + getResult[i].HsnCode + '</td>';
+                        element = element + '<td>' + getResult[i].SKU + '</td>';
+                        element = element + '<td>' + getResult[i].PU + '</td>';
+                        element = element + '</tr>';
+                    }
+                    element = element + '</tbody>';
+                    $("#CityTableId").append(element);
+                    $('#CityTableId').dataTable({
+                        "paging": true,
+                        //"scrollY": 400,
+                        "destroy": true,
+                        "pagingType": "simple_numbers"[{
+                            style: 'Margin-left:1%'
+                        }]
+                    });
+                    $('.dataTables_length').addClass('bs-select');
+                },
+                error: function (err) {
+                    // alert(err.statusText)
+                }
+            });
+        }
+        function GetExecutionDetails(ExecutionId) {
+            var element = "";
+            var Counter = 1;
+            $.ajax({
+                contentType: "application/json; charset=utf-8",
+                url: "Reports.aspx/GetExecutionDetails",
+                type: "POST",
+                data: "{ExecutionId:" + ExecutionId + "}",
+                dataType: "json",
+                success: function (result) {
+                    var getResult = result.d;
+                    var len = getResult.length;
+                    $('#ExecutionTableId').empty();
+                    $('#itemTable').hide();
+                    $('#QuotationTable').hide();
+                    $('#RequisitionTable').hide();
+                    $('#ExecutionTable').show();
+                    $('#dvdQuotation').hide();
+                    $('#dvdExecution').show();
+                    $('#dvdrequisition').hide();
+                    $('#dvdItems').hide();
+                    $('#tblApprove').empty();
+                    element = element + '<thead class="cf"><tr class="bgblue-Over">';
+                    element = element + '<th>Document Number</th>';
+                    element = element + '<th>Division</th>';
+                    element = element + '<th>Version Nember</th>';
+                    element = element + '<th>Supplier Name</th>';
+                    element = element + '<th>Creation Date</th>';
+                    element = element + '<th>Created By</th>';
+                    element = element + '</tr></thead><tbody>';
+                    if (len == 0) {
+                        element = element + '<tr>';
+                        element = element + '<td>No Data Available</td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '<td></td>';
+                        element = element + '</tr>';
+                    }
+                    for (var i = 0; i < len; i++) {
+                        element = element + '<tr>';
+                        element = element + '<td>' + getResult[i].DocumentNumber + '</td>';
+                        element = element + '<td>' + getResult[i].Division + '</td>';
+                        element = element + '<td>' + getResult[i].VersionNember + '</td>';
+                        element = element + '<td>' + getResult[i].SupplierName + '</td>';
+                        element = element + '<td>' + GetProperDate(getResult[i].CreatedDate) + '</td>';
+                        element = element + '<td>' + getResult[i].CreatedBy + '</td>';
+                        element = element + '</tr>';
+                    }
+                    element = element + '</tbody>';
+                    $("#ExecutionTableId").append(element);
+                    $('#ExecutionTableId').dataTable({
+                        "paging": true,
+                        //"scrollY": 400,
+                        "destroy": true,
+                        "pagingType": "simple_numbers"[{
+                            style: 'Margin-left:1%'
+                        }]
+                    });
+                    $('.dataTables_length').addClass('bs-select');
+                },
+                error: function (err) {
+                    // alert(err.statusText)
+                }
+            });
+        }
+    </script>
+</asp:Content>
