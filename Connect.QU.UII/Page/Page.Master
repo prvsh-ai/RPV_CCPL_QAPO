@@ -31,20 +31,22 @@
             <header class="main-header">
                 <!-- Logo -->
                 <%--<a href="index.html" class="logo">--%>
-                <a href="CompanyDetails.aspx" class="logo">
+                <a href="" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span class="logo-mini"><b>QU</b></span>
                     <!-- logo for regular state and mobile devices -->
-                    <span class="logo-lg"><b>Enhanced </b>System</span>
+                    <span class="logo-lg">  <img src="../images/Connectlogo.JPG" width="45px" alt="Logo" /><b>Enhanced </b>System</span>
                 </a>
                 <!-- Sidebar toggle button-->
                 <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button"><span class="sr-only">Toggle navigation</span> </a>
                 <!-- Header Navbar: style can be found in header.less -->
                 <nav class="navbar navbar-static-top" role="navigation">
-                    <div class="col-md-12 col-md-header">
-                        <%--<a href="../Redirect.aspx" class="logo">--%>
-                        <a href="CompanyDetails.aspx" class="logo">
-<%--                            <img src="../images/Connectlogo.JPG" width="115" alt="Logo" />--%>
+
+                    <div class="">
+
+
+<%--                         <div class="col-md-1">
+                     <a href="CompanyDetails.aspx" class="logo">
 
                             <img src="../images/Connectlogo.JPG" width="80" alt="Logo" /> 
 
@@ -54,6 +56,17 @@
                             <!-- logo for regular state and mobile devices -->
                             <span class="logo-lg"><b>CCPL</b>System</span>
                         </a>
+
+                             </div>--%>
+
+                    <div class="col-md-12 col-md-header">
+                    <%--    <a href="CompanyDetails.aspx" class="logo">
+                            <img src="../images/Connectlogo.JPG" width="80" alt="Logo" /> 
+                            <!-- mini logo for sidebar mini 50x50 pixels -->
+                            <span class="logo-mini"><b>Connect</b></span>
+                            <!-- logo for regular state and mobile devices -->
+                            <span class="logo-lg"><b>CCPL</b>System</span>
+                        </a>--%>
                         <!-- Navbar Right Menu -->
                         <div class="navbar-custom-menu">
                             <ul class="nav navbar-nav">
@@ -81,6 +94,11 @@
                             </ul>
                         </div>
                     </div>
+
+
+                        </div>
+
+
                 </nav>
             </header>
             <!-- Left side column. contains the logo and sidebar -->

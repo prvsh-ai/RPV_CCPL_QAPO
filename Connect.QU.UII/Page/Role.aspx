@@ -16,7 +16,7 @@
                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                     <div class="box box-solid">
                         <div class="box-body">
-                            
+
                             <div class="form-horizontal">
                                 <div class="form-group">
                                     <label class="control-label col-sm-2" for="txtRoleName">Role Name</label>
@@ -137,6 +137,26 @@
                     </div>
                 </div>
             </div>
+            <br />
+
+            <%--            new role fun--%>
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                    <div class="box box-solid">
+                        <div class="box-body">
+                         <table id="RoleTableIdNew" class="table table-striped cf">
+                            </table>
+                        
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <%--            new role fun--%>
+
             <div id="RoleModal" class="modal fade" role="dialog">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -309,6 +329,12 @@
 
             var data = {};
             GetRoleDetails(0, "");
+
+            //new role fun
+            GetRoleDetailsNew(0, "");
+
+            //new role fun
+
             $("#btnSave").click(function () {
                 if ($('#txtRoleName').val().trim() != '') {
                     data.Mode = 1;
@@ -351,6 +377,48 @@
                 }
             });
         });
+
+        //new role fun
+
+        function GetRoleDetailsNew(RoleId, RoleName) {
+            var element = "";
+            $.ajax({
+                contentType: "application/json; charset=utf-8",
+                url: "Role.aspx/GetRoleUserDetails",
+                type: "POST",
+                data: "{RoleId:" + RoleId + ",RoleName:'" + RoleName + "'}",
+                dataType: "json",
+                success: function (result) {
+                    var getResult = result.d;
+                    var len = getResult.length;
+                    $("#RoleTableIdNew").empty();
+                    element = element + '<thead class="cf"><tr class="bgblue-Over">';
+                    element = element + '<th>Role Name</th>';
+                    element = element + '<th>Action</th>';
+                    element = element + '</tr></thead><tbody>';
+                    if (len == 0) {
+                        element = element + '<tr>';
+                        element = element + '<td>No Data Available</td>';
+                        element = element + '<td></td>';
+                        element = element + '</tr>';
+                    }
+                    for (var i = 0; i < len; i++) {
+                        element = element + '<tr>';
+                        element = element + '<td>' + getResult[i].RoleName + '</td>';
+                        element = element + '<td><a href="#"><span class="label label-warning" onclick="GetRoleDetailsForUpdate(' + getResult[i].RoleId + ',\'' + getResult[i].RoleName + '\',' + getResult[i].RegisterPage + ',' + getResult[i].ReportsPage + ',' + getResult[i].RolePage + ',' + getResult[i].ItemPage + ',' + getResult[i].CompanyPage + ',' + getResult[i].CategoryPage + ',' + getResult[i].QuotationApprovalPage + ',' + getResult[i].QuotationPage + ',' + getResult[i].RequisitionPage + ',' + getResult[i].ExecutionPage + ',' + getResult[i].ItemApprovalPage + '); return false;" data-toggle="modal" data-target="#RoleModal"><i class="fa fa-file-text"  aria-hidden="true"></i> Edit </span></a></td>';
+                        element = element + '</tr>';
+                    }
+                    element = element + '</tbody>';
+                    $("#RoleTableIdNew").append(element);
+                },
+                error: function (err) {
+                    // alert(err.statusText)
+                }
+            });
+        }
+
+        //new role fun
+
         function GetRoleDetails(RoleId, RoleName) {
             var element = "";
             $.ajax({
@@ -387,6 +455,7 @@
                 }
             });
         }
+
         function GetRoleDetailsForUpdate(RoleId, RoleName, RegisterPage, ReportsPage, RolePage, ItemPage, CompanyPage, CategoryPage, QuotationApprovalPage, QuotationPage, RequisitionPage, ExecutionPage, ItemApprovalPage) {
             $('#hidRoleId').val(RoleId);
             $('#txtRoleNameUpdate').val(RoleName);

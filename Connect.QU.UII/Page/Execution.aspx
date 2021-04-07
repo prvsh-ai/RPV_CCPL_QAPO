@@ -26,7 +26,7 @@
                                         <input id="txtDivision" class="form-control" type="text" />
                                     </div>
                                     <div class="form-group col-lg-4 col-sm-4 col-xs-4 col-md-4">
-                                        <label for="txtCreationDate">Creation Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                        <label for="txtCreationDate">Creation Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                                         <div class='input-group date AppFormdatetimepicker' id='datetimepicker1'>
                                             <input type='text' class="form-control" id="txtCreationDate" />
                                             <span class="input-group-addon">
@@ -47,7 +47,7 @@
                                         <input id="txtSupplierName" class="form-control" type="text" />
                                     </div>
                                     <div class="form-group col-lg-4 col-sm-4 col-xs-4 col-md-4">
-                                        <label for="txtModificationDate">Modification Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                        <label for="txtModificationDate">Modification Date&nbsp;&nbsp;&nbsp;</label>
                                         <div class='input-group date AppFormdatetimepicker' id='datetimepicker2'>
                                             <input type='text' class="form-control" id="txtModificationDate" />
                                             <span class="input-group-addon">

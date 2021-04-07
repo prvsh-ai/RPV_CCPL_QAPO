@@ -450,7 +450,7 @@ namespace Connect.QU.DAL
                     {
                         CL.ItemApprovalPage = Convert.ToBoolean(sdr["ItemApprovalPage"]);
                     }
-                  
+
                     Entities.Add(CL);
                 }
             }
@@ -541,7 +541,7 @@ namespace Connect.QU.DAL
                     CL.CategoryName = sdr["CategoryName"].ToString();
                     CL.Code = sdr["Code"].ToString();
                     CL.DefaultSKU = Convert.ToInt32(sdr["DefaultSKU"]);
-                   // CL.DefaultPU = sdr["DefaultPU"].ToString();
+                    // CL.DefaultPU = sdr["DefaultPU"].ToString();
                     CL.Brand = Convert.ToBoolean(sdr["Brand"].ToString());
                     CL.Type = Convert.ToBoolean(sdr["Type"].ToString());
                     CL.Name = Convert.ToBoolean(sdr["Name"].ToString());
@@ -1735,7 +1735,7 @@ namespace Connect.QU.DAL
                 myCmd.Parameters.AddWithValue("@CategoryName", cnt.CategoryName);
                 myCmd.Parameters.AddWithValue("@Code", cnt.Code);
                 myCmd.Parameters.AddWithValue("@DefaultSKU", cnt.DefaultSKU);
-               // myCmd.Parameters.AddWithValue("@DefaultPU", cnt.DefaultPU);
+                // myCmd.Parameters.AddWithValue("@DefaultPU", cnt.DefaultPU);
                 myCmd.Parameters.AddWithValue("@Brand", cnt.Brand);
                 myCmd.Parameters.AddWithValue("@Type", cnt.Type);
                 myCmd.Parameters.AddWithValue("@Name", cnt.Name);
@@ -2079,7 +2079,27 @@ namespace Connect.QU.DAL
                 myCmd.Parameters.AddWithValue("@ApplicationType", cnt.ApplicationType);
                 myCmd.Parameters.AddWithValue("@ApplicationReference", cnt.ApplicationReference);
                 myCmd.Parameters.AddWithValue("@QType", cnt.QType);
-                myCmd.Parameters.AddWithValue("@QNo", cnt.QNo);
+                //                myCmd.Parameters.AddWithValue("@QNo", cnt.QNo);
+                if (cnt.Mode == "2" && cnt.Approved == true)
+                {
+                    string PreviousQNo = cnt.QNo;
+
+                    if (PreviousQNo.Contains("R"))
+                    {
+                        string count = PreviousQNo.Split('/')[3].Split('R')[1];
+                        int x = Convert.ToInt32(count) + 1;
+                        myCmd.Parameters.AddWithValue("@QNo", (PreviousQNo.Split('/')[0] + '/' + PreviousQNo.Split('/')[1] + '/' + PreviousQNo.Split('/')[2] + "/R" + x));
+                    }
+                    else
+                    {
+                        myCmd.Parameters.AddWithValue("@QNo", (cnt.QNo + "/R1"));
+                    }
+                }
+                else
+                {
+                    myCmd.Parameters.AddWithValue("@QNo", cnt.QNo);
+
+                }
                 myCmd.Parameters.AddWithValue("@QDate", cnt.QDate);
                 myCmd.Parameters.AddWithValue("@QFromCompanyName", cnt.QFromCompanyName);
                 myCmd.Parameters.AddWithValue("@QFromAddress", cnt.QFromAddress);
