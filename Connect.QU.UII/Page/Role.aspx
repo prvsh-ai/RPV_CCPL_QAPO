@@ -131,8 +131,7 @@
                             </div>
 
                             <br />
-                            <table id="RoleTableId" class="table table-striped cf">
-                            </table>
+                           
                         </div>
                     </div>
                 </div>
@@ -144,9 +143,9 @@
                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                     <div class="box box-solid">
                         <div class="box-body">
-                         <table id="RoleTableIdNew" class="table table-striped cf">
+                            <table id="RoleTableIdNew" class="table table-striped cf">
                             </table>
-                        
+
                         </div>
                     </div>
                 </div>
@@ -157,131 +156,6 @@
 
             <%--            new role fun--%>
 
-            <div id="RoleModal" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Role Details Update</h4>
-                        </div>
-                        <div class="modal-body" style="padding: 1px;">
-                            <div class="box box-solid">
-                                <div class="box-body">
-
-                                    <div class="form-horizontal">
-                                        <div class="form-group">
-                                            <label class="control-label col-sm-2" for="txtRoleNameUpdate">Role Name</label>
-                                            <div class="col-sm-10">
-                                                <input id="txtRoleNameUpdate" class="form-control" type="text" />
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group form-check-inline">
-                                            <div class="col-sm-offset-2 col-sm-10">
-                                                <input type="checkbox" class="form-check-input" name="ItemApproval" value="ItemApproval" id="chkItemApprovalUpdate" />
-                                                <label class="form-check-label" for="chkItemApprovalUpdate">
-                                                    Item Approval Page
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="form-group form-check-inline">
-                                            <div class="col-sm-offset-2 col-sm-10">
-                                                <input type="checkbox" class="form-check-input" name="Execution" value="Execution" id="chkExecutionUpdate" />
-                                                <label class="form-check-label" for="chkExecutionUpdate">
-                                                    Execution Page
-                                                </label>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="form-group form-check-inline">
-                                            <div class="col-sm-offset-2 col-sm-10">
-                                                <input type="checkbox" class="form-check-input" name="Requisition" value="Requisition" id="chkRequisitionUpdate" />
-                                                <label class="form-check-label" for="chkRequisitionUpdate">
-                                                    Requisition Page
-                                                </label>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="form-group form-check-inline">
-                                            <div class="col-sm-offset-2 col-sm-10">
-                                                <input type="checkbox" class="form-check-input" name="Quotation" value="Quotation" id="chkQuotationUpdate" />
-                                                <label class="form-check-label" for="chkQuotationUpdate">
-                                                    Quotation Page
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="form-group form-check-inline">
-                                            <div class="col-sm-offset-2 col-sm-10">
-                                                <input type="checkbox" class="form-check-input" name="Approval" value="Approval" id="chkApprovalUpdate" />
-                                                <label class="form-check-label" for="chkApprovalUpdate">
-                                                    Quotation Approval Page
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group form-check-inline">
-                                            <div class="col-sm-offset-2 col-sm-10">
-                                                <input type="checkbox" class="form-check-input" name="Category" id="chkCategoryUpdate" value="Category" />
-                                                <label class="form-check-label" for="chkCategoryUpdate">
-                                                    Category Page
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="form-group form-check-inline">
-                                            <div class="col-sm-offset-2 col-sm-10">
-                                                <input type="checkbox" class="form-check-input" name="Company" value="Company" id="chkCompanyUpdate" />
-                                                <label class="form-check-label" for="chkCompanyUpdate">
-                                                    Company Page
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="form-group form-check-inline">
-                                            <div class="col-sm-offset-2 col-sm-10">
-                                                <input type="checkbox" class="form-check-input" name="Item" value="Item" id="chkItemUpdate" />
-                                                <label class="form-check-label" for="chkItemUpdate">
-                                                    Item Page
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group form-check-inline">
-                                            <div class="col-sm-offset-2 col-sm-10">
-                                                <input type="checkbox" class="form-check-input" name="Role" value="Name" id="chkRoleUpdate" />
-                                                <label class="form-check-label" for="chkRoleUpdate">
-                                                    Role Page                                   
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="form-group form-check-inline">
-                                            <div class="col-sm-offset-2 col-sm-10">
-                                                <input type="checkbox" class="form-check-input" name="Reports" value="Reports" id="chkReportsUpdate" />
-                                                <label class="form-check-label" for="chkReportsUpdate">
-                                                    Reports Page
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="form-group form-check-inline">
-                                            <div class="col-sm-offset-2 col-sm-10">
-                                                <input type="checkbox" class="form-check-input" name="Register" id="chkRegisterUpdate" value="Register" />
-                                                <label class="form-check-label" for="chkRegisterUpdate">
-                                                    Register Page
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <input id="btnUpdate" type="button" value="Update" class="btn btn-success" style="float: left;" />
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
         </section>
         <div id="pageloaddiv" class="pageloaddiv" style="display: none;">
         </div>
@@ -310,6 +184,11 @@
         });
         $(document).ready(function () {
 
+
+
+
+
+
             $('input:checkbox').change(function () {
                 if ($('#chkQuotation').prop('checked')) {
                     alert("Quotation page can not be associated with other pages");
@@ -318,25 +197,32 @@
                 }
             });
 
-            $('#chkQuotationUpdate').change(function () {
-                if ($('#chkQuotationUpdate').prop('checked')) {
-                    alert("Quotation page can not be associated with other pages");
-                    $('input:checkbox').removeAttr('checked');
-                    $('#chkQuotationUpdate').prop('checked', true);
-                }
-            });
-
-
             var data = {};
-            GetRoleDetails(0, "");
+            //GetRoleDetails(0, "");
 
             //new role fun
             GetRoleDetailsNew(0, "");
-
+            $("span").off('click');
             //new role fun
 
             $("#btnSave").click(function () {
                 if ($('#txtRoleName').val().trim() != '') {
+
+
+
+                    if (
+              $("#chkRegister").prop("checked") ||
+              $("#chkReports").prop("checked") ||
+              $("#chkRole").prop("checked") ||
+              $("#chkItem").prop("checked") ||
+              $("#chkCompany").prop("checked") ||
+              $("#chkCategory").prop("checked") ||
+              $("#chkQuotation").prop("checked") ||
+              $("#chkRequisition").prop("checked") ||
+              $("#chkExecution").prop("checked") ||
+              $("#chkItemApproval").prop("checked")
+              ) {
+
                     data.Mode = 1;
                     data.RoleId = 0;
                     data.RoleName = $('#txtRoleName').val();
@@ -353,29 +239,18 @@
                     data.ItemApprovalPage = $('#chkItemApproval').prop("checked");
 
                     InsertUpdateRoleDetails(data);
-                }
-            });
-            $("#btnUpdate").click(function () {
-                if ($('#txtRoleNameUpdate').val().trim() != '') {
-                    debugger;
-                    data.Mode = 2;
-                    data.RoleId = $('#hidRoleId').val();
-                    data.RoleName = $('#txtRoleNameUpdate').val();
-                    data.RegisterPage = $('#chkRegisterUpdate').prop("checked");
-                    data.ReportsPage = $('#chkReportsUpdate').prop("checked");
-                    data.RolePage = $('#chkRoleUpdate').prop("checked");
-                    data.ItemPage = $('#chkItemUpdate').prop("checked");
-                    data.CompanyPage = $('#chkCompanyUpdate').prop("checked");
-                    data.CategoryPage = $('#chkCategoryUpdate').prop("checked");
-                    data.QuotationApprovalPage = $('#chkApprovalUpdate').prop("checked");
-                    data.QuotationPage = $('#chkQuotationUpdate').prop("checked");
-                    data.RequisitionPage = $('#chkRequisitionUpdate').prop("checked");
-                    data.ExecutionPage = $('#chkExecutionUpdate').prop("checked");
-                    data.ItemApprovalPage = $('#chkItemApprovalUpdate').prop("checked");
+                    }
 
-                    InsertUpdateRoleDetails(data);
+                    else
+                    {
+                        alert("Please select any page");
+                        return false;
+                    }
+
+
                 }
             });
+         
         });
 
         //new role fun
@@ -393,7 +268,19 @@
                     var len = getResult.length;
                     $("#RoleTableIdNew").empty();
                     element = element + '<thead class="cf"><tr class="bgblue-Over">';
-                    element = element + '<th>Role Name</th>';
+                    element = element + '<th>Select</th>';
+                    element = element + '<th>Name</th>';
+                    element = element + '<th>Role</th>';
+                    element = element + '<th>Reports</th>';
+                    element = element + '<th>Register</th>';
+                    element = element + '<th>item</th>';
+                    element = element + '<th>Company</th>';
+                    element = element + '<th>Category</th>';
+                    element = element + '<th>Quotation</th>';
+                    element = element + '<th>Quotation Approval</th>';
+                    element = element + '<th>Item Approval</th>';
+                    element = element + '<th>Requisition</th>';
+                    element = element + '<th>Execution</th>';
                     element = element + '<th>Action</th>';
                     element = element + '</tr></thead><tbody>';
                     if (len == 0) {
@@ -403,9 +290,104 @@
                         element = element + '</tr>';
                     }
                     for (var i = 0; i < len; i++) {
-                        element = element + '<tr>';
+                        element = element + '<tr>'; //
+                        element = element + '<td>' + '<input type="checkbox" class="action" onclick="ClickAction(event,' + getResult[i].RoleId + ',' + [i] + ');" value=' + [i] + '  name="Action"   id="chkApprove' + [i] + '" />';
                         element = element + '<td>' + getResult[i].RoleName + '</td>';
-                        element = element + '<td><a href="#"><span class="label label-warning" onclick="GetRoleDetailsForUpdate(' + getResult[i].RoleId + ',\'' + getResult[i].RoleName + '\',' + getResult[i].RegisterPage + ',' + getResult[i].ReportsPage + ',' + getResult[i].RolePage + ',' + getResult[i].ItemPage + ',' + getResult[i].CompanyPage + ',' + getResult[i].CategoryPage + ',' + getResult[i].QuotationApprovalPage + ',' + getResult[i].QuotationPage + ',' + getResult[i].RequisitionPage + ',' + getResult[i].ExecutionPage + ',' + getResult[i].ItemApprovalPage + '); return false;" data-toggle="modal" data-target="#RoleModal"><i class="fa fa-file-text"  aria-hidden="true"></i> Edit </span></a></td>';
+                        if (getResult[i].RolePage) {
+                            element = element + '<td>' + '<input type="checkbox" class="item-list" checked disabled name="Role"  id="chkRole' + [i] + '" />';
+                        }
+                        else {
+                            element = element + '<td>' + '<input type="checkbox" class="item-list" unchecked disabled name="Role"  id="chkRole' + [i] + '" />';
+                        }
+
+                        if (getResult[i].ReportsPage) {
+                            element = element + '<td>' + '<input type="checkbox" class="item-list" checked disabled name="Reports"   id="chkReports' + [i] + '" />';
+                        }
+                        else {
+                            element = element + '<td>' + '<input type="checkbox" class="item-list" unchecked disabled name="Reports"   id="chkReports' + [i] + '" />';
+                        }
+
+                        if (getResult[i].RegisterPage) {
+                            element = element + '<td>' + '<input type="checkbox" class="item-list" checked disabled name="Register" id="chkRegister' + [i] + '" />';
+
+                        }
+                        else {
+                            element = element + '<td>' + '<input type="checkbox" class="item-list" unchecked disabled name="Register" id="chkRegister' + [i] + '" />';
+
+                        }
+
+                        if (getResult[i].ItemPage) {
+                            element = element + '<td>' + '<input type="checkbox" class="item-list" checked disabled name="Item"   id="chkItem' + [i] + '" />';
+
+                        }
+                        else {
+                            element = element + '<td>' + '<input type="checkbox" class="item-list" unchecked disabled name="Item"   id="chkItem' + [i] + '" />';
+
+                        }
+
+                        if (getResult[i].CompanyPage) {
+                            element = element + '<td>' + '<input type="checkbox" class="item-list" checked disabled name="Company"   id="chkCompany' + [i] + '" />';
+
+                        }
+                        else {
+                            element = element + '<td>' + '<input type="checkbox" class="item-list" unchecked disabled name="Company"   id="chkCompany' + [i] + '" />';
+
+                        }
+
+                        if (getResult[i].CategoryPage) {
+                            element = element + '<td>' + '<input type="checkbox" class="item-list" checked disabled name="Category"  id="chkCategory' + [i] + '" />';
+
+                        }
+                        else {
+                            element = element + '<td>' + '<input type="checkbox" class="item-list" unchecked disabled name="Category"  id="chkCategory' + [i] + '" />';
+
+                        }
+
+                        if (getResult[i].QuotationPage) {
+                            element = element + '<td>' + '<input type="checkbox" class="item-list quotation" checked disabled name="Quotation"   id="chkQuotation' + [i] + '" />';
+
+                        }
+                        else {
+                            element = element + '<td>' + '<input type="checkbox" class="item-list quotation" unchecked disabled name="Quotation"   id="chkQuotation' + [i] + '" />';
+
+                        }
+
+                        if (getResult[i].QuotationApprovalPage) {
+                            element = element + '<td>' + '<input type="checkbox" class="item-list" checked disabled name="QuotationApproval"  id="chkQuotationApproval' + [i] + '" />';
+
+                        }
+                        else {
+                            element = element + '<td>' + '<input type="checkbox" class="item-list" unchecked disabled name="QuotationApproval"  id="chkQuotationApproval' + [i] + '" />';
+
+                        }
+
+                        if (getResult[i].RegisterPage) {
+                            element = element + '<td>' + '<input type="checkbox" class="item-list" checked disabled name="ItemApproval"  id="chkItemApproval' + [i] + '" />';
+
+                        }
+                        else {
+                            element = element + '<td>' + '<input type="checkbox" class="item-list" unchecked disabled name="ItemApproval"  id="chkItemApproval' + [i] + '" />';
+
+                        }
+
+                        if (getResult[i].RequisitionPage) {
+                            element = element + '<td>' + '<input type="checkbox" class="item-list" checked disabled name="Requisition"   id="chkRequisition' + [i] + '" />';
+
+                        }
+                        else {
+                            element = element + '<td>' + '<input type="checkbox" class="item-list" unchecked disabled name="Requisition"   id="chkRequisition' + [i] + '" />';
+
+                        }
+
+                        if (getResult[i].ExecutionPage) {
+                            element = element + '<td>' + '<input type="checkbox" class="item-list" checked disabled name="Execution"   id="chkExecution' + [i] + '" />';
+
+                        }
+                        else {
+                            element = element + '<td>' + '<input type="checkbox" class="item-list" unchecked disabled name="Execution"   id="chkExecution' + [i] + '" />';
+
+                        }
+                        element = element + '<td><a href="#"><span id="editButton' + [i] + '"  class="editButton label label-warning" onclick="GetRoleDetailsForUpdateNew(' + getResult[i].RoleId + ',\'' + getResult[i].RoleName + '\',' + [i] + '); return false;"><i class="fa fa-file-text"  aria-hidden="true"></i> Edit </span></a><a href="#"><span class="label label-danger"   onclick="RemoveRole(' + getResult[i].RoleId + ',' + [i] + '); return false;" style="margin-left: 23px;"><i class="fa fa-file-text"  aria-hidden="true"></i>Remove</span></a></td>';
                         element = element + '</tr>';
                     }
                     element = element + '</tbody>';
@@ -417,62 +399,118 @@
             });
         }
 
-        //new role fun
 
-        function GetRoleDetails(RoleId, RoleName) {
-            var element = "";
-            $.ajax({
-                contentType: "application/json; charset=utf-8",
-                url: "Role.aspx/GetRoleUserDetails",
-                type: "POST",
-                data: "{RoleId:" + RoleId + ",RoleName:'" + RoleName + "'}",
-                dataType: "json",
-                success: function (result) {
-                    var getResult = result.d;
-                    var len = getResult.length;
-                    $("#RoleTableId").empty();
-                    element = element + '<thead class="cf"><tr class="bgblue-Over">';
-                    element = element + '<th>Role Name</th>';
-                    element = element + '<th>Action</th>';
-                    element = element + '</tr></thead><tbody>';
-                    if (len == 0) {
-                        element = element + '<tr>';
-                        element = element + '<td>No Data Available</td>';
-                        element = element + '<td></td>';
-                        element = element + '</tr>';
-                    }
-                    for (var i = 0; i < len; i++) {
-                        element = element + '<tr>';
-                        element = element + '<td>' + getResult[i].RoleName + '</td>';
-                        element = element + '<td><a href="#"><span class="label label-warning" onclick="GetRoleDetailsForUpdate(' + getResult[i].RoleId + ',\'' + getResult[i].RoleName + '\',' + getResult[i].RegisterPage + ',' + getResult[i].ReportsPage + ',' + getResult[i].RolePage + ',' + getResult[i].ItemPage + ',' + getResult[i].CompanyPage + ',' + getResult[i].CategoryPage + ',' + getResult[i].QuotationApprovalPage + ',' + getResult[i].QuotationPage + ',' + getResult[i].RequisitionPage + ',' + getResult[i].ExecutionPage + ',' + getResult[i].ItemApprovalPage + '); return false;" data-toggle="modal" data-target="#RoleModal"><i class="fa fa-file-text"  aria-hidden="true"></i> Edit </span></a></td>';
-                        element = element + '</tr>';
-                    }
-                    element = element + '</tbody>';
-                    $("#RoleTableId").append(element);
-                },
-                error: function (err) {
-                    // alert(err.statusText)
+        function ClickAction(evnt, RoleId, Id) {
+
+
+
+            //event.preventDefault();
+            $('.action').prop('checked', false);
+            $(".item-list").attr('disabled', true);
+            $("span").on('click');
+            $("#chkApprove" + Id).prop('checked', true);
+            $("#chkRole" + Id).removeAttr('disabled');
+            $("#chkReports" + Id).removeAttr('disabled');
+            $("#chkRegister" + Id).removeAttr('disabled');
+            $("#chkItem" + Id).removeAttr('disabled');
+            $("#chkCompany" + Id).removeAttr('disabled');
+            $("#chkCategory" + Id).removeAttr('disabled');
+            $("#chkQuotation" + Id).removeAttr('disabled');
+            $("#chkQuotationApproval" + Id).removeAttr('disabled');
+            $("#chkItemApproval" + Id).removeAttr('disabled');
+            $("#chkRequisition" + Id).removeAttr('disabled');
+            $("#chkExecution" + Id).removeAttr('disabled');
+
+        }
+
+
+        //new
+        function GetRoleDetailsForUpdateNew(RoleId, RoleName, id) {
+
+            
+            if ($("#chkApprove" + id).prop("checked")) {
+
+                if (($("#chkQuotation" + id).prop("checked")) && (
+
+
+                    $("#chkRole" + id).prop("checked") ||
+                    $("#chkReports" + id).prop("checked") ||
+                    $("#chkRegister" + id).prop("checked") ||
+                    $("#chkItem" + id).prop("checked") ||
+                    $("#chkCompany" + id).prop("checked") ||
+                    $("#chkCategory" + id).prop("checked") ||
+                    $("#chkQuotationApproval" + id).prop("checked") ||
+                    $("#chkItemApproval" + id).prop("checked") ||
+                    $("#chkRequisition" + id).prop("checked") ||
+                    $("#chkExecution" + id).prop("checked")
+                    )) {
+
+                    alert("Quotation page can not be associated with other pages");
+
+                    $("#chkQuotation" + id).prop('checked', true);
+
+
+                    $("#chkRole" + id).removeAttr('checked');
+                    $("#chkReports" + id).removeAttr('checked');
+                    $("#chkRegister" + id).removeAttr('checked');
+                    $("#chkItem" + id).removeAttr('checked');
+                    $("#chkCompany" + id).removeAttr('checked');
+                    $("#chkCategory" + id).removeAttr('checked');
+                    $("#chkQuotationApproval" + id).removeAttr('checked');
+                    $("#chkItemApproval" + id).removeAttr('checked');
+                    $("#chkRequisition" + id).removeAttr('checked');
+                    $("#chkExecution" + id).removeAttr('checked');
+
+                    return false;
                 }
-            });
+
+
+                if (
+                   $("#chkRole" + id).prop("checked") ||
+                   $("#chkReports" + id).prop("checked") ||
+                   $("#chkRegister" + id).prop("checked") ||
+                   $("#chkItem" + id).prop("checked") ||
+                   $("#chkCompany" + id).prop("checked") ||
+                   $("#chkCategory" + id).prop("checked") ||
+                   $("#chkQuotationApproval" + id).prop("checked") ||
+                   $("#chkItemApproval" + id).prop("checked") ||
+                   $("#chkRequisition" + id).prop("checked") ||
+                   $("#chkExecution" + id).prop("checked")
+                   ) {
+                    var data1 = {};
+                    data1.Mode = 2;
+                    data1.RoleId = RoleId;
+                    data1.RoleName = RoleName;
+                    data1.RegisterPage = $("#chkRegister" + id).prop("checked");
+                    data1.ReportsPage = $("#chkReports" + id).prop("checked");
+                    data1.RolePage = $("#chkRole" + id).prop("checked");
+                    data1.ItemPage = $("#chkItem" + id).prop("checked");
+                    data1.CompanyPage = $("#chkCompany" + id).prop("checked");
+                    data1.CategoryPage = $("#chkCategory" + id).prop("checked");
+                    data1.QuotationApprovalPage = $("#chkQuotationApproval" + id).prop("checked");
+                    data1.QuotationPage = $("#chkQuotation" + id).prop("checked");
+                    data1.RequisitionPage = $("#chkRequisition" + id).prop("checked");
+                    data1.ExecutionPage = $("#chkExecution" + id).prop("checked");
+                    data1.ItemApprovalPage = $("#chkItemApproval" + id).prop("checked");
+
+                    InsertUpdateRoleDetails(data1);
+                    //ends
+                }
+                else {
+                    alert("Please select any page");
+                    return false;
+                }
+            }
+
+            else {
+
+                return false;
+            }
+
         }
 
-        function GetRoleDetailsForUpdate(RoleId, RoleName, RegisterPage, ReportsPage, RolePage, ItemPage, CompanyPage, CategoryPage, QuotationApprovalPage, QuotationPage, RequisitionPage, ExecutionPage, ItemApprovalPage) {
-            $('#hidRoleId').val(RoleId);
-            $('#txtRoleNameUpdate').val(RoleName);
 
-            $('#chkRegisterUpdate').prop('checked', RegisterPage);
-            $('#chkReportsUpdate').prop('checked', ReportsPage);
-            $('#chkRoleUpdate').prop('checked', RolePage);
-            $('#chkItemUpdate').prop('checked', ItemPage);
-            $('#chkCompanyUpdate').prop('checked', CompanyPage);
-            $('#chkCategoryUpdate').prop('checked', CategoryPage);
-            $('#chkApprovalUpdate').prop('checked', QuotationApprovalPage);
-            $('#chkQuotationUpdate').prop('checked', QuotationPage);
-            $('#chkRequisitionUpdate').prop('checked', RequisitionPage);
-            $('#chkExecutionUpdate').prop('checked', ExecutionPage);
-            $('#chkItemApprovalUpdate').prop('checked', ItemApprovalPage);
 
-        }
         function InsertUpdateRoleDetails(data) {
             $.ajax({
                 contentType: "application/json; charset=utf-8",
@@ -484,8 +522,11 @@
                     var getResult = result.d;
                     if (getResult != "0") {
                         alert(getResult);
-                        GetRoleDetails(0, "");
+                        GetRoleDetailsNew(0, "");
                         ClearInputBoxValues();
+                        $(".item-list").attr('disabled', true);
+                        $(".action").attr('disabled', true);
+                        $('.action').prop('checked', false);
                     }
                     else {
                         alert("There is an Error");
@@ -503,7 +544,51 @@
             $('select').each(function () {
                 $(this).val('0');
             });
+            $('input[type=checkbox]').each(function () {
+                $(this).prop('checked', false);
+            });
+
+
+
         }
 
+        function RemoveRole(RoleId,id) {
+
+
+            if ($("#chkApprove" + id).prop("checked")) {
+
+                var conf = confirm("Are you sure you want to Remove Role Details ?")
+                if (!conf) {
+                    return false;
+                }
+                $.ajax({
+                    contentType: "application/json; charset=utf-8",
+                    url: "Role.aspx/RemoveRoleDetails",
+                    type: "POST",
+                    data: "{RoleId:" + RoleId + "}",
+                    dataType: "json",
+                    success: function (result) {
+                        var getResult = result.d;
+                        if (getResult != "0") {
+                            alert(getResult);
+                            GetRoleDetailsNew(0, "");
+                            $(".item-list").attr('disabled', true);
+                            $(".action").attr('disabled', true);
+                            $('.action').prop('checked', false);
+                        }
+                        else {
+                            alert("There is an Error");
+                        }
+                    },
+                    error: function (err) {
+                        // alert(err.statusText)
+                    }
+                });
+            }
+            else {
+                return false;
+            }
+
+        }
     </script>
 </asp:Content>

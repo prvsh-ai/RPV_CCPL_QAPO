@@ -26,6 +26,10 @@ namespace Connect.QU.UII.Page
         {
             return new QU.BAL.CommonBAL().SaveUpdateRoleUserDetails(cnt);
         }
-
+        [WebMethod]
+        public static string RemoveRoleDetails(int RoleId)
+        {
+            return new QU.BAL.CommonBAL().RemoveDetails(RoleId, "Role");
+        }
     }
 }
