@@ -398,6 +398,9 @@
         </div>
     </div>
     <input id="hidHotelId" type="hidden" />
+    <input id="hidApproved" type="hidden" />
+    <input id="hidRevisionCount" type="hidden" />
+
     <div class="container" style="width: 70%;">
         <div class="container" id="DivPage2" style="display: block;">
         </div>
@@ -819,11 +822,15 @@
                 data.SignatureDate = $('#txtSignatureDate').val();
                 data.CurrencyId = $('#ddlCurrency option:selected').val();
                 data.LocationId = $('#ddlCompanyLocationId option:selected').val();
+                data.Approved = $('#hidApproved').val();
+                data.RevisionCount = $('#hidRevisionCount').val();
                 SaveUpdateQuotationDetails(data);
+                GetQuotationDetails(0);
+
             });
             $("#btnClear").click(function () {
                 ClearInputBoxValues();
-                GetQuotationDetailsOnQuotationType(1);
+                 GetQuotationDetailsOnQuotationType(1);
             });
             $('#ddlQuotationType').change(function () {
                 if ($('#ddlQuotationType').val() == 1) {
@@ -1036,6 +1043,8 @@
                     if (getResult != "0") {
                         alert(getResult);
                         ClearInputBoxValues();
+
+                        //
                     }
                     else {
                         alert("There is an Error");
@@ -1112,14 +1121,17 @@
 
                         if (!getResult[i].Approved) {
 
+
+
+
                             element = element + '<td>' + '<input type="checkbox" disabled name="Approve"   id="chkApprove" />';
-//                            element = element + '<td><a href="#"><span class="label label-warning" onclick="GetQuotationDetailsForUpdate(' + getResult[i].QID + ',' + getResult[i].ApplicationType + ',\'' + getResult[i].ApplicationReference + '\',' + getResult[i].QType + ',\'' + getResult[i].QNo + '\',\'' + GetProperDate(getResult[i].QDate) + '\',\'' + getResult[i].ProjectName + '\',\'' + getResult[i].FinantialYear + '\',\'' + getResult[i].QToCompanyName + '\',\'' + getResult[i].QToGSTINNo + '\',\'' + getResult[i].QToContactPerson + '\',\'' + getResult[i].QToEmailID + '\',\'' + getResult[i].QToAddress + '\',\'' + getResult[i].PaymentTerms + '\',\'' + getResult[i].ValidityOfQuote + '\',\'' + getResult[i].PlaceOfSupply + '\',\'' + getResult[i].TotalAmountDigit + '\',\'' + getResult[i].TotalAmountWords + '\',\'' + getResult[i].TaxableAmount + '\',\'' + getResult[i].IgstAmount + '\',\'' + getResult[i].SgstAmount + '\',\'' + getResult[i].CgstAmount + '\',\'' + getResult[i].Freight + '\',\'' + getResult[i].BankName + '\',\'' + getResult[i].BranchName + '\',\'' + getResult[i].BankBranchIFSC + '\',\'' + getResult[i].BankAccountNo + '\',\'' + getResult[i].TermsAndCondition + '\',\'' + getResult[i].Note1 + '\',\'' + getResult[i].Note2 + '\' ,\'' + GetProperDate(getResult[i].SignatureDate) + '\',' + getResult[i].CurrencyId + ',' + getResult[i].LocationId + ',' + getResult[i].QToCompanyID + ',\'' + getResult[i].QFromGSTINNo + '\'); return false;" ><i class="fa fa-file-text"  aria-hidden="true"></i> Edit </span></a></td>'
-                            element = element + '<td><a href="#"><span class="label label-warning" onclick="GetQuotationDetailsForUpdate(' + getResult[i].QID + ',' + getResult[i].ApplicationType + ',\'' + getResult[i].ApplicationReference + '\',' + getResult[i].QType + ',\'' + getResult[i].QNo + '\',\'' + GetProperDate(getResult[i].QDate) + '\',\'' + getResult[i].ProjectName + '\',\'' + getResult[i].FinantialYear + '\',\'' + getResult[i].QToCompanyName + '\',\'' + getResult[i].QToGSTINNo + '\',\'' + getResult[i].QToContactPerson + '\',\'' + getResult[i].QToEmailID + '\',\'' + getResult[i].QToAddress + '\',\'' + getResult[i].PaymentTerms + '\',\'' + getResult[i].ValidityOfQuote + '\',\'' + getResult[i].PlaceOfSupply + '\',\'' + getResult[i].TotalAmountDigit + '\',\'' + getResult[i].TotalAmountWords + '\',\'' + getResult[i].TaxableAmount + '\',\'' + getResult[i].IgstAmount + '\',\'' + getResult[i].SgstAmount + '\',\'' + getResult[i].CgstAmount + '\',\'' + getResult[i].Freight + '\',\'' + getResult[i].BankName + '\',\'' + getResult[i].BranchName + '\',\'' + getResult[i].BankBranchIFSC + '\',\'' + getResult[i].BankAccountNo + '\',\'' + getResult[i].TermsAndCondition + '\',\'' + getResult[i].Note1 + '\',\'' + getResult[i].Note2 + '\' ,\'' + GetProperDate(getResult[i].SignatureDate) + '\',' + getResult[i].CurrencyId + ',' + getResult[i].LocationId + ',' + getResult[i].QToCompanyID + ',\'' + getResult[i].QFromGSTINNo + '\'); return false;" ><i class="fa fa-file-text"  aria-hidden="true"></i> Edit </span></a></td>'
+                            //                            element = element + '<td><a href="#"><span class="label label-warning" onclick="GetQuotationDetailsForUpdate(' + getResult[i].QID + ',' + getResult[i].ApplicationType + ',\'' + getResult[i].ApplicationReference + '\',' + getResult[i].QType + ',\'' + getResult[i].QNo + '\',\'' + GetProperDate(getResult[i].QDate) + '\',\'' + getResult[i].ProjectName + '\',\'' + getResult[i].FinantialYear + '\',\'' + getResult[i].QToCompanyName + '\',\'' + getResult[i].QToGSTINNo + '\',\'' + getResult[i].QToContactPerson + '\',\'' + getResult[i].QToEmailID + '\',\'' + getResult[i].QToAddress + '\',\'' + getResult[i].PaymentTerms + '\',\'' + getResult[i].ValidityOfQuote + '\',\'' + getResult[i].PlaceOfSupply + '\',\'' + getResult[i].TotalAmountDigit + '\',\'' + getResult[i].TotalAmountWords + '\',\'' + getResult[i].TaxableAmount + '\',\'' + getResult[i].IgstAmount + '\',\'' + getResult[i].SgstAmount + '\',\'' + getResult[i].CgstAmount + '\',\'' + getResult[i].Freight + '\',\'' + getResult[i].BankName + '\',\'' + getResult[i].BranchName + '\',\'' + getResult[i].BankBranchIFSC + '\',\'' + getResult[i].BankAccountNo + '\',\'' + getResult[i].TermsAndCondition + '\',\'' + getResult[i].Note1 + '\',\'' + getResult[i].Note2 + '\' ,\'' + GetProperDate(getResult[i].SignatureDate) + '\',' + getResult[i].CurrencyId + ',' + getResult[i].LocationId + ',' + getResult[i].QToCompanyID + ',\'' + getResult[i].QFromGSTINNo + '\'); return false;" ><i class="fa fa-file-text"  aria-hidden="true"></i> Edit </span></a></td>'
+                            element = element + '<td><a href="#"><span class="label label-warning" onclick="GetQuotationDetailsForUpdate(' + getResult[i].QID + ',' + getResult[i].ApplicationType + ',\'' + getResult[i].ApplicationReference + '\',' + getResult[i].QType + ',\'' + getResult[i].QNo + '\',\'' + GetProperDate(getResult[i].QDate) + '\',\'' + getResult[i].ProjectName + '\',\'' + getResult[i].FinantialYear + '\',\'' + getResult[i].QToCompanyName + '\',\'' + getResult[i].QToGSTINNo + '\',\'' + getResult[i].QToContactPerson + '\',\'' + getResult[i].QToEmailID + '\',\'' + getResult[i].QToAddress + '\',\'' + getResult[i].PaymentTerms + '\',\'' + getResult[i].ValidityOfQuote + '\',\'' + getResult[i].PlaceOfSupply + '\',\'' + getResult[i].TotalAmountDigit + '\',\'' + getResult[i].TotalAmountWords + '\',\'' + getResult[i].TaxableAmount + '\',\'' + getResult[i].IgstAmount + '\',\'' + getResult[i].SgstAmount + '\',\'' + getResult[i].CgstAmount + '\',\'' + getResult[i].Freight + '\',\'' + getResult[i].BankName + '\',\'' + getResult[i].BranchName + '\',\'' + getResult[i].BankBranchIFSC + '\',\'' + getResult[i].BankAccountNo + '\',\'' + getResult[i].TermsAndCondition + '\',\'' + getResult[i].Note1 + '\',\'' + getResult[i].Note2 + '\' ,\'' + GetProperDate(getResult[i].SignatureDate) + '\',' + getResult[i].CurrencyId + ',' + getResult[i].LocationId + ',' + getResult[i].QToCompanyID + ',\'' + getResult[i].QFromGSTINNo + '\',\'' + getResult[i].Approved + '\',' + getResult[i].RevisionCount + '); return false;" ><i class="fa fa-file-text"  aria-hidden="true"></i> Edit </span></a></td>'
 
                         }
                         else {
                             element = element + '<td>' + '<input type="checkbox" disabled checked name="Approve" id="chkApprove" />';
-                            element = element + '<td><a href="#" ><span class="label label-success"   onclick="EmailQuotationDetails(' + getResult[i].QID + ',\'' + getResult[i].QFromEmailID + '\',\'' + getResult[i].QToEmailID + '\'); return false;"><i class="fa fa-print"  aria-hidden="true"></i>   Send</span></a><a href="#"><span class="label label-warning" onclick="GetQuotationDetailsForUpdate(' + getResult[i].QID + ',' + getResult[i].ApplicationType + ',\'' + getResult[i].ApplicationReference + '\',' + getResult[i].QType + ',\'' + getResult[i].QNo + '\',\'' + GetProperDate(getResult[i].QDate) + '\',\'' + getResult[i].ProjectName + '\',\'' + getResult[i].FinantialYear + '\',\'' + getResult[i].QToCompanyName + '\',\'' + getResult[i].QToGSTINNo + '\',\'' + getResult[i].QToContactPerson + '\',\'' + getResult[i].QToEmailID + '\',\'' + getResult[i].QToAddress + '\',\'' + getResult[i].PaymentTerms + '\',\'' + getResult[i].ValidityOfQuote + '\',\'' + getResult[i].PlaceOfSupply + '\',\'' + getResult[i].TotalAmountDigit + '\',\'' + getResult[i].TotalAmountWords + '\',\'' + getResult[i].TaxableAmount + '\',\'' + getResult[i].IgstAmount + '\',\'' + getResult[i].SgstAmount + '\',\'' + getResult[i].CgstAmount + '\',\'' + getResult[i].Freight + '\',\'' + getResult[i].BankName + '\',\'' + getResult[i].BranchName + '\',\'' + getResult[i].BankBranchIFSC + '\',\'' + getResult[i].BankAccountNo + '\',\'' + getResult[i].TermsAndCondition + '\',\'' + getResult[i].Note1 + '\',\'' + getResult[i].Note2 + '\' ,\'' + GetProperDate(getResult[i].SignatureDate) + '\',' + getResult[i].CurrencyId + ',' + getResult[i].LocationId + ',' + getResult[i].QToCompanyID + ',\'' + getResult[i].QFromGSTINNo + '\'); return false;" ><i class="fa fa-file-text"  aria-hidden="true"></i> Edit </span></a></td>'
+                            element = element + '<td><a href="#" ><span class="label label-success"   onclick="EmailQuotationDetails(' + getResult[i].QID + ',\'' + getResult[i].QFromEmailID + '\',\'' + getResult[i].QToEmailID + '\'); return false;"><i class="fa fa-print"  aria-hidden="true"></i>   Send</span></a><a href="#"><span class="label label-warning" onclick="GetQuotationDetailsForUpdate(' + getResult[i].QID + ',' + getResult[i].ApplicationType + ',\'' + getResult[i].ApplicationReference + '\',' + getResult[i].QType + ',\'' + getResult[i].QNo + '\',\'' + GetProperDate(getResult[i].QDate) + '\',\'' + getResult[i].ProjectName + '\',\'' + getResult[i].FinantialYear + '\',\'' + getResult[i].QToCompanyName + '\',\'' + getResult[i].QToGSTINNo + '\',\'' + getResult[i].QToContactPerson + '\',\'' + getResult[i].QToEmailID + '\',\'' + getResult[i].QToAddress + '\',\'' + getResult[i].PaymentTerms + '\',\'' + getResult[i].ValidityOfQuote + '\',\'' + getResult[i].PlaceOfSupply + '\',\'' + getResult[i].TotalAmountDigit + '\',\'' + getResult[i].TotalAmountWords + '\',\'' + getResult[i].TaxableAmount + '\',\'' + getResult[i].IgstAmount + '\',\'' + getResult[i].SgstAmount + '\',\'' + getResult[i].CgstAmount + '\',\'' + getResult[i].Freight + '\',\'' + getResult[i].BankName + '\',\'' + getResult[i].BranchName + '\',\'' + getResult[i].BankBranchIFSC + '\',\'' + getResult[i].BankAccountNo + '\',\'' + getResult[i].TermsAndCondition + '\',\'' + getResult[i].Note1 + '\',\'' + getResult[i].Note2 + '\' ,\'' + GetProperDate(getResult[i].SignatureDate) + '\',' + getResult[i].CurrencyId + ',' + getResult[i].LocationId + ',' + getResult[i].QToCompanyID + ',\'' + getResult[i].QFromGSTINNo + '\',\'' + getResult[i].Approved + '\',' + getResult[i].RevisionCount + '); return false;" ><i class="fa fa-file-text"  aria-hidden="true"></i> Edit </span></a></td>'
                         }
 
 
@@ -1239,8 +1251,7 @@
                 }
             });
         }
-        function GetQuotationDetailsForUpdate(QID, ApplicationType, ApplicationReference, QType, QNo, QDate, ProjectName, FinantialYear, QToCompanyName, QToGSTINNo, QToContactPerson, QToEmailId, QToAddress, PaymentTerms, ValidityOfQuote, PlaceOfSupply, TotalAmountDigit, TotalAmountWords, TaxableAmount, IgstAmount, SgstAmount, CgstAmount, Freight, BankName, BranchName, BankBranchIFSC, BankAccNo, TermsAndCondition, Note1, Note2, SignatureDate, CurrencyId, LocationId, QToCompanyId, QFromGstinNo) {
-
+        function GetQuotationDetailsForUpdate(QID, ApplicationType, ApplicationReference, QType, QNo, QDate, ProjectName, FinantialYear, QToCompanyName, QToGSTINNo, QToContactPerson, QToEmailId, QToAddress, PaymentTerms, ValidityOfQuote, PlaceOfSupply, TotalAmountDigit, TotalAmountWords, TaxableAmount, IgstAmount, SgstAmount, CgstAmount, Freight, BankName, BranchName, BankBranchIFSC, BankAccNo, TermsAndCondition, Note1, Note2, SignatureDate, CurrencyId, LocationId, QToCompanyId, QFromGstinNo, Approved, RevisionCount) {
             GetCurrencyDetails(0, "");
             GetCompanyDetails(0, "");
             GetCompanyLocations(QToCompanyId);
@@ -1249,6 +1260,13 @@
             $('#ddlApplicationType').val(ApplicationType);
             $('#ddlQGstinNoType').val(QFromGstinNo);
             $('#hidHotelId').val(QID);
+           
+            $('#hidApproved').val(Approved);
+            $('#hidRevisionCount').val(RevisionCount);
+
+
+
+
             $('#ddlQuotationType').val(QType);
             $('#txtQuotationNo').val(QNo);
             $('#txtQuotationDate').val(QDate);
@@ -1281,7 +1299,7 @@
             $('#ddlCurrency').val(CurrencyId);
             $('#ddlCompanyLocationId').val(LocationId);
             $('#ddlCompanyId').val(QToCompanyId);
-           // $('#btnExportToPdf').prop('disabled', false);
+            // $('#btnExportToPdf').prop('disabled', false);
             $('#ddlQGstinNoType,#ddlQuotationType,#ddlApplicationType,#ddlCurrency,#ddlCompanyId,#ddlCompanyLocationId').prop('disabled', true);
             ApplicationTypeChange(ApplicationType);
             $("#btnUpdate").show();

@@ -142,7 +142,11 @@ namespace Connect.QU.UII
                                     Response.Redirect("Page/Requisition.aspx", false);
                                     break;
                                 }
-
+                                else if (((_User)(Session["objUser"])).obj_txn_Page.ItemApprovalPage)
+                                {
+                                    Response.Redirect("Page/ItemApproval.aspx", false);
+                                    break;
+                                }
 
 
 

@@ -7,9 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Connect.QU.UII.Store {
+namespace Connect.QU.UII.Page {
     
     
-    public partial class Requisition {
+    public partial class ItemApproval {
     }
 }

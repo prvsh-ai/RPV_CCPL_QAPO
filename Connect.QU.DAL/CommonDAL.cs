@@ -188,7 +188,7 @@ namespace Connect.QU.DAL
                     {
                         CL.LocationId = Convert.ToInt32(sdr["LocationId"]);
                     }
-
+                    CL.RevisionCount = Convert.ToInt32(sdr["RevisionCount"]);
                     Entities.Add(CL);
                 }
             }
@@ -1718,6 +1718,37 @@ namespace Connect.QU.DAL
             }
             return Result;
         }
+
+        public string InsertApprovalItemData(bool chkVal, int ItemId, string UserId)
+        {
+            string Result = null;
+            try
+            {
+                myCon = myDBConectionDAL.AssignConnection();
+                myCmd = new SqlCommand("UpdateItemApprovalRecord", myCon);
+                myCmd.CommandType = CommandType.StoredProcedure;
+                myCmd.Parameters.AddWithValue("@chkVal", chkVal);
+                myCmd.Parameters.AddWithValue("@ItemId", ItemId);
+                myCmd.Parameters.Add("@Message", SqlDbType.VarChar, 100);
+                myCmd.Parameters["@Message"].Direction = ParameterDirection.Output;
+
+                myDBConectionDAL.OpenConnection();
+                myCmd.ExecuteNonQuery();
+
+                Result = myCmd.Parameters["@Message"].Value.ToString();
+            }
+            catch (Exception ex)
+            {
+                Result = "0";
+                throw;
+            }
+            finally
+            {
+                myDBConectionDAL.CloseConnection();
+            }
+            return Result;
+        }
+
         public string SaveUpdateCategoryDetails(CategoryDetails cnt)
         {
             string Result = null;
@@ -2079,27 +2110,42 @@ namespace Connect.QU.DAL
                 myCmd.Parameters.AddWithValue("@ApplicationType", cnt.ApplicationType);
                 myCmd.Parameters.AddWithValue("@ApplicationReference", cnt.ApplicationReference);
                 myCmd.Parameters.AddWithValue("@QType", cnt.QType);
+                
+                
+                
                 //                myCmd.Parameters.AddWithValue("@QNo", cnt.QNo);
                 if (cnt.Mode == "2" && cnt.Approved == true)
                 {
                     string PreviousQNo = cnt.QNo;
 
-                    if (PreviousQNo.Contains("R"))
-                    {
-                        string count = PreviousQNo.Split('/')[3].Split('R')[1];
-                        int x = Convert.ToInt32(count) + 1;
-                        myCmd.Parameters.AddWithValue("@QNo", (PreviousQNo.Split('/')[0] + '/' + PreviousQNo.Split('/')[1] + '/' + PreviousQNo.Split('/')[2] + "/R" + x));
-                    }
-                    else
-                    {
-                        myCmd.Parameters.AddWithValue("@QNo", (cnt.QNo + "/R1"));
-                    }
+                    //if (PreviousQNo.Contains("R"))
+                    //{
+                    //    string count = PreviousQNo.Split('/')[3].Split('R')[1];
+                    //    int x = Convert.ToInt32(count) + 1;
+                    //    myCmd.Parameters.AddWithValue("@QNo", (PreviousQNo.Split('/')[0] + '/' + PreviousQNo.Split('/')[1] + '/' + PreviousQNo.Split('/')[2] + "/R" + x));
+                    //}
+                    //else
+                    //{
+                    //    myCmd.Parameters.AddWithValue("@QNo", (cnt.QNo + "/R1"));
+                    //}
+                    int x = Convert.ToInt32(cnt.RevisionCount) + 1;
+
+                    string NewQNo = PreviousQNo + "/R" + x;
+                    myCmd.Parameters.AddWithValue("@QNo", (PreviousQNo + "/R" + x));
+                    myCmd.Parameters.AddWithValue("@RevisionCount", x);
+
                 }
                 else
                 {
                     myCmd.Parameters.AddWithValue("@QNo", cnt.QNo);
 
                 }
+
+
+
+
+
+
                 myCmd.Parameters.AddWithValue("@QDate", cnt.QDate);
                 myCmd.Parameters.AddWithValue("@QFromCompanyName", cnt.QFromCompanyName);
                 myCmd.Parameters.AddWithValue("@QFromAddress", cnt.QFromAddress);
@@ -2153,7 +2199,7 @@ namespace Connect.QU.DAL
             {
                 Result = myCmd.Parameters["@Message"].Value.ToString();
             }
-            finally
+            finally 
             {
                 myDBConectionDAL.CloseConnection();
             }

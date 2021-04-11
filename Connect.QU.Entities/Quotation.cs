@@ -71,6 +71,7 @@ namespace Connect.QU.Entities
 
         public string SgstAmount { get; set; }
         public string CgstAmount { get; set; }
+        public int RevisionCount { get; set; }
 
     }
 

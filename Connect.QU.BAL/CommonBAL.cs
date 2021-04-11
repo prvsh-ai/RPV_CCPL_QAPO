@@ -126,6 +126,12 @@ namespace Connect.QU.BAL
         {
             return new CommonDAL().InsertApprovalData(chkVal, QID, UserId);
         }
+
+        public string InsertApprovalItemData(bool chkVal, int ItemId, string UserId)
+        {
+            return new CommonDAL().InsertApprovalItemData(chkVal, ItemId, UserId);
+        }
+        
         public string SaveUpdateCategoryDetails(CategoryDetails cnt)
         {
             return new CommonDAL().SaveUpdateCategoryDetails(cnt);

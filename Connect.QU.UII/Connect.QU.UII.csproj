@@ -68,12 +68,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Admin\Approval.aspx" />
-    <Content Include="Admin\Category.aspx" />
-    <Content Include="Admin\Company.aspx" />
-    <Content Include="Admin\Role.aspx" />
-    <Content Include="Admin\Item.aspx" />
-    <Content Include="Admin\Reports.aspx" />
     <Content Include="bin\Connect.QU.BAL.dll" />
     <Content Include="bin\Connect.QU.Common.dll" />
     <Content Include="bin\Connect.QU.DAL.dll" />
@@ -120,6 +114,7 @@
     <Content Include="js\datatables.1.10.2.min.js" />
     <Content Include="js\moment.2.13.0.min.js" />
     <Content Include="js\validations.js" />
+    <Content Include="Page\ItemApproval.aspx" />
     <Content Include="Page\Approval.aspx" />
     <Content Include="Page\Category.aspx" />
     <Content Include="Page\Company.aspx" />
@@ -135,8 +130,6 @@
     <Content Include="scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Page\Page.Master" />
     <None Include="Properties\PublishProfiles\Attendance.pubxml" />
-    <Content Include="Store\Execution.aspx" />
-    <Content Include="Store\Store.Master" />
     <None Include="Properties\PublishProfiles\ConnectQAPO.pubxml" />
     <None Include="Properties\PublishProfiles\QAPO.pubxml" />
     <None Include="Web.Debug.config">
@@ -147,8 +140,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Admin\Currency.aspx" />
-    <Content Include="Admin\Register.aspx" />
     <Content Include="bootstrap\css\bootstrap.css" />
     <Content Include="bootstrap\css\bootstrap.min.css" />
     <Content Include="bootstrap\fonts\glyphicons-halflings-regular.svg" />
@@ -544,7 +535,6 @@
     <Content Include="scripts\i18n\defaults-zh_TW.js" />
     <Content Include="scripts\i18n\defaults-zh_TW.min.js" />
     <Content Include="Main.Master" />
-    <Content Include="Admin\Admin.Master" />
     <None Include="scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="scripts\jquery-3.1.1.js" />
     <Content Include="scripts\jquery-3.1.1.min.js" />
@@ -557,7 +547,6 @@
     <Content Include="scripts\jquery.validate.min.js" />
     <Content Include="scripts\jquery.validate.unobtrusive.js" />
     <Content Include="scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Store\Requisition.aspx" />
     <Content Include="User\Quotation.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -565,69 +554,6 @@
     <Content Include="User\User.Master" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin\Admin.Master.cs">
-      <DependentUpon>Admin.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\Admin.Master.designer.cs">
-      <DependentUpon>Admin.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\Approval.aspx.cs">
-      <DependentUpon>Approval.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\Approval.aspx.designer.cs">
-      <DependentUpon>Approval.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\Category.aspx.cs">
-      <DependentUpon>Category.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\Category.aspx.designer.cs">
-      <DependentUpon>Category.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\Company.aspx.cs">
-      <DependentUpon>Company.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\Company.aspx.designer.cs">
-      <DependentUpon>Company.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\Role.aspx.cs">
-      <DependentUpon>Role.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\Role.aspx.designer.cs">
-      <DependentUpon>Role.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\Item.aspx.cs">
-      <DependentUpon>Item.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\Item.aspx.designer.cs">
-      <DependentUpon>Item.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\Currency.aspx.cs">
-      <DependentUpon>Currency.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\Currency.aspx.designer.cs">
-      <DependentUpon>Currency.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\Register.aspx.cs">
-      <DependentUpon>Register.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\Register.aspx.designer.cs">
-      <DependentUpon>Register.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\Reports.aspx.cs">
-      <DependentUpon>Reports.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\Reports.aspx.designer.cs">
-      <DependentUpon>Reports.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -651,6 +577,13 @@
     </Compile>
     <Compile Include="Main.Master.designer.cs">
       <DependentUpon>Main.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Page\ItemApproval.aspx.cs">
+      <DependentUpon>ItemApproval.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page\ItemApproval.aspx.designer.cs">
+      <DependentUpon>ItemApproval.aspx</DependentUpon>
     </Compile>
     <Compile Include="Page\Approval.aspx.cs">
       <DependentUpon>Approval.aspx</DependentUpon>
@@ -736,27 +669,6 @@
     </Compile>
     <Compile Include="Redirect.aspx.designer.cs">
       <DependentUpon>Redirect.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Store\Execution.aspx.cs">
-      <DependentUpon>Execution.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Store\Execution.aspx.designer.cs">
-      <DependentUpon>Execution.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Store\Store.Master.cs">
-      <DependentUpon>Store.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Store\Store.Master.designer.cs">
-      <DependentUpon>Store.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Store\Requisition.aspx.cs">
-      <DependentUpon>Requisition.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Store\Requisition.aspx.designer.cs">
-      <DependentUpon>Requisition.aspx</DependentUpon>
     </Compile>
     <Compile Include="User\Quotation.aspx.cs">
       <DependentUpon>Quotation.aspx</DependentUpon>
