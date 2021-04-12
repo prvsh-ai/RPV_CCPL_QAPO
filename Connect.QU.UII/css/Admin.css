@@ -85,7 +85,10 @@
         border: 1px solid #555;
     }
 
-    #ApplicationForm .AppFormBody input[type='text'], .PasswordControl {
+    
+    
+    
+    /*#ApplicationForm .AppFormBody input[type='text'], .PasswordControl {
         height: 25px;
         color: #1b2cef;
         width: 100%;
@@ -95,7 +98,11 @@
         height: 34px !important;
         box-shadow: none;
         border-radius: 0;
-    }
+    }*/
+
+
+
+
 
     #ApplicationForm .AppFormdatetimepicker .input-group-addon {
         border-radius: 0;
@@ -121,17 +128,17 @@
 @media (min-width: 768px) {
     #ApplicationForm .AppFormBody .AppX input[type='text'], .PasswordControl {
         border: none;
-        height: 30px;
+        /*height: 30px;*/
         border-bottom: 1px solid #999;
         color: #1b2cef;
-        width: auto;
+        width:100% !important;
     }
 }
 
 @media (min-width: 768px) {
     #ApplicationForm .AppFormBody .APPTest input[type='text'], .PasswordControl {
         border: none;
-        height: 30px;
+        /*height: 30px;*/
         border-bottom: 1px solid #999;
         color: #1b2cef;
     }
@@ -146,7 +153,7 @@
     box-shadow: 0 0 0 0;
     border-radius: 0;
     border-bottom: 1px solid #555;
-    height: 30px;
+    /*height: 30px;*/
 }
 
 #ApplicationForm .AppFormdatetimepicker .input-group-addon {

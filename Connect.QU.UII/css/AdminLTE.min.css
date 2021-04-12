@@ -4307,16 +4307,16 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e73f7c', endCo
                 border: 1px solid #555;
             }
 
-            #ApplicationForm .AppFormBody input[type='text'], .PasswordControl {          
+            /*#ApplicationForm .AppFormBody input[type='text'], .PasswordControl {          
                 height:25px;
                 color: #1b2cef;
                 width:100%;
-            }
+            }*/
 
-            #ApplicationForm .AppFormdatetimepicker .form-control {
+            /*#ApplicationForm .AppFormdatetimepicker .form-control {
                               
                 height:34px!important; box-shadow:none; border-radius: 0;
-            }
+            }*/
 
             #ApplicationForm .AppFormdatetimepicker .input-group-addon {              
                
@@ -4344,7 +4344,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e73f7c', endCo
 @media (min-width: 768px) {
      #ApplicationForm .AppFormBody input[type='text'], .PasswordControl {
                 border: none; 
-                height:30px;
+                /*height:30px;*/
                 border-bottom: 1px solid #999;
                 color: #1b2cef; width:auto;
             }
@@ -4355,7 +4355,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e73f7c', endCo
                 box-shadow: 0 0 0 0;
                 border-radius: 0;
                 border-bottom: 1px solid #555;
-                height: 30px;
+                /*height: 30px;*/
             }
 
             #ApplicationForm .AppFormdatetimepicker .input-group-addon {

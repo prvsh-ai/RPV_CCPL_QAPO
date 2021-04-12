@@ -1,37 +1,58 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/User/User.Master" CodeBehind="Quotation.aspx.cs" Inherits="Connect.QU.UII.User.Quotation" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/User/User.Master" CodeBehind="QuotationNew.aspx.cs" Inherits="Connect.QU.UII.User.QuotationNew" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="Server">
     <link href="../css/Admin.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="EAWarpper" runat="Server">
-   
 
-<%--    new code--%>
-     
+    <style>
+        .selectBox {
+            max-width: 187px;
+        }
+
+        @media (min-width: 768px) {
+    #ApplicationForm .AppFormBody .AppX input[type='text'], .PasswordControl {
+        border: none;
+        border-bottom: 1px solid #999;
+        color: #1b2cef;
+        width:100% !important;
+    }
+}
+
+@media (min-width: 768px) {
+    #ApplicationForm .AppFormBody .APPTest input[type='text'], .PasswordControl {
+        border: none;
+        border-bottom: 1px solid #999;
+        color: #1b2cef;
+    }
+}
+
+    </style>
     
-<%--    new code ends--%>
+    <%--    old code--%>
 
-
-<%--    old code--%>
-    
-     <div class="container">
-
-
-
-
-
+    <div class="container">
 
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12  col-lg-12 col-sm-12 col-xs-12">
                 <div id="ApplicationForm">
                     <div class="text-right">
                         <div class="form-inline">
-                            <div class="form-group">
-                                <select id="ddlApplicationType" class="form-control" name="ApplicationType">
-                                    <option value="1">Quotation</option>
-                                    <option value="2">Purchase Order</option>
-                                </select>
+
+                            <div class="row">
+                                <div class="form-group col-lg-4 col-sm-4 col-xs-4 col-md-4 text-justify">
+                                    <select id="ddlCurrency" class="form-control"></select>
+                                </div>
+                                <div class="form-group col-lg-4 col-sm-4 col-xs-4 col-md-4">
+                                </div>
+                                <div class="form-group col-lg-4 col-sm-4 col-xs-4 col-md-4">
+                                    <select id="ddlApplicationType" class="form-control" name="ApplicationType">
+                                        <option value="1">Quotation</option>
+                                        <option value="2">Purchase Order</option>
+                                    </select>
+                                </div>
                             </div>
+
                         </div>
                     </div>
                     <div class="text-center">
@@ -48,31 +69,37 @@
                         </p>
                         <p>
                             <div class="form-inline">
-                                <div class="form-group">
-                                    <label>&nbsp;GSTIN No </label>
-                                    <select id="ddlQGstinNoType" class="form-control" name="GstinNoType">
-                                        <option value="07AAACC4708J1ZS"><a href="xyz" target="_blank">07AAACC4708J1ZS</a></option>
-                                        <option value="07SKACC4708J12T"><a href="xyz" target="_blank">07SKACC4708J12T</a></option>
-                                    </select>
-                                    &nbsp;&nbsp;
-                                      <label id="QuotationNoText">&nbsp;Quotation No</label>
-                                    <input type="text" id="txtQuotationNo" />
-                                    &nbsp;&nbsp;
-                                   <label id="QuotationTypeText">&nbsp;Quotation Type</label>
-                                    <select id="ddlQuotationType" class="form-control" name="QuotationType">
-                                        <option value="1"><a href="xyz" target="_blank">SU</a></option>
-                                        <option value="2"><a href="xyz" target="_blank">SER</a></option>
-                                        <option value="3"><a href="xyz" target="_blank">TEN</a></option>
-                                    </select>
-                                    <label class="label11" for="ddlCurrency">Currency</label>
-                                    <select id="ddlCurrency" class="form-control"></select>
+
+                                <div class="row">
+                                    <div class="form-group col-lg-4 col-sm-4 col-xs-4 col-md-4">
+
+                                        <label for="txtUserId">GST No</label>
+                                        <select id="ddlQGstinNoType" class="form-control" name="GstinNoType">
+                                            <option value="07AAACC4708J1ZS"><a href="xyz" target="_blank">07AAACC4708J1ZS</a></option>
+                                            <option value="07SKACC4708J12T"><a href="xyz" target="_blank">07SKACC4708J12T</a></option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-lg-4 col-sm-4 col-xs-4 col-md-4">
+                                        <label id="QuotationNoText" for="txtQuotationNo">Quotation No</label>
+                                        <input type="text" class="form-control" id="txtQuotationNo" />
+                                    </div>
+                                    <div class="form-group col-lg-4 col-sm-4 col-xs-4 col-md-4">
+                                        <label for="ddlQuotationType" id="QuotationTypeText">Quotation Type</label>
+                                        <select id="ddlQuotationType" class="form-control" name="QuotationType">
+                                            <option value="1"><a href="xyz" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SALE&nbsp;&nbsp;&nbsp;</a></option>
+                                            <option value="2"><a href="xyz" target="_blank">&nbsp;&nbsp;&nbsp;SERVICE&nbsp;&nbsp;&nbsp;</a></option>
+                                            <option value="3"><a href="xyz" target="_blank">&nbsp;&nbsp;&nbsp;TENDER&nbsp;&nbsp;&nbsp;</a></option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </p>
                         <p>
                             <div class="form-inline">
-                                <div class="form-group">
-                                    <input type="buttton" id="btnExportToPdf" style="margin-top: 4%" value="Export" class="btn btn-sm btn-success" />
+                                <div class="row">
+                                    <div class="form-group col-lg-12 col-sm-12 col-xs-12 col-md-12">
+                                        <input type="buttton" id="btnExportToPdf" value="Export" class="btn btn-sm btn-success" />
+                                    </div>
                                 </div>
                             </div>
                         </p>
@@ -90,19 +117,19 @@
                             <u>Instructions:</u>  All Applications <u>must be typed </u>; Handwritten Applications will <u>not</u> be accepted
                         </p>
                         <p>
-                            </br>
+                            <br />
                             <div class="form-inline AppX">
-                                <div class="form-row">
-                                    <div class="col-lg-4">
-                                        <label class="control-label">Project Name </label>
+                                <div class="row">
+                                    <div class="form-group col-lg-4 col-sm-4 col-xs-4 col-md-4">
+                                        <label for="txtProjectName">Project&nbsp;&nbsp;</label>
                                         <input type="text" id="txtProjectName" class="form-control" />
                                     </div>
-                                    <div class="col-lg-4">
-                                        <label class="control-label">Financial Year</label>
+                                    <div class="form-group col-lg-4 col-sm-4 col-xs-4 col-md-4">
+                                        <label for="txtFinancialYear">Financial Year</label>
                                         <input type='text' class="form-control" id="txtFinancialYear" />
                                     </div>
-                                    <div class="col-lg-4">
-                                        <label for="txtQuotationDate" class="control-label">Date:</label><b />
+                                    <div class="form-group col-lg-4 col-sm-4 col-xs-4 col-md-4">
+                                        <label for="txtQuotationDate">Date:</label><b />
                                         <div class='input-group date AppFormdatetimepicker' id='datetimepicker3'>
                                             <input type='text' class="form-control" id="txtQuotationDate" />
                                             <span class="input-group-addon">
@@ -113,73 +140,78 @@
                                 </div>
                             </div>
                         </p>
-                        <br />
+
                         <br />
                         <br />
                         <p class="text-bold">Customer Details:<span class="mandatory" style="color: red">*</span> </p>
                         <br />
-                        <p>
-                            <div class="form-inline AppX">
-                                <div class="form-row">
-                                    <div class="col-lg-4">
-                                        <label class="control-label">Company Name </label>
-                                        <select id="ddlCompanyId" name="ddlCompanyName" class="selectBox form-control" style="width: 57%;"></select>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label class="control-label">Location </label>
-                                        <select id="ddlCompanyLocationId" name="ddlCompanyLocation" class="selectBox form-control" style="width: 57%;"></select>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label class="control-label">Contact Person   </label>
-                                        <input type="text" id="txtContactPerson" style="width: 57%;" class="form-control" disabled />
-                                    </div>
+
+
+                        <div class="form-inline AppX">
+                            <div class="row">
+                                <div class="form-group col-lg-4 col-sm-4 col-xs-4 col-md-4">
+                                    <label for="ddlCompanyId">Name&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                    <select id="ddlCompanyId" style="    width: 100% !important;" name="ddlCompanyName" class=" form-control"></select>
+                                </div>
+                                <div class="form-group col-lg-4 col-sm-4 col-xs-4 col-md-4">
+                                    <label for="ddlCompanyLocationId">Location&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                    <select id="ddlCompanyLocationId" style="    width: 100% !important;" name="ddlCompanyLocation" class=" form-control">
+                                        <option value="0">------------Select------------</option>
+
+                                    </select>
+                                </div>
+                                <div class="form-group col-lg-4 col-sm-4 col-xs-4 col-md-4">
+                                    <label for="txtContactPerson">Contact</label>
+                                    <input type="text" id="txtContactPerson" class="form-control" disabled />
                                 </div>
                             </div>
-                        </p>
+                        </div>
+
                         <br />
-                        <br />
-                        <p>
-                            <div class="form-inline AppX">
-                                <div class="form-row">
-                                    <div class="col-lg-4">
-                                        <label class="control-label">Address </label>
-                                        <input type="text" id="txtAddress" style="margin-left: 16%; width: 58%;" class="form-control" disabled />
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label class="control-label">GSTIN</label>
-                                        <input type="text" id="txtGstinParty" style="margin-left: 5%; width: 58%;" class="form-control" disabled />
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label class="control-label">Company Email</label>
-                                        <input type="text" id="txtCompanyEmailId" style="width: 58%;" class="form-control" disabled />
-                                    </div>
+
+                        <div class="form-inline AppX">
+                            <div class="row">
+                                <div class="form-group col-lg-4 col-sm-4 col-xs-4 col-md-4">
+                                    <label for="txtAddress">Address&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                    <input type="text" id="txtAddress" class="form-control" disabled />
+                                </div>
+                                <div class="form-group col-lg-4 col-sm-4 col-xs-4 col-md-4">
+                                    <label for="txtGstinParty">GST&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                    <input type="text" id="txtGstinParty" class="form-control" disabled />
+
+                                </div>
+                                <div class="form-group col-lg-4 col-sm-4 col-xs-4 col-md-4">
+                                    <label for="txtCompanyEmailId">Email</label>
+                                    <input type="text" id="txtCompanyEmailId" class="form-control" disabled />
                                 </div>
                             </div>
-                            <br />
-                            <br />
-                            <div class="form-inline AppX">
-                                <div class="form-row">
-                                    <div class="col-lg-4">
-                                        <label class="control-label">Quote Validity  </label>
-                                        <input type="text" id="txtValidityOfQuote" style="width: 58%; margin-left: 4%;" class="form-control" />
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label class="control-label">Payment</label>
-                                        <input type="text" id="txtPaymentTerms" style="width: 58%;" class="form-control" />
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label class="control-label">Place Of Supply </label>
-                                        <input type="text" id="txtPlaceOfSupply" style="width: 58%;" class="form-control" />
-                                    </div>
+                        </div>
+
+
+                        <br />
+
+                        <div class="form-inline AppX">
+                            <div class="row">
+                                <div class="form-group col-lg-4 col-sm-4 col-xs-4 col-md-4">
+                                    <label for="txtValidityOfQuote">Validity&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                    <input type="text" id="txtValidityOfQuote" class="form-control" />
+                                </div>
+                                <div class="form-group col-lg-4 col-sm-4 col-xs-4 col-md-4">
+                                    <label for="txtPaymentTerms">Payment&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                    <input type="text" id="txtPaymentTerms" class="form-control" />
+
+                                </div>
+                                <div class="form-group col-lg-4 col-sm-4 col-xs-4 col-md-4">
+                                    <label for="txtPlaceOfSupply">Place</label>
+                                    <input type="text" id="txtPlaceOfSupply" class="form-control" />
                                 </div>
                             </div>
-                        </p>
-                        <br />
-                        <br />
-                        <br />
+                        </div>
+
+
                         <br />
                         <div class="row APPTest">
-                            <div class="col-lg-12">
+                            <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12">
                                 <div style="overflow-x: auto">
                                     <table id="tblCustomers" class="table" cellpadding="0" cellspacing="0">
                                         <thead>
@@ -271,97 +303,98 @@
                                 </div>
                             </div>
                         </div>
-                        <p>
 
-                            <br />
-
-                            <br />
-
-                            <div class="form-inline AppX">
-                                <div class="form-row">
-                                    <div class="col-lg-4">
-                                        <label class="control-label">Igst Amount</label>
-                                        <input type="text" id="txtIgstAmount" style="width: 58%; margin-left: 8%;" class="form-control" disabled />
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label class="control-label">Sgst Amount</label>
-                                        <input type="text" id="txtSgstAmount" style="width: 58%;" class="form-control" disabled />
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label class="control-label">Cgst Amount</label>
-                                        <input type="text" id="txtCgstAmount" style="width: 58%;" class="form-control" disabled />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <br />
-                            <br />
-                            <div class="form-inline AppX">
-                                <div class="form-row">
-                                    <div class="col-lg-4">
-                                        <label class="control-label">Taxable Amount  </label>
-                                        <input type="text" id="txtTaxableAmount" style="width: 58%;" class="form-control" disabled />
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label class="control-label">Freight </label>
-                                        <input type="text" id="txtFreight" style="width: 58%; margin-left: 13%;" class="form-control" />
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label class="control-label">Grand Total</label>
-                                        <input type="text" id="txtGrandTotal" style="width: 58%; margin-left: 3%;" disabled class="form-control integer" />
-                                    </div>
-                                </div>
-                            </div>
-                        </p>
                         <br />
-                        <br />
-                        <p>
-                            <div class="form-inline AppX">
-                                <div class="form-row">
-                                    <div class="col-lg-12">
-                                        <label class="control-label">Total Words </label>
-                                        <input type="text" id="txtTotalWords" style="margin-left: 3%; width: 84%;" disabled class="form-control" />
-                                    </div>
+
+
+                        <div class="form-inline AppX">
+                            <div class="row">
+                                <div class="form-group col-lg-4 col-sm-4 col-xs-4 col-md-4">
+                                    <label for="txtIgstAmount">Igst&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                    <input type="text" id="txtIgstAmount" class="form-control" disabled />
+                                </div>
+                                <div class="form-group col-lg-4 col-sm-4 col-xs-4 col-md-4">
+                                    <label for="txtSgstAmount">Sgst&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                    <input type="text" id="txtSgstAmount" class="form-control" disabled />
 
                                 </div>
+                                <div class="form-group col-lg-4 col-sm-4 col-xs-4 col-md-4">
+                                    <label for="txtCgstAmount">Cgst</label>
+                                    <input type="text" id="txtCgstAmount" class="form-control" disabled />
+                                </div>
                             </div>
-                        </p>
+                        </div>
+
                         <br />
+
+
+                        <div class="form-inline AppX">
+                            <div class="row">
+                                <div class="form-group col-lg-4 col-sm-4 col-xs-4 col-md-4">
+                                    <label for="txtTaxableAmount">Taxable&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                    <input type="text" id="txtTaxableAmount" class="form-control" disabled />
+                                </div>
+                                <div class="form-group col-lg-4 col-sm-4 col-xs-4 col-md-4">
+                                    <label for="txtFreight">Freight&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                    <input type="text" id="txtFreight" class="form-control" />
+
+                                </div>
+                                <div class="form-group col-lg-4 col-sm-4 col-xs-4 col-md-4">
+                                    <label for="txtGrandTotal">Total</label>
+                                    <input type="text" id="txtGrandTotal" disabled class="form-control integer" />
+                                </div>
+                            </div>
+                        </div>
+
+
                         <br />
+
+                        <div class="form-inline AppX">
+                            <div class="row">
+                                <div class="form-group col-lg-12 col-sm-12 col-xs-12 col-md-12">
+                                    <label for="txtTotalWords">Total Words&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                    <input type="text" id="txtTotalWords" disabled class="form-control" />
+                                </div>
+
+                            </div>
+                        </div>
+
                         <br />
+
+
                         <p>Bank Details</p>
-                        <p>
-                            <div class="form-inline AppX">
-                                <div class="form-row">
-                                    <div class="col-lg-6">
-                                        <label class="control-label">Bank Name </label>
-                                        <input type="text" id="txtBankName" style="margin-left: 7%;" class="form-control" disabled />
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <label class="control-label">Branch Name</label>
-                                        <input type="text" id="txtBranchName" style="margin-left: 6%;" class="form-control" disabled />
-                                    </div>
+
+
+                        <div class="form-inline AppX">
+                            <div class="row">
+                                <div class="form-group col-lg-6 col-sm-6 col-xs-6 col-md-6">
+                                    <label for="txtBankName">Bank&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                    <input type="text" id="txtBankName" class="form-control" disabled />
+                                </div>
+                                <div class="form-group col-lg-6 col-sm-6 col-xs-6 col-md-6">
+                                    <label for="txtBranchName">Branch&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                    <input type="text" id="txtBranchName" class="form-control" disabled />
                                 </div>
                             </div>
-                        </p>
+                        </div>
+
                         <br />
-                        <br />
-                        <p>
-                            <div class="form-inline AppX">
-                                <div class="form-row">
-                                    <div class="col-lg-6">
-                                        <label class="control-label">Account No.</label>
-                                        <input type="text" id="txtBankAccountNo" style="margin-left: 6%;" class="form-control" disabled />
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <label class="control-label">Bank Branch IFSC</label>
+                       
+                          <div class="form-inline AppX">
+                            <div class="row">
+                                <div class="form-group col-lg-6 col-sm-6 col-xs-6 col-md-6">
+                                    <label for="txtBankAccountNo">Account&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                        <input type="text" id="txtBankAccountNo" class="form-control" disabled />
+                                </div>
+                                <div class="form-group col-lg-6 col-sm-6 col-xs-6 col-md-6">
+                                    <label for="txtBranchIfsc">IFSC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                                         <input type="text" id="txtBranchIfsc" class="form-control" disabled />
-                                    </div>
                                 </div>
                             </div>
-                        </p>
-                        <br />
-                        <br />
+                        </div>
+
+                        
+                         <br />
                         <br />
                         <p><b>Terms And Conditions :</b></p>
                         <textarea class="form-control" rows="2" cols="2" id="txtTermsAndConditions"></textarea>
@@ -402,15 +435,30 @@
                 </div>
             </div>
         </div>
+
+
+
+           <div class="row">
+
+                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                   <table id="CityTableId" class="table table-striped cf table-bordered table-striped table-responsive dataTable" ></table>
+                </div>
+            </div>
+
     </div>
-    
-<%--    old code ends--%>
-    
+
+    <%--    old code ends--%>
+
     <div class="container">
     </div>
-    <div class="container" style="margin-top: 5%; margin-bottom: 1%; width: 100%;">
+  <%--  <div class="container" style="margin-top: 5%; margin-bottom: 1%; width: 100%;">
         <table id="CityTableId" class="table table-striped cf table-bordered table-striped table-responsive dataTable" style="table-layout: fixed"></table>
-    </div>
+    </div>--%>
+
+  
+
+
+
     <div id="overlay">
         <div class="cv-spinner">
             <span class="spinner"></span>
@@ -468,8 +516,8 @@
                     $('#QuotationApplicationText').text("QUOTATION APPLICATION");
                 }
                 else {
-                    $('#QuotationNoText').text("Purchase Order No");
-                    $('#QuotationTypeText').text("Purchase Order Type");
+                    $('#QuotationNoText').text("PO No");
+                    $('#QuotationTypeText').text("PO Type");
                     $('#QuotationApplicationText').text("PURCHASE ORDER APPLICATION");
                 }
             });
@@ -849,7 +897,7 @@
             });
             $("#btnClear").click(function () {
                 ClearInputBoxValues();
-                 GetQuotationDetailsOnQuotationType(1);
+                GetQuotationDetailsOnQuotationType(1);
             });
             $('#ddlQuotationType').change(function () {
                 if ($('#ddlQuotationType').val() == 1) {
@@ -1279,7 +1327,7 @@
             $('#ddlApplicationType').val(ApplicationType);
             $('#ddlQGstinNoType').val(QFromGstinNo);
             $('#hidHotelId').val(QID);
-           
+
             $('#hidApproved').val(Approved);
             $('#hidRevisionCount').val(RevisionCount);
 
@@ -1389,7 +1437,7 @@
                     var getResult = result.d;
                     var len = getResult.length;
                     $("#ddlCompanyLocationId").empty();
-                    $("#ddlCompanyLocationId").append('<option value="0">Select</option>');
+                    $("#ddlCompanyLocationId").append('<option value="0">------------Select------------</option>');
                     for (var i = 0; i < len; i++) {
                         $("#ddlCompanyLocationId").append('<option value=' + getResult[i].StateId + '>' + getResult[i].StateName + '</option>');
                     }
@@ -1570,8 +1618,8 @@
                 $('#QuotationApplicationText').text("QUOTATION APPLICATION");
             }
             else {
-                $('#QuotationNoText').text("Purchase Order No");
-                $('#QuotationTypeText').text("Purchase Order Type");
+                $('#QuotationNoText').text("PO No");
+                $('#QuotationTypeText').text("PO Type");
                 $('#QuotationApplicationText').text("PURCHASE ORDER APPLICATION");
             }
         }

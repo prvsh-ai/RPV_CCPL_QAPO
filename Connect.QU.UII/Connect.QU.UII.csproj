@@ -547,6 +547,7 @@
     <Content Include="scripts\jquery.validate.min.js" />
     <Content Include="scripts\jquery.validate.unobtrusive.js" />
     <Content Include="scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="User\QuotationNew.aspx" />
     <Content Include="User\Quotation.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -669,6 +670,13 @@
     </Compile>
     <Compile Include="Redirect.aspx.designer.cs">
       <DependentUpon>Redirect.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="User\QuotationNew.aspx.cs">
+      <DependentUpon>QuotationNew.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\QuotationNew.aspx.designer.cs">
+      <DependentUpon>QuotationNew.aspx</DependentUpon>
     </Compile>
     <Compile Include="User\Quotation.aspx.cs">
       <DependentUpon>Quotation.aspx</DependentUpon>

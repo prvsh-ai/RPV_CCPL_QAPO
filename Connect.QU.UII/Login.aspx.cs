@@ -156,7 +156,7 @@ namespace Connect.QU.UII
                             default:
                                 if (((_User)(Session["objUser"])).obj_txn_Page.QuotationPage)
                                 {
-                                    Response.Redirect("User/Quotation.aspx", false);
+                                    Response.Redirect("User/QuotationNew.aspx", false);
                                     break;
                                 }
                                 else if (((_User)(Session["objUser"])).obj_txn_Page.RegisterPage)

@@ -15,7 +15,7 @@
     <div class="content-wrapper">
         <section class="content">
           
-                 <div class="row">
+             <div class="row">
                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                     <div class="box box-solid">
                         <div class="box-body">
